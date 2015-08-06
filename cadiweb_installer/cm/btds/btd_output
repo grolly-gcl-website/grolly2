@@ -1,0 +1,6569 @@
+
+Bluetooth daemon for Cadi startedBluetooth daemon for Cadi startedBluetooth daemon for Cadi startedBluetooth daemon for Cadi startedFailed to open shared memory.Failed to read shared memoryLoading SVG tank defaults
+Array
+(
+    [3] => Array
+        (
+            [top] => 14
+            [bottom] => 100
+            [svg] => Array
+                (
+                    [height] => 400
+                    [tank_top] => 20
+                )
+
+        )
+
+    [4] => Array
+        (
+            [top] => 7
+            [bottom] => 47
+            [svg] => Array
+                (
+                    [height] => 430
+                    [tank_top] => 300
+                )
+
+        )
+
+)
+(Wed, 31 Dec 2014 00:00:01 +0000) Got CMD 
+ reloading Cadi BTDaemon settings
+*** CBD settings reloaded! ***
+Array
+(
+    [photo_divider] => 8000			
+    [csd] => 25000
+    [fsd] => 5					
+    [rpd] => 5					
+    [videox] => 0				
+    [srtrs] => 150				
+    [sppd] => 3					
+    [cs_dmp_fs] => 2000				
+    [cs_start_addr] => 1400			
+    [default_bt_mac] => 20:13:06:19:15:11	
+    [csv_parse_divider] => 6			
+)
+
+CurCMD=echo
+
+
+(Wed, 15 Jul 2015 14:26:11 +0000) Got CMD 
+*** Running automatic connection script
+BT Autoconnect
+*** Starting re-Pair process...
+*** re-Paired
+Array
+(
+    [0] => spawn bluetoothctl
+    [1] => power on
+    [2] => [bluetooth]# [0;94m[bluetooth][0m#                         [[0;92mNEW[0m] Controller 00:1A:7D:DA:71:13 BlueZ 5.30 [default]
+    [3] => [0;94m[bluetooth][0m# power on
+    [4] => [0;94m[bluetooth][0m#                         Changing power on succeeded
+    [5] => [0;94m[bluetooth][0m# agent on
+    [6] => [0;94m[bluetooth][0m#                         [[0;93mCHG[0m] Controller 00:1A:7D:DA:71:13 Powered: yes
+    [7] => [0;94m[bluetooth][0m#                         Agent registered
+    [8] => [0;94m[bluetooth][0m# default-agent
+    [9] => [0;94m[bluetooth][0m#                         Default agent request successful
+    [10] => [0;94m[bluetooth][0m# remove 20:13:07:26:11:64
+    [11] => Device 20:13:07:26:11:64 not available
+    [12] => 
+    [13] => [0;94m[bluetooth][0m# [0;94m[bluetooth][0m# scan on
+    [14] => [0;94m[bluetooth][0m#                         Discovery started
+    [15] => [0;94m[bluetooth][0m#                         [[0;93mCHG[0m] Controller 00:1A:7D:DA:71:13 Name: cadiweb-1
+    [16] => [0;94m[bluetooth][0m#                         [[0;93mCHG[0m] Controller 00:1A:7D:DA:71:13 Alias: BlueZ 5.30
+    [17] => [0;94m[bluetooth][0m#                         [[0;93mCHG[0m] Controller 00:1A:7D:DA:71:13 Discovering: yes
+    [18] => [0;94m[bluetooth][0m#                         [[0;93mCHG[0m] Controller 00:1A:7D:DA:71:13 Alias: cadiweb-1
+    [19] => [0;94m[bluetooth][0m#                         [[0;92mNEW[0m] Device 20:13:07:26:11:64 20-13-07-26-11-64
+    [20] => EXPECT FOUND DEVICE
+    [21] => 
+    [22] => [0;94m[bluetooth][0m# pair 20:13:07:26:11:64
+    [23] => Attempting to pair with 20:13:07:26:11:64
+    [24] => [0;94m[bluetooth][0m# [0;94m[20-13-07-26-11-64][0m#                                 [[0;93mCHG[0m] Device 20:13:07:26:11:64 Connected: yes
+    [25] => [0;94m[20-13-07-26-11-64][0m#                                 [[0;93mCHG[0m] Device 20:13:07:26:11:64 Name: HC-06
+    [26] => [0;94m[20-13-07-26-11-64][0m#                                 [[0;93mCHG[0m] Device 20:13:07:26:11:64 Alias: HC-06
+    [27] => [0;94m[20-13-07-26-11-64][0m#                                 Request PIN code
+    [28] => [0;94m[20-13-07-26-11-64][0m#                                 [0;91m[agent][0m Enter PIN code: EXPECT ENTERING PINCODE
+    [29] => 
+    [30] => 1234
+    [31] => [0;94m[20-13-07-26-11-64][0m#                                 [[0;93mCHG[0m] Device 20:13:07:26:11:64 UUIDs: 00001101-0000-1000-8000-00805f9b34fb
+    [32] => [0;94m[20-13-07-26-11-64][0m#                                 [[0;93mCHG[0m] Device 20:13:07:26:11:64 Paired: yes
+    [33] => [0;94m[20-13-07-26-11-64][0m#                                 Pairing successful
+    [34] => [0;94m[20-13-07-26-11-64][0m# exit
+    [35] => [0;94m[20-13-07-26-11-64][0m#                                 Agent unregistered
+    [36] => [0;94m[20-13-07-26-11-64][0m#                                 [[0;91mDEL[0m] Controller 00:1A:7D:DA:71:13 cadiweb-1 [default]
+    [37] => [0;94m[20-13-07-26-11-64][0m# [0;94m[bluetooth][0m#         [bluetooth]#
+)
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+RFCOMM:0
+LINE0 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE1 = ...releasing it
+1
+LINE2 = RFCOMM configuration utility ver 5.30
+1
+LINE3 = Usage:
+1
+LINE4 = 	rfcomm [options] <command> <dev>
+1
+LINE5 = 
+1
+LINE6 = Options:
+1
+LINE7 = 	-i, --device [hciX|bdaddr]     Local HCI device or BD Address
+1
+LINE8 = 	-h, --help                     Display help
+1
+LINE9 = 	-r, --raw                      Switch TTY into raw mode
+1
+LINE10 = 	-A, --auth                     Enable authentication
+1
+LINE11 = 	-E, --encrypt                  Enable encryption
+1
+LINE12 = 	-S, --secure                   Secure connection
+1
+LINE13 = 	-M, --master                   Become the master of a piconet
+1
+LINE14 = 	-L, --linger [seconds]         Set linger timeout
+1
+LINE15 = 	-a                             Show all devices (default)
+1
+LINE16 = 
+1
+LINE17 = Commands:
+1
+LINE18 = 	bind     <dev> <bdaddr> [channel]	Bind device
+1
+LINE19 = 	release  <dev>                   	Release device
+1
+LINE20 = 	show     <dev>                   	Show device
+1
+LINE21 = 	connect  <dev> <bdaddr> [channel]	Connect device
+1
+LINE22 = 	listen   <dev> [channel [cmd]]   	Listen
+1
+LINE23 = 	watch    <dev> [channel [cmd]]   	Watch
+1
+LINE24 = 
+1
+LINE25 = ...hci0 down
+1
+LINE26 = ...stopping bluetoth
+1
+LINE27 = ...rmmod btusb
+1
+LINE28 = ...modprobe btusb
+1
+LINE29 = ...starting bluetooth service
+1
+LINE30 = ...hci0 up
+1
+LINE31 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE32 = ... config for rfcomm stty 2
+1
+LINE33 = ...streaming >>>>>>
+1
+LINE34 = streamer pid=297
+2
+LINE35 = bt_restart Archlinux edition executed
+1
+*** PID of streamer = 297
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+
+*** CONNECTION ATTEMPTS LEFT: 20
+*** re-Pair skipped
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+RFCOMM:0
+LINE0 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE1 = ...releasing it
+1
+LINE2 = RFCOMM configuration utility ver 5.30
+1
+LINE3 = Usage:
+1
+LINE4 = 	rfcomm [options] <command> <dev>
+1
+LINE5 = 
+1
+LINE6 = Options:
+1
+LINE7 = 	-i, --device [hciX|bdaddr]     Local HCI device or BD Address
+1
+LINE8 = 	-h, --help                     Display help
+1
+LINE9 = 	-r, --raw                      Switch TTY into raw mode
+1
+LINE10 = 	-A, --auth                     Enable authentication
+1
+LINE11 = 	-E, --encrypt                  Enable encryption
+1
+LINE12 = 	-S, --secure                   Secure connection
+1
+LINE13 = 	-M, --master                   Become the master of a piconet
+1
+LINE14 = 	-L, --linger [seconds]         Set linger timeout
+1
+LINE15 = 	-a                             Show all devices (default)
+1
+LINE16 = 
+1
+LINE17 = Commands:
+1
+LINE18 = 	bind     <dev> <bdaddr> [channel]	Bind device
+1
+LINE19 = 	release  <dev>                   	Release device
+1
+LINE20 = 	show     <dev>                   	Show device
+1
+LINE21 = 	connect  <dev> <bdaddr> [channel]	Connect device
+1
+LINE22 = 	listen   <dev> [channel [cmd]]   	Listen
+1
+LINE23 = 	watch    <dev> [channel [cmd]]   	Watch
+1
+LINE24 = 
+1
+LINE25 = ...hci0 down
+1
+LINE26 = ...stopping bluetoth
+1
+LINE27 = ...rmmod btusb
+1
+LINE28 = ...modprobe btusb
+1
+LINE29 = ...starting bluetooth service
+1
+LINE30 = ...hci0 up
+1
+LINE31 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE32 = ... config for rfcomm stty 2
+1
+LINE33 = ...streaming >>>>>>
+1
+LINE34 = streamer pid=297
+2
+LINE35 = bt_restart Archlinux edition executed
+1
+LINE36 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE37 = ...releasing it
+1
+LINE38 = ...hci0 down
+1
+LINE39 = ...stopping bluetoth
+1
+LINE40 = ...rmmod btusb
+1
+LINE41 = ...modprobe btusb
+1
+LINE42 = ...starting bluetooth service
+1
+LINE43 = ...hci0 up
+1
+LINE44 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE45 = ... config for rfcomm stty 2
+1
+LINE46 = ...streaming >>>>>>
+1
+LINE47 = streamer pid=337
+2
+LINE48 = bt_restart Archlinux edition executed
+1
+*** PID of streamer = 337
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+
+*** CONNECTION ATTEMPTS LEFT: 19
+*** re-Pair skipped
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+RFCOMM:0
+LINE0 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE1 = ...releasing it
+1
+LINE2 = RFCOMM configuration utility ver 5.30
+1
+LINE3 = Usage:
+1
+LINE4 = 	rfcomm [options] <command> <dev>
+1
+LINE5 = 
+1
+LINE6 = Options:
+1
+LINE7 = 	-i, --device [hciX|bdaddr]     Local HCI device or BD Address
+1
+LINE8 = 	-h, --help                     Display help
+1
+LINE9 = 	-r, --raw                      Switch TTY into raw mode
+1
+LINE10 = 	-A, --auth                     Enable authentication
+1
+LINE11 = 	-E, --encrypt                  Enable encryption
+1
+LINE12 = 	-S, --secure                   Secure connection
+1
+LINE13 = 	-M, --master                   Become the master of a piconet
+1
+LINE14 = 	-L, --linger [seconds]         Set linger timeout
+1
+LINE15 = 	-a                             Show all devices (default)
+1
+LINE16 = 
+1
+LINE17 = Commands:
+1
+LINE18 = 	bind     <dev> <bdaddr> [channel]	Bind device
+1
+LINE19 = 	release  <dev>                   	Release device
+1
+LINE20 = 	show     <dev>                   	Show device
+1
+LINE21 = 	connect  <dev> <bdaddr> [channel]	Connect device
+1
+LINE22 = 	listen   <dev> [channel [cmd]]   	Listen
+1
+LINE23 = 	watch    <dev> [channel [cmd]]   	Watch
+1
+LINE24 = 
+1
+LINE25 = ...hci0 down
+1
+LINE26 = ...stopping bluetoth
+1
+LINE27 = ...rmmod btusb
+1
+LINE28 = ...modprobe btusb
+1
+LINE29 = ...starting bluetooth service
+1
+LINE30 = ...hci0 up
+1
+LINE31 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE32 = ... config for rfcomm stty 2
+1
+LINE33 = ...streaming >>>>>>
+1
+LINE34 = streamer pid=297
+2
+LINE35 = bt_restart Archlinux edition executed
+1
+LINE36 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE37 = ...releasing it
+1
+LINE38 = ...hci0 down
+1
+LINE39 = ...stopping bluetoth
+1
+LINE40 = ...rmmod btusb
+1
+LINE41 = ...modprobe btusb
+1
+LINE42 = ...starting bluetooth service
+1
+LINE43 = ...hci0 up
+1
+LINE44 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE45 = ... config for rfcomm stty 2
+1
+LINE46 = ...streaming >>>>>>
+1
+LINE47 = streamer pid=337
+2
+LINE48 = bt_restart Archlinux edition executed
+1
+LINE49 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE50 = ...releasing it
+1
+LINE51 = ...hci0 down
+1
+LINE52 = ...stopping bluetoth
+1
+LINE53 = ...rmmod btusb
+1
+LINE54 = ...modprobe btusb
+1
+LINE55 = ...starting bluetooth service
+1
+LINE56 = ...hci0 up
+1
+LINE57 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE58 = ... config for rfcomm stty 2
+1
+LINE59 = ...streaming >>>>>>
+1
+LINE60 = streamer pid=378
+2
+LINE61 = bt_restart Archlinux edition executed
+1
+*** PID of streamer = 378
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+
+*** CONNECTION ATTEMPTS LEFT: 18
+*** re-Pair skipped
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+RFCOMM:0
+LINE0 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE1 = ...releasing it
+1
+LINE2 = RFCOMM configuration utility ver 5.30
+1
+LINE3 = Usage:
+1
+LINE4 = 	rfcomm [options] <command> <dev>
+1
+LINE5 = 
+1
+LINE6 = Options:
+1
+LINE7 = 	-i, --device [hciX|bdaddr]     Local HCI device or BD Address
+1
+LINE8 = 	-h, --help                     Display help
+1
+LINE9 = 	-r, --raw                      Switch TTY into raw mode
+1
+LINE10 = 	-A, --auth                     Enable authentication
+1
+LINE11 = 	-E, --encrypt                  Enable encryption
+1
+LINE12 = 	-S, --secure                   Secure connection
+1
+LINE13 = 	-M, --master                   Become the master of a piconet
+1
+LINE14 = 	-L, --linger [seconds]         Set linger timeout
+1
+LINE15 = 	-a                             Show all devices (default)
+1
+LINE16 = 
+1
+LINE17 = Commands:
+1
+LINE18 = 	bind     <dev> <bdaddr> [channel]	Bind device
+1
+LINE19 = 	release  <dev>                   	Release device
+1
+LINE20 = 	show     <dev>                   	Show device
+1
+LINE21 = 	connect  <dev> <bdaddr> [channel]	Connect device
+1
+LINE22 = 	listen   <dev> [channel [cmd]]   	Listen
+1
+LINE23 = 	watch    <dev> [channel [cmd]]   	Watch
+1
+LINE24 = 
+1
+LINE25 = ...hci0 down
+1
+LINE26 = ...stopping bluetoth
+1
+LINE27 = ...rmmod btusb
+1
+LINE28 = ...modprobe btusb
+1
+LINE29 = ...starting bluetooth service
+1
+LINE30 = ...hci0 up
+1
+LINE31 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE32 = ... config for rfcomm stty 2
+1
+LINE33 = ...streaming >>>>>>
+1
+LINE34 = streamer pid=297
+2
+LINE35 = bt_restart Archlinux edition executed
+1
+LINE36 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE37 = ...releasing it
+1
+LINE38 = ...hci0 down
+1
+LINE39 = ...stopping bluetoth
+1
+LINE40 = ...rmmod btusb
+1
+LINE41 = ...modprobe btusb
+1
+LINE42 = ...starting bluetooth service
+1
+LINE43 = ...hci0 up
+1
+LINE44 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE45 = ... config for rfcomm stty 2
+1
+LINE46 = ...streaming >>>>>>
+1
+LINE47 = streamer pid=337
+2
+LINE48 = bt_restart Archlinux edition executed
+1
+LINE49 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE50 = ...releasing it
+1
+LINE51 = ...hci0 down
+1
+LINE52 = ...stopping bluetoth
+1
+LINE53 = ...rmmod btusb
+1
+LINE54 = ...modprobe btusb
+1
+LINE55 = ...starting bluetooth service
+1
+LINE56 = ...hci0 up
+1
+LINE57 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE58 = ... config for rfcomm stty 2
+1
+LINE59 = ...streaming >>>>>>
+1
+LINE60 = streamer pid=378
+2
+LINE61 = bt_restart Archlinux edition executed
+1
+LINE62 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE63 = ...releasing it
+1
+LINE64 = ...hci0 down
+1
+LINE65 = ...stopping bluetoth
+1
+LINE66 = ...rmmod btusb
+1
+LINE67 = ...modprobe btusb
+1
+LINE68 = ...starting bluetooth service
+1
+LINE69 = ...hci0 up
+1
+LINE70 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE71 = ... config for rfcomm stty 2
+1
+LINE72 = ...streaming >>>>>>
+1
+LINE73 = streamer pid=418
+2
+LINE74 = bt_restart Archlinux edition executed
+1
+*** PID of streamer = 418
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+
+*** CONNECTION ATTEMPTS LEFT: 17
+*** re-Pair skipped
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+RFCOMM:0
+LINE0 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE1 = ...releasing it
+1
+LINE2 = RFCOMM configuration utility ver 5.30
+1
+LINE3 = Usage:
+1
+LINE4 = 	rfcomm [options] <command> <dev>
+1
+LINE5 = 
+1
+LINE6 = Options:
+1
+LINE7 = 	-i, --device [hciX|bdaddr]     Local HCI device or BD Address
+1
+LINE8 = 	-h, --help                     Display help
+1
+LINE9 = 	-r, --raw                      Switch TTY into raw mode
+1
+LINE10 = 	-A, --auth                     Enable authentication
+1
+LINE11 = 	-E, --encrypt                  Enable encryption
+1
+LINE12 = 	-S, --secure                   Secure connection
+1
+LINE13 = 	-M, --master                   Become the master of a piconet
+1
+LINE14 = 	-L, --linger [seconds]         Set linger timeout
+1
+LINE15 = 	-a                             Show all devices (default)
+1
+LINE16 = 
+1
+LINE17 = Commands:
+1
+LINE18 = 	bind     <dev> <bdaddr> [channel]	Bind device
+1
+LINE19 = 	release  <dev>                   	Release device
+1
+LINE20 = 	show     <dev>                   	Show device
+1
+LINE21 = 	connect  <dev> <bdaddr> [channel]	Connect device
+1
+LINE22 = 	listen   <dev> [channel [cmd]]   	Listen
+1
+LINE23 = 	watch    <dev> [channel [cmd]]   	Watch
+1
+LINE24 = 
+1
+LINE25 = ...hci0 down
+1
+LINE26 = ...stopping bluetoth
+1
+LINE27 = ...rmmod btusb
+1
+LINE28 = ...modprobe btusb
+1
+LINE29 = ...starting bluetooth service
+1
+LINE30 = ...hci0 up
+1
+LINE31 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE32 = ... config for rfcomm stty 2
+1
+LINE33 = ...streaming >>>>>>
+1
+LINE34 = streamer pid=297
+2
+LINE35 = bt_restart Archlinux edition executed
+1
+LINE36 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE37 = ...releasing it
+1
+LINE38 = ...hci0 down
+1
+LINE39 = ...stopping bluetoth
+1
+LINE40 = ...rmmod btusb
+1
+LINE41 = ...modprobe btusb
+1
+LINE42 = ...starting bluetooth service
+1
+LINE43 = ...hci0 up
+1
+LINE44 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE45 = ... config for rfcomm stty 2
+1
+LINE46 = ...streaming >>>>>>
+1
+LINE47 = streamer pid=337
+2
+LINE48 = bt_restart Archlinux edition executed
+1
+LINE49 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE50 = ...releasing it
+1
+LINE51 = ...hci0 down
+1
+LINE52 = ...stopping bluetoth
+1
+LINE53 = ...rmmod btusb
+1
+LINE54 = ...modprobe btusb
+1
+LINE55 = ...starting bluetooth service
+1
+LINE56 = ...hci0 up
+1
+LINE57 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE58 = ... config for rfcomm stty 2
+1
+LINE59 = ...streaming >>>>>>
+1
+LINE60 = streamer pid=378
+2
+LINE61 = bt_restart Archlinux edition executed
+1
+LINE62 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE63 = ...releasing it
+1
+LINE64 = ...hci0 down
+1
+LINE65 = ...stopping bluetoth
+1
+LINE66 = ...rmmod btusb
+1
+LINE67 = ...modprobe btusb
+1
+LINE68 = ...starting bluetooth service
+1
+LINE69 = ...hci0 up
+1
+LINE70 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE71 = ... config for rfcomm stty 2
+1
+LINE72 = ...streaming >>>>>>
+1
+LINE73 = streamer pid=418
+2
+LINE74 = bt_restart Archlinux edition executed
+1
+LINE75 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE76 = ...releasing it
+1
+LINE77 = ...hci0 down
+1
+LINE78 = ...stopping bluetoth
+1
+LINE79 = ...rmmod btusb
+1
+LINE80 = ...modprobe btusb
+1
+LINE81 = ...starting bluetooth service
+1
+LINE82 = ...hci0 up
+1
+LINE83 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE84 = ... config for rfcomm stty 2
+1
+LINE85 = ...streaming >>>>>>
+1
+LINE86 = streamer pid=458
+2
+LINE87 = bt_restart Archlinux edition executed
+1
+*** PID of streamer = 458
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+
+*** CONNECTION ATTEMPTS LEFT: 16
+*** Starting re-Pair process...
+Bluetooth daemon for Cadi startedFailed to open shared memory.Failed to read shared memoryLoading SVG tank defaults
+Array
+(
+    [3] => Array
+        (
+            [top] => 14
+            [bottom] => 100
+            [svg] => Array
+                (
+                    [height] => 400
+                    [tank_top] => 20
+                )
+
+        )
+
+    [4] => Array
+        (
+            [top] => 7
+            [bottom] => 47
+            [svg] => Array
+                (
+                    [height] => 430
+                    [tank_top] => 300
+                )
+
+        )
+
+)
+(Wed, 31 Dec 2014 00:00:01 +0000) Got CMD 
+ reloading Cadi BTDaemon settings
+*** CBD settings reloaded! ***
+Array
+(
+    [photo_divider] => 8000			
+    [csd] => 25000
+    [fsd] => 5					
+    [rpd] => 5					
+    [videox] => 0				
+    [srtrs] => 150				
+    [sppd] => 3					
+    [cs_dmp_fs] => 2000				
+    [cs_start_addr] => 1400			
+    [default_bt_mac] => 20:13:06:19:15:11	
+    [csv_parse_divider] => 6			
+)
+
+CurCMD=echo
+
+
+(Wed, 15 Jul 2015 14:39:42 +0000) Got CMD 
+*** Running automatic connection script
+BT Autoconnect
+*** Starting re-Pair process...
+*** re-Paired
+Array
+(
+    [0] => spawn bluetoothctl
+    [1] => power on
+    [2] => [bluetooth]# [0;94m[bluetooth][0m#                         [[0;92mNEW[0m] Controller 00:1A:7D:DA:71:13 BlueZ 5.30 [default]
+    [3] => [0;94m[bluetooth][0m# power on
+    [4] => [0;94m[bluetooth][0m#                         Changing power on succeeded
+    [5] => [0;94m[bluetooth][0m#                         [[0;93mCHG[0m] Controller 00:1A:7D:DA:71:13 Powered: yes
+    [6] => [0;94m[bluetooth][0m# agent on
+    [7] => [0;94m[bluetooth][0m#                         Agent registered
+    [8] => [0;94m[bluetooth][0m# default-agent
+    [9] => [0;94m[bluetooth][0m#                         Default agent request successful
+    [10] => [0;94m[bluetooth][0m# remove 20:13:07:26:11:64
+    [11] => Device 20:13:07:26:11:64 not available
+    [12] => [0;94m[bluetooth][0m# [0;94m[bluetooth][0m# scan on
+    [13] => [0;94m[bluetooth][0m#                         Discovery started
+    [14] => [0;94m[bluetooth][0m#                         [[0;93mCHG[0m] Controller 00:1A:7D:DA:71:13 Name: cadiweb-1
+    [15] => [0;94m[bluetooth][0m#                         [[0;93mCHG[0m] Controller 00:1A:7D:DA:71:13 Alias: BlueZ 5.30
+    [16] => [0;94m[bluetooth][0m#                         [[0;93mCHG[0m] Controller 00:1A:7D:DA:71:13 Alias: cadiweb-1
+    [17] => [0;94m[bluetooth][0m#                         [[0;93mCHG[0m] Controller 00:1A:7D:DA:71:13 Discovering: yes
+    [18] => [0;94m[bluetooth][0m#                         [[0;92mNEW[0m] Device 20:13:07:26:11:64 HC-06
+    [19] => EXPECT FOUND DEVICE
+    [20] => 
+    [21] => [0;94m[bluetooth][0m# pair 20:13:07:26:11:64
+    [22] => Attempting to pair with 20:13:07:26:11:64
+    [23] => [0;94m[bluetooth][0m# [0;94m[HC-06][0m#                         [[0;93mCHG[0m] Device 20:13:07:26:11:64 Connected: yes
+    [24] => [0;94m[HC-06][0m#                     Request PIN code
+    [25] => [0;94m[HC-06][0m#                     [0;91m[agent][0m Enter PIN code: EXPECT ENTERING PINCODE
+    [26] => 
+    [27] => 1234
+    [28] => [0;94m[HC-06][0m#                     [[0;93mCHG[0m] Device 20:13:07:26:11:64 UUIDs: 00001101-0000-1000-8000-00805f9b34fb
+    [29] => [0;94m[HC-06][0m#                     [[0;93mCHG[0m] Device 20:13:07:26:11:64 Paired: yes
+    [30] => [0;94m[HC-06][0m#                     Pairing successful
+    [31] => [0;94m[HC-06][0m# exit
+    [32] => [0;94m[HC-06][0m#                     Agent unregistered
+    [33] => [0;94m[HC-06][0m#                     [[0;91mDEL[0m] Controller 00:1A:7D:DA:71:13 cadiweb-1 [default]
+    [34] => [0;94m[HC-06][0m# [0;94m[bluetooth][0m# [bluetooth]#
+)
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+RFCOMM:0
+LINE0 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE1 = ...releasing it
+1
+LINE2 = RFCOMM configuration utility ver 5.30
+1
+LINE3 = Usage:
+1
+LINE4 = 	rfcomm [options] <command> <dev>
+1
+LINE5 = 
+1
+LINE6 = Options:
+1
+LINE7 = 	-i, --device [hciX|bdaddr]     Local HCI device or BD Address
+1
+LINE8 = 	-h, --help                     Display help
+1
+LINE9 = 	-r, --raw                      Switch TTY into raw mode
+1
+LINE10 = 	-A, --auth                     Enable authentication
+1
+LINE11 = 	-E, --encrypt                  Enable encryption
+1
+LINE12 = 	-S, --secure                   Secure connection
+1
+LINE13 = 	-M, --master                   Become the master of a piconet
+1
+LINE14 = 	-L, --linger [seconds]         Set linger timeout
+1
+LINE15 = 	-a                             Show all devices (default)
+1
+LINE16 = 
+1
+LINE17 = Commands:
+1
+LINE18 = 	bind     <dev> <bdaddr> [channel]	Bind device
+1
+LINE19 = 	release  <dev>                   	Release device
+1
+LINE20 = 	show     <dev>                   	Show device
+1
+LINE21 = 	connect  <dev> <bdaddr> [channel]	Connect device
+1
+LINE22 = 	listen   <dev> [channel [cmd]]   	Listen
+1
+LINE23 = 	watch    <dev> [channel [cmd]]   	Watch
+1
+LINE24 = 
+1
+LINE25 = ...hci0 down
+1
+LINE26 = ...stopping bluetoth
+1
+LINE27 = ...rmmod btusb
+1
+LINE28 = ...modprobe btusb
+1
+LINE29 = ...starting bluetooth service
+1
+LINE30 = ...hci0 up
+1
+LINE31 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE32 = ... config for rfcomm stty 2
+1
+LINE33 = ...streaming >>>>>>
+1
+LINE34 = streamer pid=277
+2
+LINE35 = bt_restart Archlinux edition executed
+1
+*** PID of streamer = 277
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+
+*** CONNECTION ATTEMPTS LEFT: 20
+*** re-Pair skipped
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+RFCOMM:0
+LINE0 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE1 = ...releasing it
+1
+LINE2 = RFCOMM configuration utility ver 5.30
+1
+LINE3 = Usage:
+1
+LINE4 = 	rfcomm [options] <command> <dev>
+1
+LINE5 = 
+1
+LINE6 = Options:
+1
+LINE7 = 	-i, --device [hciX|bdaddr]     Local HCI device or BD Address
+1
+LINE8 = 	-h, --help                     Display help
+1
+LINE9 = 	-r, --raw                      Switch TTY into raw mode
+1
+LINE10 = 	-A, --auth                     Enable authentication
+1
+LINE11 = 	-E, --encrypt                  Enable encryption
+1
+LINE12 = 	-S, --secure                   Secure connection
+1
+LINE13 = 	-M, --master                   Become the master of a piconet
+1
+LINE14 = 	-L, --linger [seconds]         Set linger timeout
+1
+LINE15 = 	-a                             Show all devices (default)
+1
+LINE16 = 
+1
+LINE17 = Commands:
+1
+LINE18 = 	bind     <dev> <bdaddr> [channel]	Bind device
+1
+LINE19 = 	release  <dev>                   	Release device
+1
+LINE20 = 	show     <dev>                   	Show device
+1
+LINE21 = 	connect  <dev> <bdaddr> [channel]	Connect device
+1
+LINE22 = 	listen   <dev> [channel [cmd]]   	Listen
+1
+LINE23 = 	watch    <dev> [channel [cmd]]   	Watch
+1
+LINE24 = 
+1
+LINE25 = ...hci0 down
+1
+LINE26 = ...stopping bluetoth
+1
+LINE27 = ...rmmod btusb
+1
+LINE28 = ...modprobe btusb
+1
+LINE29 = ...starting bluetooth service
+1
+LINE30 = ...hci0 up
+1
+LINE31 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE32 = ... config for rfcomm stty 2
+1
+LINE33 = ...streaming >>>>>>
+1
+LINE34 = streamer pid=277
+2
+LINE35 = bt_restart Archlinux edition executed
+1
+LINE36 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE37 = ...releasing it
+1
+LINE38 = ...hci0 down
+1
+LINE39 = ...stopping bluetoth
+1
+LINE40 = ...rmmod btusb
+1
+LINE41 = ...modprobe btusb
+1
+LINE42 = ...starting bluetooth service
+1
+LINE43 = ...hci0 up
+1
+LINE44 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE45 = ... config for rfcomm stty 2
+1
+LINE46 = ...streaming >>>>>>
+1
+LINE47 = streamer pid=316
+2
+LINE48 = bt_restart Archlinux edition executed
+1
+*** PID of streamer = 316
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+
+*** CONNECTION ATTEMPTS LEFT: 19
+*** re-Pair skipped
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+RFCOMM:0
+LINE0 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE1 = ...releasing it
+1
+LINE2 = RFCOMM configuration utility ver 5.30
+1
+LINE3 = Usage:
+1
+LINE4 = 	rfcomm [options] <command> <dev>
+1
+LINE5 = 
+1
+LINE6 = Options:
+1
+LINE7 = 	-i, --device [hciX|bdaddr]     Local HCI device or BD Address
+1
+LINE8 = 	-h, --help                     Display help
+1
+LINE9 = 	-r, --raw                      Switch TTY into raw mode
+1
+LINE10 = 	-A, --auth                     Enable authentication
+1
+LINE11 = 	-E, --encrypt                  Enable encryption
+1
+LINE12 = 	-S, --secure                   Secure connection
+1
+LINE13 = 	-M, --master                   Become the master of a piconet
+1
+LINE14 = 	-L, --linger [seconds]         Set linger timeout
+1
+LINE15 = 	-a                             Show all devices (default)
+1
+LINE16 = 
+1
+LINE17 = Commands:
+1
+LINE18 = 	bind     <dev> <bdaddr> [channel]	Bind device
+1
+LINE19 = 	release  <dev>                   	Release device
+1
+LINE20 = 	show     <dev>                   	Show device
+1
+LINE21 = 	connect  <dev> <bdaddr> [channel]	Connect device
+1
+LINE22 = 	listen   <dev> [channel [cmd]]   	Listen
+1
+LINE23 = 	watch    <dev> [channel [cmd]]   	Watch
+1
+LINE24 = 
+1
+LINE25 = ...hci0 down
+1
+LINE26 = ...stopping bluetoth
+1
+LINE27 = ...rmmod btusb
+1
+LINE28 = ...modprobe btusb
+1
+LINE29 = ...starting bluetooth service
+1
+LINE30 = ...hci0 up
+1
+LINE31 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE32 = ... config for rfcomm stty 2
+1
+LINE33 = ...streaming >>>>>>
+1
+LINE34 = streamer pid=277
+2
+LINE35 = bt_restart Archlinux edition executed
+1
+LINE36 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE37 = ...releasing it
+1
+LINE38 = ...hci0 down
+1
+LINE39 = ...stopping bluetoth
+1
+LINE40 = ...rmmod btusb
+1
+LINE41 = ...modprobe btusb
+1
+LINE42 = ...starting bluetooth service
+1
+LINE43 = ...hci0 up
+1
+LINE44 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE45 = ... config for rfcomm stty 2
+1
+LINE46 = ...streaming >>>>>>
+1
+LINE47 = streamer pid=316
+2
+LINE48 = bt_restart Archlinux edition executed
+1
+LINE49 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE50 = ...releasing it
+1
+LINE51 = ...hci0 down
+1
+LINE52 = ...stopping bluetoth
+1
+LINE53 = ...rmmod btusb
+1
+LINE54 = ...modprobe btusb
+1
+LINE55 = ...starting bluetooth service
+1
+LINE56 = ...hci0 up
+1
+LINE57 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE58 = ... config for rfcomm stty 2
+1
+LINE59 = ...streaming >>>>>>
+1
+LINE60 = streamer pid=355
+2
+LINE61 = bt_restart Archlinux edition executed
+1
+*** PID of streamer = 355
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+
+*** CONNECTION ATTEMPTS LEFT: 18
+*** re-Pair skipped
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+RFCOMM:0
+LINE0 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE1 = ...releasing it
+1
+LINE2 = RFCOMM configuration utility ver 5.30
+1
+LINE3 = Usage:
+1
+LINE4 = 	rfcomm [options] <command> <dev>
+1
+LINE5 = 
+1
+LINE6 = Options:
+1
+LINE7 = 	-i, --device [hciX|bdaddr]     Local HCI device or BD Address
+1
+LINE8 = 	-h, --help                     Display help
+1
+LINE9 = 	-r, --raw                      Switch TTY into raw mode
+1
+LINE10 = 	-A, --auth                     Enable authentication
+1
+LINE11 = 	-E, --encrypt                  Enable encryption
+1
+LINE12 = 	-S, --secure                   Secure connection
+1
+LINE13 = 	-M, --master                   Become the master of a piconet
+1
+LINE14 = 	-L, --linger [seconds]         Set linger timeout
+1
+LINE15 = 	-a                             Show all devices (default)
+1
+LINE16 = 
+1
+LINE17 = Commands:
+1
+LINE18 = 	bind     <dev> <bdaddr> [channel]	Bind device
+1
+LINE19 = 	release  <dev>                   	Release device
+1
+LINE20 = 	show     <dev>                   	Show device
+1
+LINE21 = 	connect  <dev> <bdaddr> [channel]	Connect device
+1
+LINE22 = 	listen   <dev> [channel [cmd]]   	Listen
+1
+LINE23 = 	watch    <dev> [channel [cmd]]   	Watch
+1
+LINE24 = 
+1
+LINE25 = ...hci0 down
+1
+LINE26 = ...stopping bluetoth
+1
+LINE27 = ...rmmod btusb
+1
+LINE28 = ...modprobe btusb
+1
+LINE29 = ...starting bluetooth service
+1
+LINE30 = ...hci0 up
+1
+LINE31 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE32 = ... config for rfcomm stty 2
+1
+LINE33 = ...streaming >>>>>>
+1
+LINE34 = streamer pid=277
+2
+LINE35 = bt_restart Archlinux edition executed
+1
+LINE36 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE37 = ...releasing it
+1
+LINE38 = ...hci0 down
+1
+LINE39 = ...stopping bluetoth
+1
+LINE40 = ...rmmod btusb
+1
+LINE41 = ...modprobe btusb
+1
+LINE42 = ...starting bluetooth service
+1
+LINE43 = ...hci0 up
+1
+LINE44 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE45 = ... config for rfcomm stty 2
+1
+LINE46 = ...streaming >>>>>>
+1
+LINE47 = streamer pid=316
+2
+LINE48 = bt_restart Archlinux edition executed
+1
+LINE49 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE50 = ...releasing it
+1
+LINE51 = ...hci0 down
+1
+LINE52 = ...stopping bluetoth
+1
+LINE53 = ...rmmod btusb
+1
+LINE54 = ...modprobe btusb
+1
+LINE55 = ...starting bluetooth service
+1
+LINE56 = ...hci0 up
+1
+LINE57 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE58 = ... config for rfcomm stty 2
+1
+LINE59 = ...streaming >>>>>>
+1
+LINE60 = streamer pid=355
+2
+LINE61 = bt_restart Archlinux edition executed
+1
+LINE62 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE63 = ...releasing it
+1
+LINE64 = ...hci0 down
+1
+LINE65 = ...stopping bluetoth
+1
+LINE66 = ...rmmod btusb
+1
+LINE67 = ...modprobe btusb
+1
+LINE68 = ...starting bluetooth service
+1
+LINE69 = ...hci0 up
+1
+LINE70 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE71 = ... config for rfcomm stty 2
+1
+LINE72 = ...streaming >>>>>>
+1
+LINE73 = streamer pid=395
+2
+LINE74 = bt_restart Archlinux edition executed
+1
+*** PID of streamer = 395
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+
+*** CONNECTION ATTEMPTS LEFT: 17
+*** re-Pair skipped
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+RFCOMM:0
+LINE0 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE1 = ...releasing it
+1
+LINE2 = RFCOMM configuration utility ver 5.30
+1
+LINE3 = Usage:
+1
+LINE4 = 	rfcomm [options] <command> <dev>
+1
+LINE5 = 
+1
+LINE6 = Options:
+1
+LINE7 = 	-i, --device [hciX|bdaddr]     Local HCI device or BD Address
+1
+LINE8 = 	-h, --help                     Display help
+1
+LINE9 = 	-r, --raw                      Switch TTY into raw mode
+1
+LINE10 = 	-A, --auth                     Enable authentication
+1
+LINE11 = 	-E, --encrypt                  Enable encryption
+1
+LINE12 = 	-S, --secure                   Secure connection
+1
+LINE13 = 	-M, --master                   Become the master of a piconet
+1
+LINE14 = 	-L, --linger [seconds]         Set linger timeout
+1
+LINE15 = 	-a                             Show all devices (default)
+1
+LINE16 = 
+1
+LINE17 = Commands:
+1
+LINE18 = 	bind     <dev> <bdaddr> [channel]	Bind device
+1
+LINE19 = 	release  <dev>                   	Release device
+1
+LINE20 = 	show     <dev>                   	Show device
+1
+LINE21 = 	connect  <dev> <bdaddr> [channel]	Connect device
+1
+LINE22 = 	listen   <dev> [channel [cmd]]   	Listen
+1
+LINE23 = 	watch    <dev> [channel [cmd]]   	Watch
+1
+LINE24 = 
+1
+LINE25 = ...hci0 down
+1
+LINE26 = ...stopping bluetoth
+1
+LINE27 = ...rmmod btusb
+1
+LINE28 = ...modprobe btusb
+1
+LINE29 = ...starting bluetooth service
+1
+LINE30 = ...hci0 up
+1
+LINE31 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE32 = ... config for rfcomm stty 2
+1
+LINE33 = ...streaming >>>>>>
+1
+LINE34 = streamer pid=277
+2
+LINE35 = bt_restart Archlinux edition executed
+1
+LINE36 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE37 = ...releasing it
+1
+LINE38 = ...hci0 down
+1
+LINE39 = ...stopping bluetoth
+1
+LINE40 = ...rmmod btusb
+1
+LINE41 = ...modprobe btusb
+1
+LINE42 = ...starting bluetooth service
+1
+LINE43 = ...hci0 up
+1
+LINE44 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE45 = ... config for rfcomm stty 2
+1
+LINE46 = ...streaming >>>>>>
+1
+LINE47 = streamer pid=316
+2
+LINE48 = bt_restart Archlinux edition executed
+1
+LINE49 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE50 = ...releasing it
+1
+LINE51 = ...hci0 down
+1
+LINE52 = ...stopping bluetoth
+1
+LINE53 = ...rmmod btusb
+1
+LINE54 = ...modprobe btusb
+1
+LINE55 = ...starting bluetooth service
+1
+LINE56 = ...hci0 up
+1
+LINE57 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE58 = ... config for rfcomm stty 2
+1
+LINE59 = ...streaming >>>>>>
+1
+LINE60 = streamer pid=355
+2
+LINE61 = bt_restart Archlinux edition executed
+1
+LINE62 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE63 = ...releasing it
+1
+LINE64 = ...hci0 down
+1
+LINE65 = ...stopping bluetoth
+1
+LINE66 = ...rmmod btusb
+1
+LINE67 = ...modprobe btusb
+1
+LINE68 = ...starting bluetooth service
+1
+LINE69 = ...hci0 up
+1
+LINE70 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE71 = ... config for rfcomm stty 2
+1
+LINE72 = ...streaming >>>>>>
+1
+LINE73 = streamer pid=395
+2
+LINE74 = bt_restart Archlinux edition executed
+1
+LINE75 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE76 = ...releasing it
+1
+LINE77 = ...hci0 down
+1
+LINE78 = ...stopping bluetoth
+1
+LINE79 = ...rmmod btusb
+1
+LINE80 = ...modprobe btusb
+1
+LINE81 = ...starting bluetooth service
+1
+LINE82 = ...hci0 up
+1
+LINE83 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE84 = ... config for rfcomm stty 2
+1
+LINE85 = ...streaming >>>>>>
+1
+LINE86 = streamer pid=434
+2
+LINE87 = bt_restart Archlinux edition executed
+1
+*** PID of streamer = 434
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+
+*** CONNECTION ATTEMPTS LEFT: 16
+*** Starting re-Pair process...
+*** re-Paired
+Array
+(
+    [0] => spawn bluetoothctl
+    [1] => power on
+    [2] => [bluetooth]# [0;94m[bluetooth][0m#                         [[0;92mNEW[0m] Controller 00:1A:7D:DA:71:13 cadiweb-1 [default]
+    [3] => [0;94m[bluetooth][0m#                         [[0;92mNEW[0m] Device 20:13:07:26:11:64 HC-06
+    [4] => [0;94m[bluetooth][0m# power on
+    [5] => [0;94m[bluetooth][0m#                         Changing power on succeeded
+    [6] => [0;94m[bluetooth][0m# agent on
+    [7] => [0;94m[bluetooth][0m#                         Agent registered
+    [8] => [0;94m[bluetooth][0m# default-agent
+    [9] => [0;94m[bluetooth][0m#                         Default agent request successful
+    [10] => [0;94m[bluetooth][0m# remove 20:13:07:26:11:64
+    [11] => [0;94m[bluetooth][0m#                         [[0;91mDEL[0m] Device 20:13:07:26:11:64 HC-06
+    [12] => [0;94m[bluetooth][0m# [0;94m[bluetooth][0m# scan on
+    [13] => [0;94m[bluetooth][0m#                         Device has been removed
+    [14] => [0;94m[bluetooth][0m#                         Discovery started
+    [15] => [0;94m[bluetooth][0m#                         [[0;93mCHG[0m] Controller 00:1A:7D:DA:71:13 Discovering: yes
+    [16] => [0;94m[bluetooth][0m#                         [[0;92mNEW[0m] Device 20:13:07:26:11:64 HC-06
+    [17] => EXPECT FOUND DEVICE
+    [18] => 
+    [19] => [0;94m[bluetooth][0m# pair 20:13:07:26:11:64
+    [20] => Attempting to pair with 20:13:07:26:11:64
+    [21] => [0;94m[bluetooth][0m# [0;94m[HC-06][0m#                         [[0;93mCHG[0m] Device 20:13:07:26:11:64 Connected: yes
+    [22] => [0;94m[HC-06][0m#                     Request PIN code
+    [23] => [0;94m[HC-06][0m#                     [0;91m[agent][0m Enter PIN code: EXPECT ENTERING PINCODE
+    [24] => 
+    [25] => 1234
+    [26] => [0;94m[HC-06][0m#                     [[0;93mCHG[0m] Device 20:13:07:26:11:64 UUIDs: 00001101-0000-1000-8000-00805f9b34fb
+    [27] => [0;94m[HC-06][0m#                     [[0;93mCHG[0m] Device 20:13:07:26:11:64 Paired: yes
+    [28] => [0;94m[HC-06][0m#                     Pairing successful
+    [29] => [0;94m[HC-06][0m# exit
+    [30] => [0;94m[HC-06][0m#                     Agent unregistered
+    [31] => [0;94m[HC-06][0m#                     [[0;91mDEL[0m] Controller 00:1A:7D:DA:71:13 cadiweb-1 [default]
+    [32] => [0;94m[HC-06][0m# [0;94m[bluetooth][0m# [bluetooth]#
+)
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+RFCOMM:0
+LINE0 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE1 = ...releasing it
+1
+LINE2 = RFCOMM configuration utility ver 5.30
+1
+LINE3 = Usage:
+1
+LINE4 = 	rfcomm [options] <command> <dev>
+1
+LINE5 = 
+1
+LINE6 = Options:
+1
+LINE7 = 	-i, --device [hciX|bdaddr]     Local HCI device or BD Address
+1
+LINE8 = 	-h, --help                     Display help
+1
+LINE9 = 	-r, --raw                      Switch TTY into raw mode
+1
+LINE10 = 	-A, --auth                     Enable authentication
+1
+LINE11 = 	-E, --encrypt                  Enable encryption
+1
+LINE12 = 	-S, --secure                   Secure connection
+1
+LINE13 = 	-M, --master                   Become the master of a piconet
+1
+LINE14 = 	-L, --linger [seconds]         Set linger timeout
+1
+LINE15 = 	-a                             Show all devices (default)
+1
+LINE16 = 
+1
+LINE17 = Commands:
+1
+LINE18 = 	bind     <dev> <bdaddr> [channel]	Bind device
+1
+LINE19 = 	release  <dev>                   	Release device
+1
+LINE20 = 	show     <dev>                   	Show device
+1
+LINE21 = 	connect  <dev> <bdaddr> [channel]	Connect device
+1
+LINE22 = 	listen   <dev> [channel [cmd]]   	Listen
+1
+LINE23 = 	watch    <dev> [channel [cmd]]   	Watch
+1
+LINE24 = 
+1
+LINE25 = ...hci0 down
+1
+LINE26 = ...stopping bluetoth
+1
+LINE27 = ...rmmod btusb
+1
+LINE28 = ...modprobe btusb
+1
+LINE29 = ...starting bluetooth service
+1
+LINE30 = ...hci0 up
+1
+LINE31 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE32 = ... config for rfcomm stty 2
+1
+LINE33 = ...streaming >>>>>>
+1
+LINE34 = streamer pid=277
+2
+LINE35 = bt_restart Archlinux edition executed
+1
+LINE36 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE37 = ...releasing it
+1
+LINE38 = ...hci0 down
+1
+LINE39 = ...stopping bluetoth
+1
+LINE40 = ...rmmod btusb
+1
+LINE41 = ...modprobe btusb
+1
+LINE42 = ...starting bluetooth service
+1
+LINE43 = ...hci0 up
+1
+LINE44 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE45 = ... config for rfcomm stty 2
+1
+LINE46 = ...streaming >>>>>>
+1
+LINE47 = streamer pid=316
+2
+LINE48 = bt_restart Archlinux edition executed
+1
+LINE49 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE50 = ...releasing it
+1
+LINE51 = ...hci0 down
+1
+LINE52 = ...stopping bluetoth
+1
+LINE53 = ...rmmod btusb
+1
+LINE54 = ...modprobe btusb
+1
+LINE55 = ...starting bluetooth service
+1
+LINE56 = ...hci0 up
+1
+LINE57 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE58 = ... config for rfcomm stty 2
+1
+LINE59 = ...streaming >>>>>>
+1
+LINE60 = streamer pid=355
+2
+LINE61 = bt_restart Archlinux edition executed
+1
+LINE62 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE63 = ...releasing it
+1
+LINE64 = ...hci0 down
+1
+LINE65 = ...stopping bluetoth
+1
+LINE66 = ...rmmod btusb
+1
+LINE67 = ...modprobe btusb
+1
+LINE68 = ...starting bluetooth service
+1
+LINE69 = ...hci0 up
+1
+LINE70 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE71 = ... config for rfcomm stty 2
+1
+LINE72 = ...streaming >>>>>>
+1
+LINE73 = streamer pid=395
+2
+LINE74 = bt_restart Archlinux edition executed
+1
+LINE75 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE76 = ...releasing it
+1
+LINE77 = ...hci0 down
+1
+LINE78 = ...stopping bluetoth
+1
+LINE79 = ...rmmod btusb
+1
+LINE80 = ...modprobe btusb
+1
+LINE81 = ...starting bluetooth service
+1
+LINE82 = ...hci0 up
+1
+LINE83 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE84 = ... config for rfcomm stty 2
+1
+LINE85 = ...streaming >>>>>>
+1
+LINE86 = streamer pid=434
+2
+LINE87 = bt_restart Archlinux edition executed
+1
+LINE88 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE89 = ...releasing it
+1
+LINE90 = ...hci0 down
+1
+LINE91 = ...stopping bluetoth
+1
+LINE92 = ...rmmod btusb
+1
+LINE93 = ...modprobe btusb
+1
+LINE94 = ...starting bluetooth service
+1
+LINE95 = ...hci0 up
+1
+LINE96 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE97 = ... config for rfcomm stty 2
+1
+LINE98 = ...streaming >>>>>>
+1
+LINE99 = streamer pid=484
+2
+LINE100 = bt_restart Archlinux edition executed
+1
+*** PID of streamer = 484
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+
+*** CONNECTION ATTEMPTS LEFT: 15
+*** re-Pair skipped
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+RFCOMM:0
+LINE0 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE1 = ...releasing it
+1
+LINE2 = RFCOMM configuration utility ver 5.30
+1
+LINE3 = Usage:
+1
+LINE4 = 	rfcomm [options] <command> <dev>
+1
+LINE5 = 
+1
+LINE6 = Options:
+1
+LINE7 = 	-i, --device [hciX|bdaddr]     Local HCI device or BD Address
+1
+LINE8 = 	-h, --help                     Display help
+1
+LINE9 = 	-r, --raw                      Switch TTY into raw mode
+1
+LINE10 = 	-A, --auth                     Enable authentication
+1
+LINE11 = 	-E, --encrypt                  Enable encryption
+1
+LINE12 = 	-S, --secure                   Secure connection
+1
+LINE13 = 	-M, --master                   Become the master of a piconet
+1
+LINE14 = 	-L, --linger [seconds]         Set linger timeout
+1
+LINE15 = 	-a                             Show all devices (default)
+1
+LINE16 = 
+1
+LINE17 = Commands:
+1
+LINE18 = 	bind     <dev> <bdaddr> [channel]	Bind device
+1
+LINE19 = 	release  <dev>                   	Release device
+1
+LINE20 = 	show     <dev>                   	Show device
+1
+LINE21 = 	connect  <dev> <bdaddr> [channel]	Connect device
+1
+LINE22 = 	listen   <dev> [channel [cmd]]   	Listen
+1
+LINE23 = 	watch    <dev> [channel [cmd]]   	Watch
+1
+LINE24 = 
+1
+LINE25 = ...hci0 down
+1
+LINE26 = ...stopping bluetoth
+1
+LINE27 = ...rmmod btusb
+1
+LINE28 = ...modprobe btusb
+1
+LINE29 = ...starting bluetooth service
+1
+LINE30 = ...hci0 up
+1
+LINE31 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE32 = ... config for rfcomm stty 2
+1
+LINE33 = ...streaming >>>>>>
+1
+LINE34 = streamer pid=277
+2
+LINE35 = bt_restart Archlinux edition executed
+1
+LINE36 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE37 = ...releasing it
+1
+LINE38 = ...hci0 down
+1
+LINE39 = ...stopping bluetoth
+1
+LINE40 = ...rmmod btusb
+1
+LINE41 = ...modprobe btusb
+1
+LINE42 = ...starting bluetooth service
+1
+LINE43 = ...hci0 up
+1
+LINE44 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE45 = ... config for rfcomm stty 2
+1
+LINE46 = ...streaming >>>>>>
+1
+LINE47 = streamer pid=316
+2
+LINE48 = bt_restart Archlinux edition executed
+1
+LINE49 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE50 = ...releasing it
+1
+LINE51 = ...hci0 down
+1
+LINE52 = ...stopping bluetoth
+1
+LINE53 = ...rmmod btusb
+1
+LINE54 = ...modprobe btusb
+1
+LINE55 = ...starting bluetooth service
+1
+LINE56 = ...hci0 up
+1
+LINE57 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE58 = ... config for rfcomm stty 2
+1
+LINE59 = ...streaming >>>>>>
+1
+LINE60 = streamer pid=355
+2
+LINE61 = bt_restart Archlinux edition executed
+1
+LINE62 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE63 = ...releasing it
+1
+LINE64 = ...hci0 down
+1
+LINE65 = ...stopping bluetoth
+1
+LINE66 = ...rmmod btusb
+1
+LINE67 = ...modprobe btusb
+1
+LINE68 = ...starting bluetooth service
+1
+LINE69 = ...hci0 up
+1
+LINE70 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE71 = ... config for rfcomm stty 2
+1
+LINE72 = ...streaming >>>>>>
+1
+LINE73 = streamer pid=395
+2
+LINE74 = bt_restart Archlinux edition executed
+1
+LINE75 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE76 = ...releasing it
+1
+LINE77 = ...hci0 down
+1
+LINE78 = ...stopping bluetoth
+1
+LINE79 = ...rmmod btusb
+1
+LINE80 = ...modprobe btusb
+1
+LINE81 = ...starting bluetooth service
+1
+LINE82 = ...hci0 up
+1
+LINE83 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE84 = ... config for rfcomm stty 2
+1
+LINE85 = ...streaming >>>>>>
+1
+LINE86 = streamer pid=434
+2
+LINE87 = bt_restart Archlinux edition executed
+1
+LINE88 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE89 = ...releasing it
+1
+LINE90 = ...hci0 down
+1
+LINE91 = ...stopping bluetoth
+1
+LINE92 = ...rmmod btusb
+1
+LINE93 = ...modprobe btusb
+1
+LINE94 = ...starting bluetooth service
+1
+LINE95 = ...hci0 up
+1
+LINE96 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE97 = ... config for rfcomm stty 2
+1
+LINE98 = ...streaming >>>>>>
+1
+LINE99 = streamer pid=484
+2
+LINE100 = bt_restart Archlinux edition executed
+1
+LINE101 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE102 = ...releasing it
+1
+LINE103 = ...hci0 down
+1
+LINE104 = ...stopping bluetoth
+1
+LINE105 = ...rmmod btusb
+1
+LINE106 = ...modprobe btusb
+1
+LINE107 = ...starting bluetooth service
+1
+LINE108 = ...hci0 up
+1
+LINE109 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE110 = ... config for rfcomm stty 2
+1
+LINE111 = ...streaming >>>>>>
+1
+LINE112 = streamer pid=527
+2
+LINE113 = bt_restart Archlinux edition executed
+1
+*** PID of streamer = 527
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+
+*** CONNECTION ATTEMPTS LEFT: 14
+*** re-Pair skipped
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+RFCOMM:0
+LINE0 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE1 = ...releasing it
+1
+LINE2 = RFCOMM configuration utility ver 5.30
+1
+LINE3 = Usage:
+1
+LINE4 = 	rfcomm [options] <command> <dev>
+1
+LINE5 = 
+1
+LINE6 = Options:
+1
+LINE7 = 	-i, --device [hciX|bdaddr]     Local HCI device or BD Address
+1
+LINE8 = 	-h, --help                     Display help
+1
+LINE9 = 	-r, --raw                      Switch TTY into raw mode
+1
+LINE10 = 	-A, --auth                     Enable authentication
+1
+LINE11 = 	-E, --encrypt                  Enable encryption
+1
+LINE12 = 	-S, --secure                   Secure connection
+1
+LINE13 = 	-M, --master                   Become the master of a piconet
+1
+LINE14 = 	-L, --linger [seconds]         Set linger timeout
+1
+LINE15 = 	-a                             Show all devices (default)
+1
+LINE16 = 
+1
+LINE17 = Commands:
+1
+LINE18 = 	bind     <dev> <bdaddr> [channel]	Bind device
+1
+LINE19 = 	release  <dev>                   	Release device
+1
+LINE20 = 	show     <dev>                   	Show device
+1
+LINE21 = 	connect  <dev> <bdaddr> [channel]	Connect device
+1
+LINE22 = 	listen   <dev> [channel [cmd]]   	Listen
+1
+LINE23 = 	watch    <dev> [channel [cmd]]   	Watch
+1
+LINE24 = 
+1
+LINE25 = ...hci0 down
+1
+LINE26 = ...stopping bluetoth
+1
+LINE27 = ...rmmod btusb
+1
+LINE28 = ...modprobe btusb
+1
+LINE29 = ...starting bluetooth service
+1
+LINE30 = ...hci0 up
+1
+LINE31 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE32 = ... config for rfcomm stty 2
+1
+LINE33 = ...streaming >>>>>>
+1
+LINE34 = streamer pid=277
+2
+LINE35 = bt_restart Archlinux edition executed
+1
+LINE36 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE37 = ...releasing it
+1
+LINE38 = ...hci0 down
+1
+LINE39 = ...stopping bluetoth
+1
+LINE40 = ...rmmod btusb
+1
+LINE41 = ...modprobe btusb
+1
+LINE42 = ...starting bluetooth service
+1
+LINE43 = ...hci0 up
+1
+LINE44 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE45 = ... config for rfcomm stty 2
+1
+LINE46 = ...streaming >>>>>>
+1
+LINE47 = streamer pid=316
+2
+LINE48 = bt_restart Archlinux edition executed
+1
+LINE49 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE50 = ...releasing it
+1
+LINE51 = ...hci0 down
+1
+LINE52 = ...stopping bluetoth
+1
+LINE53 = ...rmmod btusb
+1
+LINE54 = ...modprobe btusb
+1
+LINE55 = ...starting bluetooth service
+1
+LINE56 = ...hci0 up
+1
+LINE57 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE58 = ... config for rfcomm stty 2
+1
+LINE59 = ...streaming >>>>>>
+1
+LINE60 = streamer pid=355
+2
+LINE61 = bt_restart Archlinux edition executed
+1
+LINE62 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE63 = ...releasing it
+1
+LINE64 = ...hci0 down
+1
+LINE65 = ...stopping bluetoth
+1
+LINE66 = ...rmmod btusb
+1
+LINE67 = ...modprobe btusb
+1
+LINE68 = ...starting bluetooth service
+1
+LINE69 = ...hci0 up
+1
+LINE70 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE71 = ... config for rfcomm stty 2
+1
+LINE72 = ...streaming >>>>>>
+1
+LINE73 = streamer pid=395
+2
+LINE74 = bt_restart Archlinux edition executed
+1
+LINE75 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE76 = ...releasing it
+1
+LINE77 = ...hci0 down
+1
+LINE78 = ...stopping bluetoth
+1
+LINE79 = ...rmmod btusb
+1
+LINE80 = ...modprobe btusb
+1
+LINE81 = ...starting bluetooth service
+1
+LINE82 = ...hci0 up
+1
+LINE83 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE84 = ... config for rfcomm stty 2
+1
+LINE85 = ...streaming >>>>>>
+1
+LINE86 = streamer pid=434
+2
+LINE87 = bt_restart Archlinux edition executed
+1
+LINE88 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE89 = ...releasing it
+1
+LINE90 = ...hci0 down
+1
+LINE91 = ...stopping bluetoth
+1
+LINE92 = ...rmmod btusb
+1
+LINE93 = ...modprobe btusb
+1
+LINE94 = ...starting bluetooth service
+1
+LINE95 = ...hci0 up
+1
+LINE96 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE97 = ... config for rfcomm stty 2
+1
+LINE98 = ...streaming >>>>>>
+1
+LINE99 = streamer pid=484
+2
+LINE100 = bt_restart Archlinux edition executed
+1
+LINE101 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE102 = ...releasing it
+1
+LINE103 = ...hci0 down
+1
+LINE104 = ...stopping bluetoth
+1
+LINE105 = ...rmmod btusb
+1
+LINE106 = ...modprobe btusb
+1
+LINE107 = ...starting bluetooth service
+1
+LINE108 = ...hci0 up
+1
+LINE109 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE110 = ... config for rfcomm stty 2
+1
+LINE111 = ...streaming >>>>>>
+1
+LINE112 = streamer pid=527
+2
+LINE113 = bt_restart Archlinux edition executed
+1
+LINE114 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE115 = ...releasing it
+1
+LINE116 = ...hci0 down
+1
+LINE117 = ...stopping bluetoth
+1
+LINE118 = ...rmmod btusb
+1
+LINE119 = ...modprobe btusb
+1
+LINE120 = ...starting bluetooth service
+1
+LINE121 = ...hci0 up
+1
+LINE122 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE123 = ... config for rfcomm stty 2
+1
+LINE124 = ...streaming >>>>>>
+1
+LINE125 = streamer pid=569
+2
+LINE126 = bt_restart Archlinux edition executed
+1
+*** PID of streamer = 569
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+
+*** CONNECTION ATTEMPTS LEFT: 13
+*** re-Pair skipped
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+RFCOMM:0
+LINE0 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE1 = ...releasing it
+1
+LINE2 = RFCOMM configuration utility ver 5.30
+1
+LINE3 = Usage:
+1
+LINE4 = 	rfcomm [options] <command> <dev>
+1
+LINE5 = 
+1
+LINE6 = Options:
+1
+LINE7 = 	-i, --device [hciX|bdaddr]     Local HCI device or BD Address
+1
+LINE8 = 	-h, --help                     Display help
+1
+LINE9 = 	-r, --raw                      Switch TTY into raw mode
+1
+LINE10 = 	-A, --auth                     Enable authentication
+1
+LINE11 = 	-E, --encrypt                  Enable encryption
+1
+LINE12 = 	-S, --secure                   Secure connection
+1
+LINE13 = 	-M, --master                   Become the master of a piconet
+1
+LINE14 = 	-L, --linger [seconds]         Set linger timeout
+1
+LINE15 = 	-a                             Show all devices (default)
+1
+LINE16 = 
+1
+LINE17 = Commands:
+1
+LINE18 = 	bind     <dev> <bdaddr> [channel]	Bind device
+1
+LINE19 = 	release  <dev>                   	Release device
+1
+LINE20 = 	show     <dev>                   	Show device
+1
+LINE21 = 	connect  <dev> <bdaddr> [channel]	Connect device
+1
+LINE22 = 	listen   <dev> [channel [cmd]]   	Listen
+1
+LINE23 = 	watch    <dev> [channel [cmd]]   	Watch
+1
+LINE24 = 
+1
+LINE25 = ...hci0 down
+1
+LINE26 = ...stopping bluetoth
+1
+LINE27 = ...rmmod btusb
+1
+LINE28 = ...modprobe btusb
+1
+LINE29 = ...starting bluetooth service
+1
+LINE30 = ...hci0 up
+1
+LINE31 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE32 = ... config for rfcomm stty 2
+1
+LINE33 = ...streaming >>>>>>
+1
+LINE34 = streamer pid=277
+2
+LINE35 = bt_restart Archlinux edition executed
+1
+LINE36 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE37 = ...releasing it
+1
+LINE38 = ...hci0 down
+1
+LINE39 = ...stopping bluetoth
+1
+LINE40 = ...rmmod btusb
+1
+LINE41 = ...modprobe btusb
+1
+LINE42 = ...starting bluetooth service
+1
+LINE43 = ...hci0 up
+1
+LINE44 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE45 = ... config for rfcomm stty 2
+1
+LINE46 = ...streaming >>>>>>
+1
+LINE47 = streamer pid=316
+2
+LINE48 = bt_restart Archlinux edition executed
+1
+LINE49 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE50 = ...releasing it
+1
+LINE51 = ...hci0 down
+1
+LINE52 = ...stopping bluetoth
+1
+LINE53 = ...rmmod btusb
+1
+LINE54 = ...modprobe btusb
+1
+LINE55 = ...starting bluetooth service
+1
+LINE56 = ...hci0 up
+1
+LINE57 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE58 = ... config for rfcomm stty 2
+1
+LINE59 = ...streaming >>>>>>
+1
+LINE60 = streamer pid=355
+2
+LINE61 = bt_restart Archlinux edition executed
+1
+LINE62 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE63 = ...releasing it
+1
+LINE64 = ...hci0 down
+1
+LINE65 = ...stopping bluetoth
+1
+LINE66 = ...rmmod btusb
+1
+LINE67 = ...modprobe btusb
+1
+LINE68 = ...starting bluetooth service
+1
+LINE69 = ...hci0 up
+1
+LINE70 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE71 = ... config for rfcomm stty 2
+1
+LINE72 = ...streaming >>>>>>
+1
+LINE73 = streamer pid=395
+2
+LINE74 = bt_restart Archlinux edition executed
+1
+LINE75 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE76 = ...releasing it
+1
+LINE77 = ...hci0 down
+1
+LINE78 = ...stopping bluetoth
+1
+LINE79 = ...rmmod btusb
+1
+LINE80 = ...modprobe btusb
+1
+LINE81 = ...starting bluetooth service
+1
+LINE82 = ...hci0 up
+1
+LINE83 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE84 = ... config for rfcomm stty 2
+1
+LINE85 = ...streaming >>>>>>
+1
+LINE86 = streamer pid=434
+2
+LINE87 = bt_restart Archlinux edition executed
+1
+LINE88 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE89 = ...releasing it
+1
+LINE90 = ...hci0 down
+1
+LINE91 = ...stopping bluetoth
+1
+LINE92 = ...rmmod btusb
+1
+LINE93 = ...modprobe btusb
+1
+LINE94 = ...starting bluetooth service
+1
+LINE95 = ...hci0 up
+1
+LINE96 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE97 = ... config for rfcomm stty 2
+1
+LINE98 = ...streaming >>>>>>
+1
+LINE99 = streamer pid=484
+2
+LINE100 = bt_restart Archlinux edition executed
+1
+LINE101 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE102 = ...releasing it
+1
+LINE103 = ...hci0 down
+1
+LINE104 = ...stopping bluetoth
+1
+LINE105 = ...rmmod btusb
+1
+LINE106 = ...modprobe btusb
+1
+LINE107 = ...starting bluetooth service
+1
+LINE108 = ...hci0 up
+1
+LINE109 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE110 = ... config for rfcomm stty 2
+1
+LINE111 = ...streaming >>>>>>
+1
+LINE112 = streamer pid=527
+2
+LINE113 = bt_restart Archlinux edition executed
+1
+LINE114 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE115 = ...releasing it
+1
+LINE116 = ...hci0 down
+1
+LINE117 = ...stopping bluetoth
+1
+LINE118 = ...rmmod btusb
+1
+LINE119 = ...modprobe btusb
+1
+LINE120 = ...starting bluetooth service
+1
+LINE121 = ...hci0 up
+1
+LINE122 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE123 = ... config for rfcomm stty 2
+1
+LINE124 = ...streaming >>>>>>
+1
+LINE125 = streamer pid=569
+2
+LINE126 = bt_restart Archlinux edition executed
+1
+LINE127 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE128 = ...releasing it
+1
+LINE129 = ...hci0 down
+1
+LINE130 = ...stopping bluetoth
+1
+LINE131 = ...rmmod btusb
+1
+LINE132 = ...modprobe btusb
+1
+LINE133 = ...starting bluetooth service
+1
+LINE134 = ...hci0 up
+1
+LINE135 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE136 = ... config for rfcomm stty 2
+1
+LINE137 = ...streaming >>>>>>
+1
+LINE138 = streamer pid=609
+2
+LINE139 = bt_restart Archlinux edition executed
+1
+*** PID of streamer = 609
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+
+*** CONNECTION ATTEMPTS LEFT: 12
+*** re-Pair skipped
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+RFCOMM:0
+LINE0 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE1 = ...releasing it
+1
+LINE2 = RFCOMM configuration utility ver 5.30
+1
+LINE3 = Usage:
+1
+LINE4 = 	rfcomm [options] <command> <dev>
+1
+LINE5 = 
+1
+LINE6 = Options:
+1
+LINE7 = 	-i, --device [hciX|bdaddr]     Local HCI device or BD Address
+1
+LINE8 = 	-h, --help                     Display help
+1
+LINE9 = 	-r, --raw                      Switch TTY into raw mode
+1
+LINE10 = 	-A, --auth                     Enable authentication
+1
+LINE11 = 	-E, --encrypt                  Enable encryption
+1
+LINE12 = 	-S, --secure                   Secure connection
+1
+LINE13 = 	-M, --master                   Become the master of a piconet
+1
+LINE14 = 	-L, --linger [seconds]         Set linger timeout
+1
+LINE15 = 	-a                             Show all devices (default)
+1
+LINE16 = 
+1
+LINE17 = Commands:
+1
+LINE18 = 	bind     <dev> <bdaddr> [channel]	Bind device
+1
+LINE19 = 	release  <dev>                   	Release device
+1
+LINE20 = 	show     <dev>                   	Show device
+1
+LINE21 = 	connect  <dev> <bdaddr> [channel]	Connect device
+1
+LINE22 = 	listen   <dev> [channel [cmd]]   	Listen
+1
+LINE23 = 	watch    <dev> [channel [cmd]]   	Watch
+1
+LINE24 = 
+1
+LINE25 = ...hci0 down
+1
+LINE26 = ...stopping bluetoth
+1
+LINE27 = ...rmmod btusb
+1
+LINE28 = ...modprobe btusb
+1
+LINE29 = ...starting bluetooth service
+1
+LINE30 = ...hci0 up
+1
+LINE31 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE32 = ... config for rfcomm stty 2
+1
+LINE33 = ...streaming >>>>>>
+1
+LINE34 = streamer pid=277
+2
+LINE35 = bt_restart Archlinux edition executed
+1
+LINE36 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE37 = ...releasing it
+1
+LINE38 = ...hci0 down
+1
+LINE39 = ...stopping bluetoth
+1
+LINE40 = ...rmmod btusb
+1
+LINE41 = ...modprobe btusb
+1
+LINE42 = ...starting bluetooth service
+1
+LINE43 = ...hci0 up
+1
+LINE44 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE45 = ... config for rfcomm stty 2
+1
+LINE46 = ...streaming >>>>>>
+1
+LINE47 = streamer pid=316
+2
+LINE48 = bt_restart Archlinux edition executed
+1
+LINE49 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE50 = ...releasing it
+1
+LINE51 = ...hci0 down
+1
+LINE52 = ...stopping bluetoth
+1
+LINE53 = ...rmmod btusb
+1
+LINE54 = ...modprobe btusb
+1
+LINE55 = ...starting bluetooth service
+1
+LINE56 = ...hci0 up
+1
+LINE57 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE58 = ... config for rfcomm stty 2
+1
+LINE59 = ...streaming >>>>>>
+1
+LINE60 = streamer pid=355
+2
+LINE61 = bt_restart Archlinux edition executed
+1
+LINE62 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE63 = ...releasing it
+1
+LINE64 = ...hci0 down
+1
+LINE65 = ...stopping bluetoth
+1
+LINE66 = ...rmmod btusb
+1
+LINE67 = ...modprobe btusb
+1
+LINE68 = ...starting bluetooth service
+1
+LINE69 = ...hci0 up
+1
+LINE70 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE71 = ... config for rfcomm stty 2
+1
+LINE72 = ...streaming >>>>>>
+1
+LINE73 = streamer pid=395
+2
+LINE74 = bt_restart Archlinux edition executed
+1
+LINE75 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE76 = ...releasing it
+1
+LINE77 = ...hci0 down
+1
+LINE78 = ...stopping bluetoth
+1
+LINE79 = ...rmmod btusb
+1
+LINE80 = ...modprobe btusb
+1
+LINE81 = ...starting bluetooth service
+1
+LINE82 = ...hci0 up
+1
+LINE83 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE84 = ... config for rfcomm stty 2
+1
+LINE85 = ...streaming >>>>>>
+1
+LINE86 = streamer pid=434
+2
+LINE87 = bt_restart Archlinux edition executed
+1
+LINE88 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE89 = ...releasing it
+1
+LINE90 = ...hci0 down
+1
+LINE91 = ...stopping bluetoth
+1
+LINE92 = ...rmmod btusb
+1
+LINE93 = ...modprobe btusb
+1
+LINE94 = ...starting bluetooth service
+1
+LINE95 = ...hci0 up
+1
+LINE96 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE97 = ... config for rfcomm stty 2
+1
+LINE98 = ...streaming >>>>>>
+1
+LINE99 = streamer pid=484
+2
+LINE100 = bt_restart Archlinux edition executed
+1
+LINE101 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE102 = ...releasing it
+1
+LINE103 = ...hci0 down
+1
+LINE104 = ...stopping bluetoth
+1
+LINE105 = ...rmmod btusb
+1
+LINE106 = ...modprobe btusb
+1
+LINE107 = ...starting bluetooth service
+1
+LINE108 = ...hci0 up
+1
+LINE109 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE110 = ... config for rfcomm stty 2
+1
+LINE111 = ...streaming >>>>>>
+1
+LINE112 = streamer pid=527
+2
+LINE113 = bt_restart Archlinux edition executed
+1
+LINE114 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE115 = ...releasing it
+1
+LINE116 = ...hci0 down
+1
+LINE117 = ...stopping bluetoth
+1
+LINE118 = ...rmmod btusb
+1
+LINE119 = ...modprobe btusb
+1
+LINE120 = ...starting bluetooth service
+1
+LINE121 = ...hci0 up
+1
+LINE122 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE123 = ... config for rfcomm stty 2
+1
+LINE124 = ...streaming >>>>>>
+1
+LINE125 = streamer pid=569
+2
+LINE126 = bt_restart Archlinux edition executed
+1
+LINE127 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE128 = ...releasing it
+1
+LINE129 = ...hci0 down
+1
+LINE130 = ...stopping bluetoth
+1
+LINE131 = ...rmmod btusb
+1
+LINE132 = ...modprobe btusb
+1
+LINE133 = ...starting bluetooth service
+1
+LINE134 = ...hci0 up
+1
+LINE135 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE136 = ... config for rfcomm stty 2
+1
+LINE137 = ...streaming >>>>>>
+1
+LINE138 = streamer pid=609
+2
+LINE139 = bt_restart Archlinux edition executed
+1
+LINE140 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE141 = ...releasing it
+1
+LINE142 = ...hci0 down
+1
+LINE143 = ...stopping bluetoth
+1
+LINE144 = ...rmmod btusb
+1
+LINE145 = ...modprobe btusb
+1
+LINE146 = ...starting bluetooth service
+1
+LINE147 = ...hci0 up
+1
+LINE148 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE149 = ... config for rfcomm stty 2
+1
+LINE150 = ...streaming >>>>>>
+1
+LINE151 = streamer pid=650
+2
+LINE152 = bt_restart Archlinux edition executed
+1
+*** PID of streamer = 650
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+
+*** CONNECTION ATTEMPTS LEFT: 11
+*** Starting re-Pair process...
+*** re-Paired
+Array
+(
+    [0] => spawn bluetoothctl
+    [1] => power on
+    [2] => [bluetooth]# [0;94m[bluetooth][0m#                         [[0;92mNEW[0m] Controller 00:1A:7D:DA:71:13 cadiweb-1 [default]
+    [3] => [0;94m[bluetooth][0m#                         [[0;92mNEW[0m] Device 20:13:07:26:11:64 HC-06
+    [4] => [0;94m[bluetooth][0m# power on
+    [5] => [0;94m[bluetooth][0m#                         Changing power on succeeded
+    [6] => [0;94m[bluetooth][0m# agent on
+    [7] => [0;94m[bluetooth][0m#                         Agent registered
+    [8] => [0;94m[bluetooth][0m# default-agent
+    [9] => [0;94m[bluetooth][0m#                         Default agent request successful
+    [10] => [0;94m[bluetooth][0m# remove 20:13:07:26:11:64
+    [11] => [0;94m[bluetooth][0m#                         [[0;91mDEL[0m] Device 20:13:07:26:11:64 HC-06
+    [12] => [0;94m[bluetooth][0m#                         Device has been removed
+    [13] => [0;94m[bluetooth][0m# [0;94m[bluetooth][0m# scan on
+    [14] => [0;94m[bluetooth][0m#                         Discovery started
+    [15] => [0;94m[bluetooth][0m#                         [[0;93mCHG[0m] Controller 00:1A:7D:DA:71:13 Discovering: yes
+    [16] => [0;94m[bluetooth][0m#                         [[0;92mNEW[0m] Device 20:13:07:26:11:64 HC-06
+    [17] => [0;94m[bluetooth][0m# EXPECT FOUND DEVICE
+    [18] => 
+    [19] => pair 20:13:07:26:11:64
+    [20] => Attempting to pair with 20:13:07:26:11:64
+    [21] => [0;94m[bluetooth][0m# [0;94m[HC-06][0m#                         [[0;93mCHG[0m] Device 20:13:07:26:11:64 Connected: yes
+    [22] => [0;94m[HC-06][0m#                     Request PIN code
+    [23] => [0;94m[HC-06][0m#                     [0;91m[agent][0m Enter PIN code: EXPECT ENTERING PINCODE
+    [24] => 
+    [25] => 1234
+    [26] => [0;94m[HC-06][0m#                     [[0;93mCHG[0m] Device 20:13:07:26:11:64 UUIDs: 00001101-0000-1000-8000-00805f9b34fb
+    [27] => [0;94m[HC-06][0m#                     [[0;93mCHG[0m] Device 20:13:07:26:11:64 Paired: yes
+    [28] => [0;94m[HC-06][0m#                     Pairing successful
+    [29] => [0;94m[HC-06][0m# exit
+    [30] => [0;94m[HC-06][0m#                     Agent unregistered
+    [31] => [0;94m[HC-06][0m#                     [[0;91mDEL[0m] Controller 00:1A:7D:DA:71:13 cadiweb-1 [default]
+    [32] => [0;94m[HC-06][0m# [0;94m[bluetooth][0m# [bluetooth]#
+)
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+RFCOMM:0
+Bluetooth daemon for Cadi startedFailed to open shared memory.Failed to read shared memoryLoading SVG tank defaults
+Array
+(
+    [3] => Array
+        (
+            [top] => 14
+            [bottom] => 100
+            [svg] => Array
+                (
+                    [height] => 400
+                    [tank_top] => 20
+                )
+
+        )
+
+    [4] => Array
+        (
+            [top] => 7
+            [bottom] => 47
+            [svg] => Array
+                (
+                    [height] => 430
+                    [tank_top] => 300
+                )
+
+        )
+
+)
+(Wed, 31 Dec 2014 00:00:01 +0000) Got CMD 
+ reloading Cadi BTDaemon settings
+*** CBD settings reloaded! ***
+Array
+(
+    [photo_divider] => 8000			
+    [csd] => 25000
+    [fsd] => 5					
+    [rpd] => 5					
+    [videox] => 0				
+    [srtrs] => 150				
+    [sppd] => 3					
+    [cs_dmp_fs] => 2000				
+    [cs_start_addr] => 1400			
+    [default_bt_mac] => 20:13:06:19:15:11	
+    [csv_parse_divider] => 6			
+)
+
+CurCMD=echo
+
+(Wed, 15 Jul 2015 14:47:55 +0000) Got CMD 
+*** Running automatic connection script
+BT Autoconnect
+*** Starting re-Pair process...
+*** re-Paired
+Array
+(
+    [0] => spawn bluetoothctl
+    [1] => power on
+    [2] => [bluetooth]# [0;94m[bluetooth][0m#                         [[0;92mNEW[0m] Controller 00:1A:7D:DA:71:13 cadiweb-1 [default]
+    [3] => [0;94m[bluetooth][0m#                         [[0;92mNEW[0m] Device 20:13:07:26:11:64 HC-06
+    [4] => [0;94m[bluetooth][0m# power on
+    [5] => [0;94m[bluetooth][0m#                         Changing power on succeeded
+    [6] => [0;94m[bluetooth][0m# agent on
+    [7] => [0;94m[bluetooth][0m#                         Agent registered
+    [8] => [0;94m[bluetooth][0m# default-agent
+    [9] => [0;94m[bluetooth][0m#                         Default agent request successful
+    [10] => [0;94m[bluetooth][0m# remove 20:13:07:26:11:64
+    [11] => [0;94m[bluetooth][0m#                         [[0;91mDEL[0m] Device 20:13:07:26:11:64 HC-06
+    [12] => [0;94m[bluetooth][0m# [0;94m[bluetooth][0m# scan on
+    [13] => [0;94m[bluetooth][0m#                         Device has been removed
+    [14] => [0;94m[bluetooth][0m#                         Discovery started
+    [15] => [0;94m[bluetooth][0m#                         [[0;93mCHG[0m] Controller 00:1A:7D:DA:71:13 Discovering: yes
+    [16] => [0;94m[bluetooth][0m#                         [[0;92mNEW[0m] Device 20:13:07:26:11:64 HC-06
+    [17] => [0;94m[bluetooth][0m# EXPECT FOUND DEVICE
+    [18] => 
+    [19] => pair 20:13:07:26:11:64
+    [20] => Attempting to pair with 20:13:07:26:11:64
+    [21] => [0;94m[bluetooth][0m#                         Failed to pair: org.bluez.Error.ConnectionAttemptFailed
+    [22] => [0;94m[bluetooth][0m# EXPECT FAILED PAIRING
+    [23] => scan off
+    [24] => [0;94m[bluetooth][0m# agent off
+    [25] => [0;94m[bluetooth][0m# power off
+    [26] => [0;94m[bluetooth][0m#                         [[0;93mCHG[0m] Device 20:13:07:26:11:64 RSSI is nil
+    [27] => [0;94m[bluetooth][0m#                         [[0;93mCHG[0m] Controller 00:1A:7D:DA:71:13 Discovering: no
+    [28] => [0;94m[bluetooth][0m#                         Discovery stopped
+    [29] => [0;94m[bluetooth][0m#                         Agent unregistered
+    [30] => [0;94m[bluetooth][0m#                         Changing power off succeeded
+    [31] => [0;94m[bluetooth][0m#                         [[0;93mCHG[0m] Controller 00:1A:7D:DA:71:13 Powered: no
+    [32] => [0;94m[bluetooth][0m#                         [[0;93mCHG[0m] Controller 00:1A:7D:DA:71:13 Discovering: no
+    [33] => [0;94m[bluetooth][0m# power on
+    [34] => [0;94m[bluetooth][0m#                         Changing power on succeeded
+    [35] => [0;94m[bluetooth][0m# agent on
+    [36] => [0;94m[bluetooth][0m#                         [[0;93mCHG[0m] Controller 00:1A:7D:DA:71:13 Powered: yes
+    [37] => [0;94m[bluetooth][0m#                         Agent registered
+    [38] => [0;94m[bluetooth][0m# default-agent
+    [39] => [0;94m[bluetooth][0m#                         Default agent request successful
+    [40] => [0;94m[bluetooth][0m# remove 20:13:07:26:11:64
+    [41] => [0;94m[bluetooth][0m#                         [[0;91mDEL[0m] Device 20:13:07:26:11:64 HC-06
+    [42] => [0;94m[bluetooth][0m# [0;94m[bluetooth][0m# scan on
+    [43] => [0;94m[bluetooth][0m#                         Device has been removed
+    [44] => [0;94m[bluetooth][0m#                         Discovery started
+    [45] => [0;94m[bluetooth][0m#                         [[0;93mCHG[0m] Controller 00:1A:7D:DA:71:13 Discovering: yes
+    [46] => [0;94m[bluetooth][0m#                         [[0;92mNEW[0m] Device 20:13:07:26:11:64 HC-06
+    [47] => [0;94m[bluetooth][0m# EXPECT FOUND DEVICE
+    [48] => 
+    [49] => pair 20:13:07:26:11:64
+    [50] => Attempting to pair with 20:13:07:26:11:64
+    [51] => [0;94m[bluetooth][0m# [0;94m[HC-06][0m#                         [[0;93mCHG[0m] Device 20:13:07:26:11:64 Connected: yes
+    [52] => [0;94m[HC-06][0m#                     Request PIN code
+    [53] => [0;94m[HC-06][0m#                     [0;91m[agent][0m Enter PIN code: EXPECT ENTERING PINCODE
+    [54] => 
+    [55] => 1234
+    [56] => [0;94m[HC-06][0m#                     [[0;93mCHG[0m] Device 20:13:07:26:11:64 UUIDs: 00001101-0000-1000-8000-00805f9b34fb
+    [57] => [0;94m[HC-06][0m#                     [[0;93mCHG[0m] Device 20:13:07:26:11:64 Paired: yes
+    [58] => [0;94m[HC-06][0m#                     Pairing successful
+    [59] => [0;94m[HC-06][0m# exit
+    [60] => [0;94m[HC-06][0m#                     Agent unregistered
+    [61] => [0;94m[HC-06][0m#                     [[0;91mDEL[0m] Controller 00:1A:7D:DA:71:13 cadiweb-1 [default]
+    [62] => [0;94m[HC-06][0m# [0;94m[bluetooth][0m# [bluetooth]#
+)
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+RFCOMM:0
+LINE0 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE1 = ...releasing it
+1
+LINE2 = RFCOMM configuration utility ver 5.30
+1
+LINE3 = Usage:
+1
+LINE4 = 	rfcomm [options] <command> <dev>
+1
+LINE5 = 
+1
+LINE6 = Options:
+1
+LINE7 = 	-i, --device [hciX|bdaddr]     Local HCI device or BD Address
+1
+LINE8 = 	-h, --help                     Display help
+1
+LINE9 = 	-r, --raw                      Switch TTY into raw mode
+1
+LINE10 = 	-A, --auth                     Enable authentication
+1
+LINE11 = 	-E, --encrypt                  Enable encryption
+1
+LINE12 = 	-S, --secure                   Secure connection
+1
+LINE13 = 	-M, --master                   Become the master of a piconet
+1
+LINE14 = 	-L, --linger [seconds]         Set linger timeout
+1
+LINE15 = 	-a                             Show all devices (default)
+1
+LINE16 = 
+1
+LINE17 = Commands:
+1
+LINE18 = 	bind     <dev> <bdaddr> [channel]	Bind device
+1
+LINE19 = 	release  <dev>                   	Release device
+1
+LINE20 = 	show     <dev>                   	Show device
+1
+LINE21 = 	connect  <dev> <bdaddr> [channel]	Connect device
+1
+LINE22 = 	listen   <dev> [channel [cmd]]   	Listen
+1
+LINE23 = 	watch    <dev> [channel [cmd]]   	Watch
+1
+LINE24 = 
+1
+LINE25 = ...hci0 down
+1
+LINE26 = ...stopping bluetoth
+1
+LINE27 = ...rmmod btusb
+1
+LINE28 = ...modprobe btusb
+1
+LINE29 = ...starting bluetooth service
+1
+LINE30 = ...hci0 up
+1
+LINE31 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE32 = ... config for rfcomm stty 2
+1
+LINE33 = ...streaming >>>>>>
+1
+LINE34 = streamer pid=299
+2
+LINE35 = bt_restart Archlinux edition executed
+1
+*** PID of streamer = 299
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+
+*** CONNECTION ATTEMPTS LEFT: 20
+*** re-Pair skipped
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+RFCOMM:0
+LINE0 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE1 = ...releasing it
+1
+LINE2 = RFCOMM configuration utility ver 5.30
+1
+LINE3 = Usage:
+1
+LINE4 = 	rfcomm [options] <command> <dev>
+1
+LINE5 = 
+1
+LINE6 = Options:
+1
+LINE7 = 	-i, --device [hciX|bdaddr]     Local HCI device or BD Address
+1
+LINE8 = 	-h, --help                     Display help
+1
+LINE9 = 	-r, --raw                      Switch TTY into raw mode
+1
+LINE10 = 	-A, --auth                     Enable authentication
+1
+LINE11 = 	-E, --encrypt                  Enable encryption
+1
+LINE12 = 	-S, --secure                   Secure connection
+1
+LINE13 = 	-M, --master                   Become the master of a piconet
+1
+LINE14 = 	-L, --linger [seconds]         Set linger timeout
+1
+LINE15 = 	-a                             Show all devices (default)
+1
+LINE16 = 
+1
+LINE17 = Commands:
+1
+LINE18 = 	bind     <dev> <bdaddr> [channel]	Bind device
+1
+LINE19 = 	release  <dev>                   	Release device
+1
+LINE20 = 	show     <dev>                   	Show device
+1
+LINE21 = 	connect  <dev> <bdaddr> [channel]	Connect device
+1
+LINE22 = 	listen   <dev> [channel [cmd]]   	Listen
+1
+LINE23 = 	watch    <dev> [channel [cmd]]   	Watch
+1
+LINE24 = 
+1
+LINE25 = ...hci0 down
+1
+LINE26 = ...stopping bluetoth
+1
+LINE27 = ...rmmod btusb
+1
+LINE28 = ...modprobe btusb
+1
+LINE29 = ...starting bluetooth service
+1
+LINE30 = ...hci0 up
+1
+LINE31 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE32 = ... config for rfcomm stty 2
+1
+LINE33 = ...streaming >>>>>>
+1
+LINE34 = streamer pid=299
+2
+LINE35 = bt_restart Archlinux edition executed
+1
+LINE36 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE37 = ...releasing it
+1
+LINE38 = ...hci0 down
+1
+LINE39 = ...stopping bluetoth
+1
+LINE40 = ...rmmod btusb
+1
+LINE41 = ...modprobe btusb
+1
+LINE42 = ...starting bluetooth service
+1
+LINE43 = ...hci0 up
+1
+LINE44 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE45 = ... config for rfcomm stty 2
+1
+LINE46 = ...streaming >>>>>>
+1
+LINE47 = streamer pid=342
+2
+LINE48 = bt_restart Archlinux edition executed
+1
+*** PID of streamer = 342
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+
+*** CONNECTION ATTEMPTS LEFT: 19
+*** re-Pair skipped
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+RFCOMM:0
+LINE0 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE1 = ...releasing it
+1
+LINE2 = RFCOMM configuration utility ver 5.30
+1
+LINE3 = Usage:
+1
+LINE4 = 	rfcomm [options] <command> <dev>
+1
+LINE5 = 
+1
+LINE6 = Options:
+1
+LINE7 = 	-i, --device [hciX|bdaddr]     Local HCI device or BD Address
+1
+LINE8 = 	-h, --help                     Display help
+1
+LINE9 = 	-r, --raw                      Switch TTY into raw mode
+1
+LINE10 = 	-A, --auth                     Enable authentication
+1
+LINE11 = 	-E, --encrypt                  Enable encryption
+1
+LINE12 = 	-S, --secure                   Secure connection
+1
+LINE13 = 	-M, --master                   Become the master of a piconet
+1
+LINE14 = 	-L, --linger [seconds]         Set linger timeout
+1
+LINE15 = 	-a                             Show all devices (default)
+1
+LINE16 = 
+1
+LINE17 = Commands:
+1
+LINE18 = 	bind     <dev> <bdaddr> [channel]	Bind device
+1
+LINE19 = 	release  <dev>                   	Release device
+1
+LINE20 = 	show     <dev>                   	Show device
+1
+LINE21 = 	connect  <dev> <bdaddr> [channel]	Connect device
+1
+LINE22 = 	listen   <dev> [channel [cmd]]   	Listen
+1
+LINE23 = 	watch    <dev> [channel [cmd]]   	Watch
+1
+LINE24 = 
+1
+LINE25 = ...hci0 down
+1
+LINE26 = ...stopping bluetoth
+1
+LINE27 = ...rmmod btusb
+1
+LINE28 = ...modprobe btusb
+1
+LINE29 = ...starting bluetooth service
+1
+LINE30 = ...hci0 up
+1
+LINE31 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE32 = ... config for rfcomm stty 2
+1
+LINE33 = ...streaming >>>>>>
+1
+LINE34 = streamer pid=299
+2
+LINE35 = bt_restart Archlinux edition executed
+1
+LINE36 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE37 = ...releasing it
+1
+LINE38 = ...hci0 down
+1
+LINE39 = ...stopping bluetoth
+1
+LINE40 = ...rmmod btusb
+1
+LINE41 = ...modprobe btusb
+1
+LINE42 = ...starting bluetooth service
+1
+LINE43 = ...hci0 up
+1
+LINE44 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE45 = ... config for rfcomm stty 2
+1
+LINE46 = ...streaming >>>>>>
+1
+LINE47 = streamer pid=342
+2
+LINE48 = bt_restart Archlinux edition executed
+1
+LINE49 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE50 = ...releasing it
+1
+LINE51 = ...hci0 down
+1
+LINE52 = ...stopping bluetoth
+1
+LINE53 = ...rmmod btusb
+1
+LINE54 = ...modprobe btusb
+1
+LINE55 = ...starting bluetooth service
+1
+LINE56 = ...hci0 up
+1
+LINE57 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE58 = ... config for rfcomm stty 2
+1
+LINE59 = ...streaming >>>>>>
+1
+LINE60 = streamer pid=382
+2
+LINE61 = bt_restart Archlinux edition executed
+1
+*** PID of streamer = 382
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+
+*** CONNECTION ATTEMPTS LEFT: 18
+*** re-Pair skipped
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+RFCOMM:0
+LINE0 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE1 = ...releasing it
+1
+LINE2 = RFCOMM configuration utility ver 5.30
+1
+LINE3 = Usage:
+1
+LINE4 = 	rfcomm [options] <command> <dev>
+1
+LINE5 = 
+1
+LINE6 = Options:
+1
+LINE7 = 	-i, --device [hciX|bdaddr]     Local HCI device or BD Address
+1
+LINE8 = 	-h, --help                     Display help
+1
+LINE9 = 	-r, --raw                      Switch TTY into raw mode
+1
+LINE10 = 	-A, --auth                     Enable authentication
+1
+LINE11 = 	-E, --encrypt                  Enable encryption
+1
+LINE12 = 	-S, --secure                   Secure connection
+1
+LINE13 = 	-M, --master                   Become the master of a piconet
+1
+LINE14 = 	-L, --linger [seconds]         Set linger timeout
+1
+LINE15 = 	-a                             Show all devices (default)
+1
+LINE16 = 
+1
+LINE17 = Commands:
+1
+LINE18 = 	bind     <dev> <bdaddr> [channel]	Bind device
+1
+LINE19 = 	release  <dev>                   	Release device
+1
+LINE20 = 	show     <dev>                   	Show device
+1
+LINE21 = 	connect  <dev> <bdaddr> [channel]	Connect device
+1
+LINE22 = 	listen   <dev> [channel [cmd]]   	Listen
+1
+LINE23 = 	watch    <dev> [channel [cmd]]   	Watch
+1
+LINE24 = 
+1
+LINE25 = ...hci0 down
+1
+LINE26 = ...stopping bluetoth
+1
+LINE27 = ...rmmod btusb
+1
+LINE28 = ...modprobe btusb
+1
+LINE29 = ...starting bluetooth service
+1
+LINE30 = ...hci0 up
+1
+LINE31 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE32 = ... config for rfcomm stty 2
+1
+LINE33 = ...streaming >>>>>>
+1
+LINE34 = streamer pid=299
+2
+LINE35 = bt_restart Archlinux edition executed
+1
+LINE36 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE37 = ...releasing it
+1
+LINE38 = ...hci0 down
+1
+LINE39 = ...stopping bluetoth
+1
+LINE40 = ...rmmod btusb
+1
+LINE41 = ...modprobe btusb
+1
+LINE42 = ...starting bluetooth service
+1
+LINE43 = ...hci0 up
+1
+LINE44 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE45 = ... config for rfcomm stty 2
+1
+LINE46 = ...streaming >>>>>>
+1
+LINE47 = streamer pid=342
+2
+LINE48 = bt_restart Archlinux edition executed
+1
+LINE49 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE50 = ...releasing it
+1
+LINE51 = ...hci0 down
+1
+LINE52 = ...stopping bluetoth
+1
+LINE53 = ...rmmod btusb
+1
+LINE54 = ...modprobe btusb
+1
+LINE55 = ...starting bluetooth service
+1
+LINE56 = ...hci0 up
+1
+LINE57 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE58 = ... config for rfcomm stty 2
+1
+LINE59 = ...streaming >>>>>>
+1
+LINE60 = streamer pid=382
+2
+LINE61 = bt_restart Archlinux edition executed
+1
+LINE62 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE63 = ...releasing it
+1
+LINE64 = ...hci0 down
+1
+LINE65 = ...stopping bluetoth
+1
+LINE66 = ...rmmod btusb
+1
+LINE67 = ...modprobe btusb
+1
+LINE68 = ...starting bluetooth service
+1
+LINE69 = ...hci0 up
+1
+LINE70 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE71 = ... config for rfcomm stty 2
+1
+LINE72 = ...streaming >>>>>>
+1
+LINE73 = streamer pid=422
+2
+LINE74 = bt_restart Archlinux edition executed
+1
+*** PID of streamer = 422
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+
+*** CONNECTION ATTEMPTS LEFT: 17
+*** re-Pair skipped
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+RFCOMM:0
+LINE0 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE1 = ...releasing it
+1
+LINE2 = RFCOMM configuration utility ver 5.30
+1
+LINE3 = Usage:
+1
+LINE4 = 	rfcomm [options] <command> <dev>
+1
+LINE5 = 
+1
+LINE6 = Options:
+1
+LINE7 = 	-i, --device [hciX|bdaddr]     Local HCI device or BD Address
+1
+LINE8 = 	-h, --help                     Display help
+1
+LINE9 = 	-r, --raw                      Switch TTY into raw mode
+1
+LINE10 = 	-A, --auth                     Enable authentication
+1
+LINE11 = 	-E, --encrypt                  Enable encryption
+1
+LINE12 = 	-S, --secure                   Secure connection
+1
+LINE13 = 	-M, --master                   Become the master of a piconet
+1
+LINE14 = 	-L, --linger [seconds]         Set linger timeout
+1
+LINE15 = 	-a                             Show all devices (default)
+1
+LINE16 = 
+1
+LINE17 = Commands:
+1
+LINE18 = 	bind     <dev> <bdaddr> [channel]	Bind device
+1
+LINE19 = 	release  <dev>                   	Release device
+1
+LINE20 = 	show     <dev>                   	Show device
+1
+LINE21 = 	connect  <dev> <bdaddr> [channel]	Connect device
+1
+LINE22 = 	listen   <dev> [channel [cmd]]   	Listen
+1
+LINE23 = 	watch    <dev> [channel [cmd]]   	Watch
+1
+LINE24 = 
+1
+LINE25 = ...hci0 down
+1
+LINE26 = ...stopping bluetoth
+1
+LINE27 = ...rmmod btusb
+1
+LINE28 = ...modprobe btusb
+1
+LINE29 = ...starting bluetooth service
+1
+LINE30 = ...hci0 up
+1
+LINE31 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE32 = ... config for rfcomm stty 2
+1
+LINE33 = ...streaming >>>>>>
+1
+LINE34 = streamer pid=299
+2
+LINE35 = bt_restart Archlinux edition executed
+1
+LINE36 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE37 = ...releasing it
+1
+LINE38 = ...hci0 down
+1
+LINE39 = ...stopping bluetoth
+1
+LINE40 = ...rmmod btusb
+1
+LINE41 = ...modprobe btusb
+1
+LINE42 = ...starting bluetooth service
+1
+LINE43 = ...hci0 up
+1
+LINE44 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE45 = ... config for rfcomm stty 2
+1
+LINE46 = ...streaming >>>>>>
+1
+LINE47 = streamer pid=342
+2
+LINE48 = bt_restart Archlinux edition executed
+1
+LINE49 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE50 = ...releasing it
+1
+LINE51 = ...hci0 down
+1
+LINE52 = ...stopping bluetoth
+1
+LINE53 = ...rmmod btusb
+1
+LINE54 = ...modprobe btusb
+1
+LINE55 = ...starting bluetooth service
+1
+LINE56 = ...hci0 up
+1
+LINE57 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE58 = ... config for rfcomm stty 2
+1
+LINE59 = ...streaming >>>>>>
+1
+LINE60 = streamer pid=382
+2
+LINE61 = bt_restart Archlinux edition executed
+1
+LINE62 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE63 = ...releasing it
+1
+LINE64 = ...hci0 down
+1
+LINE65 = ...stopping bluetoth
+1
+LINE66 = ...rmmod btusb
+1
+LINE67 = ...modprobe btusb
+1
+LINE68 = ...starting bluetooth service
+1
+LINE69 = ...hci0 up
+1
+LINE70 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE71 = ... config for rfcomm stty 2
+1
+LINE72 = ...streaming >>>>>>
+1
+LINE73 = streamer pid=422
+2
+LINE74 = bt_restart Archlinux edition executed
+1
+LINE75 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE76 = ...releasing it
+1
+LINE77 = ...hci0 down
+1
+LINE78 = ...stopping bluetoth
+1
+LINE79 = ...rmmod btusb
+1
+LINE80 = ...modprobe btusb
+1
+LINE81 = ...starting bluetooth service
+1
+LINE82 = ...hci0 up
+1
+LINE83 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE84 = ... config for rfcomm stty 2
+1
+LINE85 = ...streaming >>>>>>
+1
+LINE86 = streamer pid=462
+2
+LINE87 = bt_restart Archlinux edition executed
+1
+*** PID of streamer = 462
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+
+*** CONNECTION ATTEMPTS LEFT: 16
+*** Starting re-Pair process...
+Bluetooth daemon for Cadi startedFailed to open shared memory.Failed to read shared memoryLoading SVG tank defaults
+Array
+(
+    [3] => Array
+        (
+            [top] => 14
+            [bottom] => 100
+            [svg] => Array
+                (
+                    [height] => 400
+                    [tank_top] => 20
+                )
+
+        )
+
+    [4] => Array
+        (
+            [top] => 7
+            [bottom] => 47
+            [svg] => Array
+                (
+                    [height] => 430
+                    [tank_top] => 300
+                )
+
+        )
+
+)
+(Wed, 31 Dec 2014 00:00:01 +0000) Got CMD 
+ reloading Cadi BTDaemon settings
+*** CBD settings reloaded! ***
+Array
+(
+    [photo_divider] => 8000			
+    [csd] => 25000
+    [fsd] => 5					
+    [rpd] => 5					
+    [videox] => 0				
+    [srtrs] => 150				
+    [sppd] => 3					
+    [cs_dmp_fs] => 2000				
+    [cs_start_addr] => 1400			
+    [default_bt_mac] => 20:13:06:19:15:11	
+    [csv_parse_divider] => 6			
+)
+
+CurCMD=echo
+
+
+
+
+
+(Wed, 15 Jul 2015 15:13:22 +0000) Got CMD 
+*** Running automatic connection script
+BT Autoconnect
+*** Starting re-Pair process...
+*** re-Paired
+Array
+(
+    [0] => spawn bluetoothctl
+    [1] => power on
+    [2] => [bluetooth]# [0;94m[bluetooth][0m#                         [[0;92mNEW[0m] Controller 00:1A:7D:DA:71:13 BlueZ 5.30 [default]
+    [3] => [0;94m[bluetooth][0m# power on
+    [4] => [0;94m[bluetooth][0m#                         Changing power on succeeded
+    [5] => [0;94m[bluetooth][0m# agent on
+    [6] => [0;94m[bluetooth][0m#                         Agent registered
+    [7] => [0;94m[bluetooth][0m# default-agent
+    [8] => [0;94m[bluetooth][0m#                         Default agent request successful
+    [9] => [0;94m[bluetooth][0m# remove 20:13:07:26:11:64
+    [10] => Device 20:13:07:26:11:64 not available
+    [11] => 
+    [12] => [0;94m[bluetooth][0m# [0;94m[bluetooth][0m# scan on
+    [13] => [0;94m[bluetooth][0m#                         Discovery started
+    [14] => [0;94m[bluetooth][0m#                         [[0;93mCHG[0m] Controller 00:1A:7D:DA:71:13 Discovering: yes
+    [15] => [0;94m[bluetooth][0m#                         [[0;93mCHG[0m] Controller 00:1A:7D:DA:71:13 Name: cadiweb-1
+    [16] => [0;94m[bluetooth][0m#                         [[0;93mCHG[0m] Controller 00:1A:7D:DA:71:13 Alias: BlueZ 5.30
+    [17] => [0;94m[bluetooth][0m#                         [[0;93mCHG[0m] Controller 00:1A:7D:DA:71:13 Alias: cadiweb-1
+    [18] => [0;94m[bluetooth][0m#                         [[0;92mNEW[0m] Device 20:13:07:26:11:64 HC-06
+    [19] => [0;94m[bluetooth][0m# EXPECT FOUND DEVICE
+    [20] => 
+    [21] => pair 20:13:07:26:11:64
+    [22] => Attempting to pair with 20:13:07:26:11:64
+    [23] => [0;94m[bluetooth][0m# [0;94m[HC-06][0m#                         [[0;93mCHG[0m] Device 20:13:07:26:11:64 Connected: yes
+    [24] => [0;94m[HC-06][0m#                     Request PIN code
+    [25] => [0;94m[HC-06][0m#                     [0;91m[agent][0m Enter PIN code: EXPECT ENTERING PINCODE
+    [26] => 
+    [27] => 1234
+    [28] => [0;94m[HC-06][0m#                     [[0;93mCHG[0m] Device 20:13:07:26:11:64 UUIDs: 00001101-0000-1000-8000-00805f9b34fb
+    [29] => [0;94m[HC-06][0m#                     [[0;93mCHG[0m] Device 20:13:07:26:11:64 Paired: yes
+    [30] => [0;94m[HC-06][0m#                     Pairing successful
+    [31] => [0;94m[HC-06][0m# exit
+    [32] => [0;94m[HC-06][0m#                     Agent unregistered
+    [33] => [0;94m[HC-06][0m#                     [[0;91mDEL[0m] Controller 00:1A:7D:DA:71:13 cadiweb-1 [default]
+    [34] => [0;94m[HC-06][0m# [0;94m[bluetooth][0m# [bluetooth]#
+)
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+RFCOMM:0
+LINE0 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE1 = ...releasing it
+1
+LINE2 = RFCOMM configuration utility ver 5.30
+1
+LINE3 = Usage:
+1
+LINE4 = 	rfcomm [options] <command> <dev>
+1
+LINE5 = 
+1
+LINE6 = Options:
+1
+LINE7 = 	-i, --device [hciX|bdaddr]     Local HCI device or BD Address
+1
+LINE8 = 	-h, --help                     Display help
+1
+LINE9 = 	-r, --raw                      Switch TTY into raw mode
+1
+LINE10 = 	-A, --auth                     Enable authentication
+1
+LINE11 = 	-E, --encrypt                  Enable encryption
+1
+LINE12 = 	-S, --secure                   Secure connection
+1
+LINE13 = 	-M, --master                   Become the master of a piconet
+1
+LINE14 = 	-L, --linger [seconds]         Set linger timeout
+1
+LINE15 = 	-a                             Show all devices (default)
+1
+LINE16 = 
+1
+LINE17 = Commands:
+1
+LINE18 = 	bind     <dev> <bdaddr> [channel]	Bind device
+1
+LINE19 = 	release  <dev>                   	Release device
+1
+LINE20 = 	show     <dev>                   	Show device
+1
+LINE21 = 	connect  <dev> <bdaddr> [channel]	Connect device
+1
+LINE22 = 	listen   <dev> [channel [cmd]]   	Listen
+1
+LINE23 = 	watch    <dev> [channel [cmd]]   	Watch
+1
+LINE24 = 
+1
+LINE25 = ...hci0 down
+1
+LINE26 = ...stopping bluetoth
+1
+LINE27 = ...rmmod btusb
+1
+LINE28 = ...modprobe btusb
+1
+LINE29 = ...starting bluetooth service
+1
+LINE30 = ...hci0 up
+1
+LINE31 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE32 = ... config for rfcomm stty 2
+1
+LINE33 = ...streaming >>>>>>
+1
+LINE34 = streamer pid=321
+2
+LINE35 = bt_restart Archlinux edition executed
+1
+*** PID of streamer = 321
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+
+*** CONNECTION ATTEMPTS LEFT: 20
+*** re-Pair skipped
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+RFCOMM:0
+LINE0 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE1 = ...releasing it
+1
+LINE2 = RFCOMM configuration utility ver 5.30
+1
+LINE3 = Usage:
+1
+LINE4 = 	rfcomm [options] <command> <dev>
+1
+LINE5 = 
+1
+LINE6 = Options:
+1
+LINE7 = 	-i, --device [hciX|bdaddr]     Local HCI device or BD Address
+1
+LINE8 = 	-h, --help                     Display help
+1
+LINE9 = 	-r, --raw                      Switch TTY into raw mode
+1
+LINE10 = 	-A, --auth                     Enable authentication
+1
+LINE11 = 	-E, --encrypt                  Enable encryption
+1
+LINE12 = 	-S, --secure                   Secure connection
+1
+LINE13 = 	-M, --master                   Become the master of a piconet
+1
+LINE14 = 	-L, --linger [seconds]         Set linger timeout
+1
+LINE15 = 	-a                             Show all devices (default)
+1
+LINE16 = 
+1
+LINE17 = Commands:
+1
+LINE18 = 	bind     <dev> <bdaddr> [channel]	Bind device
+1
+LINE19 = 	release  <dev>                   	Release device
+1
+LINE20 = 	show     <dev>                   	Show device
+1
+LINE21 = 	connect  <dev> <bdaddr> [channel]	Connect device
+1
+LINE22 = 	listen   <dev> [channel [cmd]]   	Listen
+1
+LINE23 = 	watch    <dev> [channel [cmd]]   	Watch
+1
+LINE24 = 
+1
+LINE25 = ...hci0 down
+1
+LINE26 = ...stopping bluetoth
+1
+LINE27 = ...rmmod btusb
+1
+LINE28 = ...modprobe btusb
+1
+LINE29 = ...starting bluetooth service
+1
+LINE30 = ...hci0 up
+1
+LINE31 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE32 = ... config for rfcomm stty 2
+1
+LINE33 = ...streaming >>>>>>
+1
+LINE34 = streamer pid=321
+2
+LINE35 = bt_restart Archlinux edition executed
+1
+LINE36 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE37 = ...releasing it
+1
+LINE38 = ...hci0 down
+1
+LINE39 = ...stopping bluetoth
+1
+LINE40 = ...rmmod btusb
+1
+LINE41 = ...modprobe btusb
+1
+LINE42 = ...starting bluetooth service
+1
+LINE43 = ...hci0 up
+1
+LINE44 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE45 = ... config for rfcomm stty 2
+1
+LINE46 = ...streaming >>>>>>
+1
+LINE47 = streamer pid=362
+2
+LINE48 = bt_restart Archlinux edition executed
+1
+*** PID of streamer = 362
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+
+*** CONNECTION ATTEMPTS LEFT: 19
+*** re-Pair skipped
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+RFCOMM:0
+LINE0 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE1 = ...releasing it
+1
+LINE2 = RFCOMM configuration utility ver 5.30
+1
+LINE3 = Usage:
+1
+LINE4 = 	rfcomm [options] <command> <dev>
+1
+LINE5 = 
+1
+LINE6 = Options:
+1
+LINE7 = 	-i, --device [hciX|bdaddr]     Local HCI device or BD Address
+1
+LINE8 = 	-h, --help                     Display help
+1
+LINE9 = 	-r, --raw                      Switch TTY into raw mode
+1
+LINE10 = 	-A, --auth                     Enable authentication
+1
+LINE11 = 	-E, --encrypt                  Enable encryption
+1
+LINE12 = 	-S, --secure                   Secure connection
+1
+LINE13 = 	-M, --master                   Become the master of a piconet
+1
+LINE14 = 	-L, --linger [seconds]         Set linger timeout
+1
+LINE15 = 	-a                             Show all devices (default)
+1
+LINE16 = 
+1
+LINE17 = Commands:
+1
+LINE18 = 	bind     <dev> <bdaddr> [channel]	Bind device
+1
+LINE19 = 	release  <dev>                   	Release device
+1
+LINE20 = 	show     <dev>                   	Show device
+1
+LINE21 = 	connect  <dev> <bdaddr> [channel]	Connect device
+1
+LINE22 = 	listen   <dev> [channel [cmd]]   	Listen
+1
+LINE23 = 	watch    <dev> [channel [cmd]]   	Watch
+1
+LINE24 = 
+1
+LINE25 = ...hci0 down
+1
+LINE26 = ...stopping bluetoth
+1
+LINE27 = ...rmmod btusb
+1
+LINE28 = ...modprobe btusb
+1
+LINE29 = ...starting bluetooth service
+1
+LINE30 = ...hci0 up
+1
+LINE31 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE32 = ... config for rfcomm stty 2
+1
+LINE33 = ...streaming >>>>>>
+1
+LINE34 = streamer pid=321
+2
+LINE35 = bt_restart Archlinux edition executed
+1
+LINE36 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE37 = ...releasing it
+1
+LINE38 = ...hci0 down
+1
+LINE39 = ...stopping bluetoth
+1
+LINE40 = ...rmmod btusb
+1
+LINE41 = ...modprobe btusb
+1
+LINE42 = ...starting bluetooth service
+1
+LINE43 = ...hci0 up
+1
+LINE44 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE45 = ... config for rfcomm stty 2
+1
+LINE46 = ...streaming >>>>>>
+1
+LINE47 = streamer pid=362
+2
+LINE48 = bt_restart Archlinux edition executed
+1
+LINE49 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE50 = ...releasing it
+1
+LINE51 = ...hci0 down
+1
+LINE52 = ...stopping bluetoth
+1
+LINE53 = ...rmmod btusb
+1
+LINE54 = ...modprobe btusb
+1
+LINE55 = ...starting bluetooth service
+1
+LINE56 = ...hci0 up
+1
+LINE57 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE58 = ... config for rfcomm stty 2
+1
+LINE59 = ...streaming >>>>>>
+1
+LINE60 = streamer pid=402
+2
+LINE61 = bt_restart Archlinux edition executed
+1
+*** PID of streamer = 402
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+
+*** CONNECTION ATTEMPTS LEFT: 18
+*** re-Pair skipped
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+RFCOMM:0
+LINE0 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE1 = ...releasing it
+1
+LINE2 = RFCOMM configuration utility ver 5.30
+1
+LINE3 = Usage:
+1
+LINE4 = 	rfcomm [options] <command> <dev>
+1
+LINE5 = 
+1
+LINE6 = Options:
+1
+LINE7 = 	-i, --device [hciX|bdaddr]     Local HCI device or BD Address
+1
+LINE8 = 	-h, --help                     Display help
+1
+LINE9 = 	-r, --raw                      Switch TTY into raw mode
+1
+LINE10 = 	-A, --auth                     Enable authentication
+1
+LINE11 = 	-E, --encrypt                  Enable encryption
+1
+LINE12 = 	-S, --secure                   Secure connection
+1
+LINE13 = 	-M, --master                   Become the master of a piconet
+1
+LINE14 = 	-L, --linger [seconds]         Set linger timeout
+1
+LINE15 = 	-a                             Show all devices (default)
+1
+LINE16 = 
+1
+LINE17 = Commands:
+1
+LINE18 = 	bind     <dev> <bdaddr> [channel]	Bind device
+1
+LINE19 = 	release  <dev>                   	Release device
+1
+LINE20 = 	show     <dev>                   	Show device
+1
+LINE21 = 	connect  <dev> <bdaddr> [channel]	Connect device
+1
+LINE22 = 	listen   <dev> [channel [cmd]]   	Listen
+1
+LINE23 = 	watch    <dev> [channel [cmd]]   	Watch
+1
+LINE24 = 
+1
+LINE25 = ...hci0 down
+1
+LINE26 = ...stopping bluetoth
+1
+LINE27 = ...rmmod btusb
+1
+LINE28 = ...modprobe btusb
+1
+LINE29 = ...starting bluetooth service
+1
+LINE30 = ...hci0 up
+1
+LINE31 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE32 = ... config for rfcomm stty 2
+1
+LINE33 = ...streaming >>>>>>
+1
+LINE34 = streamer pid=321
+2
+LINE35 = bt_restart Archlinux edition executed
+1
+LINE36 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE37 = ...releasing it
+1
+LINE38 = ...hci0 down
+1
+LINE39 = ...stopping bluetoth
+1
+LINE40 = ...rmmod btusb
+1
+LINE41 = ...modprobe btusb
+1
+LINE42 = ...starting bluetooth service
+1
+LINE43 = ...hci0 up
+1
+LINE44 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE45 = ... config for rfcomm stty 2
+1
+LINE46 = ...streaming >>>>>>
+1
+LINE47 = streamer pid=362
+2
+LINE48 = bt_restart Archlinux edition executed
+1
+LINE49 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE50 = ...releasing it
+1
+LINE51 = ...hci0 down
+1
+LINE52 = ...stopping bluetoth
+1
+LINE53 = ...rmmod btusb
+1
+LINE54 = ...modprobe btusb
+1
+LINE55 = ...starting bluetooth service
+1
+LINE56 = ...hci0 up
+1
+LINE57 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE58 = ... config for rfcomm stty 2
+1
+LINE59 = ...streaming >>>>>>
+1
+LINE60 = streamer pid=402
+2
+LINE61 = bt_restart Archlinux edition executed
+1
+LINE62 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE63 = ...releasing it
+1
+LINE64 = ...hci0 down
+1
+LINE65 = ...stopping bluetoth
+1
+LINE66 = ...rmmod btusb
+1
+LINE67 = ...modprobe btusb
+1
+LINE68 = ...starting bluetooth service
+1
+LINE69 = ...hci0 up
+1
+LINE70 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE71 = ... config for rfcomm stty 2
+1
+LINE72 = ...streaming >>>>>>
+1
+LINE73 = streamer pid=445
+2
+LINE74 = bt_restart Archlinux edition executed
+1
+*** PID of streamer = 445
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+
+*** CONNECTION ATTEMPTS LEFT: 17
+*** re-Pair skipped
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+RFCOMM:0
+LINE0 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE1 = ...releasing it
+1
+LINE2 = RFCOMM configuration utility ver 5.30
+1
+LINE3 = Usage:
+1
+LINE4 = 	rfcomm [options] <command> <dev>
+1
+LINE5 = 
+1
+LINE6 = Options:
+1
+LINE7 = 	-i, --device [hciX|bdaddr]     Local HCI device or BD Address
+1
+LINE8 = 	-h, --help                     Display help
+1
+LINE9 = 	-r, --raw                      Switch TTY into raw mode
+1
+LINE10 = 	-A, --auth                     Enable authentication
+1
+LINE11 = 	-E, --encrypt                  Enable encryption
+1
+LINE12 = 	-S, --secure                   Secure connection
+1
+LINE13 = 	-M, --master                   Become the master of a piconet
+1
+LINE14 = 	-L, --linger [seconds]         Set linger timeout
+1
+LINE15 = 	-a                             Show all devices (default)
+1
+LINE16 = 
+1
+LINE17 = Commands:
+1
+LINE18 = 	bind     <dev> <bdaddr> [channel]	Bind device
+1
+LINE19 = 	release  <dev>                   	Release device
+1
+LINE20 = 	show     <dev>                   	Show device
+1
+LINE21 = 	connect  <dev> <bdaddr> [channel]	Connect device
+1
+LINE22 = 	listen   <dev> [channel [cmd]]   	Listen
+1
+LINE23 = 	watch    <dev> [channel [cmd]]   	Watch
+1
+LINE24 = 
+1
+LINE25 = ...hci0 down
+1
+LINE26 = ...stopping bluetoth
+1
+LINE27 = ...rmmod btusb
+1
+LINE28 = ...modprobe btusb
+1
+LINE29 = ...starting bluetooth service
+1
+LINE30 = ...hci0 up
+1
+LINE31 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE32 = ... config for rfcomm stty 2
+1
+LINE33 = ...streaming >>>>>>
+1
+LINE34 = streamer pid=321
+2
+LINE35 = bt_restart Archlinux edition executed
+1
+LINE36 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE37 = ...releasing it
+1
+LINE38 = ...hci0 down
+1
+LINE39 = ...stopping bluetoth
+1
+LINE40 = ...rmmod btusb
+1
+LINE41 = ...modprobe btusb
+1
+LINE42 = ...starting bluetooth service
+1
+LINE43 = ...hci0 up
+1
+LINE44 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE45 = ... config for rfcomm stty 2
+1
+LINE46 = ...streaming >>>>>>
+1
+LINE47 = streamer pid=362
+2
+LINE48 = bt_restart Archlinux edition executed
+1
+LINE49 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE50 = ...releasing it
+1
+LINE51 = ...hci0 down
+1
+LINE52 = ...stopping bluetoth
+1
+LINE53 = ...rmmod btusb
+1
+LINE54 = ...modprobe btusb
+1
+LINE55 = ...starting bluetooth service
+1
+LINE56 = ...hci0 up
+1
+LINE57 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE58 = ... config for rfcomm stty 2
+1
+LINE59 = ...streaming >>>>>>
+1
+LINE60 = streamer pid=402
+2
+LINE61 = bt_restart Archlinux edition executed
+1
+LINE62 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE63 = ...releasing it
+1
+LINE64 = ...hci0 down
+1
+LINE65 = ...stopping bluetoth
+1
+LINE66 = ...rmmod btusb
+1
+LINE67 = ...modprobe btusb
+1
+LINE68 = ...starting bluetooth service
+1
+LINE69 = ...hci0 up
+1
+LINE70 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE71 = ... config for rfcomm stty 2
+1
+LINE72 = ...streaming >>>>>>
+1
+LINE73 = streamer pid=445
+2
+LINE74 = bt_restart Archlinux edition executed
+1
+LINE75 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE76 = ...releasing it
+1
+LINE77 = ...hci0 down
+1
+LINE78 = ...stopping bluetoth
+1
+LINE79 = ...rmmod btusb
+1
+LINE80 = ...modprobe btusb
+1
+LINE81 = ...starting bluetooth service
+1
+LINE82 = ...hci0 up
+1
+LINE83 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE84 = ... config for rfcomm stty 2
+1
+LINE85 = ...streaming >>>>>>
+1
+LINE86 = streamer pid=485
+2
+LINE87 = bt_restart Archlinux edition executed
+1
+*** PID of streamer = 485
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+
+*** CONNECTION ATTEMPTS LEFT: 16
+*** Starting re-Pair process...
+Bluetooth daemon for Cadi startedFailed to open shared memory.Failed to read shared memoryLoading SVG tank defaults
+Array
+(
+    [3] => Array
+        (
+            [top] => 14
+            [bottom] => 100
+            [svg] => Array
+                (
+                    [height] => 400
+                    [tank_top] => 20
+                )
+
+        )
+
+    [4] => Array
+        (
+            [top] => 7
+            [bottom] => 47
+            [svg] => Array
+                (
+                    [height] => 430
+                    [tank_top] => 300
+                )
+
+        )
+
+)
+(Wed, 31 Dec 2014 00:00:01 +0000) Got CMD 
+ reloading Cadi BTDaemon settings
+*** CBD settings reloaded! ***
+Array
+(
+    [photo_divider] => 8000			
+    [csd] => 25000
+    [fsd] => 5					
+    [rpd] => 5					
+    [videox] => 0				
+    [srtrs] => 150				
+    [sppd] => 3					
+    [cs_dmp_fs] => 2000				
+    [cs_start_addr] => 1400			
+    [default_bt_mac] => 20:13:06:19:15:11	
+    [csv_parse_divider] => 6			
+)
+
+CurCMD=echo
+(Wed, 31 Dec 2014 00:00:07 +0000) Got CMD 
+*** Running automatic connection script
+BT Autoconnect
+*** Starting re-Pair process...
+*** re-Paired
+Array
+(
+    [0] => spawn bluetoothctl
+    [1] => power on
+    [2] => [bluetooth]# [0;94m[bluetooth][0m#                         [[0;92mNEW[0m] Controller 00:1A:7D:DA:71:13 BlueZ 5.30 [default]
+    [3] => [0;94m[bluetooth][0m#                         [[0;92mNEW[0m] Device 20:13:07:26:11:64 HC-06
+    [4] => [0;94m[bluetooth][0m# power on
+    [5] => [0;94m[bluetooth][0m#                         Changing power on succeeded
+    [6] => [0;94m[bluetooth][0m#                         [[0;93mCHG[0m] Controller 00:1A:7D:DA:71:13 Powered: yes
+    [7] => [0;94m[bluetooth][0m# agent on
+    [8] => [0;94m[bluetooth][0m#                         Agent registered
+    [9] => [0;94m[bluetooth][0m# default-agent
+    [10] => [0;94m[bluetooth][0m#                         Default agent request successful
+    [11] => [0;94m[bluetooth][0m# remove 20:13:07:26:11:64
+    [12] => [0;94m[bluetooth][0m#                         [[0;93mCHG[0m] Controller 00:1A:7D:DA:71:13 Name: cadiweb-1
+    [13] => [0;94m[bluetooth][0m#                         [[0;93mCHG[0m] Controller 00:1A:7D:DA:71:13 Alias: BlueZ 5.30
+    [14] => [0;94m[bluetooth][0m#                         [[0;93mCHG[0m] Controller 00:1A:7D:DA:71:13 Alias: cadiweb-1
+    [15] => [0;94m[bluetooth][0m#                         [[0;91mDEL[0m] Device 20:13:07:26:11:64 HC-06
+    [16] => [0;94m[bluetooth][0m#                         Device has been removed
+    [17] => [0;94m[bluetooth][0m# [0;94m[bluetooth][0m# scan on
+    [18] => [0;94m[bluetooth][0m#                         Discovery started
+    [19] => [0;94m[bluetooth][0m#                         [[0;93mCHG[0m] Controller 00:1A:7D:DA:71:13 Discovering: yes
+    [20] => [0;94m[bluetooth][0m#                         [[0;92mNEW[0m] Device 20:13:07:26:11:64 HC-06
+    [21] => [0;94m[bluetooth][0m# EXPECT FOUND DEVICE
+    [22] => 
+    [23] => pair 20:13:07:26:11:64
+    [24] => Attempting to pair with 20:13:07:26:11:64
+    [25] => [0;94m[bluetooth][0m# [0;94m[HC-06][0m#                         [[0;93mCHG[0m] Device 20:13:07:26:11:64 Connected: yes
+    [26] => [0;94m[HC-06][0m#                     Request PIN code
+    [27] => [0;94m[HC-06][0m#                     [0;91m[agent][0m Enter PIN code: EXPECT ENTERING PINCODE
+    [28] => 
+    [29] => 1234
+    [30] => [0;94m[HC-06][0m#                     [[0;93mCHG[0m] Device 20:13:07:26:11:64 UUIDs: 00001101-0000-1000-8000-00805f9b34fb
+    [31] => [0;94m[HC-06][0m#                     [[0;93mCHG[0m] Device 20:13:07:26:11:64 Paired: yes
+    [32] => [0;94m[HC-06][0m#                     Pairing successful
+    [33] => [0;94m[HC-06][0m# exit
+    [34] => [0;94m[HC-06][0m#                     Agent unregistered
+    [35] => [0;94m[HC-06][0m#                     [[0;91mDEL[0m] Controller 00:1A:7D:DA:71:13 cadiweb-1 [default]
+    [36] => [0;94m[HC-06][0m# [0;94m[bluetooth][0m# [bluetooth]#
+)
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+RFCOMM:0
+LINE0 = ...RFNUM_EX=$RFNUM_EX
+1
+LINE1 = ...releasing it
+1
+LINE2 = RFCOMM configuration utility ver 5.30
+1
+LINE3 = Usage:
+1
+LINE4 = 	rfcomm [options] <command> <dev>
+1
+LINE5 = 
+1
+LINE6 = Options:
+1
+LINE7 = 	-i, --device [hciX|bdaddr]     Local HCI device or BD Address
+1
+LINE8 = 	-h, --help                     Display help
+1
+LINE9 = 	-r, --raw                      Switch TTY into raw mode
+1
+LINE10 = 	-A, --auth                     Enable authentication
+1
+LINE11 = 	-E, --encrypt                  Enable encryption
+1
+LINE12 = 	-S, --secure                   Secure connection
+1
+LINE13 = 	-M, --master                   Become the master of a piconet
+1
+LINE14 = 	-L, --linger [seconds]         Set linger timeout
+1
+LINE15 = 	-a                             Show all devices (default)
+1
+LINE16 = 
+1
+LINE17 = Commands:
+1
+LINE18 = 	bind     <dev> <bdaddr> [channel]	Bind device
+1
+LINE19 = 	release  <dev>                   	Release device
+1
+LINE20 = 	show     <dev>                   	Show device
+1
+LINE21 = 	connect  <dev> <bdaddr> [channel]	Connect device
+1
+LINE22 = 	listen   <dev> [channel [cmd]]   	Listen
+1
+LINE23 = 	watch    <dev> [channel [cmd]]   	Watch
+1
+LINE24 = 
+1
+LINE25 = ...hci0 down
+1
+LINE26 = ...stopping bluetoth
+1
+LINE27 = ...rmmod btusb
+1
+LINE28 = ...modprobe btusb
+1
+LINE29 = ...starting bluetooth service
+1
+LINE30 = ...hci0 up
+1
+LINE31 = ...binding rfcomm${RFNUM} for ${MAC}
+1
+LINE32 = ... config for rfcomm stty 2
+1
+LINE33 = ...streaming >>>>>>
+1
+LINE34 = streamer pid=654
+2
+LINE35 = bt_restart Archlinux edition executed
+1
+*** PID of streamer = 654
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+Array
+(
+    [0] => rfcomm0: 20:13:07:26:11:64 channel 1 closed
+)
+*** Connected?  0
+
+*** CONNECTION ATTEMPTS LEFT: 20
+*** re-Pair skipped
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+./bt_autocon_arch.sh 20:13:07:26:11:64 0 1
+
+RFCOMM:0
+Bluetooth daemon for Cadi startedFailed to open shared memory.Failed to read shared memoryLoading SVG tank defaults
+Array
+(
+    [3] => Array
+        (
+            [top] => 14
+            [bottom] => 100
+            [svg] => Array
+                (
+                    [height] => 400
+                    [tank_top] => 20
+                )
+
+        )
+
+    [4] => Array
+        (
+            [top] => 7
+            [bottom] => 47
+            [svg] => Array
+                (
+                    [height] => 430
+                    [tank_top] => 300
+                )
+
+        )
+
+)
+(Wed, 31 Dec 2014 00:00:01 +0000) Got CMD 
+ reloading Cadi BTDaemon settings
+*** CBD settings reloaded! ***
+Array
+(
+    [photo_divider] => 8000			
+    [csd] => 25000
+    [fsd] => 5					
+    [rpd] => 5					
+    [videox] => 0				
+    [srtrs] => 150				
+    [sppd] => 3					
+    [cs_dmp_fs] => 2000				
+    [cs_start_addr] => 1400			
+    [default_bt_mac] => 20:13:06:19:15:11	
+    [csv_parse_divider] => 6			
+)
+
+CurCMD=echo
+(Wed, 31 Dec 2014 00:01:20 +0000) Got CMD 
+*** Going to stream status locally
+Current stream_status changed from: 0 to 1
+(Wed, 31 Dec 2014 00:02:46 +0000) Got CMD 
+*** Going to stream status locally
+Current stream_status changed from: 0 to 1
+CSV = 1400002292,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1836,3560,2.63,48,0000,254,0,0,11,100
+
+CSV = 1400002293,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1837,3559,2.63,48,0000,254,0,0,26,100
+
+CSV = 1400002294,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1838,3559,2.63,48,0000,254,0,0,11,100
+
+CSV = 1400002295,0,0,0000,0000,0000000000,0000,0,0,0,0,1957,1838,3559,2.63,48,0000,254,0,0,11,100
+
+CSV = 1400002296,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1837,3559,2.63,48,0000,254,0,0,11,100
+
+CSV = 1400002297,0,0,0000,0000,0000000000,0000,0,0,0,0,1963,1836,3560,2.63,48,0000,254,0,0,11,100
+
+CSV = 1400002298,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1835,3559,2.63,48,0000,254,0,0,24,100
+
+CSV = 1400002299,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1834,3560,2.63,48,0000,254,0,0,11,100
+
+CSV = 1400002300,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1834,3560,2.63,48,0000,254,0,0,24,100
+
+CSV = 1400002301,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1835,3560,2.63,48,0000,254,0,0,11,100
+
+CSV = 1400002302,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1834,3560,2.63,48,0000,254,0,0,25,100
+
+CSV = 1400002303,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1834,3560,2.63,48,0000,254,0,0,10,100
+
+CSV = 1400002304,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1833,3560,2.62,48,0000,254,0,0,26,100
+
+CSV = 1400002305,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1834,3559,2.63,48,0000,254,0,0,25,100
+
+CSV = 1400002306,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1834,3560,2.63,48,0000,254,0,0,12,100
+
+CSV = 1400002307,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1832,3560,2.62,48,0000,254,0,0,11,100
+
+CSV = 1400002308,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1834,3560,2.63,48,0000,254,0,0,25,100
+
+CSV = 1400002309,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1833,3559,2.62,48,0000,254,0,0,11,100
+
+CSV = 1400002310,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1833,3560,2.62,48,0000,254,0,0,11,100
+
+CSV = 1400002311,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1832,3559,2.62,48,0000,254,0,0,25,100
+
+CSV = 1400002312,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1835,3559,2.63,48,0000,254,0,0,10,100
+
+CSV = 1400002313,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1833,3559,2.62,48,0000,254,0,0,11,100
+
+CSV = 1400002314,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1835,3560,2.63,48,0000,254,0,0,11,100
+
+CSV = 1400002315,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1835,3560,2.63,48,0000,254,0,0,11,100
+
+CSV = 1400002316,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1832,3559,2.62,48,0000,254,0,0,11,100
+
+CSV = 1400002317,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1832,3560,2.62,48,0000,254,0,0,25,100
+
+CSV = 1400002318,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1832,3559,2.62,48,0000,254,0,0,11,100
+
+CSV = 1400002319,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1835,3559,2.63,48,0000,254,0,0,27,100
+
+CSV = 1400002320,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1834,3560,2.63,48,0000,254,0,0,11,100
+
+CSV = 1400002321,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1835,3560,2.63,48,0000,254,0,0,11,100
+
+CSV = 1400002322,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1835,3560,2.63,48,0000,254,0,0,24,100
+
+CSV = 1400002323,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1833,3559,2.62,48,0000,254,0,0,11,100
+
+CSV = 1400002328,0,0,0000,0000,0000000000,0000,0,0,0,0,1957,1836,3560,2.63,51,0000,254,0,0,26,100
+
+CSV = 1400002329,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1834,3560,2.63,51,0000,254,0,0,14,100
+
+CSV = 1400002330,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1834,3560,2.63,51,0000,254,0,0,29,100
+
+CSV = 1400002331,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1834,3560,2.63,51,0000,254,0,0,5,100
+
+CSV = 1400002332,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1834,3559,2.63,51,0000,254,0,0,13,100
+
+CSV = 1400002333,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1834,3560,2.63,51,0000,254,0,0,24,100
+
+CSV = 1400002334,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1834,3559,2.63,51,0000,254,0,0,13,100
+
+CSV = 1400002335,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1834,3560,2.63,51,0000,254,0,0,13,100
+
+CSV = 1400002336,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1834,3560,2.63,51,0000,254,0,0,27,100
+
+CSV = 1400002338,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1834,3559,2.63,51,0000,254,0,0,6,100
+
+CSV = 1400002338,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1834,3559,2.63,51,0000,254,0,0,29,100
+
+CSV = 1400002339,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3559,2.62,51,0000,254,0,0,13,100
+
+CSV = 1400002340,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1834,3560,2.63,51,0000,254,0,0,13,100
+
+CSV = 1400002341,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1833,3559,2.62,51,0000,254,0,0,13,100
+
+CSV = 1400002342,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1833,3560,2.62,51,0000,254,0,0,14,100
+
+CSV = 1400002343,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1833,3559,2.62,51,0000,254,0,0,26,100
+
+CSV = 1400002344,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1833,3559,2.62,51,0000,254,0,0,12,100
+
+CSV = 1400002350,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1832,3560,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002351,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1833,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002352,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1832,3559,2.62,51,0000,255,0,0,26,100
+
+CSV = 1400002353,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1836,3559,2.63,51,0000,255,0,0,13,100
+
+CSV = 1400002354,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1833,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002355,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1835,3559,2.63,51,0000,255,0,0,26,100
+
+CSV = 1400002356,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1834,3559,2.63,51,0000,255,0,0,6,100
+
+CSV = 1400002361,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1835,3559,2.63,51,0000,255,0,0,14,100
+
+CSV = 1400002362,0,0,0000,0000,0000000000,0000,0,0,0,0,1963,1834,3559,2.63,51,0000,255,0,0,14,100
+
+CSV = 1400002364,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1834,3559,2.63,51,0000,255,0,0,14,100
+
+CSV = 1400002368,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002369,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3559,2.62,51,0000,255,0,0,25,100
+
+CSV = 1400002370,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002371,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3560,2.62,51,0000,255,0,0,26,100
+
+CSV = 1400002372,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3560,2.62,51,0000,255,0,0,25,100
+
+CSV = 1400002373,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002377,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1833,3560,2.62,48,0000,255,0,0,25,100
+
+CSV = 1400002378,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1833,3560,2.62,48,0000,255,0,0,11,100
+
+CSV = 1400002379,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3559,2.62,48,0000,255,0,0,26,100
+
+CSV = 1400002380,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1832,3559,2.62,48,0000,255,0,0,11,100
+
+CSV = 1400002381,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1834,3559,2.63,48,0000,255,0,0,11,100
+
+CSV = 1400002382,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1832,3560,2.62,48,0000,255,0,0,25,100
+
+CSV = 1400002383,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1833,3559,2.62,48,0000,255,0,0,24,100
+
+CSV = 1400002384,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1832,3559,2.62,48,0000,255,0,0,11,100
+
+CSV = 1400002385,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1831,3559,2.62,48,0000,255,0,0,10,100
+
+CSV = 1400002389,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1833,3560,2.62,51,0000,255,0,0,24,100
+
+CSV = 1400002390,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1834,3560,2.63,51,0000,255,0,0,13,100
+
+CSV = 1400002391,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1833,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002392,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1835,3559,2.63,51,0000,255,0,0,27,100
+
+CSV = 1400002394,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1833,3560,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002395,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1834,3560,2.63,51,0000,255,0,0,13,100
+
+CSV = 1400002396,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1833,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002397,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1834,3559,2.63,51,0000,255,0,0,5,100
+
+CSV = 1400002398,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1833,3560,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002399,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1834,3559,2.63,51,0000,255,0,0,25,100
+
+CSV = 1400002400,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1834,3560,2.63,51,0000,255,0,0,13,100
+
+CSV = 1400002401,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1834,3560,2.63,51,0000,255,0,0,25,100
+
+CSV = 1400002402,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1834,3560,2.63,51,0000,255,0,0,13,100
+
+CSV = 1400002403,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3559,2.62,51,0000,255,0,0,26,100
+
+CSV = 1400002404,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002405,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1833,3560,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002406,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1832,3559,2.62,51,0000,255,0,0,25,100
+
+CSV = 1400002407,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002408,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3560,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002409,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1832,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002410,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3560,2.62,51,0000,255,0,0,25,100
+
+CSV = 1400002411,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002412,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002413,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3560,2.62,51,0000,255,0,0,27,100
+
+CSV = 1400002414,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002415,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3559,2.62,51,0000,255,0,0,10,100
+
+CSV = 1400002416,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002417,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002419,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1834,3560,2.63,51,0000,255,0,0,13,100
+
+CSV = 1400002420,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1832,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002421,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1832,3559,2.62,51,0000,255,0,0,26,100
+
+CSV = 1400002422,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1832,3560,2.62,51,0000,255,0,0,12,100
+
+CSV = 1400002423,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1830,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002424,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1833,3560,2.62,51,0000,255,0,0,29,100
+
+CSV = 1400002425,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1832,3559,2.62,51,0000,255,0,0,26,100
+
+CSV = 1400002427,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1834,3560,2.63,51,0000,255,0,0,14,100
+
+CSV = 1400002428,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1832,3559,2.62,51,0000,255,0,0,25,100
+
+CSV = 1400002429,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1832,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002430,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1834,3560,2.63,51,0000,255,0,0,24,100
+
+CSV = 1400002431,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1835,3560,2.63,51,0000,255,0,0,13,100
+
+CSV = 1400002432,0,0,0000,0000,0000000000,0000,0,0,0,0,1963,1835,3560,2.63,51,0000,255,0,0,14,100
+
+CSV = 1400002433,0,0,0000,0000,0000000000,0000,0,0,0,0,1963,1834,3559,2.63,51,0000,255,0,0,14,100
+
+CSV = 1400002434,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3560,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002435,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1834,3559,2.63,51,0000,255,0,0,6,100
+
+CSV = 1400002436,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1833,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002437,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1834,3560,2.63,51,0000,255,0,0,25,100
+
+CSV = 1400002438,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1833,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002439,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1834,3559,2.63,51,0000,255,0,0,27,100
+
+CSV = 1400002440,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3559,2.62,51,0000,255,0,0,27,100
+
+CSV = 1400002441,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1833,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002442,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3559,2.62,51,0000,255,0,0,27,100
+
+CSV = 1400002443,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1832,3560,2.62,51,0000,255,0,0,25,100
+
+CSV = 1400002444,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002445,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3559,2.62,51,0000,255,0,0,25,100
+
+CSV = 1400002446,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002447,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3559,2.62,51,0000,255,0,0,25,100
+
+CSV = 1400002448,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002449,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3559,2.62,51,0000,255,0,0,26,100
+
+CSV = 1400002450,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1833,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002451,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1833,3560,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002452,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1833,3559,2.62,51,0000,255,0,0,5,100
+
+CSV = 1400002453,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1831,3560,2.62,51,0000,255,0,0,13,100
+
+
+CSV = 1400002454,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3559,2.62,51,0000,255,0,0,26,100
+
+CSV = 1400002455,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1831,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002456,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1831,3559,2.62,51,0000,255,0,0,24,100
+
+CSV = 1400002457,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002458,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1833,3560,2.62,51,0000,255,0,0,24,100
+
+CSV = 1400002459,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1833,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002460,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1831,3559,2.62,51,0000,255,0,0,25,100
+
+CSV = 1400002461,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1831,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002462,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1832,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002463,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1834,3558,2.63,51,0000,255,0,0,13,100
+
+CSV = 1400002464,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1834,3559,2.63,51,0000,255,0,0,14,100
+
+CSV = 1400002465,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1833,3560,2.62,51,0000,255,0,0,5,100
+
+CSV = 1400002466,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1834,3559,2.63,51,0000,255,0,0,14,100
+
+CSV = 1400002467,0,0,0000,0000,0000000000,0000,0,0,0,0,1963,1834,3559,2.63,51,0000,255,0,0,5,100
+
+CSV = 1400002468,0,0,0000,0000,0000000000,0000,0,0,0,0,1963,1834,3559,2.63,51,0000,255,0,0,14,100
+
+CSV = 1400002469,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1834,3559,2.63,51,0000,255,0,0,25,100
+
+CSV = 1400002470,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1833,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002471,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1834,3559,2.63,51,0000,255,0,0,14,100
+
+CSV = 1400002472,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1834,3559,2.63,51,0000,255,0,0,28,100
+
+CSV = 1400002473,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3560,2.62,51,0000,255,0,0,25,100
+
+CSV = 1400002474,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1834,3560,2.63,51,0000,255,0,0,14,100
+
+CSV = 1400002475,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3560,2.62,51,0000,255,0,0,27,100
+
+CSV = 1400002476,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1834,3559,2.63,51,0000,255,0,0,13,100
+
+CSV = 1400002477,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002478,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3560,2.62,51,0000,255,0,0,28,100
+
+CSV = 1400002479,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3560,2.62,51,0000,255,0,0,12,100
+
+CSV = 1400002480,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002481,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002482,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1832,3560,2.62,51,0000,255,0,0,6,100
+
+CSV = 1400002483,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002484,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1832,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002485,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3560,2.62,51,0000,255,0,0,5,100
+
+CSV = 1400002486,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002487,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3559,2.62,51,0000,255,0,0,25,100
+
+CSV = 1400002488,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3559,2.62,51,0000,255,0,0,28,100
+
+CSV = 1400002489,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1831,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002490,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1832,3559,2.62,51,0000,255,0,0,10,100
+
+CSV = 1400002491,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002492,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1833,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002493,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1833,3560,2.62,51,0000,255,0,0,27,100
+
+CSV = 1400002494,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1831,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002495,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1830,3559,2.62,51,0000,255,0,0,24,100
+
+CSV = 1400002496,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1831,3559,2.62,51,0000,255,0,0,12,100
+
+CSV = 1400002497,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1831,3559,2.62,51,0000,255,0,0,26,100
+
+CSV = 1400002498,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1830,3559,2.62,51,0000,255,0,0,25,100
+
+CSV = 1400002499,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1832,3560,2.62,51,0000,255,0,0,6,100
+
+CSV = 1400002500,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1832,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002501,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1831,3560,2.62,51,0000,255,0,0,24,100
+
+CSV = 1400002502,0,0,0000,0000,0000000000,0000,0,0,0,0,1963,1834,3559,2.63,51,0000,255,0,0,13,100
+
+CSV = 1400002503,0,0,0000,0000,0000000000,0000,0,0,0,0,1963,1834,3560,2.63,51,0000,255,0,0,29,100
+
+CSV = 1400002504,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1834,3560,2.63,51,0000,255,0,0,5,100
+
+CSV = 1400002505,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1833,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002506,0,0,0000,0000,0000000000,0000,0,0,0,0,1963,1833,3560,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002507,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1834,3560,2.63,51,0000,255,0,0,5,100
+
+CSV = 1400002508,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1833,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002509,0,0,0000,0000,0000000000,0000,0,0,0,0,1963,1834,3559,2.63,51,0000,255,0,0,25,100
+
+CSV = 1400002510,0,0,0000,0000,0000000000,0000,0,0,0,0,1963,1834,3559,2.63,51,0000,255,0,0,26,100
+
+CSV = 1400002511,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1833,3560,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002512,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1834,3559,2.63,51,0000,255,0,0,29,100
+
+CSV = 1400002513,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1833,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002514,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1833,3560,2.62,51,0000,255,0,0,28,100
+
+CSV = 1400002515,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002516,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3560,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002517,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3559,2.62,51,0000,255,0,0,25,100
+
+CSV = 1400002518,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002519,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3559,2.62,51,0000,255,0,0,26,100
+
+CSV = 1400002520,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3559,2.62,51,0000,255,0,0,5,100
+
+CSV = 1400002522,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002523,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3559,2.62,51,0000,255,0,0,26,100
+
+CSV = 1400002524,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3560,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002525,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3559,2.62,51,0000,255,0,0,25,100
+
+CSV = 1400002526,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002527,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1831,3560,2.62,51,0000,255,0,0,26,100
+
+CSV = 1400002528,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1831,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002529,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1831,3560,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002530,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002531,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1833,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002532,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1831,3560,2.62,51,0000,255,0,0,5,100
+
+CSV = 1400002533,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1831,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002534,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1832,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002535,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1833,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002536,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1835,3560,2.63,51,0000,255,0,0,14,100
+
+CSV = 1400002537,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1833,3559,2.62,51,0000,255,0,0,5,100
+
+CSV = 1400002538,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1833,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002539,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1834,3560,2.63,51,0000,255,0,0,10,100
+
+CSV = 1400002540,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1834,3559,2.63,51,0000,255,0,0,14,100
+
+CSV = 1400002541,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1833,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002542,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1833,3559,2.62,51,0000,255,0,0,25,100
+
+CSV = 1400002543,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002544,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002545,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1833,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002546,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1832,3559,2.62,51,0000,255,0,0,4,100
+
+CSV = 1400002547,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3559,2.62,51,0000,255,0,0,29,100
+
+CSV = 1400002548,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3559,2.62,51,0000,255,0,0,5,100
+
+CSV = 1400002549,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3560,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002550,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1832,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002551,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1833,3560,2.62,51,0000,255,0,0,25,100
+
+CSV = 1400002552,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002553,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3559,2.62,51,0000,255,0,0,24,100
+
+CSV = 1400002554,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1832,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002555,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002556,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3560,2.62,51,0000,255,0,0,27,100
+
+CSV = 1400002557,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002558,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1831,3559,2.62,51,0000,255,0,0,29,100
+
+CSV = 1400002559,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002560,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3560,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002561,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1831,3560,2.62,51,0000,255,0,0,29,100
+
+CSV = 1400002562,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1831,3559,2.62,51,0000,255,0,0,25,100
+
+CSV = 1400002563,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1832,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002564,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1831,3559,2.62,51,0000,255,0,0,28,100
+
+CSV = 1400002565,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1831,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002566,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1832,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002567,0,0,0000,0000,0000000000,0000,0,0,0,0,1963,1834,3560,2.63,51,0000,255,0,0,26,100
+
+CSV = 1400002568,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1834,3559,2.63,51,0000,255,0,0,13,100
+
+CSV = 1400002569,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1833,3559,2.62,51,0000,255,0,0,27,100
+
+CSV = 1400002570,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1833,3559,2.62,51,0000,255,0,0,25,100
+
+CSV = 1400002571,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002572,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1833,3559,2.62,51,0000,255,0,0,26,100
+
+CSV = 1400002573,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3560,2.62,51,0000,255,0,0,24,100
+
+CSV = 1400002574,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3560,2.62,51,0000,255,0,0,27,100
+
+CSV = 1400002575,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3560,2.62,51,0000,255,0,0,28,100
+
+CSV = 1400002576,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1832,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002577,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3560,2.62,51,0000,255,0,0,11,100
+
+CSV = 1400002578,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1832,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002579,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002580,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1833,3559,2.62,51,0000,255,0,0,5,100
+
+CSV = 1400002581,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002582,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3560,2.62,51,0000,255,0,0,24,100
+
+CSV = 1400002583,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002584,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002585,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002586,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002587,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1831,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002588,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1831,3559,2.62,51,0000,255,0,0,26,100
+
+CSV = 1400002589,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1831,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002590,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1831,3560,2.62,51,0000,255,0,0,29,100
+
+CSV = 1400002591,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1832,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002592,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1830,3560,2.62,51,0000,255,0,0,10,100
+
+CSV = 1400002593,0,0,0000,0000,0000000000,0000,0,0,0,0,1963,1834,3559,2.63,51,0000,255,0,0,13,100
+
+CSV = 1400002594,0,0,0000,0000,0000000000,0000,0,0,0,0,1963,1834,3560,2.63,51,0000,255,0,0,24,100
+
+CSV = 1400002595,0,0,0000,0000,0000000000,0000,0,0,0,0,1963,1834,3560,2.63,51,0000,255,0,0,14,100
+
+CSV = 1400002596,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1834,3560,2.63,51,0000,255,0,0,14,100
+
+CSV = 1400002597,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1833,3560,2.62,51,0000,255,0,0,5,100
+
+CSV = 1400002598,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1833,3559,2.62,51,0000,255,0,0,12,100
+
+CSV = 1400002599,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1833,3560,2.62,51,0000,255,0,0,25,100
+
+CSV = 1400002600,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1833,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002601,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1833,3560,2.62,51,0000,255,0,0,28,100
+
+CSV = 1400002602,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1833,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002603,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1833,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002604,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002605,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3559,2.62,51,0000,255,0,0,24,100
+
+CSV = 1400002606,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002607,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002608,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1832,3560,2.62,51,0000,255,0,0,5,100
+
+CSV = 1400002609,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3559,2.62,51,0000,255,0,0,29,100
+
+CSV = 1400002610,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3560,2.62,51,0000,255,0,0,25,100
+
+CSV = 1400002611,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3560,2.62,51,0000,255,0,0,24,100
+
+CSV = 1400002612,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1832,3559,2.62,51,0000,255,0,0,27,100
+
+CSV = 1400002613,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002614,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1831,3559,2.62,51,0000,255,0,0,29,100
+
+CSV = 1400002615,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1831,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002616,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3559,2.62,51,0000,255,0,0,27,100
+
+CSV = 1400002617,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002618,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1831,3559,2.62,51,0000,255,0,0,24,100
+
+CSV = 1400002619,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3560,2.62,51,0000,255,0,0,11,100
+
+CSV = 1400002620,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1831,3560,2.62,51,0000,255,0,0,26,100
+
+CSV = 1400002621,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1831,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002622,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002623,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1833,3560,2.62,51,0000,255,0,0,26,100
+
+CSV = 1400002624,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1830,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002626,0,0,0000,0000,0000000000,0000,0,0,0,0,1964,1834,3559,2.63,51,0000,255,0,0,26,100
+
+CSV = 1400002627,0,0,0000,0000,0000000000,0000,0,0,0,0,1963,1834,3559,2.63,51,0000,255,0,0,13,100
+
+CSV = 1400002628,0,0,0000,0000,0000000000,0000,0,0,0,0,1963,1834,3559,2.63,51,0000,255,0,0,27,100
+
+CSV = 1400002629,0,0,0000,0000,0000000000,0000,0,0,0,0,1963,1834,3560,2.63,51,0000,255,0,0,13,100
+
+CSV = 1400002630,0,0,0000,0000,0000000000,0000,0,0,0,0,1963,1834,3559,2.63,51,0000,255,0,0,14,100
+
+CSV = 1400002631,0,0,0000,0000,0000000000,0000,0,0,0,0,1963,1834,3559,2.63,51,0000,255,0,0,14,100
+
+CSV = 1400002632,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1833,3560,2.62,51,0000,255,0,0,26,100
+
+CSV = 1400002633,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1834,3559,2.63,51,0000,255,0,0,6,100
+
+CSV = 1400002634,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1832,3559,2.62,51,0000,255,0,0,26,100
+
+CSV = 1400002635,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1833,3560,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002636,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1834,3559,2.63,51,0000,255,0,0,14,100
+
+CSV = 1400002637,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1833,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002638,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1833,3559,2.62,51,0000,255,0,0,28,100
+
+CSV = 1400002639,0,0,0000,0000,0000000000,0000,0,0,0,0,1963,1834,3560,2.63,51,0000,255,0,0,13,100
+
+CSV = 1400002643,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3559,2.62,51,0000,255,0,0,26,100
+
+CSV = 1400002644,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1833,3560,2.62,51,0000,255,0,0,5,100
+
+CSV = 1400002645,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1832,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002646,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1832,3559,2.62,51,0000,255,0,0,26,100
+
+CSV = 1400002651,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002652,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1831,3560,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002653,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3559,2.62,51,0000,255,0,0,5,100
+
+CSV = 1400002654,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1831,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002655,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1831,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002660,0,0,0000,0000,0000000000,0000,0,0,0,0,1964,1835,3559,2.63,48,0000,255,0,0,11,100
+
+CSV = 1400002661,0,0,0000,0000,0000000000,0000,0,0,0,0,1963,1834,3559,2.63,48,0000,255,0,0,11,100
+
+CSV = 1400002662,0,0,0000,0000,0000000000,0000,0,0,0,0,1963,1835,3560,2.63,48,0000,255,0,0,25,100
+
+CSV = 1400002663,0,0,0000,0000,0000000000,0000,0,0,0,0,1963,1834,3560,2.63,48,0000,255,0,0,11,100
+
+CSV = 1400002664,0,0,0000,0000,0000000000,0000,0,0,0,0,1963,1834,3559,2.63,48,0000,255,0,0,11,100
+
+CSV = 1400002665,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1833,3560,2.62,48,0000,255,0,0,25,100
+
+CSV = 1400002666,0,0,0000,0000,0000000000,0000,0,0,0,0,1963,1833,3559,2.62,48,0000,255,0,0,11,100
+
+CSV = 1400002670,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1833,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002671,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1833,3559,2.62,51,0000,255,0,0,29,100
+
+CSV = 1400002672,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1833,3559,2.62,51,0000,255,0,0,5,100
+
+CSV = 1400002673,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1833,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002674,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002675,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1832,3559,2.62,51,0000,255,0,0,26,100
+
+CSV = 1400002676,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1832,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002677,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3560,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002678,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1832,3559,2.62,51,0000,255,0,0,26,100
+
+CSV = 1400002679,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002680,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1832,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002681,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1832,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002682,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1832,3559,2.62,51,0000,255,0,0,27,100
+
+CSV = 1400002683,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002684,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3560,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002685,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1831,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002686,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1831,3560,2.62,51,0000,255,0,0,25,100
+
+CSV = 1400002687,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1831,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002688,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3559,2.62,51,0000,255,0,0,27,100
+
+CSV = 1400002689,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1831,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002690,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1830,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002691,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1830,3559,2.62,51,0000,255,0,0,26,100
+
+CSV = 1400002692,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1832,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002693,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1832,3560,2.62,51,0000,255,0,0,27,100
+
+CSV = 1400002694,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1833,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002696,0,0,0000,0000,0000000000,0000,0,0,0,0,1964,1834,3560,2.63,51,0000,255,0,0,13,100
+
+CSV = 1400002696,0,0,0000,0000,0000000000,0000,0,0,0,0,1963,1834,3560,2.63,51,0000,255,0,0,29,100
+
+CSV = 1400002697,0,0,0000,0000,0000000000,0000,0,0,0,0,1964,1835,3559,2.63,51,0000,255,0,0,25,100
+
+CSV = 1400002698,0,0,0000,0000,0000000000,0000,0,0,0,0,1964,1834,3559,2.63,51,0000,255,0,0,13,100
+
+CSV = 1400002700,0,0,0000,0000,0000000000,0000,0,0,0,0,1963,1834,3559,2.63,51,0000,255,0,0,26,100
+
+CSV = 1400002701,0,0,0000,0000,0000000000,0000,0,0,0,0,1963,1834,3559,2.63,51,0000,255,0,0,13,100
+
+CSV = 1400002702,0,0,0000,0000,0000000000,0000,0,0,0,0,1963,1834,3559,2.63,51,0000,255,0,0,14,100
+
+CSV = 1400002703,0,0,0000,0000,0000000000,0000,0,0,0,0,1963,1834,3560,2.63,51,0000,255,0,0,25,100
+
+CSV = 1400002704,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1833,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002705,0,0,0000,0000,0000000000,0000,0,0,0,0,1963,1833,3560,2.62,51,0000,255,0,0,27,100
+
+CSV = 1400002706,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002707,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1833,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002708,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1833,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002709,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1833,3559,2.62,51,0000,255,0,0,5,100
+
+CSV = 1400002710,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1833,3559,2.62,51,0000,255,0,0,25,100
+
+CSV = 1400002711,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1832,3560,2.62,51,0000,255,0,0,26,100
+
+CSV = 1400002712,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3560,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002713,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1832,3560,2.62,51,0000,255,0,0,27,100
+
+CSV = 1400002714,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1833,3560,2.62,51,0000,255,0,0,4,100
+
+CSV = 1400002715,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1832,3559,2.62,51,0000,255,0,0,29,100
+
+CSV = 1400002716,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1832,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002717,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002718,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1832,3559,2.62,51,0000,255,0,0,24,100
+
+CSV = 1400002719,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002720,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3560,2.62,51,0000,255,0,0,29,100
+
+CSV = 1400002721,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002722,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1831,3560,2.62,51,0000,255,0,0,27,100
+
+CSV = 1400002723,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1831,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002724,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1831,3559,2.62,51,0000,255,0,0,27,100
+
+CSV = 1400002725,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1832,3560,2.62,51,0000,255,0,0,25,100
+
+CSV = 1400002726,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1831,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002728,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1830,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002729,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1832,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002730,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1831,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002731,0,0,0000,0000,0000000000,0000,0,0,0,0,1963,1834,3559,2.63,51,0000,255,0,0,27,100
+
+CSV = 1400002732,0,0,0000,0000,0000000000,0000,0,0,0,0,1963,1834,3559,2.63,51,0000,255,0,0,14,100
+
+CSV = 1400002733,0,0,0000,0000,0000000000,0000,0,0,0,0,1963,1834,3559,2.63,51,0000,255,0,0,27,100
+
+CSV = 1400002734,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1833,3559,2.62,51,0000,255,0,0,27,100
+
+CSV = 1400002735,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1833,3560,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002736,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1833,3560,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002737,0,0,0000,0000,0000000000,0000,0,0,0,0,1963,1833,3560,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002738,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1833,3560,2.62,51,0000,255,0,0,25,100
+
+CSV = 1400002739,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1833,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002740,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3560,2.62,51,0000,255,0,0,26,100
+
+CSV = 1400002741,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1833,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002742,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002743,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1832,3560,2.62,51,0000,255,0,0,27,100
+
+CSV = 1400002744,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1832,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002745,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1832,3559,2.62,51,0000,255,0,0,6,100
+
+CSV = 1400002746,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1832,3559,2.62,51,0000,255,0,0,24,100
+
+CSV = 1400002747,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1832,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002748,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1832,3560,2.62,51,0000,255,0,0,26,100
+
+CSV = 1400002749,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1832,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002750,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1832,3559,2.62,51,0000,255,0,0,29,100
+
+CSV = 1400002751,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1832,3559,2.62,51,0000,255,0,0,24,100
+
+CSV = 1400002752,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1831,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002753,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1831,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002754,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3559,2.62,51,0000,255,0,0,28,100
+
+CSV = 1400002755,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1831,3559,2.62,51,0000,255,0,0,12,100
+
+CSV = 1400002756,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1831,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002757,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1830,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002758,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3559,2.62,51,0000,255,0,0,28,100
+
+CSV = 1400002759,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002760,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1831,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002761,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1833,3560,2.62,51,0000,255,0,0,25,100
+
+CSV = 1400002762,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1833,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002763,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1832,3559,2.62,51,0000,255,0,0,28,100
+
+CSV = 1400002764,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1830,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002765,0,0,0000,0000,0000000000,0000,0,0,0,0,1964,1834,3560,2.63,51,0000,255,0,0,5,100
+
+CSV = 1400002766,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1833,3560,2.62,51,0000,255,0,0,6,100
+
+CSV = 1400002767,0,0,0000,0000,0000000000,0000,0,0,0,0,1963,1834,3559,2.63,51,0000,255,0,0,13,100
+
+CSV = 1400002768,0,0,0000,0000,0000000000,0000,0,0,0,0,1963,1834,3559,2.63,51,0000,255,0,0,25,100
+
+CSV = 1400002769,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1833,3560,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002770,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1833,3559,2.62,51,0000,255,0,0,25,100
+
+CSV = 1400002771,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1833,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002772,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1834,3559,2.63,51,0000,255,0,0,26,100
+
+CSV = 1400002773,0,0,0000,0000,0000000000,0000,0,0,0,0,1962,1833,3559,2.62,51,0000,255,0,0,6,100
+
+CSV = 1400002774,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1832,3559,2.62,51,0000,255,0,0,5,100
+
+CSV = 1400002775,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1833,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002776,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1832,3559,2.62,51,0000,255,0,0,27,100
+
+CSV = 1400002777,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1831,3560,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002778,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1831,3559,2.62,51,0000,255,0,0,25,100
+
+CSV = 1400002779,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1831,3559,2.62,51,0000,255,0,0,5,100
+
+CSV = 1400002780,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1831,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002781,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3559,2.62,51,0000,255,0,0,25,100
+
+CSV = 1400002782,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1831,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002783,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1832,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002784,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1831,3559,2.62,51,0000,255,0,0,28,100
+
+CSV = 1400002785,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1831,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002786,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1832,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002787,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1833,3560,2.62,51,0000,255,0,0,26,100
+
+CSV = 1400002788,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1833,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002789,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1832,3559,2.62,51,0000,255,0,0,29,100
+
+CSV = 1400002790,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1832,3560,2.62,51,0000,255,0,0,5,100
+
+CSV = 1400002791,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1834,3560,2.63,51,0000,255,0,0,13,100
+
+CSV = 1400002792,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1834,3559,2.63,51,0000,255,0,0,25,100
+
+CSV = 1400002793,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1833,3559,2.62,51,0000,255,0,0,24,100
+
+CSV = 1400002794,0,0,0000,0000,0000000000,0000,0,0,0,0,1957,1835,3560,2.63,51,0000,255,0,0,14,100
+
+CSV = 1400002795,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1832,3559,2.62,51,0000,255,0,0,27,100
+
+CSV = 1400002796,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1834,3560,2.63,51,0000,255,0,0,13,100
+
+CSV = 1400002797,0,0,0000,0000,0000000000,0000,0,0,0,0,1957,1835,3560,2.63,51,0000,255,0,0,14,100
+
+CSV = 1400002798,0,0,0000,0000,0000000000,0000,0,0,0,0,1957,1834,3560,2.63,51,0000,255,0,0,26,100
+
+CSV = 1400002799,0,0,0000,0000,0000000000,0000,0,0,0,0,1957,1835,3559,2.63,51,0000,255,0,0,13,100
+
+CSV = 1400002800,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1832,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002801,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1832,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002802,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1832,3559,2.62,51,0000,255,0,0,25,100
+
+CSV = 1400002803,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1832,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002804,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1832,3559,2.62,51,0000,255,0,0,25,100
+
+CSV = 1400002805,0,0,0000,0000,0000000000,0000,0,0,0,0,1961,1832,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002807,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1831,3560,2.62,51,0000,255,0,0,26,100
+
+CSV = 1400002808,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1832,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002809,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1831,3560,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002810,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1831,3559,2.62,51,0000,255,0,0,25,100
+
+CSV = 1400002811,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1831,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002812,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1831,3560,2.62,51,0000,255,0,0,27,100
+
+CSV = 1400002813,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1831,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002814,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1831,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002816,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1831,3560,2.62,51,0000,255,0,0,25,100
+
+CSV = 1400002817,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1833,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002818,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1831,3560,2.62,51,0000,255,0,0,26,100
+
+CSV = 1400002819,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1830,3559,2.62,51,0000,255,0,0,12,100
+
+CSV = 1400002820,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1833,3560,2.62,51,0000,255,0,0,29,100
+
+CSV = 1400002821,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1830,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002822,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1832,3560,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002823,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1829,3559,2.61,51,0000,255,0,0,26,100
+
+CSV = 1400002824,0,0,0000,0000,0000000000,0000,0,0,0,0,1957,1835,3560,2.63,51,0000,255,0,0,26,100
+
+CSV = 1400002825,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1833,3559,2.62,51,0000,255,0,0,24,100
+
+CSV = 1400002826,0,0,0000,0000,0000000000,0000,0,0,0,0,1957,1835,3560,2.63,51,0000,255,0,0,14,100
+
+CSV = 1400002827,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1833,3559,2.62,51,0000,255,0,0,24,100
+
+CSV = 1400002828,0,0,0000,0000,0000000000,0000,0,0,0,0,1957,1834,3560,2.63,51,0000,255,0,0,14,100
+
+CSV = 1400002829,0,0,0000,0000,0000000000,0000,0,0,0,0,1956,1835,3560,2.63,51,0000,255,0,0,25,100
+
+CSV = 1400002830,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1836,3559,2.63,51,0000,255,0,0,13,100
+
+CSV = 1400002831,0,0,0000,0000,0000000000,0000,0,0,0,0,1956,1834,3559,2.63,51,0000,255,0,0,25,100
+
+CSV = 1400002832,0,0,0000,0000,0000000000,0000,0,0,0,0,1955,1835,3559,2.63,51,0000,255,0,0,14,100
+
+CSV = 1400002833,0,0,0000,0000,0000000000,0000,0,0,0,0,1957,1834,3560,2.63,51,0000,255,0,0,24,100
+
+CSV = 1400002834,0,0,0000,0000,0000000000,0000,0,0,0,0,1956,1838,3560,2.63,51,0000,255,0,0,13,100
+
+CSV = 1400002835,0,0,0000,0000,0000000000,0000,0,0,0,0,1955,1837,3559,2.63,51,0000,255,0,0,14,100
+
+CSV = 1400002836,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1831,3560,2.62,51,0000,255,0,0,26,100
+
+CSV = 1400002837,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1831,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002838,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1831,3559,2.62,51,0000,255,0,0,29,100
+
+CSV = 1400002839,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1830,3560,2.62,51,0000,255,0,0,4,100
+
+CSV = 1400002840,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1831,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002841,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1830,3559,2.62,51,0000,255,0,0,24,100
+
+CSV = 1400002842,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1831,3560,2.62,51,0000,255,0,0,6,100
+
+CSV = 1400002843,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1833,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002844,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1830,3560,2.62,51,0000,255,0,0,5,100
+
+CSV = 1400002845,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1832,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002846,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1832,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002847,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1830,3560,2.62,51,0000,255,0,0,26,100
+
+CSV = 1400002848,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1834,3559,2.63,51,0000,255,0,0,13,100
+
+CSV = 1400002849,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1834,3560,2.63,51,0000,255,0,0,27,100
+
+CSV = 1400002850,0,0,0000,0000,0000000000,0000,0,0,0,0,1957,1833,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002851,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1834,3559,2.63,51,0000,255,0,0,9,100
+
+CSV = 1400002852,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1834,3559,2.63,51,0000,255,0,0,14,100
+
+CSV = 1400002853,0,0,0000,0000,0000000000,0000,0,0,0,0,1957,1834,3560,2.63,51,0000,255,0,0,13,100
+
+CSV = 1400002854,0,0,0000,0000,0000000000,0000,0,0,0,0,1957,1834,3559,2.63,51,0000,255,0,0,14,100
+
+
+CSV = 1400002855,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1832,3560,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002856,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1834,3559,2.63,51,0000,255,0,0,27,100
+
+CSV = 1400002857,0,0,0000,0000,0000000000,0000,0,0,0,0,1957,1834,3559,2.63,51,0000,255,0,0,27,100
+
+CSV = 1400002858,0,0,0000,0000,0000000000,0000,0,0,0,0,1957,1836,3560,2.63,51,0000,255,0,0,13,100
+
+CSV = 1400002859,0,0,0000,0000,0000000000,0000,0,0,0,0,1956,1834,3559,2.63,51,0000,255,0,0,14,100
+
+CSV = 1400002860,0,0,0000,0000,0000000000,0000,0,0,0,0,1957,1834,3559,2.63,51,0000,255,0,0,5,100
+
+CSV = 1400002861,0,0,0000,0000,0000000000,0000,0,0,0,0,1956,1837,3559,2.63,51,0000,255,0,0,14,100
+
+CSV = 1400002862,0,0,0000,0000,0000000000,0000,0,0,0,0,1957,1836,3560,2.63,51,0000,255,0,0,24,100
+
+CSV = 1400002863,0,0,0000,0000,0000000000,0000,0,0,0,0,1956,1836,3559,2.63,51,0000,255,0,0,13,100
+
+CSV = 1400002864,0,0,0000,0000,0000000000,0000,0,0,0,0,1956,1837,3560,2.63,51,0000,255,0,0,29,100
+
+CSV = 1400002865,0,0,0000,0000,0000000000,0000,0,0,0,0,1957,1839,3560,2.64,51,0000,255,0,0,13,100
+
+CSV = 1400002866,0,0,0000,0000,0000000000,0000,0,0,0,0,1956,1835,3560,2.63,51,0000,255,0,0,13,100
+
+CSV = 1400002867,0,0,0000,0000,0000000000,0000,0,0,0,0,1955,1836,3560,2.63,51,0000,255,0,0,14,100
+
+CSV = 1400002868,0,0,0000,0000,0000000000,0000,0,0,0,0,1955,1838,3559,2.63,51,0000,255,0,0,26,100
+
+CSV = 1400002869,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1831,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002870,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1832,3560,2.62,51,0000,255,0,0,29,100
+
+CSV = 1400002871,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1832,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002872,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1831,3560,2.62,51,0000,255,0,0,10,100
+
+CSV = 1400002873,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1830,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002874,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1832,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002875,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1830,3559,2.62,51,0000,255,0,0,27,100
+
+CSV = 1400002876,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1830,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002877,0,0,0000,0000,0000000000,0000,0,0,0,0,1960,1831,3559,2.62,51,0000,255,0,0,28,100
+
+CSV = 1400002878,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1832,3559,2.62,51,0000,255,0,0,12,100
+
+CSV = 1400002879,0,0,0000,0000,0000000000,0000,0,0,0,0,1959,1832,3560,2.62,51,0000,255,0,0,26,100
+
+CSV = 1400002880,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1832,3560,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002881,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1832,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002883,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1834,3560,2.63,51,0000,255,0,0,5,100
+
+CSV = 1400002884,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1833,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002885,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1830,3559,2.62,51,0000,255,0,0,13,100
+
+CSV = 1400002886,0,0,0000,0000,0000000000,0000,0,0,0,0,1957,1834,3559,2.63,51,0000,255,0,0,14,100
+
+CSV = 1400002887,0,0,0000,0000,0000000000,0000,0,0,0,0,1958,1833,3559,2.62,51,0000,255,0,0,14,100
+
+CSV = 1400002888,0,0,0000,0000,0000000000,0000,0,0,0,0,1957,1835,3560,2.63,51,0000,255,0,0,26,100
+

@@ -1,0 +1,8 @@
+ac_loads,PSI pump,,,
+ac_loads_hints,High pressure pump,,,
+valves,--, MTI , FWI, --,Back Valve, -- , --, --, Out 5, Out 1, Out 3, Out 4, Out6, --, --
+valves_hints,Out 1, Out 2, Out 3, Out 4, Back Valve, Fresh Water Intake, MixTank Intake, MixTank Intake, back to MixTank valve, Main Water Supply Valve
+dosing_pumps,Doser 1,Doser 3, Doser 2, Doser 4
+dosers_hints, ,N/C,GHE FloraDuo Bloom fertilizer (2ml/sec), GHE FloraDuo Grow fertilizer (1ml/sec)
+dosers_pwm_duty_cycles, 100,100,50,50
+
