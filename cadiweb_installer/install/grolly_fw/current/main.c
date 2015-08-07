@@ -588,7 +588,7 @@ volatile static uint8_t psi_max_speed = 0;
 #endif
 
 // Grolly 2 (S/N: 001)
-
+/*
 #define FWTANK						0
 #define MIXTANK						1
 #define FWTANK_SONAR					0
@@ -603,8 +603,8 @@ volatile static uint8_t psi_max_speed = 0;
 #define WLINE_64_VALVE					11
 #define WLINE_65_VALVE					8
 #define WLINE_66_VALVE					12
+*/
 
-/*
  // GROLLY 2 (002 and 003)
 #define FWTANK						0
 #define MIXTANK						1
@@ -620,7 +620,7 @@ volatile static uint8_t psi_max_speed = 0;
 #define WLINE_64_VALVE					7
 #define WLINE_65_VALVE					2
 #define WLINE_66_VALVE					12
- */
+
 
 
 
