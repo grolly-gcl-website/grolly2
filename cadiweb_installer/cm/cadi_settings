@@ -1,3 +1,5 @@
+# this is Cadiweb settings file
+
 ac_loads,PSI pump,,,
 ac_loads_hints,High pressure pump,,,
 valves,--, MTI , FWI, --,Back Valve, -- , --, --, Out 5, Out 1, Out 3, Out 4, Out6, --, --
@@ -6,3 +8,11 @@ dosing_pumps,Doser 1,Doser 3, Doser 2, Doser 4
 dosers_hints, ,N/C,GHE FloraDuo Bloom fertilizer (2ml/sec), GHE FloraDuo Grow fertilizer (1ml/sec)
 dosers_pwm_duty_cycles, 100,100,50,50
 
+# valves to display (if not full list displayed) and display order
+display_valves,1,2,4,9,10,11,8,12
+
+# maximum and minimum levels for water tanks (minimum first, then max)
+watertank_minmax_levels,2000,100
+
+# water tank top and bottom levels (Fresh water first (top and bottom levels), and then MixTank)
+watertank_top_bottom,100,800,100,500

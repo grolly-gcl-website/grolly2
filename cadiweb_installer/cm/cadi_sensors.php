@@ -1,5 +1,27 @@
 
+<?php 
+session_start();
+	if (($handle = fopen("cm/cadi_settings", "r")) !== FALSE) {
+	    while (($rowarr = fgetcsv($handle, 1000, ",")) !== FALSE) {
+		$num = count($_SESSION['settings_data'][$row]);
+		if (substr($rowarr[0],0,1)!='#') {
+			$_SESSION['settings_data'][($rowarr[0])] = $rowarr;
+			$row++;
+		}
+	    }
+	    fclose($handle);
+	}
+	$minval = $_SESSION["settings_data"]["watertank_minmax_levels"][1];
+	$maxval = $_SESSION["settings_data"]["watertank_minmax_levels"][2];
+
+
+?>
+
 <script script type="text/javascript">
+
+
+
+
 
 $(function() {
 	$( "#cadi_sensors_accordion" ).accordion();
@@ -9,12 +31,17 @@ $(function() {
 
 $(function() {
 
-	// <?php echo 't3top = '.$svg_t3top.';'.PHP_EOL; ?>
-	// var t3top = <?php echo 200 ?>;
+<?php
+	echo 'var maxval = '.$maxval.';'.PHP_EOL;
+	echo 'var minval = '.$minval.';'.PHP_EOL;
+
+?>
+ 	  
+ 	
 	$( "#t3top_sldr, #t3btm_sldr, #t4top_sldr, #t4btm_sldr" ).slider({
 	orientation: "horizontal",
 	range: "min",
-	max: 255,
+	max: minval,
 	value: 0,
 	slide: refreshSliders,
 	change: refreshSliders

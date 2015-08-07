@@ -151,9 +151,11 @@ function wt_mix_in(){
 
 	$row = 1;
 	if (($handle = fopen("cm/cadi_settings", "r")) !== FALSE) {
-	    while (($_SESSION['settings_data'][$row] = fgetcsv($handle, 1000, ",")) !== FALSE) {
-		$num = count($_SESSION['settings_data'][$row]);
-		$row++;
+	    while (($rowarr = fgetcsv($handle, 1000, ",")) !== FALSE) {
+		if (substr($rowarr[0],0,1)!='#') {
+			$_SESSION['settings_data'][($rowarr[0])] = $rowarr;
+			$row++;
+		}
 	    }
 	    fclose($handle);
 	}
@@ -165,7 +167,7 @@ function wt_mix_in(){
 	for ($i=0; $i<$plug_amount; $i++) {
 		echo '
 		<tr title="'.$_SESSION['settings_data'][2][$i+1].'">
-			<td style="text-align:right; width:15%;">'.$_SESSION['settings_data'][1][$i+1].'</td>
+			<td style="text-align:right; width:15%;">'.$_SESSION['settings_data']['ac_loads'][$i+1].'</td>
 			<td>
 				<form class="c_inline">
 				<div id="radio_plug1" class="radio_">
@@ -187,10 +189,31 @@ function wt_mix_in(){
 
 	
 //	echo '<tr><b>VALVES:</b></tr>';
-	for ($i=0; $i<$valves_amount; $i++) {
+
+
+// display only ordered valves
+	$valve_order = $_SESSION['settings_data']['display_valves'];
+	for ($i=1;$i<sizeof($valve_order);$i++) {
 		echo '
-		<tr title="'.$_SESSION['settings_data'][4][$i+1].'">
-			<td style="text-align:right; width:15%;">'.$_SESSION['settings_data'][3][$i+1].'</td>
+		<tr title="'.$_SESSION['settings_data']['valves_hints'][$i+1].'">
+			<td style="text-align:right; width:15%;">'.$valve_order[$i].' '.$_SESSION['settings_data']['valves'][($valve_order[$i]+1)].'</td>
+			<td>
+				<form class="c_inline">
+				<div id="radio_plug1" class="radio_">
+				<input type="radio" id="valve'.$valve_order[$i].'_radio1" name="valve'.$valve_order[$i].'_radio"><label for="valve'.$valve_order[$i].'_radio1" onClick="open_valve('.$valve_order[$i].')">Open</label>
+				<input type="radio" id="valve'.$valve_order[$i].'_radio2" name="valve'.$valve_order[$i].'_radio" checked="checked"><label for="valve'.$valve_order[$i].'_radio2" onClick="close_valve('.$valve_order[$i].')">Close</label>
+				</div>
+				</form>
+			</td>
+			<td></td>
+		</tr>';
+	}
+
+ // display all the valves
+/*	for ($i=0; $i<$valves_amount; $i++) {
+		echo '
+		<tr class="valves_all" title="'.$_SESSION['settings_data']['valves_hints'][$i+1].'">
+			<td style="text-align:right; width:15%;">'.$_SESSION['settings_data']['valves'][$i+1].'</td>
 			<td>
 				<form class="c_inline">
 				<div id="radio_plug1" class="radio_">
@@ -201,8 +224,8 @@ function wt_mix_in(){
 			</td>
 			<td></td>
 		</tr>';
-	}
-
+	} */
+	
 
 
 	?>
@@ -216,7 +239,7 @@ function wt_mix_in(){
 		<select id="wt_line_id">
 		<?php 
 			for ($i=0; $i<$valves_amount; $i++) {
-				echo '<option value="'.$i.'">'.$i.' - '.($_SESSION['settings_data'][3][$i+1]).'</option>';
+				echo '<option value="'.$i.'">'.$i.' - '.($_SESSION['settings_data']['valves'][$i+1]).'</option>';
 			}
 		?>
 		</select>
@@ -238,8 +261,21 @@ function wt_mix_in(){
 
 		Duration (seconds):<input type="text" id="wt_mixin_duration" /><br>
 		Volume (seconds):<input type="text" id="wt_mixin_volume" /><br>
-		doserId:<input type="text" id="wt_mixin_doserid" /><br>
-		Speed (40-100):<input type="text" id="wt_mixin_speed" /><br>
+		doser:
+		<?php
+			echo '<select id="fert_selector">';
+			$dosers_amount = 4;
+			for ($i=0; $i<$dosers_amount; $i++) {
+				echo '
+					<option value="'.$i.'" title="'.$_SESSION['settings_data']['dosers_hints'][$i+1].'">'.$i.': '.$_SESSION['settings_data']['dosing_pumps'][$i+1].'</option>';
+			}
+			echo '</select>';
+			for ($i=0; $i<$dosers_amount; $i++) {
+				echo '<input type="hidden" id="doser_speed_'.$i.'" value="'.$_SESSION['settings_data'][7][$i+1].'" />';
+			}
+		?>
+		<br>
+		Speed (40-100):<input type="text" id="wt_mixin_speed" value="50" /><br>
 		<button onClick="wt_mix_in()">Mix-IN</button>
 
 		<br>
@@ -252,33 +288,6 @@ function wt_mix_in(){
 	</td></tr>
 
 	<tr><td colspan="2">
-		<?php
-			echo '<div style="border: 1px solid red;">';
-			echo '<b style="color: red;">Fertilizer mixer</b><br>';
-			echo '<select id="fert_selector">';
-
-			$dosers_amount = 4;
-
-			for ($i=0; $i<$dosers_amount; $i++) {
-				echo '
-					<option value="'.$i.'" title="'.$_SESSION['settings_data'][6][$i+1].'">'.$i.': '.$_SESSION['settings_data'][5][$i+1].'</option>';
-			}
-			echo '</select>';
-			for ($i=0; $i<$dosers_amount; $i++) {
-				echo '<input type="hidden" id="doser_speed_'.$i.'" value="'.$_SESSION['settings_data'][7][$i+1].'" />';
-			}
-			echo '<input
-					id="fert_amount"
-					style="width:40px;"
-					type="text"
-					value="0"
-					title="how much seconds to run the dosing pump"
-				/>';
-			echo '<button onClick=run_doser_for()>Add</button>';
-			echo '</div>';
-
-		?>		
-
 		<button class="btn_" onClick="reset_valve_fails()">Fails=0</button>
 		<button class="btn_" onClick="auto_flags(0)">Auto=0</button><br>
 		<button class="btn_" onClick="auto_flags(255)">Auto=255</button>

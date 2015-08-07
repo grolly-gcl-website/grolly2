@@ -43,40 +43,31 @@ $_SESSION['cadiweb_version'] = '1.0';
 <!-- <script type="text/javascript" src="js/date.format.js"></script> -->
 
 <?php
-// load SVG settings
-		if (($handle = fopen("cm/svg.conf", "r")) !== FALSE) {
-		    	$data = fgetcsv($handle, 1000, ",");
-		    	$svg_t3top = $data[0];
-		    	$svg_t3btm  = $data[1];
-		    	$svg_t3wx = $data[2];
-		    	$svg_t3wy  = $data[3];
-
-		    	$svg_t4top = $data[4];
-		    	$svg_t4btm  = $data[5];
-		    	$svg_t4wx = $data[6];
-		    	$svg_t4wy  = $data[7];
-		    fclose($handle);
+// load tank levels settings
+	$row = 1;
+	if (($handle = fopen("cm/cadi_settings", "r")) !== FALSE) {
+	    while (($rowarr = fgetcsv($handle, 1000, ",")) !== FALSE) {
+		$num = count($_SESSION['settings_data'][$row]);
+		if (substr($rowarr[0],0,1)!='#') {
+			$_SESSION['settings_data'][($rowarr[0])] = $rowarr;
+			$row++;
 		}
-		else {
-		    	$svg_t3top = 0;
+	    }
+	    fclose($handle);
+	}
+		    	$svg_t3top = $_SESSION['settings_data']['watertank_top_bottom'][1];
+		    	$svg_t3btm  = $_SESSION['settings_data']['watertank_top_bottom'][2];
+
+		    	$svg_t4top = $_SESSION['settings_data']['watertank_top_bottom'][3];
+		    	$svg_t4btm  = $_SESSION['settings_data']['watertank_top_bottom'][4];
+	
+		    	/*$svg_t3top = 0;
 		    	$svg_t3btm  = 0;
-		    	$svg_t3wx = 0;
-		    	$svg_t3wy  = 0;
 
 		    	$svg_t4top = 0;
-		    	$svg_t4btm  = 0;
-		    	$svg_t4wx = 0;
-		    	$svg_t4wy  = 0; 
-/*		    	$svg_t3top = 0;
-		    	$svg_t3btm  = 100;
-		    	$svg_t3wx = 728;
-		    	$svg_t3wy  = 193;
-
-		    	$svg_t4top = 0;
-		    	$svg_t4btm  = 100;
-		    	$svg_t4wx = 586;
-		    	$svg_t4wy  = 393; */
-		}
+		    	$svg_t4btm  = 0; */
+ 
+		
 ?>
 
 <script>
@@ -266,8 +257,6 @@ $(document).ready(function() {
 		
 			<?php echo 't3top = '.$svg_t3top.';'.PHP_EOL; ?>
 			<?php echo 't3btm = '.$svg_t3btm.';'.PHP_EOL; ?>
-			<?php echo 't3wx = '.$svg_t3wx.';'.PHP_EOL; ?>
-			<?php echo 't3wy = '.$svg_t3wy.';'.PHP_EOL; ?>	
 			t3curlvl = statusArray[8]; 	// provide current level globally
 			if (statusArray[8]>t3top && statusArray[8]<t3btm) {
 				var lvl = Math.floor((275 * (t3btm-statusArray[8])/(t3btm-t3top)));
@@ -286,8 +275,6 @@ $(document).ready(function() {
 				// tank 4 water lvl redraw
 			<?php echo 't4top = '.$svg_t4top.';'.PHP_EOL; ?>
 			<?php echo 't4btm = '.$svg_t4btm.';'.PHP_EOL; ?>
-			<?php echo 't4wx = '.$svg_t4wx.';'.PHP_EOL; ?>
-			<?php echo 't4wy = '.$svg_t4wy.';'.PHP_EOL; ?>
 
 			t4curlvl = statusArray[9];	// provide current level globally
 			if (statusArray[9]>t4top && statusArray[9]<t4btm) {
