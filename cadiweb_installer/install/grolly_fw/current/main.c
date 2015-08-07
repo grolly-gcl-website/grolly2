@@ -610,7 +610,7 @@ volatile static uint8_t psi_max_speed = 0;
 #define MIXTANK						1
 #define FWTANK_SONAR					0
 #define MIXTANK_SONAR					1
-#define	MTI_VALVE					6	// MixTank intake valve
+#define	MTI_VALVE					11	// MixTank intake valve
 #define FWI_VALVE					10	// Fresh water intake valve
 #define BACK_VALVE					4	// Back valve for solution mixing
 #define	WI_VALVE					0
