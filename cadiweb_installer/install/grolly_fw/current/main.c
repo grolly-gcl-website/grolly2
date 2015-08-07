@@ -4473,6 +4473,7 @@ void wt_watering(uint16_t duration, uint8_t line_id){
 		psiOn();
 	}
 	psiOff();
+	vTaskDelay(1000);
 	close_valves();
 }
 
@@ -4509,6 +4510,8 @@ void wt_mt_add_water(uint16_t amount, uint8_t source){
 		IWDG_ReloadCounter();
 	}
 	psiOff();
+	close_valve(FWI_VALVE);
+	vTaskDelay(1000);
 	close_valves();
 }
 
@@ -4524,6 +4527,7 @@ void wt_mt_drain2level(uint16_t new_level, uint8_t drain_valve){
 		IWDG_ReloadCounter();
 	}
 	psiOff();
+	vTaskDelay(1000);
 	close_valves();
 }
 
