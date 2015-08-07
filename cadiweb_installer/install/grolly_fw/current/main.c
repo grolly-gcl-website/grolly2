@@ -944,6 +944,8 @@ void run_watering_pump(uint32_t seconds);
 void run_demo(void);
 void wt_get_water(uint8_t amount);
 
+void wt_mt_drain2level(uint16_t new_level, uint8_t drain_valve);
+
 int strlen(const char *);
 char *strrev(char *);
 char *itoa(int, char *, int);
@@ -2791,7 +2793,7 @@ void tankLevelStab(void) {
 
 
 void open_valve(uint8_t valveId){
-	if (valveId > 0 && valveId < 5) {		// [PA5-PA8]
+	if (valveId > 0 && valveId < 5) {		// [PA4-PA7]
 		GPIOA->BRR |= (1 << (valveId + 3));
 	}
 
@@ -2804,14 +2806,14 @@ void open_valve(uint8_t valveId){
 	}
 
 	else if (valveId == 12){
-		GPIOA->BRR |= (1 << 8);
+		GPIOA->BRR |= (1 << 8);			// PA8
 	}
 
 	valveFlags |= (1 << valveId); // set flag
 }
 
 void close_valve(uint8_t valveId){
-	if (valveId > 0 && valveId < 5) {		// [PA5-PA8]
+	if (valveId > 0 && valveId < 5) {		// [PA4-PA7]
 		GPIOA->BSRR |= (1 << (valveId + 3));
 	}
 
@@ -4478,11 +4480,15 @@ void wt_watering(uint16_t duration, uint8_t line_id){
 
 // get water into MixTank from the water 'source', reaching 'level' desired. Default source - :FWI
 void wt_mt_reach_level(uint16_t new_level, uint8_t source){
+	uint16_t curlevel = 0;
+	curlevel = sonar_read[MIXTANK_SONAR];
 	close_valves();
-	while (sonar_read[source] > new_level) {
+	open_valve(BACK_VALVE);
+	while (sonar_read[MIXTANK_SONAR] > new_level) {
 		open_valve(FWI_VALVE);
 		psiOn();
 		vTaskDelay(400);
+		IWDG_ReloadCounter();
 	}
 	psiOff();
 	close_valves();
@@ -4493,12 +4499,29 @@ void wt_mt_add_water(uint16_t amount, uint8_t source){
 	uint16_t curlevel = 0;
 	uint16_t new_level = 0;
 	close_valves();
-	curlevel = sonar_read[source];
+	curlevel = sonar_read[MIXTANK_SONAR];
 	new_level = curlevel - amount;	// cpunt new level to reach
-	while (sonar_read[source] > new_level) {
+	open_valve(BACK_VALVE);
+	while (sonar_read[MIXTANK_SONAR] > new_level) {
 		open_valve(FWI_VALVE);
 		psiOn();
 		vTaskDelay(400);
+		IWDG_ReloadCounter();
+	}
+	psiOff();
+	close_valves();
+}
+
+void wt_mt_drain2level(uint16_t new_level, uint8_t drain_valve){
+	uint16_t curlevel = 0;
+	close_valves();
+	curlevel = sonar_read[MIXTANK_SONAR];
+	open_valve(MTI_VALVE);
+	while (sonar_read[MIXTANK_SONAR] < new_level) {
+		open_valve(drain_valve);
+		psiOn();
+		vTaskDelay(400);
+		IWDG_ReloadCounter();
 	}
 	psiOff();
 	close_valves();
@@ -4531,6 +4554,28 @@ void run_watering_task(uint8_t pwt) {
 			//val16 = val16 + 15;
 			wt_mix_in(val16, val16_2, wt_args[4], wt_args[5]);
 			break;
+		case 105:
+			val16 = ((((uint16_t)wt_args[0]) << 8) & 0xFF00)
+					+ (((uint16_t)wt_args[1]) & 0x00FF);
+			// wt_mt_reach_level(uint16_t new_level, uint8_t source)
+			wt_mt_reach_level(val16,wt_args[2]);
+			break;
+		case 106:
+			val16 = ((((uint16_t)wt_args[0]) << 8) & 0xFF00)
+					+ (((uint16_t)wt_args[1]) & 0x00FF);
+
+			// wt_mt_add_water(uint16_t amount, uint8_t source)
+			wt_mt_add_water(val16,wt_args[2]);
+			break;
+		case 107:
+			val16 = ((((uint16_t)wt_args[0]) << 8) & 0xFF00)
+					+ (((uint16_t)wt_args[1]) & 0x00FF);
+			// void wt_mt_drain2level(uint16_t new_level, uint8_t drain_valve)
+			wt_mt_drain2level(val16,wt_args[2]);
+			break;
+
+
+
 	}
 	pending_wt = 0;
 }

@@ -71,6 +71,29 @@ if (isset($_POST['cmd'])) {
 			$packet .= chr($_POST['speed']%256);	// doser speed (percents: 40% to 100%)
 			echo PHP_EOL.$_POST['volume'].PHP_EOL.$_POST['doserid'].PHP_EOL.$_POST['speed'].PHP_EOL.$_POST['duration'];
 			break;
+
+		case 105:	// wt_mt_reach_level(uint16_t new_level, uint8_t source) call
+			$packet .= chr(5);	// packet payload size
+			$packet .= chr(105);
+			$packet .= chr(floor($_POST['new_level']/256));		// new tank level to reach HSB
+			$packet .= chr($_POST['new_level']%256);		// LSB
+			$packet .= chr($_POST['src']%256);			// source (for future versions)
+			break;
+
+		case 106:	// wt_mt_add_water(uint16_t amount, uint8_t source) call
+			$packet .= chr(5);	// packet payload size
+			$packet .= chr(106);
+			$packet .= chr(floor($_POST['amount']/256));		// new tank level to reach HSB
+			$packet .= chr($_POST['amount']%256);		// LSB
+			$packet .= chr($_POST['src']%256);			// source (for future versions)
+			break;
+		case 107:	// wt_mt_add_water(uint16_t amount, uint8_t source) call
+			$packet .= chr(5);	// packet payload size
+			$packet .= chr(107);
+			$packet .= chr(floor($_POST['new_level']/256));		// new tank level to reach HSB
+			$packet .= chr($_POST['new_level']%256);		// LSB
+			$packet .= chr($_POST['drain_valve']%256);			// source (for future versions)
+			break;
 		
 
 

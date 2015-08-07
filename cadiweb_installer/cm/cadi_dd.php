@@ -139,6 +139,35 @@ function wt_mix_in(){
 	});
 }
 
+// wt_mt_reach_level(uint16_t new_level, uint8_t source)
+function wt_mt_reach_level(){
+	var new_level = $('#wt_mtrl_newlevel').val();
+	var src = 1;	// HARDCODE
+	$.post('cm/cadi_bt_processor.php', {action: 'tx_packet', cmd: '105', new_level:new_level, src:src}, function(data){
+		
+	});
+}
+
+// wt_mt_add_water(uint16_t amount, uint8_t source)
+function wt_mt_add_water(){
+	var amount = $('#wt_mtaw_amount').val();
+	var src = 1;
+	$.post('cm/cadi_bt_processor.php', {action: 'tx_packet', cmd: '106', amount:amount, src:src}, function(data){
+		
+	});
+}
+
+
+// void wt_mt_drain2level(uint16_t new_level, uint8_t drain_valve)
+function wt_mt_drain2level(){
+	var new_level = $('#wt_dtl_newlevel').val();
+	var drain_valve = $('#wt_dtl_drain_valve').val();
+	var src = 1;	// HARDCODE
+	$.post('cm/cadi_bt_processor.php', {action: 'tx_packet', cmd: '107', new_level:new_level, drain_valve:drain_valve}, function(data){
+		
+	});
+}
+
 
 </script>
 
@@ -232,6 +261,39 @@ function wt_mix_in(){
 	<tr><td><button onClick="close_valves()">Close valves</button></td></tr>
 	
 	<tr><td>
+		<br>
+
+		...REACH WATER LEVEL...
+		<br>
+		New level (cms):<input type="text" id="wt_mtrl_newlevel" /><br>
+		<button onClick="wt_mt_reach_level()">Reach new level</button>
+		<br>
+		<br>
+
+
+		...ADD WATER...
+		<br>
+		Amount (cms):<input type="text" id="wt_mtaw_amount" /><br>
+		<button onClick="wt_mt_add_water()">Add water</button>
+		<br>
+		<br>
+
+		
+		... DRAIN TO THE LEVEL...
+		<br>
+		New level (cms):<input type="text" id="wt_dtl_newlevel" /><br>
+		<select id="wt_dtl_drain_valve">
+		<?php 
+			for ($i=0; $i<$valves_amount; $i++) {
+				echo '<option value="'.$i.'">'.$i.' - '.($_SESSION['settings_data']['valves'][$i+1]).'</option>';
+			}
+		?>
+		</select>
+		<br>
+		<button onClick="wt_mt_drain2level()">Drain</button>
+		<br>
+		<br>
+
 		<br>
 		...WATERING TASK...
 		<br>

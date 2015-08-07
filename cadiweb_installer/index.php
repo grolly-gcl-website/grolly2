@@ -55,19 +55,10 @@ $_SESSION['cadiweb_version'] = '1.0';
 	    }
 	    fclose($handle);
 	}
-		    	$svg_t3top = $_SESSION['settings_data']['watertank_top_bottom'][1];
-		    	$svg_t3btm  = $_SESSION['settings_data']['watertank_top_bottom'][2];
-
-		    	$svg_t4top = $_SESSION['settings_data']['watertank_top_bottom'][3];
-		    	$svg_t4btm  = $_SESSION['settings_data']['watertank_top_bottom'][4];
-	
-		    	/*$svg_t3top = 0;
-		    	$svg_t3btm  = 0;
-
-		    	$svg_t4top = 0;
-		    	$svg_t4btm  = 0; */
- 
-		
+	$svg_t3top = $_SESSION['settings_data']['watertank_top_bottom'][1];
+	$svg_t3btm  = $_SESSION['settings_data']['watertank_top_bottom'][2];
+    	$svg_t4top = $_SESSION['settings_data']['watertank_top_bottom'][3];
+    	$svg_t4btm  = $_SESSION['settings_data']['watertank_top_bottom'][4];		
 ?>
 
 <script>
