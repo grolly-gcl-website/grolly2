@@ -725,6 +725,13 @@ unsigned char smtx2dtx(void){
 	
 	if (TxBuffer[4]<50) {		// check if command if > than 50 or not. 0..50 need confirmations
 		pckt_id = new_packet_id(); // the last byte of packet is Packet ID
+		printf("Assigned pckt_id=");
+		printf("%d\n",pckt_id);
+	}
+	else if (TxBuffer[4]>99 && TxBuffer[4]<200) {
+		pckt_id = new_packet_id();	// same bahavior
+		printf("Assigned pckt_id=");
+		printf("%d\n",pckt_id);
 	}
 	else {
 		pckt_id = 0;	// packet_id=0 does not need ZX7 response
