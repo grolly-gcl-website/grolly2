@@ -15,10 +15,21 @@ mkdir /tmp/cadiwebtmp
 #enter cadiweb temp folder
 cd /tmp/cadiwebtmp
 
-# backup config file
+# backup Cadiweb config file
 echo 'CU> backing up Cadiweb config file'
 cp /srv/http/cm/cadi_settings /tmp/cadiwebtmp/cadi_settings
 
+#backup Grolly eeprom setttings structure file
+cp /srv/http/cm/cadi_settings_conf.csv /tmp/cadiwebtmp/cadi_settings_conf.csv
+
+# backup Grolly eeprom dump
+cp /srv/http/cm/cadi_settings_dump /tmp/cadiwebtmp/cadi_settings_dump
+
+echo 'CU> stopping CBTD service'
+systemctl cbtd.service stop
+
+echo 'CU> compiling CCD'
+gcc -lrt /srv/http/install/ccd.c -o /srv/http/install/ccd
 
 # install Git (--needed to skip reinstall if already installed)
 echo 'CU> Installing Git'
@@ -54,3 +65,12 @@ cp -rf index.php /srv/http/index.php
 # restore config backup
 echo 'CU> restoring config backup'
 cp -rf /tmp/cadiwebtmp/cadi_settings /srv/http/cm/cadi_settings
+
+# recover Grolly eeprom setttings structure file
+cp -rf /tmp/cadiwebtmp/cadi_settings_conf.csv /srv/http/cm/cadi_settings_conf.csv
+
+# recover Grolly eeprom dump
+cp -rf /tmp/cadiwebtmp/cadi_settings_dump /srv/http/cm/cadi_settings_dump
+
+
+
