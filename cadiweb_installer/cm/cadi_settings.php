@@ -75,40 +75,47 @@ function sync_conf2dump(){
 
 	// pack corresponding (from conf file adresses and types) values to settings dump file
 	foreach ($sca as $key=>$row) {
+		$pointer = 0;
+		$pntr = 0;
 		if ($row[1]==1) {
 			// pack 8 bit value
 			$addr = substr($row[0],0,4);		// 21.11.14, 4 instead of 5
 			$parity = substr($row[0],4,1);	// 0 - higher byte, 1 - lower byte
 			$pointer = ($addr)*2+$parity;
+			$pntr = $pointer;
 			$settings_dump[$pointer] = chr($sca[$key][2]);
 
-			echo 'packing 8 bit at '.$addr.' (pointer:'.$pointer.') Val='.$sca[$key][2].PHP_EOL;
+			echo 'packing 8 bit ('.$sca[$key][2].') at '.$addr.' (pointer:'.$pntr.') Val='.$sca[$key][2].PHP_EOL;
 		}
 		if ($row[1]==2) {
 			// 16 bit value pack
 			$addr = $row[0];
 			$pointer = ($addr)*2;
+			$pntr = $pointer;
 			$settings_dump[$pointer++] = chr(floor($sca[$key][2]/256));
 			$settings_dump[$pointer] = chr($sca[$key][2]%256);
-			echo 'packing 16 bit ('.(floor($sca[$key][2]/256)).' and '.($sca[$key][2]%256).') at '.$addr.' (pointer: '.$pointer.')'.PHP_EOL;
+			echo 'packing 16 bit ('.$sca[$key][2].') ('.(floor($sca[$key][2]/256)).' and '.($sca[$key][2]%256).') at '.$addr.' (pointer: '.$pntr.')'.PHP_EOL;
 		}
 		if ($row[1]==3) {
 			// 32 bit
 
 			$addr = 0;
 			$addr = $row[0];
+			$pointer = ($addr)*2;
+			$pntr = $pointer;
 			$val = 0;
 			$val = floor($sca[$key][2]/65536);
-			echo 'packing 32 (1/2) bit at '.$addr.PHP_EOL;
-			$pointer = ($addr)*2;
+			echo 'packing 32 ('.$sca[$key][2].') (1/2) bit at '.$addr.' (pointer: '.$pntr.')'.PHP_EOL;
+
 			$settings_dump[$pointer++] = chr(floor($val/256));
 			$settings_dump[$pointer++] = chr($val%256);
 
 			$addr++;
 			$val = 0;
 			$val = $sca[$key][2]%65536;
-			echo 'packing 32 (2/2) bit at '.$addr.PHP_EOL;
+			echo 'packing 32 (2/2) bit at '.$addr.' (pointer: '.$pntr.')'.PHP_EOL;
 			$pointer = ($addr)*2;
+			$pntr = $pointer;
 			$settings_dump[$pointer++] = chr(floor($val/256));
 			$settings_dump[$pointer] = chr($val%256);
 

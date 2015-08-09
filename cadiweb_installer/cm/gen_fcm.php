@@ -1,7 +1,7 @@
 <?php 
 
 include_once('cadi_settings.php');
-sync_dump2conf();
+// sync_dump2conf();
 
 	$row = 0;
 	if (($handle = fopen("cadi_settings", "r")) !== FALSE) {
@@ -103,6 +103,9 @@ while $sca is an array like
 		[3] = $description_string
 	
 */
+
+// Extract encoded Cadi Settings into PHP array
+
 function csx2sca($csx){
 	$curaddr_arr = explode("_", $csx[0]);	// get first csx line address to
 	$curaddr = $curaddr_arr[1];		// start foreach properly filling $sca
@@ -323,8 +326,8 @@ function get_wp_block($wp_id){
 				<input 
 					onChange="rx_ee_(this)" 
 					type="hidden"
-					value="'.$wp_start.'"
 					name="csx_'.$addr_wp_start.'_value"
+					value="'.$wp_start.'"
 				/>
 			</td>
 		</tr>

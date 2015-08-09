@@ -182,13 +182,13 @@ switch ($action) {
 		sleep(1);
 		echo 'rx_ee_dir completed sending '.$value.' to 0d0'.$addr;
 		break;	
-	case 'upload_csx':
+/*	case 'upload_csx':
 		// parse $params into array of values
 		$params = array();
 		parse_str($_POST['csx_data'], $params);
 		upload_csx($params);
 		sync_conf2dump();	// synchronize: config CSV-to-dump
-		break;
+		break; */
 /*	case 'download_csx':	// PHP daemon settings DL with Protobuzz v2
 		file_put_contents('daemon_cmd', 'ee2server,1500,200,');
 		break; */
@@ -239,8 +239,13 @@ function upload_csx($csx){
 		$line .= PHP_EOL;
 		$outfile .= $line;
 	}
+	
+	echo $outfile;
+
 	// put file contents into config file
+	file_put_contents('cadi_settings_conf.csv','');
 	file_put_contents('cadi_settings_conf.csv',$outfile);
+	
 	sleep(1);
 }
 

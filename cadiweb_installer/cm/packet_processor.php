@@ -328,15 +328,17 @@ if (isset($_POST['cmd'])) {
 			$description = $value_arr[3];
 			switch ($type) {
 				case 1:		// 8-bit value (ZX3,size,cmdid,addrH,addrL,parity,val,crc,paketid)
+					$addr = substr($_POST['addr'],0,4);
 					$parity = substr($_POST['addr'],4,1);	// get parity (0:Higher or 1:Lower)
-
+					echo PHP_EOL.'===== 8 bit assembly ====='.PHP_EOL;
 					$packet .= chr(6);	// payload size
 					$packet .= chr(31);	// cmdid
-					$packet .= chr(floor($_POST['addr']/256));	// address higher byte
-					$packet .= chr($_POST['addr']%256);		// address lower byte
+					$packet .= chr(floor($addr/256));	// address higher byte
+					$packet .= chr($addr%256);		// address lower byte
+					echo PHP_EOL.'===== addr ====='.$addr.PHP_EOL;
 					$packet .= chr($parity);			// 0:Higher or 1:Lower
-					$packet .= chr($value);				// value
-					
+					$packet .= chr($value%256);				// value
+					echo PHP_EOL.'===== value ====='.$_POST['value'].PHP_EOL;
 					break;
 				case 2:		// 16-bit value
 					$packet .= chr(6);	// payload size

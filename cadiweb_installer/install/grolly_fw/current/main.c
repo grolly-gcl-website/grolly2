@@ -588,7 +588,7 @@ volatile static uint8_t psi_max_speed = 0;
 #endif
 
 // Grolly 2 (S/N: 001)
-/*
+
 #define FWTANK						0
 #define MIXTANK						1
 #define FWTANK_SONAR					0
@@ -603,10 +603,10 @@ volatile static uint8_t psi_max_speed = 0;
 #define WLINE_64_VALVE					11
 #define WLINE_65_VALVE					8
 #define WLINE_66_VALVE					12
-*/
+
 
  // GROLLY 2 (002 and 003)
-#define FWTANK						0
+/* #define FWTANK						0
 #define MIXTANK						1
 #define FWTANK_SONAR					0
 #define MIXTANK_SONAR					1
@@ -621,7 +621,7 @@ volatile static uint8_t psi_max_speed = 0;
 #define WLINE_65_VALVE					2
 #define WLINE_66_VALVE					12
 
-
+*/
 
 
 
@@ -1868,13 +1868,13 @@ void run_uart_cmd(void) {
 		addr = ((((uint16_t) RxBuffer[2]) << 8) & 0xFF00)
 				+ (((uint16_t) RxBuffer[3]) & 0x00FF);
 		EE_ReadVariable(addr, &val16);
-		if (RxBuffer[4] == 0) { // higher byte received
+		if (RxBuffer[4] == 0) { // PARITY: higher byte received
 			val16 &= (uint16_t) 0x00FF;
-			val16 &= ((((uint16_t) RxBuffer[5]) << 8) & 0xFF00);
+			val16 += ((((uint16_t) RxBuffer[5]) << 8) & 0xFF00);
 			EE_WriteVariable(addr, val16);
 		} else if (RxBuffer[4] == 1) {
 			val16 &= (uint16_t) 0xFF00;
-			val16 &= ((((uint16_t) RxBuffer[5])) & ((uint16_t) 0x00FF));
+			val16 += ((((uint16_t) RxBuffer[5])) & ((uint16_t) 0x00FF));
 			EE_WriteVariable(addr, val16);
 		} else {
 			// wrong parity bit received with packet
@@ -1892,10 +1892,12 @@ void run_uart_cmd(void) {
 	case 33: // 32 bit EEPROM value write
 		addr = ((((uint16_t) RxBuffer[2]) << 8) & 0xFF00)
 				+ (((uint16_t) RxBuffer[3]) & 0x00FF);
-		val32 = ((((uint32_t) RxBuffer[4]) << 24) & 0xFF000000)
-				+ ((((uint32_t) RxBuffer[5]) << 16) & 0xFF000000)
-				+ ((((uint32_t) RxBuffer[6]) << 8) & 0xFF000000)
-				+ (((uint32_t) RxBuffer[7]) & 0x000000FF);
+	/*	val32 = ((((uint32_t) RxBuffer[4]) << 24) & 0xFF000000)
+				+ ((((uint32_t) RxBuffer[5]) << 16) & 0xFF0000)
+				+ ((((uint32_t) RxBuffer[6]) << 8) & 0xFF00)
+				+ (((uint32_t) RxBuffer[7]) & 0xFF); */
+		val32 = RxBuffer[4] * 16777216 + RxBuffer[5] * 65536 + RxBuffer[6] * 256
+								+ RxBuffer[7];
 		EE_WriteWord(addr, val32);
 		break;
 	case 34:
@@ -3633,7 +3635,14 @@ void startWp(void) {
 
  */
 
-void run_watering_program_g2(uint8_t progId) {
+
+void run_watering_program_g2(uint8_t progId){
+	 wt_watering(10, 9);	// run watering for 10 seconds on valve id 9
+
+}
+
+
+void run_watering_program_g2_old(uint8_t progId) {
 	open_valve(2);
 	vTaskDelay(200);
 	close_valve(2);
