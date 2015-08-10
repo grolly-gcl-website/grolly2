@@ -650,6 +650,24 @@ function enable_dlsettings_overlay(state){
 	}
 }
 
+
+
+
+
+
+function download_csx(type){
+	enable_dlsettings_overlay(1);
+	var interval_csxdl = $('#csxdl_interval').val();
+	clearInterval(interval_csxdl);
+	setTimeout(function(){ }, 1000);
+	$.post('cm/cadi_bt_processor.php', {action: 'dl_settings'}, function(data){
+		// alert(data);
+		var interval_csxdl = setInterval(function(){csx_dl_proc(type)},1000);	
+		$('#csxdl_interval').val(interval_csxdl);	
+	});
+}
+
+/*
 function download_csx(type){
 	enable_dlsettings_overlay(1);
 	var interval_csxdl = $('#csxdl_interval').val();
@@ -661,11 +679,37 @@ function download_csx(type){
 		$('#csxdl_interval').val(interval_csxdl);	
 	});
 }
+*/
 
+
+// running during Cadi settings download
+function csx_dl_proc(type){
+	
+	$.post('cm/cadi_bt_processor.php', {action: 'check_dl_set_status'}, function(data){
+		
+		var tmparr = data.split('v0t0n0');
+		var btdState = tmparr[1];
+		if (btdState == "1") {				// if BTDaemon is idle
+			var interval_csxdl = $('#csxdl_interval').val();
+			clearInterval(interval_csxdl); 		//, clear interval for checking status
+			if (type==0) {
+				$.post('cm/csx_get_table.php', {}, function(data){
+					$('#csxform').html(data);	//  and reload settings table
+				});
+			}
+			enable_dlsettings_overlay(0);
+		}	
+	});
+
+	
+}
+
+/*
 // running during Cadi settings download
 function csx_dl_proc(type){
 	var btdStateStr = $('#btd_state').html();
 	var btdState = btdStateStr.charAt(0);		// get BTD current status came with Cadi status CSV
+	
 	if (btdState == "0") {				// if BTDaemon is idle
 		var interval_csxdl = $('#csxdl_interval').val();
 		clearInterval(interval_csxdl); 		//, clear interval for checking status
@@ -677,6 +721,8 @@ function csx_dl_proc(type){
 		enable_dlsettings_overlay(0);
 	}
 }
+*/
+
 
 function mix_solution(){
 	var secs = $('#run_watering_secs').val();
