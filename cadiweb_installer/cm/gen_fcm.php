@@ -3,11 +3,27 @@
 include_once('cadi_settings.php');
 // sync_dump2conf();
 
+
+/*
 	$row = 0;
 	if (($handle = fopen("cadi_settings", "r")) !== FALSE) {
 	    while (($_SESSION['settings_data'][$row] = fgetcsv($handle, 1000, ",")) !== FALSE) {
 		$num = count($_SESSION['settings_data'][$row]);
 		$row++;
+	    }
+	    fclose($handle);
+	}
+
+*/
+
+
+	if (($handle = fopen("cm/cadi_settings", "r")) !== FALSE) {
+	    while (($rowarr = fgetcsv($handle, 1000, ",")) !== FALSE) {
+		$num = count($_SESSION['settings_data'][$row]);
+		if (substr($rowarr[0],0,1)!='#') {
+			$_SESSION['settings_data'][($rowarr[0])] = $rowarr;
+			$row++;
+		}
 	    }
 	    fclose($handle);
 	}
@@ -25,11 +41,28 @@ EEPROM value's bits to access.
 */
 
 function gen_flags_block($block_id){
+	global $_SESSION;
 	global $wp_block_size;
 	if ($block_id>100 && $block_id<200) {		// WP_FLAGs
 		$strct = '16,';
 		$strct .= (1575+$wp_block_size*($block_id-101));
-		$strct .= '(addr),,Line 2,Line 3,Line 4,,,';
+		
+		$strct .= '(addr),';
+		// $wlines = explode(',',$_SESSION['settings_data']['output_valves']);
+		// generim stroku vida:
+		// 	',,Line 1, Line 2, Line 3,,Line 7, Line 4, Line X,, Holo'
+		// dlja peredachi v generator blokov flagov
+		for ($i=1;$i<sizeof($_SESSION['settings_data']['valves']);$i++) {
+
+			if (strlen($_SESSION['settings_data']['valves'][$i])>1) {
+			// dobavit' kusochek stroki vida ",valve_id valve_name"
+			$vlvid = str_pad($i, 2, "0", STR_PAD_LEFT);
+			$strct .= ','.$vlvid.' '.$_SESSION['settings_data']['valves'][$i];
+
+			}
+		}
+		// $strct .= $_SESSION['settings_data']['output_valves'];
+	//	$strct .= ',,Line 1, Line 2, Line 3,,Line 7, Line 4, Line X,, Holo';
 		gen_flags($strct);
 	}
 	if ($block_id>1100 && $block_id<1200) {		// TIMERS
@@ -62,8 +95,8 @@ function gen_flags($strct){
 			break;
 
 	}
-	$valsize = 8;		// HARDCODE
-	$binstr = str_pad(decbin($value), $valsize, '0', STR_PAD_LEFT);	// get full 8bit representation of byte
+	$valsize = 16;		// HARDCODE
+	$binstr = str_pad(decbin($value), $valsize, '0', STR_PAD_LEFT);	// get full 16bit representation of 2 bytes
 	$flags_amount = strlen($binstr);
 	echo '<input type="hidden" id="val_'.$addr.'" value="'.$value.'" />';
 	for ($i=0; $i<($flags_amount); $i++) {
@@ -141,7 +174,7 @@ function get_fert_selector($fert_id){		// fill selector with fertilizer options
 		if ($i == $fert_id) {
 			echo ' selected';
 		}
-		echo ' title="'.$_SESSION['settings_data'][6][$i+1].'">'.$i.': '.$_SESSION['settings_data'][5][$i+1].'</option>';
+		echo ' title="'.$_SESSION['settings_data']['dosing_pumps'][$i+1].'">'.$i.': '.$_SESSION['settings_data']['dosers_hints'][$i+1].'</option>';
 	}
 	echo '</select>';
 }
@@ -443,7 +476,7 @@ function get_wp_block($wp_id){
 			echo '<option value="'.($fmp_selector[$fmp_key]['id']).'">
 				FMP#'.($fmp_selector[$fmp_key]['id']).' - 
 				'.$fmp_selector[$fmp_key]['doser_id'].':
-				 '.$_SESSION['settings_data'][4][($fmp_selector[$fmp_key]['doser_id']+1)].' - 
+				 '.$_SESSION['settings_data']['dosers_hints'][($fmp_selector[$fmp_key]['doser_id']+1)].' - 
 				Vol: '.$fmp_selector[$fmp_key]['dosing_time'].' - 
 				Aftermix: '.$fmp_selector[$fmp_key]['aftermix_time'].' - 
 				WPLink: '.$fmp_selector[$fmp_key]['link'].' 

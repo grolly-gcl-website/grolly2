@@ -63,6 +63,8 @@ $_SESSION['cadiweb_version'] = '1.0';
 
 <script>
 
+// replaced by rx_ee_(). Commented out 150809
+/*
 function rx_ee_bak(addr){	// CSX format data upload
 	var csx_data = $('#csxform').serialize();
 	alert('updating addr '+addr);
@@ -90,6 +92,9 @@ function rx_ee(addr){	// CSX format data upload
 }
 
 
+
+
+
 function rx_ee_this(input){	// semi-direct value upload
 	var inputName = input.name;
 	var inputData = inputName.split('_');
@@ -105,6 +110,17 @@ function rx_ee_dir(addr, value){	// direct value upload
 	});
 }
 
+*/
+
+
+
+/* accepts the <input>. The 'name' of <input> should be in format:
+ aaa_bbb_ccc, where
+	- aaa: fields group name (should not intersect with other groups if setting appeared twice)
+	- bbb: value address in eeprom
+	- ccc: something else
+the value is extracted from the 'value' property of <input>
+*/
 function rx_ee_(input){
 	var inputName = input.name;
 	var inputData = inputName.split('_');

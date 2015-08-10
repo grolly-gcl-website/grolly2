@@ -2,8 +2,10 @@
 
 ac_loads,PSI pump,,,
 ac_loads_hints,High pressure pump,,,
-valves,--, Out3 , Out5, Out2,Back Valve, -- , Out1, Out4, --, --, FWI, MTI, Out6, --, --
-# valves,--, MTI , FWI, --,Back Valve, -- , --, --, Out 5, Out 1, Out 3, Out 4, Out6, --, --
+# SN002 and up
+# valves, , Out3 , Out5, Out2,Back Valve, , Out 1, Out4, , , FWI, MTI, Out 6, , ,
+# SN001
+valves, , MTI , FWI, ,Back Valve, , , , Out 5, Out 1, Out 3, Out 4, Out 6, , ,
 valves_hints,Out 1, Out 2, Out 3, Out 4, Back Valve, Fresh Water Intake, MixTank Intake, MixTank Intake, back to MixTank valve, Main Water Supply Valve
 dosing_pumps,Doser 1,Doser 3, Doser 2, Doser 4
 dosers_hints, ,N/C,GHE FloraDuo Bloom fertilizer (2ml/sec), GHE FloraDuo Grow fertilizer (1ml/sec)
@@ -11,9 +13,15 @@ dosers_pwm_duty_cycles, 100,100,50,50
 
 # valves to display (if not full list displayed) and display order
 # S/N 001
-#display_valves,1,2,4,9,10,11,8,12
+display_valves,1,2,4,9,10,11,8,12
 # S/N 002 and up
-display_valves,11,10,4,6,3,1,7,2,12
+#display_valves,11,10,4,6,3,1,7,2,12
+
+# output vaves only for SN001
+# output_valves,9,10,11,8,12
+
+# output vaves only for SN002 and up
+output_valves,6,3,1,7,2,12
 
 # maximum and minimum levels for water tanks (minimum first, then max)
 watertank_minmax_levels,2000,100

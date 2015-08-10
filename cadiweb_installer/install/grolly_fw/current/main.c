@@ -362,7 +362,7 @@ volatile uint32_t water_counter[WFM_AMOUNT];
 #define VALVE_DISABLE	GPIOA->BSRR
 #define VALVE_ENABLE	GPIOA->BRR
 #define VALVE_SENSOR_GPIO_SHIFT		4		// valve position sensor GPIO shift
-#define VALVE_AMOUNT				4		// number of valves to process
+#define VALVE_AMOUNT				15		// number of valves to process
 #define VALVE_MOTOR_GPIO_SHIFT		11		// valve control motor GPIO out shift
 #define VALVE_CTRL_PORT			GPIOA
 #define VALVE_SENSOR_PORT			GPIOA
@@ -3636,16 +3636,113 @@ void startWp(void) {
  */
 
 
-void run_watering_program_g2(uint8_t progId){
-	 wt_watering(10, 9);	// run watering for 10 seconds on valve id 9
+void wt_add_ferts_for_wp(uint8_t progId){
+	uint8_t i=0;
+	uint16_t addr = 0;
+	uint32_t interval = 0;
+	uint32_t startime = 0;
+	uint16_t enabled = 0;
+	uint8_t rest = 0;
+	uint32_t curN = 0;
+	uint16_t n = 0;
+	uint16_t fmpLink = 0;
 
+	 for (i = 0; i < FMP_PROGRAMS_AMOUNT; i++) {
+	 			vTaskDelay(10);
+	 			wpProgress = i + 87;
+	 			addr = 0;
+	 			// count current N value
+	 			addr = WP_OFFSET + progId * WP_SIZE + WP_INTERVAL;
+	 			interval = EE_ReadWord(addr);
+	 			addr = WP_OFFSET + progId * WP_SIZE + WP_START;
+	 			startime = EE_ReadWord(addr);
+	 			vTaskDelay(100);
+	 			addr = FMP_OFFSET + i * FMP_SIZE + FMP_TRIG_FREQUENCY_SHIFT;
+	 			EE_ReadVariable(addr, &n);
+	 			vTaskDelay(100);
+	 			enabled = 0;
+	 			rest = 0;
+	 			if (n > 0) {
+	 				curN = (RTC_GetCounter() - startime) / interval;
+	 				vTaskDelay(100);
+	 				wpProgress = 200;
+	 				vTaskDelay(200);
+	 				rest = curN % (n % 256); // lower byte of 16bit of FMP_TRIG_FREQUENCY_SHIFT
+	 				enabled = 1;
+	 			} else {
+	 				enabled = 0;
+	 			}
+	 			vTaskDelay(50);
+	 			fmpLink = n / 256; // higher byte of FMP_TRIG_FREQUENCY = WP link
+	 			addr = 0;
+	 			// addr = FMP_OFFSET+i*FMP_SIZE+FMP_DOSING_PUMP_ID_SHIFT;
+	 			// EE_ReadVariable(addr, &enabled);	//
+	 			if (fmpLink == progId && enabled > 0) {
+	 				wpProgress = 99;
+	 				vTaskDelay(400);
+	 				run_fertilizer_mixer_g2(i);
+	 				wpProgress = 100 + i;
+	 				vTaskDelay(2000);
+	 			}
+	 			vTaskDelay(100);
+	 			wpProgress = 8;
+	 		}
+}
+
+#define WT_MIN_LVL_DIV	3		// divider for watering amount, to detect minimum level needed
+
+void run_watering_program_g2_new(uint8_t progId){
+	uint16_t addr = 0;
+	open_valve(MTI_VALVE);	// test for click sound
+	vTaskDelay(100);
+	close_valve(MTI_VALVE);
+
+
+	uint16_t minimum_level = 0;
+	uint16_t amount = 0;
+	// First, check if we have enough water in the MixTank
+
+	// Get the minimum water level, below which Grolly mixes up the new solution
+	minimum_level = tank_windows_bottom[MIXTANK] - (amount / WT_MIN_LVL_DIV);
+	if (sonar_read[MIXTANK_SONAR] > minimum_level) {	// make a new fert. solution for watering
+		wt_mt_add_water(amount,0);
+	}
+
+	wt_add_ferts_for_wp(progId);
+
+	// start watering then
+
+	uint32_t wpStartTs = 0;
+	wpStartTs = RTC_GetCounter();
+	wt_watering(10, 9);	// run watering for 10 seconds on valve id 9
+	addr = WP_OFFSET + progId * WP_SIZE + WP_LAST_RUN_SHIFT;
+	EE_WriteWord(addr, wpStartTs); // write last run time
 }
 
 
-void run_watering_program_g2_old(uint8_t progId) {
-	open_valve(2);
-	vTaskDelay(200);
-	close_valve(2);
+/*void open_valves(uint16_t valveFlags){
+	uint8_t i = 0;
+	uint8_t flag = 0;
+	for (i=0; i<16; i++) {
+		flag = 0;
+		flag = (valveFlags >> i) & 1;
+		if (flag == 1) {
+			open_valve(i);
+		}
+		else {
+			close_valve(i);
+		}
+
+	}
+
+} */
+
+
+void run_watering_program_g2(uint8_t progId) {
+
+
+
+
 	enableClock = 0;
 	wpProgress = 2;
 	wpStateFlags |= (1 << progId); // set active flag for this program
@@ -3713,41 +3810,9 @@ void run_watering_program_g2_old(uint8_t progId) {
 	volatile static uint8_t left = 0; // indicates how much water let to fill
 	if (fwl < (vlm / 3)) { // if current water level < than 1/3 of WP volume
 		fwl = swl - vlm; // get Final Water Level: now+WPvol
-		Lcd_clear();
-		Lcd_write_str("FW");
-		Lcd_write_16b(fwl);
-		Lcd_goto(1, 0);
-		Lcd_write_str("SW");
-		Lcd_write_16b(swl);
-		Lcd_write_str("VL");
-		Lcd_write_16b(vlm);
-		vTaskDelay(10000);
-		open_valve(FWI_VALVE); // FWI valve
-		Lcd_clear();
-		psiOn(); // enable pump for faster fill up
-		while (overTime > now) { // 5 seconds sonar should report >100% fill to close FWI valve
-			IWDG_ReloadCounter();
-			left = (uint8_t)((sonar_read[MIXTANK_SONAR] - fwl) & (0xFF));
-			if (sonar_read[MIXTANK_SONAR] >= fwl) { // more sonar read - less water
-				overTime = RTC_GetCounter() + 5;
-				open_valve(FWI_VALVE);
-			}
-			Lcd_goto(0, 0);
-			Lcd_write_str("Left=");
-			Lcd_write_digit(left / 100);
-			Lcd_write_digit(left);
-			vTaskDelay(10);
-			Lcd_goto(1, 0);
-			Lcd_write_str("Lvl=");
-			Lcd_write_16b(sonar_read[MIXTANK_SONAR]);
-			vTaskDelay(200);
-			now = RTC_GetCounter();
-			wpProgress = 5;
-			psiStab(); // stab pump pressure
-		}
-		psiOff(); // disable
-		close_valve(FWI_VALVE);
-		vTaskDelay(1000);
+		wt_mt_reach_level(fwl,0);	// reach final water level
+		vTaskDelay(200);
+		IWDG_ReloadCounter();
 		wpProgress = 6;
 
 		// mix fertilizers
@@ -3802,14 +3867,16 @@ void run_watering_program_g2_old(uint8_t progId) {
 	EE_ReadVariable(addr, &flags);
 	close_valves(); // close all valves
 	open_valve(MTI_VALVE); // MixTank intake line valve open
-	for (i = 1; i <= VALVE_AMOUNT; i++) { // open output lines
+	open_valves(flags);
+
+/*	for (i = 1; i <= VALVE_AMOUNT; i++) { // open output lines
 		if (((flags >> i) & 1) == 1) {
 			open_valve(i);
 		} else {
 			close_valve(i);
 		}
 		vTaskDelay(100);
-	}
+	} */
 	wpProgress = 10; // test
 	uint8_t srcomm = 0;
 	uint16_t tmpval = 0;
@@ -3819,11 +3886,18 @@ void run_watering_program_g2_old(uint8_t progId) {
 	addr = WP_OFFSET + progId * WP_SIZE + WP_TIMEOUT;
 	vlm = 0;
 	EE_ReadVariable(addr, &vlm);
-	overTime = RTC_GetCounter();
+
+	wt_watering_x(vlm,flags);
+
+/*	overTime = RTC_GetCounter();
 	overTime += 0x0000FFFF & ((uint32_t) vlm); // volume used to retrieve timeout
 	auto_flags |= (1 << 2); // set overpressure autosafe flag  !!!!! (psiOn())
 	auto_failures &= ~1; // reset PSI main failure flag	!!!!! (psiOn())
 	auto_failures &= ~(1 << 3); // reset PSI underpressure flag	!!!!! (psiOn())
+
+
+
+	open_valve(MTI_VALVE);	// water intake line open
 
 	now = 0;
 	// run watering
@@ -3833,16 +3907,18 @@ void run_watering_program_g2_old(uint8_t progId) {
 	vTaskDelay(30);
 	while (((auto_failures & 8) >> 3) == 0 && now < overTime) {
 		IWDG_ReloadCounter();
-		Lcd_goto(0, 0);
-		Lcd_write_str("Left: ");
-		Lcd_write_digit(wpProgress);
 		vTaskDelay(500);
-		psiStab();
+		psiOn();
 		wpProgress = (uint8_t)(overTime - now);
 		now = RTC_GetCounter();
 		vTaskDelay(50);
 	}
 	psiOff();
+
+	*/
+
+	addr = WP_OFFSET + progId * WP_SIZE + WP_LAST_RUN_SHIFT;
+	EE_WriteWord(addr, wpStartTs); // write last run time
 
 	wpProgress = 12;
 	vTaskDelay(20000); // release pressure in watering line
@@ -3850,10 +3926,9 @@ void run_watering_program_g2_old(uint8_t progId) {
 	auto_failures &= ~(1 << 3); // reset PSI failure flag
 	wpProgress = 13;
 	vTaskDelay(1000);
-	valve_init(); // close all valves
+	close_valves(); // close all valves
 
-	addr = WP_OFFSET + progId * WP_SIZE + WP_LAST_RUN_SHIFT;
-	EE_WriteWord(addr, wpStartTs); // write last run time
+
 
 	wpStateFlags &= ~(1 << progId); // sbrosit' flag
 	enableClock = 1;
@@ -3875,29 +3950,21 @@ void run_fertilizer_mixer_g2(uint8_t progId) {
 	addr = FMP_OFFSET + progId * FMP_SIZE + FMP_DOSING_PUMP_ID_SHIFT;
 	EE_ReadVariable(addr, &dosingPumpId);
 	wpProgress = 95;
-	vTaskDelay(400);
+	vTaskDelay(40);
+	IWDG_ReloadCounter();
 	addr = 0;
 	addr = FMP_OFFSET + progId * FMP_SIZE + FMP_AFTERMIX_TIME_SHIFT;
 	wpProgress = 94;
-	vTaskDelay(400);
+	vTaskDelay(40);
 	EE_ReadVariable(addr, &circulationMixingTime);
 	wpProgress = 93;
-	vTaskDelay(400);
-	dosingEndTime = RTC_GetCounter() + (uint32_t) dosingTime;
-	wpProgress = 92;
-	vTaskDelay(400);
-	enable_dosing_pump(dosingPumpId, 101); // OPASNO!!! dosingPumpId - 16-bit, while function requires 8-bit
-	wpProgress = 91;
-	vTaskDelay(400);
-	while (RTC_GetCounter() < dosingEndTime) {
-		wpProgress = 91;
-		vTaskDelay(100);
-		IWDG_ReloadCounter();
-	}
-	wpProgress = 90;
-	vTaskDelay(400);
-	mix_solution(circulationMixingTime);
-	wpProgress = 89;
+	vTaskDelay(40);
+	IWDG_ReloadCounter();
+//	dosingEndTime = RTC_GetCounter() + (uint32_t) dosingTime;
+
+	// void wt_mix_in(uint16_t duration, uint16_t vol, uint8_t doserid, uint8_t spd)
+	wt_mix_in(circulationMixingTime,dosingTime,dosingPumpId,1);
+
 	vTaskDelay(400);
 
 }
@@ -4050,8 +4117,9 @@ void watering_program_trigger(void *pvParameters) {
 	uint8_t progId = 0;
 	uint8_t enabled = 0;
 	uint8_t rules = 0;
+	uint16_t val16 = 0;
 	// close all valves
-	valve_init();
+	close_valves();
 	vTaskDelay(20000);
 	while (1) {
 
@@ -4079,7 +4147,7 @@ void watering_program_trigger(void *pvParameters) {
 			temp = 0;
 			EE_ReadVariable(addr, &temp); // watering program flags
 			vTaskDelay(500);
-			enabled = (uint8_t)(temp & 0xFF);
+			val16 = temp & 0xFFFF;
 
 			addr = WP_OFFSET + progId * WP_SIZE + WP_LAST_RUN_SHIFT;
 			lastRun = EE_ReadWord(addr);
@@ -4093,7 +4161,7 @@ void watering_program_trigger(void *pvParameters) {
 			}
 			curtime = RTC_GetCounter();
 			if ((diff > interval) && (curtime > startTime) && (curtime < endTime)
-					&& (enabled > 0) && (rules == 1)) {
+					&& (val16 > 0) &&	(rules == 1)) {
 				run_watering_program_g2(progId);
 				// wpProgress++;
 			}
@@ -4485,6 +4553,28 @@ void wt_watering(uint16_t duration, uint8_t line_id){
 	vTaskDelay(1000);
 	close_valves();
 }
+
+void wt_watering_x(uint16_t duration, uint16_t valveFlags){
+	uint32_t timeout = 0;
+	uint32_t now = 0;
+	timeout = duration;
+	timeout &= 0xFFFF;
+	timeout += RTC_GetCounter();
+	close_valves();		// close all valves before doing anything
+	open_valve(MTI_VALVE);		// open MIXTANK valve for incoming water
+	open_valves(valveFlags);		// open desired valve_id for watering out
+	now = RTC_GetCounter();
+	while (now<timeout) {
+		now = RTC_GetCounter();
+		vTaskDelay(200);
+		psiOn();
+	}
+	psiOff();
+	vTaskDelay(1000);
+	close_valves();
+}
+
+
 
 
 
