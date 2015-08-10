@@ -160,7 +160,7 @@ function update_block(addr){
 			elid = $( this ).attr('id');	// get its element id
 			elidarr = elid.split('_');	// get value addr and bit id
 			bit_id = elidarr[3];		// bit value
-			nval |= (1<<bit_id);
+			nval |= (1<<(bit_id-1));
 			//alert(index+' checked / bit_id='+bit_id+' / nval='+nval);
 		}
 	});

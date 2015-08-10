@@ -104,13 +104,16 @@ function rx_ee_this(input){	// semi-direct value upload
 	});
 }
 
+*/
+
 function rx_ee_dir(addr, value){	// direct value upload
 //	$.post('cm/cadi_bt_processor.php', {action: 'rx_ee_dir', addr:addr, value:value}, function(data){
 	$.post('cm/cadi_bt_processor.php', {action: 'tx_packet', cmd:64, addr:addr, value:value}, function(data){
+		alert(addr+'/'+value);
 	});
 }
 
-*/
+
 
 
 
@@ -126,9 +129,9 @@ function rx_ee_(input){
 	var inputData = inputName.split('_');
 	var addr = inputData[1];
 	var value = input.value;
-	alert('addr='+addr+';val='+value);
+	// alert('addr='+addr+';val='+value);
 	 $.post('cm/cadi_bt_processor.php', {action: 'tx_packet', cmd:64, addr:addr, value:value}, function(data){
-		alert(data);
+	//	alert(data);
 	});
 }
 

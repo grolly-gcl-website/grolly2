@@ -5786,6 +5786,7 @@ void printOk(void) {
 }
 
 void psiOn(void) {
+	PSI_PUMP_TIM->CCR1 = 0;		// SN002 fix
 	auto_flags |= (1 << 2); // set overpressure autosafe flag
 	auto_failures &= ~1; // reset PSI main failure flag
 	auto_failures &= ~(1 << 3); // reset PSI underpressure flag

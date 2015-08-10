@@ -56,9 +56,12 @@ function gen_flags_block($block_id){
 
 			if (strlen($_SESSION['settings_data']['valves'][$i])>1) {
 			// dobavit' kusochek stroki vida ",valve_id valve_name"
-			$vlvid = str_pad($i, 2, "0", STR_PAD_LEFT);
+			$vlvid = str_pad(($i-1), 2, "0", STR_PAD_LEFT);
 			$strct .= ','.$vlvid.' '.$_SESSION['settings_data']['valves'][$i];
 
+			}
+			else {
+				$strct .= ',';
 			}
 		}
 		// $strct .= $_SESSION['settings_data']['output_valves'];
@@ -104,7 +107,7 @@ function gen_flags($strct){
 			echo '
 				<tr>
 					<td><input type="checkbox"';
-			if (($binstr[($flags_amount-1-$i)])==1) {	// if on the 
+			if (($binstr[($flags_amount-$i)])==1) {	// if on the 
 				echo 'checked';
 			}
 			echo 		' name="" id="addr_'.$addr.'_bit_'.($i).'" /></td>
