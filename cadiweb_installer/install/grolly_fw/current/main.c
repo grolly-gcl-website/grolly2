@@ -588,7 +588,7 @@ volatile static uint8_t psi_max_speed = 0;
 #endif
 
 // Grolly 2 (S/N: 001)
-
+/*
 #define FWTANK						0
 #define MIXTANK						1
 #define FWTANK_SONAR					0
@@ -603,10 +603,10 @@ volatile static uint8_t psi_max_speed = 0;
 #define WLINE_64_VALVE					11
 #define WLINE_65_VALVE					8
 #define WLINE_66_VALVE					12
-
+*/
 
  // GROLLY 2 (002 and 003)
-/* #define FWTANK						0
+#define FWTANK						0
 #define MIXTANK						1
 #define FWTANK_SONAR					0
 #define MIXTANK_SONAR					1
@@ -620,8 +620,6 @@ volatile static uint8_t psi_max_speed = 0;
 #define WLINE_64_VALVE					7
 #define WLINE_65_VALVE					2
 #define WLINE_66_VALVE					12
-
-*/
 
 
 
@@ -763,6 +761,7 @@ volatile static uint8_t rx_pntr = 0; // packet buffer pointer
 volatile static uint8_t packet_length = 0;
 volatile static uint8_t rxm_state = 0;
 volatile static uint8_t packet_ready = 0; // packet readiness flag. reset after command execution
+volatile static wtprog = 0;					// Watering task progress indicates if Watering task is running already
 
 volatile static uint8_t runners = 0;
 
@@ -4161,13 +4160,15 @@ void watering_program_trigger(void *pvParameters) {
 			}
 			curtime = RTC_GetCounter();
 			if ((diff > interval) && (curtime > startTime) && (curtime < endTime)
-					&& (val16 > 0) &&	(rules == 1)) {
+					&& (val16 > 0) &&	(rules == 1) && wtprog == 0) {
 				run_watering_program_g2(progId);
 				// wpProgress++;
 			}
 			vTaskDelay(50);
 			if (pending_wt > 100) { // pending watering task id is being mapped to watering program id
+				wtprog = 1;
 				run_watering_task(pending_wt);
+				wtprog = 0;
 			}
 			vTaskDelay(50);
 		}
