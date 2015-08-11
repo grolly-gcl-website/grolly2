@@ -298,7 +298,7 @@ $(document).ready(function() {
 			}
 			$('#tank4_water').attr('height',t4h);
 			$('#tank4_water').attr('y',t4y);
-				var psi_offset = 6;
+				var psi_offset = -1;
 				// draw labels for tanks, displaying current level
 				$('#t3l_txt').html('2Top: '+statusArray[8]+'cm');
 				$('#t4l_txt').html('2Top: '+statusArray[9]+'cm');
@@ -667,19 +667,7 @@ function download_csx(type){
 	});
 }
 
-/*
-function download_csx(type){
-	enable_dlsettings_overlay(1);
-	var interval_csxdl = $('#csxdl_interval').val();
-	clearInterval(interval_csxdl);
-	setTimeout(function(){ }, 1000);
-	$.post('cm/cadi_bt_processor.php', {action: 'tx_packet', cmd:63}, function(data){
-		// alert(data);
-		var interval_csxdl = setInterval(function(){csx_dl_proc(type)},1000);	
-		$('#csxdl_interval').val(interval_csxdl);	
-	});
-}
-*/
+
 
 
 // running during Cadi settings download
@@ -703,25 +691,6 @@ function csx_dl_proc(type){
 
 	
 }
-
-/*
-// running during Cadi settings download
-function csx_dl_proc(type){
-	var btdStateStr = $('#btd_state').html();
-	var btdState = btdStateStr.charAt(0);		// get BTD current status came with Cadi status CSV
-	
-	if (btdState == "0") {				// if BTDaemon is idle
-		var interval_csxdl = $('#csxdl_interval').val();
-		clearInterval(interval_csxdl); 		//, clear interval for checking status
-		if (type==0) {
-			$.post('cm/csx_get_table.php', {}, function(data){
-				$('#csxform').html(data);	//  and reload settings table
-			});
-		}
-		enable_dlsettings_overlay(0);
-	}
-}
-*/
 
 
 function mix_solution(){
