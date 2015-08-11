@@ -298,6 +298,7 @@ $(document).ready(function() {
 			}
 			$('#tank4_water').attr('height',t4h);
 			$('#tank4_water').attr('y',t4y);
+				// offset for PSI gauge value
 				var psi_offset = -1;
 				// draw labels for tanks, displaying current level
 				$('#t3l_txt').html('2Top: '+statusArray[8]+'cm');

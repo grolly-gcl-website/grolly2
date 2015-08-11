@@ -3672,7 +3672,8 @@ void wt_add_ferts_for_wp(uint8_t progId){
 	 				enabled = 0;
 	 			}
 	 			vTaskDelay(50);
-	 			fmpLink = n / 256; // higher byte of FMP_TRIG_FREQUENCY = WP link
+//	 			fmpLink = (n / 256); // higher byte of FMP_TRIG_FREQUENCY = WP link
+	 			fmpLink = (n / 256) - 1; // higher byte of FMP_TRIG_FREQUENCY = WP link. -1 for assuming Link 1 will link to WP0
 	 			addr = 0;
 	 			// addr = FMP_OFFSET+i*FMP_SIZE+FMP_DOSING_PUMP_ID_SHIFT;
 	 			// EE_ReadVariable(addr, &enabled);	//
@@ -3844,7 +3845,7 @@ void run_watering_program_g2(uint8_t progId) {
 				enabled = 0;
 			}
 			vTaskDelay(50);
-			fmpLink = n / 256; // higher byte of FMP_TRIG_FREQUENCY = WP link
+			fmpLink = (n / 256) - 1; // higher byte of FMP_TRIG_FREQUENCY = WP link
 			addr = 0;
 			// addr = FMP_OFFSET+i*FMP_SIZE+FMP_DOSING_PUMP_ID_SHIFT;
 			// EE_ReadVariable(addr, &enabled);	//

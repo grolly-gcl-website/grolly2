@@ -217,7 +217,7 @@ function get_wp_ferts_array($wp_id){
 		$line['n'] = $sca_fmps[$subaddr1][2];	// N
 		$subaddr2 = ($fmpstart_offset+2).'0';
 		$line['link'] = $sca_fmps[$subaddr2][2];	// fmp2wp link
-		if ($wp_id==$line['link']) {
+		if (($wp_id+1)==$line['link']) {
 			$fmp[$m++] = $line;
 		}
 		else {

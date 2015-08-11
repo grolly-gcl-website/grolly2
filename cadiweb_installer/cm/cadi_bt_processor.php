@@ -652,6 +652,16 @@ switch ($action) {
 	case 'check_dl_set_status':
 		echo 'v0t0n0'.check_dl_set_status().'v0t0n0';
 		break;
+
+	case 'link_fmp':
+		$fmp_id = $_POST['fmp_id'];
+		$wp_id = $_POST['wp_id'];
+		$_POST['cmd'] = 64;
+		$_POST['addr'] = 17030 + (50*($fmp_id - 1));
+		$_POST['value'] = ($wp_id+1);
+		$packet = get_packet();
+		tx_packet($packet);
+		break;
 	
 
 }
@@ -665,6 +675,7 @@ function check_dl_set_status(){
 	// last modified time,next DL request time,timeout (tries)
 	$status_arr = explode(',',$status_str);
 	if ($status_arr[0]<$mtime) {	// SUCCESS: settings dump updates
+		sync_dump2conf();
 		return 1;
 	}
 	else {

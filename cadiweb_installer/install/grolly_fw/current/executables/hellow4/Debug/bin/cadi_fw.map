@@ -464,7 +464,7 @@ Discarded input sections
  .text.valve_test
                 0x00000000      0x170 ..\obj\main.o
  .text.wt_add_ferts_for_wp
-                0x00000000      0x178 ..\obj\main.o
+                0x00000000      0x17c ..\obj\main.o
  .text.run_watering_program_g2_new
                 0x00000000       0x9c ..\obj\main.o
  .text.run_fertilizer_mixer
@@ -1248,7 +1248,7 @@ Linker script and memory map
 
                 0x20002000                _eram = 0x20002000
 
-.text           0x08000000     0xce50
+.text           0x08000000     0xce60
  *(.isr_vector)
  .isr_vector    0x08000000      0x124 ..\obj\startup_stm32f10x_md_vl.o
                 0x08000000                g_pfnVectors
@@ -1536,539 +1536,539 @@ Linker script and memory map
  .text.startWp  0x08004b84       0xf4 ..\obj\main.o
                 0x08004b84                startWp
  .text.run_watering_program_g2
-                0x08004c78      0x450 ..\obj\main.o
+                0x08004c78      0x454 ..\obj\main.o
                 0x08004c78                run_watering_program_g2
  .text.run_fertilizer_mixer_g2
-                0x080050c8       0xd4 ..\obj\main.o
-                0x080050c8                run_fertilizer_mixer_g2
+                0x080050cc       0xd4 ..\obj\main.o
+                0x080050cc                run_fertilizer_mixer_g2
  .text.enable_dosing_pump
-                0x0800519c       0xfc ..\obj\main.o
-                0x0800519c                enable_dosing_pump
+                0x080051a0       0xfc ..\obj\main.o
+                0x080051a0                enable_dosing_pump
  .text.get_fertilizer
-                0x08005298       0x6c ..\obj\main.o
-                0x08005298                get_fertilizer
+                0x0800529c       0x6c ..\obj\main.o
+                0x0800529c                get_fertilizer
  .text.watering_program_trigger
-                0x08005304      0x218 ..\obj\main.o
+                0x08005308      0x218 ..\obj\main.o
  .text.effect11on
-                0x0800551c       0x70 ..\obj\main.o
-                0x0800551c                effect11on
+                0x08005520       0x70 ..\obj\main.o
+                0x08005520                effect11on
  .text.effect11off
-                0x0800558c       0x70 ..\obj\main.o
-                0x0800558c                effect11off
+                0x08005590       0x70 ..\obj\main.o
+                0x08005590                effect11off
  .text.effect12on
-                0x080055fc       0x70 ..\obj\main.o
-                0x080055fc                effect12on
+                0x08005600       0x70 ..\obj\main.o
+                0x08005600                effect12on
  .text.effect12off
-                0x0800566c       0x70 ..\obj\main.o
-                0x0800566c                effect12off
+                0x08005670       0x70 ..\obj\main.o
+                0x08005670                effect12off
  .text.effect21on
-                0x080056dc       0x54 ..\obj\main.o
-                0x080056dc                effect21on
+                0x080056e0       0x54 ..\obj\main.o
+                0x080056e0                effect21on
  .text.effect21off
-                0x08005730       0x54 ..\obj\main.o
-                0x08005730                effect21off
+                0x08005734       0x54 ..\obj\main.o
+                0x08005734                effect21off
  .text.effect_running_light
-                0x08005784       0xa0 ..\obj\main.o
-                0x08005784                effect_running_light
+                0x08005788       0xa0 ..\obj\main.o
+                0x08005788                effect_running_light
  .text.effect_running_light_rev
-                0x08005824       0xa0 ..\obj\main.o
-                0x08005824                effect_running_light_rev
+                0x08005828       0xa0 ..\obj\main.o
+                0x08005828                effect_running_light_rev
  .text.trig_valve
-                0x080058c4       0x40 ..\obj\main.o
-                0x080058c4                trig_valve
+                0x080058c8       0x40 ..\obj\main.o
+                0x080058c8                trig_valve
  .text.run_demo2
-                0x08005904       0xc0 ..\obj\main.o
-                0x08005904                run_demo2
+                0x08005908       0xc0 ..\obj\main.o
+                0x08005908                run_demo2
  .text.run_demo
-                0x080059c4      0x1ac ..\obj\main.o
-                0x080059c4                run_demo
+                0x080059c8      0x1ac ..\obj\main.o
+                0x080059c8                run_demo
  .text.wt_mixing
-                0x08005b70       0x74 ..\obj\main.o
-                0x08005b70                wt_mixing
+                0x08005b74       0x74 ..\obj\main.o
+                0x08005b74                wt_mixing
  .text.wt_mix_in
-                0x08005be4       0xc8 ..\obj\main.o
-                0x08005be4                wt_mix_in
+                0x08005be8       0xc8 ..\obj\main.o
+                0x08005be8                wt_mix_in
  .text.wt_watering
-                0x08005cac       0x78 ..\obj\main.o
-                0x08005cac                wt_watering
+                0x08005cb0       0x78 ..\obj\main.o
+                0x08005cb0                wt_watering
  .text.wt_watering_x
-                0x08005d24       0x78 ..\obj\main.o
-                0x08005d24                wt_watering_x
+                0x08005d28       0x78 ..\obj\main.o
+                0x08005d28                wt_watering_x
  .text.wt_mt_reach_level
-                0x08005d9c       0x5c ..\obj\main.o
-                0x08005d9c                wt_mt_reach_level
+                0x08005da0       0x5c ..\obj\main.o
+                0x08005da0                wt_mt_reach_level
  .text.wt_mt_add_water
-                0x08005df8       0x74 ..\obj\main.o
-                0x08005df8                wt_mt_add_water
+                0x08005dfc       0x74 ..\obj\main.o
+                0x08005dfc                wt_mt_add_water
  .text.wt_mt_drain2level
-                0x08005e6c       0x64 ..\obj\main.o
-                0x08005e6c                wt_mt_drain2level
+                0x08005e70       0x64 ..\obj\main.o
+                0x08005e70                wt_mt_drain2level
  .text.run_watering_task
-                0x08005ed0      0x158 ..\obj\main.o
-                0x08005ed0                run_watering_task
+                0x08005ed4      0x158 ..\obj\main.o
+                0x08005ed4                run_watering_task
  .text.TIM1_UP_TIM16_IRQHandler
-                0x08006028        0xc ..\obj\main.o
-                0x08006028                TIM1_UP_TIM16_IRQHandler
+                0x0800602c        0xc ..\obj\main.o
+                0x0800602c                TIM1_UP_TIM16_IRQHandler
  .text.TIM1_TRG_COM_TIM17_IRQHandler
-                0x08006034        0xc ..\obj\main.o
-                0x08006034                TIM1_TRG_COM_TIM17_IRQHandler
+                0x08006038        0xc ..\obj\main.o
+                0x08006038                TIM1_TRG_COM_TIM17_IRQHandler
  .text.EXTI9_5_IRQHandler
-                0x08006040       0xa4 ..\obj\main.o
-                0x08006040                EXTI9_5_IRQHandler
+                0x08006044       0xa4 ..\obj\main.o
+                0x08006044                EXTI9_5_IRQHandler
  .text.TIM4_IRQHandler
-                0x080060e4       0x38 ..\obj\main.o
-                0x080060e4                TIM4_IRQHandler
+                0x080060e8       0x38 ..\obj\main.o
+                0x080060e8                TIM4_IRQHandler
  .text.dht_arr_displayer
-                0x0800611c       0xd8 ..\obj\main.o
-                0x0800611c                dht_arr_displayer
+                0x08006120       0xd8 ..\obj\main.o
+                0x08006120                dht_arr_displayer
  .text.readPercentVal
-                0x080061f4      0x140 ..\obj\main.o
-                0x080061f4                readPercentVal
+                0x080061f8      0x140 ..\obj\main.o
+                0x080061f8                readPercentVal
  .text.hygroStatSettings
-                0x08006334       0x9c ..\obj\main.o
-                0x08006334                hygroStatSettings
+                0x08006338       0x9c ..\obj\main.o
+                0x08006338                hygroStatSettings
  .text.Delay_us_
-                0x080063d0       0x2c ..\obj\main.o
-                0x080063d0                Delay_us_
+                0x080063d4       0x2c ..\obj\main.o
+                0x080063d4                Delay_us_
  .text.Delay_us
-                0x080063fc       0x2c ..\obj\main.o
-                0x080063fc                Delay_us
+                0x08006400       0x2c ..\obj\main.o
+                0x08006400                Delay_us
  .text.buttonCalibration
-                0x08006428      0x328 ..\obj\main.o
-                0x08006428                buttonCalibration
+                0x0800642c      0x328 ..\obj\main.o
+                0x0800642c                buttonCalibration
  .text.displayAdcValues
-                0x08006750      0x118 ..\obj\main.o
-                0x08006750                displayAdcValues
+                0x08006754      0x118 ..\obj\main.o
+                0x08006754                displayAdcValues
  .text.display_usart_rx
-                0x08006868       0xcc ..\obj\main.o
-                0x08006868                display_usart_rx
+                0x0800686c       0xcc ..\obj\main.o
+                0x0800686c                display_usart_rx
  .text.display_usart_tx
-                0x08006934       0xd4 ..\obj\main.o
-                0x08006934                display_usart_tx
+                0x08006938       0xd4 ..\obj\main.o
+                0x08006938                display_usart_tx
  .text.saveButtonRanges
-                0x08006a08       0x44 ..\obj\main.o
-                0x08006a08                saveButtonRanges
+                0x08006a0c       0x44 ..\obj\main.o
+                0x08006a0c                saveButtonRanges
  .text.readButtonRanges
-                0x08006a4c       0x40 ..\obj\main.o
-                0x08006a4c                readButtonRanges
+                0x08006a50       0x40 ..\obj\main.o
+                0x08006a50                readButtonRanges
  .text.adcAverager
-                0x08006a8c      0x18c ..\obj\main.o
-                0x08006a8c                adcAverager
- .text.setPlug  0x08006c18       0xa4 ..\obj\main.o
-                0x08006c18                setPlug
- .text.printOk  0x08006cbc       0x2c ..\obj\main.o
-                0x08006cbc                printOk
- .text.psiOn    0x08006ce8       0x54 ..\obj\main.o
-                0x08006ce8                psiOn
- .text.psiOff   0x08006d3c       0x2c ..\obj\main.o
-                0x08006d3c                psiOff
- .text.psiStab  0x08006d68       0xd4 ..\obj\main.o
-                0x08006d68                psiStab
+                0x08006a90      0x18c ..\obj\main.o
+                0x08006a90                adcAverager
+ .text.setPlug  0x08006c1c       0xa4 ..\obj\main.o
+                0x08006c1c                setPlug
+ .text.printOk  0x08006cc0       0x2c ..\obj\main.o
+                0x08006cc0                printOk
+ .text.psiOn    0x08006cec       0x60 ..\obj\main.o
+                0x08006cec                psiOn
+ .text.psiOff   0x08006d4c       0x2c ..\obj\main.o
+                0x08006d4c                psiOff
+ .text.psiStab  0x08006d78       0xd4 ..\obj\main.o
+                0x08006d78                psiStab
  .text.timerStateTrigger
-                0x08006e3c      0x1cc ..\obj\main.o
+                0x08006e4c      0x1cc ..\obj\main.o
  .text.plugStateTrigger
-                0x08007008      0x220 ..\obj\main.o
+                0x08007018      0x220 ..\obj\main.o
  .text.plugTest
-                0x08007228       0x8c ..\obj\main.o
-                0x08007228                plugTest
+                0x08007238       0x8c ..\obj\main.o
+                0x08007238                plugTest
  .text.plugStateSet
-                0x080072b4       0x8c ..\obj\main.o
-                0x080072b4                plugStateSet
+                0x080072c4       0x8c ..\obj\main.o
+                0x080072c4                plugStateSet
  .text.EE_WriteWord
-                0x08007340       0x38 ..\obj\main.o
-                0x08007340                EE_WriteWord
+                0x08007350       0x38 ..\obj\main.o
+                0x08007350                EE_WriteWord
  .text.programRunner
-                0x08007378      0x180 ..\obj\main.o
-                0x08007378                programRunner
+                0x08007388      0x180 ..\obj\main.o
+                0x08007388                programRunner
  .text.adjust8bit
-                0x080074f8       0xac ..\obj\main.o
-                0x080074f8                adjust8bit
+                0x08007508       0xac ..\obj\main.o
+                0x08007508                adjust8bit
  .text.adjust16bit
-                0x080075a4       0xb8 ..\obj\main.o
-                0x080075a4                adjust16bit
+                0x080075b4       0xb8 ..\obj\main.o
+                0x080075b4                adjust16bit
  .text.adjust16bit_fast
-                0x0800765c       0xc8 ..\obj\main.o
-                0x0800765c                adjust16bit_fast
+                0x0800766c       0xc8 ..\obj\main.o
+                0x0800766c                adjust16bit_fast
  .text.CTimerAdjust
-                0x08007724      0x188 ..\obj\main.o
-                0x08007724                CTimerAdjust
+                0x08007734      0x188 ..\obj\main.o
+                0x08007734                CTimerAdjust
  .text.setCTimer
-                0x080078ac       0xf0 ..\obj\main.o
-                0x080078ac                setCTimer
+                0x080078bc       0xf0 ..\obj\main.o
+                0x080078bc                setCTimer
  .text.idSelector
-                0x0800799c       0x90 ..\obj\main.o
-                0x0800799c                idSelector
+                0x080079ac       0x90 ..\obj\main.o
+                0x080079ac                idSelector
  .text.setTimer
-                0x08007a2c       0xf4 ..\obj\main.o
-                0x08007a2c                setTimer
+                0x08007a3c       0xf4 ..\obj\main.o
+                0x08007a3c                setTimer
  .text.timeAdjust
-                0x08007b20      0x2d4 ..\obj\main.o
-                0x08007b20                timeAdjust
+                0x08007b30      0x2d4 ..\obj\main.o
+                0x08007b30                timeAdjust
  .text.unix2DateTime
-                0x08007df4      0x2fc ..\obj\main.o
-                0x08007df4                unix2DateTime
+                0x08007e04      0x2fc ..\obj\main.o
+                0x08007e04                unix2DateTime
  .text.DateTime2unix
-                0x080080f0      0x170 ..\obj\main.o
-                0x080080f0                DateTime2unix
+                0x08008100      0x170 ..\obj\main.o
+                0x08008100                DateTime2unix
  .text.menuSelector
-                0x08008260      0x130 ..\obj\main.o
-                0x08008260                menuSelector
+                0x08008270      0x130 ..\obj\main.o
+                0x08008270                menuSelector
  .text.RTC_GetCounter
-                0x08008390       0x24 ..\obj\main.o
-                0x08008390                RTC_GetCounter
+                0x080083a0       0x24 ..\obj\main.o
+                0x080083a0                RTC_GetCounter
  .text.RTC_SetCounter
-                0x080083b4       0x48 ..\obj\main.o
-                0x080083b4                RTC_SetCounter
- .text.RtcInit  0x080083fc       0xcc ..\obj\main.o
-                0x080083fc                RtcInit
+                0x080083c4       0x48 ..\obj\main.o
+                0x080083c4                RTC_SetCounter
+ .text.RtcInit  0x0800840c       0xcc ..\obj\main.o
+                0x0800840c                RtcInit
  .text.copy_arr
-                0x080084c8       0x58 ..\obj\main.o
-                0x080084c8                copy_arr
+                0x080084d8       0x58 ..\obj\main.o
+                0x080084d8                copy_arr
  .text.skip_button_cal
-                0x08008520       0xa4 ..\obj\main.o
-                0x08008520                skip_button_cal
+                0x08008530       0xa4 ..\obj\main.o
+                0x08008530                skip_button_cal
  .text.displayClock
-                0x080085c4      0x31c ..\obj\main.o
+                0x080085d4      0x31c ..\obj\main.o
  .text.readButtons
-                0x080088e0       0xbc ..\obj\main.o
-                0x080088e0                readButtons
- .text.AdcInit  0x0800899c      0x184 ..\obj\main.o
-                0x0800899c                AdcInit
+                0x080088f0       0xbc ..\obj\main.o
+                0x080088f0                readButtons
+ .text.AdcInit  0x080089ac      0x184 ..\obj\main.o
+                0x080089ac                AdcInit
  .text.Lcd_write_digit
-                0x08008b20      0x118 ..\obj\main.o
-                0x08008b20                Lcd_write_digit
+                0x08008b30      0x118 ..\obj\main.o
+                0x08008b30                Lcd_write_digit
  .text.int32str
-                0x08008c38      0x1cc ..\obj\main.o
-                0x08008c38                int32str
+                0x08008c48      0x1cc ..\obj\main.o
+                0x08008c48                int32str
  .text.EE_ReadWord
-                0x08008e04       0x4c ..\obj\main.o
-                0x08008e04                EE_ReadWord
+                0x08008e14       0x4c ..\obj\main.o
+                0x08008e14                EE_ReadWord
  .text.flush_lcd_buffer
-                0x08008e50       0x40 ..\obj\main.o
-                0x08008e50                flush_lcd_buffer
+                0x08008e60       0x40 ..\obj\main.o
+                0x08008e60                flush_lcd_buffer
  .text.watchdog_init
-                0x08008e90       0x44 ..\obj\main.o
-                0x08008e90                watchdog_init
+                0x08008ea0       0x44 ..\obj\main.o
+                0x08008ea0                watchdog_init
  .text.dht_power_control_init
-                0x08008ed4       0x30 ..\obj\main.o
-                0x08008ed4                dht_power_control_init
+                0x08008ee4       0x30 ..\obj\main.o
+                0x08008ee4                dht_power_control_init
  .text.power_ctrl
-                0x08008f04       0x74 ..\obj\main.o
-                0x08008f04                power_ctrl
+                0x08008f14       0x74 ..\obj\main.o
+                0x08008f14                power_ctrl
  .text.beep_overload
-                0x08008f78       0x2c ..\obj\main.o
-                0x08008f78                beep_overload
- .text.main     0x08008fa4      0x244 ..\obj\main.o
-                0x08008fa4                main
+                0x08008f88       0x2c ..\obj\main.o
+                0x08008f88                beep_overload
+ .text.main     0x08008fb4      0x244 ..\obj\main.o
+                0x08008fb4                main
  .text.loadSettings
-                0x080091e8      0x1bc ..\obj\main.o
-                0x080091e8                loadSettings
+                0x080091f8      0x1bc ..\obj\main.o
+                0x080091f8                loadSettings
  .text.Lcd_write_str
-                0x080093a4       0x7c ..\obj\main.o
-                0x080093a4                Lcd_write_str
+                0x080093b4       0x7c ..\obj\main.o
+                0x080093b4                Lcd_write_str
  .text.Lcd_goto
-                0x08009420       0x48 ..\obj\main.o
-                0x08009420                Lcd_goto
+                0x08009430       0x48 ..\obj\main.o
+                0x08009430                Lcd_goto
  .text.Lcd_clear
-                0x08009468       0x1c ..\obj\main.o
-                0x08009468                Lcd_clear
+                0x08009478       0x1c ..\obj\main.o
+                0x08009478                Lcd_clear
  .text.xTimerCreateTimerTask
-                0x08009484       0x5c ..\obj\timers.o
-                0x08009484                xTimerCreateTimerTask
+                0x08009494       0x5c ..\obj\timers.o
+                0x08009494                xTimerCreateTimerTask
  .text.xTimerGenericCommand
-                0x080094e0       0x8c ..\obj\timers.o
-                0x080094e0                xTimerGenericCommand
+                0x080094f0       0x8c ..\obj\timers.o
+                0x080094f0                xTimerGenericCommand
  .text.prvProcessExpiredTimer
-                0x0800956c       0x74 ..\obj\timers.o
+                0x0800957c       0x74 ..\obj\timers.o
  .text.prvTimerTask
-                0x080095e0       0x24 ..\obj\timers.o
+                0x080095f0       0x24 ..\obj\timers.o
  .text.prvProcessTimerOrBlockTask
-                0x08009604       0x6c ..\obj\timers.o
+                0x08009614       0x6c ..\obj\timers.o
  .text.prvGetNextExpireTime
-                0x08009670       0x48 ..\obj\timers.o
+                0x08009680       0x48 ..\obj\timers.o
  .text.prvSampleTimeNow
-                0x080096b8       0x44 ..\obj\timers.o
+                0x080096c8       0x44 ..\obj\timers.o
  .text.prvInsertTimerInActiveList
-                0x080096fc       0x84 ..\obj\timers.o
+                0x0800970c       0x84 ..\obj\timers.o
  .text.prvProcessReceivedCommands
-                0x08009780       0xfc ..\obj\timers.o
+                0x08009790       0xfc ..\obj\timers.o
  .text.prvSwitchTimerLists
-                0x0800987c       0xb8 ..\obj\timers.o
+                0x0800988c       0xb8 ..\obj\timers.o
  .text.prvCheckForValidListAndQueue
-                0x08009934       0x54 ..\obj\timers.o
+                0x08009944       0x54 ..\obj\timers.o
  .text.RCC_GetClocksFreq
-                0x08009988      0x15c ..\obj\stm32f10x_rcc.o
-                0x08009988                RCC_GetClocksFreq
+                0x08009998      0x15c ..\obj\stm32f10x_rcc.o
+                0x08009998                RCC_GetClocksFreq
  .text.RCC_AHBPeriphClockCmd
-                0x08009ae4       0x3c ..\obj\stm32f10x_rcc.o
-                0x08009ae4                RCC_AHBPeriphClockCmd
+                0x08009af4       0x3c ..\obj\stm32f10x_rcc.o
+                0x08009af4                RCC_AHBPeriphClockCmd
  .text.RCC_APB2PeriphClockCmd
-                0x08009b20       0x3c ..\obj\stm32f10x_rcc.o
-                0x08009b20                RCC_APB2PeriphClockCmd
+                0x08009b30       0x3c ..\obj\stm32f10x_rcc.o
+                0x08009b30                RCC_APB2PeriphClockCmd
  .text.RCC_APB1PeriphClockCmd
-                0x08009b5c       0x3c ..\obj\stm32f10x_rcc.o
-                0x08009b5c                RCC_APB1PeriphClockCmd
+                0x08009b6c       0x3c ..\obj\stm32f10x_rcc.o
+                0x08009b6c                RCC_APB1PeriphClockCmd
  .text.RCC_APB2PeriphResetCmd
-                0x08009b98       0x3c ..\obj\stm32f10x_rcc.o
-                0x08009b98                RCC_APB2PeriphResetCmd
+                0x08009ba8       0x3c ..\obj\stm32f10x_rcc.o
+                0x08009ba8                RCC_APB2PeriphResetCmd
  .text.RCC_APB1PeriphResetCmd
-                0x08009bd4       0x3c ..\obj\stm32f10x_rcc.o
-                0x08009bd4                RCC_APB1PeriphResetCmd
+                0x08009be4       0x3c ..\obj\stm32f10x_rcc.o
+                0x08009be4                RCC_APB1PeriphResetCmd
  .text.RCC_GetFlagStatus
-                0x08009c10       0x74 ..\obj\stm32f10x_rcc.o
-                0x08009c10                RCC_GetFlagStatus
+                0x08009c20       0x74 ..\obj\stm32f10x_rcc.o
+                0x08009c20                RCC_GetFlagStatus
  .text.RCC_ClearFlag
-                0x08009c84       0x1c ..\obj\stm32f10x_rcc.o
-                0x08009c84                RCC_ClearFlag
+                0x08009c94       0x1c ..\obj\stm32f10x_rcc.o
+                0x08009c94                RCC_ClearFlag
  .text.EXTI_Init
-                0x08009ca0       0xe4 ..\obj\stm32f10x_exti.o
-                0x08009ca0                EXTI_Init
+                0x08009cb0       0xe4 ..\obj\stm32f10x_exti.o
+                0x08009cb0                EXTI_Init
  .text.EXTI_GetITStatus
-                0x08009d84       0x48 ..\obj\stm32f10x_exti.o
-                0x08009d84                EXTI_GetITStatus
+                0x08009d94       0x48 ..\obj\stm32f10x_exti.o
+                0x08009d94                EXTI_GetITStatus
  .text.EXTI_ClearITPendingBit
-                0x08009dcc       0x1c ..\obj\stm32f10x_exti.o
-                0x08009dcc                EXTI_ClearITPendingBit
+                0x08009ddc       0x1c ..\obj\stm32f10x_exti.o
+                0x08009ddc                EXTI_ClearITPendingBit
  .text.xTaskGenericCreate
-                0x08009de8      0x19c ..\obj\tasks.o
-                0x08009de8                xTaskGenericCreate
+                0x08009df8      0x19c ..\obj\tasks.o
+                0x08009df8                xTaskGenericCreate
  .text.vTaskDelay
-                0x08009f84       0x50 ..\obj\tasks.o
-                0x08009f84                vTaskDelay
+                0x08009f94       0x50 ..\obj\tasks.o
+                0x08009f94                vTaskDelay
  .text.vTaskStartScheduler
-                0x08009fd4       0x74 ..\obj\tasks.o
-                0x08009fd4                vTaskStartScheduler
+                0x08009fe4       0x74 ..\obj\tasks.o
+                0x08009fe4                vTaskStartScheduler
  .text.vTaskSuspendAll
-                0x0800a048       0x1c ..\obj\tasks.o
-                0x0800a048                vTaskSuspendAll
+                0x0800a058       0x1c ..\obj\tasks.o
+                0x0800a058                vTaskSuspendAll
  .text.xTaskResumeAll
-                0x0800a064      0x108 ..\obj\tasks.o
-                0x0800a064                xTaskResumeAll
+                0x0800a074      0x108 ..\obj\tasks.o
+                0x0800a074                xTaskResumeAll
  .text.xTaskGetTickCount
-                0x0800a16c       0x24 ..\obj\tasks.o
-                0x0800a16c                xTaskGetTickCount
+                0x0800a17c       0x24 ..\obj\tasks.o
+                0x0800a17c                xTaskGetTickCount
  .text.vTaskIncrementTick
-                0x0800a190      0x140 ..\obj\tasks.o
-                0x0800a190                vTaskIncrementTick
+                0x0800a1a0      0x140 ..\obj\tasks.o
+                0x0800a1a0                vTaskIncrementTick
  .text.vTaskSwitchContext
-                0x0800a2d0       0xa4 ..\obj\tasks.o
-                0x0800a2d0                vTaskSwitchContext
+                0x0800a2e0       0xa4 ..\obj\tasks.o
+                0x0800a2e0                vTaskSwitchContext
  .text.vTaskPlaceOnEventList
-                0x0800a374       0x70 ..\obj\tasks.o
-                0x0800a374                vTaskPlaceOnEventList
+                0x0800a384       0x70 ..\obj\tasks.o
+                0x0800a384                vTaskPlaceOnEventList
  .text.vTaskPlaceOnEventListRestricted
-                0x0800a3e4       0x54 ..\obj\tasks.o
-                0x0800a3e4                vTaskPlaceOnEventListRestricted
+                0x0800a3f4       0x54 ..\obj\tasks.o
+                0x0800a3f4                vTaskPlaceOnEventListRestricted
  .text.xTaskRemoveFromEventList
-                0x0800a438       0xb0 ..\obj\tasks.o
-                0x0800a438                xTaskRemoveFromEventList
+                0x0800a448       0xb0 ..\obj\tasks.o
+                0x0800a448                xTaskRemoveFromEventList
  .text.vTaskSetTimeOutState
-                0x0800a4e8       0x3c ..\obj\tasks.o
-                0x0800a4e8                vTaskSetTimeOutState
+                0x0800a4f8       0x3c ..\obj\tasks.o
+                0x0800a4f8                vTaskSetTimeOutState
  .text.xTaskCheckForTimeOut
-                0x0800a524       0xa8 ..\obj\tasks.o
-                0x0800a524                xTaskCheckForTimeOut
+                0x0800a534       0xa8 ..\obj\tasks.o
+                0x0800a534                xTaskCheckForTimeOut
  .text.vTaskMissedYield
-                0x0800a5cc       0x18 ..\obj\tasks.o
-                0x0800a5cc                vTaskMissedYield
+                0x0800a5dc       0x18 ..\obj\tasks.o
+                0x0800a5dc                vTaskMissedYield
  .text.prvIdleTask
-                0x0800a5e4       0x20 ..\obj\tasks.o
+                0x0800a5f4       0x20 ..\obj\tasks.o
  .text.prvInitialiseTCBVariables
-                0x0800a604       0x6c ..\obj\tasks.o
+                0x0800a614       0x6c ..\obj\tasks.o
  .text.prvInitialiseTaskLists
-                0x0800a670       0x7c ..\obj\tasks.o
+                0x0800a680       0x7c ..\obj\tasks.o
  .text.prvCheckTasksWaitingTermination
-                0x0800a6ec       0x74 ..\obj\tasks.o
+                0x0800a6fc       0x74 ..\obj\tasks.o
  .text.prvAddCurrentTaskToDelayedList
-                0x0800a760       0x6c ..\obj\tasks.o
+                0x0800a770       0x6c ..\obj\tasks.o
  .text.prvAllocateTCBAndStack
-                0x0800a7cc       0x64 ..\obj\tasks.o
+                0x0800a7dc       0x64 ..\obj\tasks.o
  .text.prvDeleteTCB
-                0x0800a830       0x20 ..\obj\tasks.o
+                0x0800a840       0x20 ..\obj\tasks.o
  .text.xTaskGetCurrentTaskHandle
-                0x0800a850       0x20 ..\obj\tasks.o
-                0x0800a850                xTaskGetCurrentTaskHandle
+                0x0800a860       0x20 ..\obj\tasks.o
+                0x0800a860                xTaskGetCurrentTaskHandle
  .text.xTaskGetSchedulerState
-                0x0800a870       0x3c ..\obj\tasks.o
-                0x0800a870                xTaskGetSchedulerState
+                0x0800a880       0x3c ..\obj\tasks.o
+                0x0800a880                xTaskGetSchedulerState
  .text.vTaskPriorityInherit
-                0x0800a8ac       0xb4 ..\obj\tasks.o
-                0x0800a8ac                vTaskPriorityInherit
+                0x0800a8bc       0xb4 ..\obj\tasks.o
+                0x0800a8bc                vTaskPriorityInherit
  .text.vTaskPriorityDisinherit
-                0x0800a960       0x7c ..\obj\tasks.o
-                0x0800a960                vTaskPriorityDisinherit
+                0x0800a970       0x7c ..\obj\tasks.o
+                0x0800a970                vTaskPriorityDisinherit
  .text.USART_DeInit
-                0x0800a9dc       0xb8 ..\obj\stm32f10x_usart.o
-                0x0800a9dc                USART_DeInit
+                0x0800a9ec       0xb8 ..\obj\stm32f10x_usart.o
+                0x0800a9ec                USART_DeInit
  .text.USART_Init
-                0x0800aa94      0x174 ..\obj\stm32f10x_usart.o
-                0x0800aa94                USART_Init
+                0x0800aaa4      0x174 ..\obj\stm32f10x_usart.o
+                0x0800aaa4                USART_Init
  .text.USART_Cmd
-                0x0800ac08       0x40 ..\obj\stm32f10x_usart.o
-                0x0800ac08                USART_Cmd
+                0x0800ac18       0x40 ..\obj\stm32f10x_usart.o
+                0x0800ac18                USART_Cmd
  .text.USART_ReceiveData
-                0x0800ac48       0x20 ..\obj\stm32f10x_usart.o
-                0x0800ac48                USART_ReceiveData
+                0x0800ac58       0x20 ..\obj\stm32f10x_usart.o
+                0x0800ac58                USART_ReceiveData
  .text.USART_HalfDuplexCmd
-                0x0800ac68       0x40 ..\obj\stm32f10x_usart.o
-                0x0800ac68                USART_HalfDuplexCmd
+                0x0800ac78       0x40 ..\obj\stm32f10x_usart.o
+                0x0800ac78                USART_HalfDuplexCmd
  .text.USART_ClearFlag
-                0x0800aca8       0x20 ..\obj\stm32f10x_usart.o
-                0x0800aca8                USART_ClearFlag
+                0x0800acb8       0x20 ..\obj\stm32f10x_usart.o
+                0x0800acb8                USART_ClearFlag
  .text.USART_GetITStatus
-                0x0800acc8       0xb8 ..\obj\stm32f10x_usart.o
-                0x0800acc8                USART_GetITStatus
- .text.OW_Init  0x0800ad80       0x98 ..\obj\onewire.o
-                0x0800ad80                OW_Init
+                0x0800acd8       0xb8 ..\obj\stm32f10x_usart.o
+                0x0800acd8                USART_GetITStatus
+ .text.OW_Init  0x0800ad90       0x98 ..\obj\onewire.o
+                0x0800ad90                OW_Init
  .text.vListInitialise
-                0x0800ae18       0x40 ..\obj\list.o
-                0x0800ae18                vListInitialise
+                0x0800ae28       0x40 ..\obj\list.o
+                0x0800ae28                vListInitialise
  .text.vListInitialiseItem
-                0x0800ae58       0x18 ..\obj\list.o
-                0x0800ae58                vListInitialiseItem
+                0x0800ae68       0x18 ..\obj\list.o
+                0x0800ae68                vListInitialiseItem
  .text.vListInsertEnd
-                0x0800ae70       0x50 ..\obj\list.o
-                0x0800ae70                vListInsertEnd
+                0x0800ae80       0x50 ..\obj\list.o
+                0x0800ae80                vListInsertEnd
  .text.vListInsert
-                0x0800aec0       0x70 ..\obj\list.o
-                0x0800aec0                vListInsert
+                0x0800aed0       0x70 ..\obj\list.o
+                0x0800aed0                vListInsert
  .text.vListRemove
-                0x0800af30       0x50 ..\obj\list.o
-                0x0800af30                vListRemove
+                0x0800af40       0x50 ..\obj\list.o
+                0x0800af40                vListRemove
  .text.FLASH_Unlock
-                0x0800af80       0x24 ..\obj\stm32f10x_flash.o
-                0x0800af80                FLASH_Unlock
+                0x0800af90       0x24 ..\obj\stm32f10x_flash.o
+                0x0800af90                FLASH_Unlock
  .text.FLASH_ErasePage
-                0x0800afa4       0x64 ..\obj\stm32f10x_flash.o
-                0x0800afa4                FLASH_ErasePage
+                0x0800afb4       0x64 ..\obj\stm32f10x_flash.o
+                0x0800afb4                FLASH_ErasePage
  .text.FLASH_ProgramHalfWord
-                0x0800b008       0x5c ..\obj\stm32f10x_flash.o
-                0x0800b008                FLASH_ProgramHalfWord
+                0x0800b018       0x5c ..\obj\stm32f10x_flash.o
+                0x0800b018                FLASH_ProgramHalfWord
  .text.FLASH_GetBank1Status
-                0x0800b064       0x58 ..\obj\stm32f10x_flash.o
-                0x0800b064                FLASH_GetBank1Status
+                0x0800b074       0x58 ..\obj\stm32f10x_flash.o
+                0x0800b074                FLASH_GetBank1Status
  .text.FLASH_WaitForLastOperation
-                0x0800b0bc       0x44 ..\obj\stm32f10x_flash.o
-                0x0800b0bc                FLASH_WaitForLastOperation
+                0x0800b0cc       0x44 ..\obj\stm32f10x_flash.o
+                0x0800b0cc                FLASH_WaitForLastOperation
  .text.xQueueGenericReset
-                0x0800b100       0xac ..\obj\queue.o
-                0x0800b100                xQueueGenericReset
+                0x0800b110       0xac ..\obj\queue.o
+                0x0800b110                xQueueGenericReset
  .text.xQueueGenericCreate
-                0x0800b1ac       0x80 ..\obj\queue.o
-                0x0800b1ac                xQueueGenericCreate
+                0x0800b1bc       0x80 ..\obj\queue.o
+                0x0800b1bc                xQueueGenericCreate
  .text.xQueueGenericSend
-                0x0800b22c      0x140 ..\obj\queue.o
-                0x0800b22c                xQueueGenericSend
+                0x0800b23c      0x140 ..\obj\queue.o
+                0x0800b23c                xQueueGenericSend
  .text.xQueueGenericSendFromISR
-                0x0800b36c       0xc4 ..\obj\queue.o
-                0x0800b36c                xQueueGenericSendFromISR
+                0x0800b37c       0xc4 ..\obj\queue.o
+                0x0800b37c                xQueueGenericSendFromISR
  .text.xQueueGenericReceive
-                0x0800b430      0x1a0 ..\obj\queue.o
-                0x0800b430                xQueueGenericReceive
+                0x0800b440      0x1a0 ..\obj\queue.o
+                0x0800b440                xQueueGenericReceive
  .text.prvCopyDataToQueue
-                0x0800b5d0       0xb8 ..\obj\queue.o
+                0x0800b5e0       0xb8 ..\obj\queue.o
  .text.prvCopyDataFromQueue
-                0x0800b688       0x4c ..\obj\queue.o
+                0x0800b698       0x4c ..\obj\queue.o
  .text.prvUnlockQueue
-                0x0800b6d4       0x98 ..\obj\queue.o
+                0x0800b6e4       0x98 ..\obj\queue.o
  .text.prvIsQueueEmpty
-                0x0800b76c       0x2c ..\obj\queue.o
+                0x0800b77c       0x2c ..\obj\queue.o
  .text.prvIsQueueFull
-                0x0800b798       0x30 ..\obj\queue.o
+                0x0800b7a8       0x30 ..\obj\queue.o
  .text.vQueueWaitForMessageRestricted
-                0x0800b7c8       0x54 ..\obj\queue.o
-                0x0800b7c8                vQueueWaitForMessageRestricted
+                0x0800b7d8       0x54 ..\obj\queue.o
+                0x0800b7d8                vQueueWaitForMessageRestricted
  .text.pxPortInitialiseStack
-                0x0800b81c       0x54 ..\obj\port.o
-                0x0800b81c                pxPortInitialiseStack
+                0x0800b82c       0x54 ..\obj\port.o
+                0x0800b82c                pxPortInitialiseStack
  .text.SVC_Handler
-                0x0800b870       0x20 ..\obj\port.o
-                0x0800b870                SVC_Handler
+                0x0800b880       0x20 ..\obj\port.o
+                0x0800b880                SVC_Handler
  .text.prvPortStartFirstTask
-                0x0800b890       0x14 ..\obj\port.o
+                0x0800b8a0       0x14 ..\obj\port.o
  .text.xPortStartScheduler
-                0x0800b8a4       0x38 ..\obj\port.o
-                0x0800b8a4                xPortStartScheduler
+                0x0800b8b4       0x38 ..\obj\port.o
+                0x0800b8b4                xPortStartScheduler
  .text.vPortYieldFromISR
-                0x0800b8dc       0x18 ..\obj\port.o
-                0x0800b8dc                vPortYieldFromISR
+                0x0800b8ec       0x18 ..\obj\port.o
+                0x0800b8ec                vPortYieldFromISR
  .text.vPortEnterCritical
-                0x0800b8f4       0x24 ..\obj\port.o
-                0x0800b8f4                vPortEnterCritical
+                0x0800b904       0x24 ..\obj\port.o
+                0x0800b904                vPortEnterCritical
  .text.vPortExitCritical
-                0x0800b918       0x2c ..\obj\port.o
-                0x0800b918                vPortExitCritical
+                0x0800b928       0x2c ..\obj\port.o
+                0x0800b928                vPortExitCritical
  .text.PendSV_Handler
-                0x0800b944       0x3c ..\obj\port.o
-                0x0800b944                PendSV_Handler
+                0x0800b954       0x3c ..\obj\port.o
+                0x0800b954                PendSV_Handler
  .text.SysTick_Handler
-                0x0800b980       0x30 ..\obj\port.o
-                0x0800b980                SysTick_Handler
+                0x0800b990       0x30 ..\obj\port.o
+                0x0800b990                SysTick_Handler
  .text.prvSetupTimerInterrupt
-                0x0800b9b0       0x24 ..\obj\port.o
+                0x0800b9c0       0x24 ..\obj\port.o
  .text.DMA_Init
-                0x0800b9d4       0x7c ..\obj\stm32f10x_dma.o
-                0x0800b9d4                DMA_Init
- .text.DMA_Cmd  0x0800ba50       0x38 ..\obj\stm32f10x_dma.o
-                0x0800ba50                DMA_Cmd
+                0x0800b9e4       0x7c ..\obj\stm32f10x_dma.o
+                0x0800b9e4                DMA_Init
+ .text.DMA_Cmd  0x0800ba60       0x38 ..\obj\stm32f10x_dma.o
+                0x0800ba60                DMA_Cmd
  .text.DMA_GetFlagStatus
-                0x0800ba88       0x54 ..\obj\stm32f10x_dma.o
-                0x0800ba88                DMA_GetFlagStatus
+                0x0800ba98       0x54 ..\obj\stm32f10x_dma.o
+                0x0800ba98                DMA_GetFlagStatus
  .text.DMA_ClearFlag
-                0x0800badc       0x34 ..\obj\stm32f10x_dma.o
-                0x0800badc                DMA_ClearFlag
+                0x0800baec       0x34 ..\obj\stm32f10x_dma.o
+                0x0800baec                DMA_ClearFlag
  .text.NVIC_Init
-                0x0800bb10       0xc4 ..\obj\misc.o
-                0x0800bb10                NVIC_Init
+                0x0800bb20       0xc4 ..\obj\misc.o
+                0x0800bb20                NVIC_Init
  .text.pvPortMalloc
-                0x0800bbd4      0x144 ..\obj\heap_2.o
-                0x0800bbd4                pvPortMalloc
+                0x0800bbe4      0x144 ..\obj\heap_2.o
+                0x0800bbe4                pvPortMalloc
  .text.vPortFree
-                0x0800bd18       0x70 ..\obj\heap_2.o
-                0x0800bd18                vPortFree
- .text.EE_Init  0x0800bd88      0x28c ..\obj\eeprom.o
-                0x0800bd88                EE_Init
+                0x0800bd28       0x70 ..\obj\heap_2.o
+                0x0800bd28                vPortFree
+ .text.EE_Init  0x0800bd98      0x28c ..\obj\eeprom.o
+                0x0800bd98                EE_Init
  .text.EE_ReadVariable
-                0x0800c014       0x98 ..\obj\eeprom.o
-                0x0800c014                EE_ReadVariable
+                0x0800c024       0x98 ..\obj\eeprom.o
+                0x0800c024                EE_ReadVariable
  .text.EE_WriteVariable
-                0x0800c0ac       0x44 ..\obj\eeprom.o
-                0x0800c0ac                EE_WriteVariable
+                0x0800c0bc       0x44 ..\obj\eeprom.o
+                0x0800c0bc                EE_WriteVariable
  .text.EE_Format
-                0x0800c0f0       0x50 ..\obj\eeprom.o
+                0x0800c100       0x50 ..\obj\eeprom.o
  .text.EE_FindValidPage
-                0x0800c140       0x8c ..\obj\eeprom.o
+                0x0800c150       0x8c ..\obj\eeprom.o
  .text.EE_VerifyPageFullWriteVariable
-                0x0800c1cc       0xb4 ..\obj\eeprom.o
+                0x0800c1dc       0xb4 ..\obj\eeprom.o
  .text.EE_PageTransfer
-                0x0800c280      0x134 ..\obj\eeprom.o
+                0x0800c290      0x134 ..\obj\eeprom.o
  .text.sonar_init
-                0x0800c3b4       0xdc ..\obj\driver_sonar.o
-                0x0800c3b4                sonar_init
+                0x0800c3c4       0xdc ..\obj\driver_sonar.o
+                0x0800c3c4                sonar_init
  .text.sonar_ping
-                0x0800c490       0x34 ..\obj\driver_sonar.o
-                0x0800c490                sonar_ping
+                0x0800c4a0       0x34 ..\obj\driver_sonar.o
+                0x0800c4a0                sonar_ping
  .text.IWDG_WriteAccessCmd
-                0x0800c4c4       0x20 ..\obj\stm32f10x_iwdg.o
-                0x0800c4c4                IWDG_WriteAccessCmd
+                0x0800c4d4       0x20 ..\obj\stm32f10x_iwdg.o
+                0x0800c4d4                IWDG_WriteAccessCmd
  .text.IWDG_SetPrescaler
-                0x0800c4e4       0x20 ..\obj\stm32f10x_iwdg.o
-                0x0800c4e4                IWDG_SetPrescaler
+                0x0800c4f4       0x20 ..\obj\stm32f10x_iwdg.o
+                0x0800c4f4                IWDG_SetPrescaler
  .text.IWDG_SetReload
-                0x0800c504       0x20 ..\obj\stm32f10x_iwdg.o
-                0x0800c504                IWDG_SetReload
+                0x0800c514       0x20 ..\obj\stm32f10x_iwdg.o
+                0x0800c514                IWDG_SetReload
  .text.IWDG_ReloadCounter
-                0x0800c524       0x18 ..\obj\stm32f10x_iwdg.o
-                0x0800c524                IWDG_ReloadCounter
+                0x0800c534       0x18 ..\obj\stm32f10x_iwdg.o
+                0x0800c534                IWDG_ReloadCounter
  .text.IWDG_Enable
-                0x0800c53c       0x18 ..\obj\stm32f10x_iwdg.o
-                0x0800c53c                IWDG_Enable
- .text          0x0800c554       0xec c:/coocox/toolchain/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg.a(lib_a-memcpy.o)
-                0x0800c554                memcpy
- .text.memset   0x0800c640       0x9c c:/coocox/toolchain/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg.a(lib_a-memset.o)
-                0x0800c640                memset
- .text.strncpy  0x0800c6dc       0x68 c:/coocox/toolchain/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg.a(lib_a-strncpy.o)
-                0x0800c6dc                strncpy
+                0x0800c54c       0x18 ..\obj\stm32f10x_iwdg.o
+                0x0800c54c                IWDG_Enable
+ .text          0x0800c564       0xec c:/coocox/toolchain/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg.a(lib_a-memcpy.o)
+                0x0800c564                memcpy
+ .text.memset   0x0800c650       0x9c c:/coocox/toolchain/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg.a(lib_a-memset.o)
+                0x0800c650                memset
+ .text.strncpy  0x0800c6ec       0x68 c:/coocox/toolchain/bin/../lib/gcc/arm-none-eabi/4.9.3/../../../../arm-none-eabi/lib/armv7-m\libg.a(lib_a-strncpy.o)
+                0x0800c6ec                strncpy
  *(.init)
  *(.fini)
  *crtbegin.o(.ctors)
@@ -2082,42 +2082,42 @@ Linker script and memory map
  *(SORT(.dtors.*))
  *(.dtors)
  *(.rodata*)
- .rodata        0x0800c744      0x6fc ..\obj\main.o
-                0x0800c940                menuItemArray
-                0x0800cba4                fatArray
- .rodata        0x0800ce40        0x8 ..\obj\timers.o
- .rodata        0x0800ce48        0x8 ..\obj\tasks.o
+ .rodata        0x0800c754      0x6fc ..\obj\main.o
+                0x0800c950                menuItemArray
+                0x0800cbb4                fatArray
+ .rodata        0x0800ce50        0x8 ..\obj\timers.o
+ .rodata        0x0800ce58        0x8 ..\obj\tasks.o
  *(.eh_fram e*)
 
-.glue_7         0x0800ce50        0x0
+.glue_7         0x0800ce60        0x0
  .glue_7        0x00000000        0x0 linker stubs
 
-.glue_7t        0x0800ce50        0x0
+.glue_7t        0x0800ce60        0x0
  .glue_7t       0x00000000        0x0 linker stubs
 
-.vfp11_veneer   0x0800ce50        0x0
+.vfp11_veneer   0x0800ce60        0x0
  .vfp11_veneer  0x00000000        0x0 linker stubs
 
-.v4_bx          0x0800ce50        0x0
+.v4_bx          0x0800ce60        0x0
  .v4_bx         0x00000000        0x0 linker stubs
 
-.iplt           0x0800ce50        0x0
+.iplt           0x0800ce60        0x0
  .iplt          0x00000000        0x0 ..\obj\delay.o
 
-.rel.dyn        0x0800ce50        0x0
+.rel.dyn        0x0800ce60        0x0
  .rel.iplt      0x00000000        0x0 ..\obj\delay.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x0800ce50                __exidx_start = .
+                0x0800ce60                __exidx_start = .
 
 .ARM.exidx
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
-                0x0800ce50                __exidx_end = .
-                0x0800ce50                __etext = .
-                0x0800ce50                _sidata = __etext
+                0x0800ce60                __exidx_end = .
+                0x0800ce60                __etext = .
+                0x0800ce60                _sidata = __etext
 
-.data           0x20000000       0x68 load address 0x0800ce50
+.data           0x20000000       0x68 load address 0x0800ce60
                 0x20000000                __data_start__ = .
                 0x20000000                _sdata = __data_start__
  *(vtable)
@@ -2150,10 +2150,10 @@ Linker script and memory map
                 0x20000068                __data_end__ = .
                 0x20000068                _edata = __data_end__
 
-.igot.plt       0x20000068        0x0 load address 0x0800ceb8
+.igot.plt       0x20000068        0x0 load address 0x0800cec8
  .igot.plt      0x00000000        0x0 ..\obj\delay.o
 
-.bss            0x20000068     0x1760 load address 0x0800ceb8
+.bss            0x20000068     0x1760 load address 0x0800cec8
                 0x20000068                . = ALIGN (0x4)
                 0x20000068                __bss_start__ = .
                 0x20000068                _sbss = __bss_start__
@@ -2216,7 +2216,7 @@ Linker script and memory map
  *(.heap*)
                 0x200017c8                __HeapLimit = .
 
-.co_stack       0x200017c8      0x400 load address 0x0800e618
+.co_stack       0x200017c8      0x400 load address 0x0800e628
                 0x200017c8                . = ALIGN (0x8)
  *(.co_stack .co_stack.*)
  .co_stack      0x200017c8      0x400 ..\obj\startup_stm32f10x_md_vl.o
@@ -2394,7 +2394,7 @@ OUTPUT(cadi_fw.elf elf32-littlearm)
  .debug_ranges  0x00001358       0x18 ..\obj\driver_sonar.o
  .debug_ranges  0x00001370       0x38 ..\obj\stm32f10x_iwdg.o
 
-.debug_line     0x00000000     0x7d8e
+.debug_line     0x00000000     0x7d8f
  .debug_line    0x00000000      0x1d2 ..\obj\delay.o
  .debug_line    0x000001d2      0xaed ..\obj\stm32f10x_tim.o
  .debug_line    0x00000cbf       0xbd ..\obj\startup_stm32f10x_md_vl.o
@@ -2402,23 +2402,23 @@ OUTPUT(cadi_fw.elf elf32-littlearm)
  .debug_line    0x000011fc      0x1fe ..\obj\system_stm32f10x.o
  .debug_line    0x000013fa      0x4e7 ..\obj\LiquidCrystal_I2C.o
  .debug_line    0x000018e1      0x3c5 ..\obj\stm32f10x_gpio.o
- .debug_line    0x00001ca6     0x2a9a ..\obj\main.o
- .debug_line    0x00004740      0x326 ..\obj\timers.o
- .debug_line    0x00004a66      0x4ea ..\obj\stm32f10x_rcc.o
- .debug_line    0x00004f50      0x2b3 ..\obj\stm32f10x_exti.o
- .debug_line    0x00005203      0x785 ..\obj\tasks.o
- .debug_line    0x00005988      0x4a8 ..\obj\stm32f10x_usart.o
- .debug_line    0x00005e30      0x34f ..\obj\onewire.o
- .debug_line    0x0000617f      0x1c4 ..\obj\list.o
- .debug_line    0x00006343      0x4e0 ..\obj\stm32f10x_flash.o
- .debug_line    0x00006823      0x50f ..\obj\queue.o
- .debug_line    0x00006d32      0x1d1 ..\obj\port.o
- .debug_line    0x00006f03      0x312 ..\obj\stm32f10x_dma.o
- .debug_line    0x00007215      0x253 ..\obj\misc.o
- .debug_line    0x00007468      0x14d ..\obj\heap_2.o
- .debug_line    0x000075b5      0x30f ..\obj\eeprom.o
- .debug_line    0x000078c4      0x2bc ..\obj\driver_sonar.o
- .debug_line    0x00007b80      0x20e ..\obj\stm32f10x_iwdg.o
+ .debug_line    0x00001ca6     0x2a9b ..\obj\main.o
+ .debug_line    0x00004741      0x326 ..\obj\timers.o
+ .debug_line    0x00004a67      0x4ea ..\obj\stm32f10x_rcc.o
+ .debug_line    0x00004f51      0x2b3 ..\obj\stm32f10x_exti.o
+ .debug_line    0x00005204      0x785 ..\obj\tasks.o
+ .debug_line    0x00005989      0x4a8 ..\obj\stm32f10x_usart.o
+ .debug_line    0x00005e31      0x34f ..\obj\onewire.o
+ .debug_line    0x00006180      0x1c4 ..\obj\list.o
+ .debug_line    0x00006344      0x4e0 ..\obj\stm32f10x_flash.o
+ .debug_line    0x00006824      0x50f ..\obj\queue.o
+ .debug_line    0x00006d33      0x1d1 ..\obj\port.o
+ .debug_line    0x00006f04      0x312 ..\obj\stm32f10x_dma.o
+ .debug_line    0x00007216      0x253 ..\obj\misc.o
+ .debug_line    0x00007469      0x14d ..\obj\heap_2.o
+ .debug_line    0x000075b6      0x30f ..\obj\eeprom.o
+ .debug_line    0x000078c5      0x2bc ..\obj\driver_sonar.o
+ .debug_line    0x00007b81      0x20e ..\obj\stm32f10x_iwdg.o
 
 .debug_str      0x00000000     0x5dd1
  .debug_str     0x00000000      0x1b7 ..\obj\delay.o

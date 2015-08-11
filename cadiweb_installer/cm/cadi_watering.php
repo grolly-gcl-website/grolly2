@@ -174,7 +174,9 @@ function update_block(addr){
 
 function link_fmp(wp_id){
 	var fmp_id = $('#wp_'+wp_id+'_link_selector').val();
-	alert(fmp_id);
+	$.post('cm/cadi_bt_processor.php', {action: 'link_fmp', fmp_id:fmp_id, wp_id:wp_id}, function(data){
+
+	});
 }
 
 
