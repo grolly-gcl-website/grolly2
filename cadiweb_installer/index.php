@@ -726,7 +726,7 @@ function mix_solution(){
 <!--<li><a href="cm/cadi_dd.php">Direct drive</a></li> -->
 </ul>
 
-<div id="csv_string">csv_string here</div>
+<div id="csv_string"></div>
 
 <div class="ral">
 <b id="btd_state">BTD state</b>
