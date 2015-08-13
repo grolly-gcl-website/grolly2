@@ -543,6 +543,7 @@ function status_bin2csv($statbin){
 		$dht[1] = ord($last_packet[11]);
 		$dht[2] = ord($last_packet[12]);
 		$dht[3] = ord($last_packet[13]);
+		$ph1_adc_val = (ord($last_packet[22])*256) + ord($last_packet[23]);
 		// Sonar data
 		$sonar_read[0] = ord($last_packet[18])+ord($last_packet[19])*265;		// First sonar lower and higher bytes
 		$sonar_read[1] = ord($last_packet[20])+ord($last_packet[21])*265;		// First sonar lower and higher bytes
@@ -580,6 +581,8 @@ function status_bin2csv($statbin){
 			$statarr['auto_failures'] = ord($last_packet[37]);
 			$statarr['runners'] = ord($last_packet[30]);
 			$statarr['psi_state'] = ord($last_packet[33]);
+			$statarr['ph1_adc_val'] = $ph1_adc_val;
+
 			// prepare array for CSV
 			$tofile[0] = $cadi_time;
 			$tofile[1] = $statarr['dht']['temp'];
@@ -602,7 +605,11 @@ function status_bin2csv($statbin){
 			$tofile[18] = $statarr['wpProgress'];
 			$tofile[19] = $statarr['auto_failures'];
 			$tofile[20] = $statarr['runners'];
-			$tofile[21] = $statarr['psi_state'];	
+			$tofile[21] = $statarr['psi_state'];
+			$tofile[22] = $statarr['ph1_adc_val'];	
+			$tofile[23] = $statarr['ph1_adc_val'];
+			$tofile[24] = $statarr['ph1_adc_val'];
+			$tofile[25] = $statarr['ph1_adc_val'];
 			
 			$csv_string = implode(",", $tofile);
 

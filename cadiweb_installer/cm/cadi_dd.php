@@ -87,22 +87,7 @@ function plugStateSet(plug, state){
 	});  
 }
 
-function enable_dosing_pump(pumpId, state){
-	$.post('cm/cadi_bt_processor.php', {action: 'tx_packet', cmd: '9', pump_id:pumpId, state:state}, function(data){
-		cadi_list_rfcomms();
-//		alert(data);
-	});  
-}
 
-function run_doser_for(){
-	var doserId = $('#fert_selector').val();
-	var speed = $('#doser_speed_'+doserId).val();
-	var amount = $('#fert_amount').val();
-	alert('Going to add fertilizer '+doserId+' within '+amount+' seconds @ the speed '+speed);
-	$.post('cm/cadi_bt_processor.php', {action: 'tx_packet', cmd: '9', pump_id:doserId, amount:amount, speed:speed}, function(data){
-//		alert(data);
-	}); 
-}
 
 function close_valves(){
 	alert('Closing ALL valves');
@@ -325,7 +310,7 @@ function wt_mt_drain2level(){
 		Volume (seconds):<input type="text" id="wt_mixin_volume" /><br>
 		doser:
 		<?php
-			echo '<select id="fert_selector">';
+			echo '<select id="wt_mixin_doserid">';
 			$dosers_amount = 4;
 			for ($i=0; $i<$dosers_amount; $i++) {
 				echo '

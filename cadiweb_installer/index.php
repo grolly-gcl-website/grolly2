@@ -196,6 +196,8 @@ $(document).ready(function() {
 		svg.text(140, 515, 'Temp',{fill: 'green', strokeWidth: 0, id:'cadi_temp'});
 		svg.text(140, 535, 'rH',{fill: 'blue', strokeWidth: 0, id:'cadi_rh'});
 
+		svg.text(140, 565, 'pH',{fill: 'red', strokeWidth: 0, id:'ph1_adc_val'});
+
 		svg.text(635, 120, 'B',{fill: 'green', strokeWidth: 0, id:'blooml'});
 		svg.text(635, 200, 'G',{fill: 'green', strokeWidth: 0, id:'growl'});
 
@@ -248,6 +250,10 @@ $(document).ready(function() {
 				$('#cadi_temp').html('&nbsp;T: '+temp+'C');
 				$('#cadi_rh').html('rH: '+rh+'%');
 
+				var ph1_adc_val = data;
+				//$('#csv_string').html(data);
+				
+
 				var wpProgress = statusArray[18];
 				$('#tf1').html(wpProgress);
 				var auto_failures = statusArray[19];
@@ -280,6 +286,8 @@ $(document).ready(function() {
 			$('#tank3_water').attr('height',t3h);
 			$('#tank3_water').attr('y',t3y);
 
+	
+			// $('#ph1_adc_val').html('&nbsp;pH: '+ph1_adc_val);
 
 
 				// tank 4 water lvl redraw
@@ -717,6 +725,9 @@ function mix_solution(){
 <li><a href="cm/cadi_advanced.php">Advanced</a></li>
 <!--<li><a href="cm/cadi_dd.php">Direct drive</a></li> -->
 </ul>
+
+<div id="csv_string">csv_string here</div>
+
 <div class="ral">
 <b id="btd_state">BTD state</b>
 <button onClick="download_csx(1)">Reload Cadi Settings</button>

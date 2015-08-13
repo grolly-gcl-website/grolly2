@@ -474,7 +474,7 @@ function get_wp_block($wp_id){
 		echo '</table>';
 		
 		echo '<br>Link fertilizer<br>';
-		echo '<select id="wp_'.$wp_id.'_link_selector">';
+		echo '<select onChange="" id="wp_'.$wp_id.'_link_selector">';
 		foreach($fmp_selector as $fmp_key=>$fmp) {
 			echo '<option value="'.($fmp_selector[$fmp_key]['id']).'">
 				FMP#'.($fmp_selector[$fmp_key]['id']).' - 
