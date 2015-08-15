@@ -531,7 +531,9 @@ switch ($action) {
 		//stream_status(0);	// stop pinging cadi
 		//usleep(250000);		// delay 150ms to ensure, ping stopped
 		$packet4sm = get_packet();
-		tx_packet($packet4sm);
+		for ($i=0; $i<4;$i++) {		// repeat packet send N times !!!
+			tx_packet($packet4sm);
+		}
 
 		break;
 	case 'rfcomm_scan':

@@ -19,7 +19,7 @@
   */
 /* Includes ------------------------------------------------------------------*/
 
-// #define USE_LCD
+#define USE_LCD
 
 #include "stm32f10x.h"
 /* Define to prevent recursive inclusion -------------------------------------*/
@@ -104,7 +104,7 @@
 #define I2C_DIRECTION_TX 0
 #define I2C_DIRECTION_RX 1
 
-#define OwnAddress1 0x32
+#define OwnAddress1 0x30
 #define OwnAddress2 0x28
 
 

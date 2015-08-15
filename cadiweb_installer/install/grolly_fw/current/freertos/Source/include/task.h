@@ -494,6 +494,7 @@ void vTaskDelete( xTaskHandle pxTaskToDelete ) PRIVILEGED_FUNCTION;
  * \ingroup TaskCtrl
  */
 void vTaskDelay( portTickType xTicksToDelay ) PRIVILEGED_FUNCTION;
+
 /**
  * task. h
  * <pre>void vTaskDelayUntil( portTickType *pxPreviousWakeTime, portTickType xTimeIncrement );</pre>

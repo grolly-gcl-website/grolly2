@@ -6,9 +6,18 @@
 #include "LiquidCrystal_I2C.h"
 #include "I2CRoutines.h"
 
-uint8_t Buffer_Tx1[4] = {0x5, 0x6,0x8,0xA};
+
+uint8_t Buffer_Tx1[7] = {0x5, 0x6,0x8,0xA, 0x6,0x8,0xA};
+uint8_t Buffer_Tx2[7] = {0x5, 0x6,0x8,0xA, 0x6,0x8,0xA};
+
+
+
+uint8_t Buffer_Rx1[7] = {0x5, 0x6,0x8,0xA, 0x6,0x8,0xA};
+uint8_t Buffer_Rx2[7] = {0x5, 0x6,0x8,0xA, 0x6,0x8,0xA};
+
 
 uint8_t lcd_bl = 0;				// lcd backlight flag
+
 
 
 
@@ -62,53 +71,33 @@ void LCDI2C_init(uint8_t lcd_Addr,uint8_t lcd_cols,uint8_t lcd_rows)
 
 void LCDI2C_simple_send(uint8_t val, uint8_t mode){
 	Buffer_Tx1[0] = 0;
-#ifdef LCD_I2C_MJKDZ
-	Buffer_Tx1[0] = lcd_bl | mode | En | (val & 0x0F);
-#endif
+
 #ifdef LCD_I2C_DFROBOT
 	Buffer_Tx1[0] = lcd_bl | mode | En | ((val<<4) & 0xF0);
 #endif
+
+#ifdef USE_LCD
 	I2C_Master_BufferWrite(I2C1, Buffer_Tx1[0],1,Interrupt, LCD_I2C_ADDR);
 
-	Delay_us(500);
-
-	// e_0;
-#ifdef LCD_I2C_MJKDZ
-	Buffer_Tx1[0] =  lcd_bl | mode | (val & 0x0F);
+	Delay_us(100);
 #endif
+
+
 #ifdef LCD_I2C_DFROBOT
 	Buffer_Tx1[0] =  lcd_bl | mode | ((val<<4) & 0xF0);
 #endif
-		I2C_Master_BufferWrite(I2C1, Buffer_Tx1[0],1,Interrupt, LCD_I2C_ADDR);
+#ifdef USE_LCD
+	I2C_Master_BufferWrite(I2C1, Buffer_Tx1[0],1,Interrupt, LCD_I2C_ADDR);
 	Delay_us(100);
+#endif
 }
 
 // mode - command (0) or data (1)
 void LCDI2C_send(uint8_t val, uint8_t mode)
 {
 	Buffer_Tx1[0] = 0;
-#ifdef LCD_I2C_MJKDZ
-	Delay_us(7);
-	Buffer_Tx1[0] = En | mode |((val>>4) & 0x0F);
-	I2C_Master_BufferWrite(I2C1, Buffer_Tx1[0],1,Interrupt, LCD_I2C_ADDR);
-	Delay_us(2);
 
-	// e_0;
-	Buffer_Tx1[0] = mode |((val>>4) & 0x0F);
-		I2C_Master_BufferWrite(I2C1, Buffer_Tx1[0],1,Interrupt, LCD_I2C_ADDR);
-	Delay_us(2);
-
-	Buffer_Tx1[0] = En| mode |(val & 0x0F);
-	I2C_Master_BufferWrite(I2C1, Buffer_Tx1[0],1,Interrupt, LCD_I2C_ADDR);
-	Delay_us(2);
-
-	// e_0;
-	Buffer_Tx1[0] =  mode |(val & 0x0F);
-		I2C_Master_BufferWrite(I2C1, Buffer_Tx1[0],1,Interrupt, LCD_I2C_ADDR);
-	Delay_us(10);
-#endif
-
-#ifdef LCD_I2C_DFROBOT
+#ifdef USE_LCD
 	Delay_us(7);
 	Buffer_Tx1[0] = lcd_bl | En | mode |(val & 0xF0);
 	I2C_Master_BufferWrite(I2C1, Buffer_Tx1[0],1,Interrupt, LCD_I2C_ADDR);
@@ -160,61 +149,35 @@ void LCDI2C_begin(uint8_t cols, uint8_t lines) {//, uint8_t dotsize) {
 
 
 	// Now we pull both RS and R/W low to begin commands
-//	LCDI2C_expanderWrite(lcdi2c.backlightval);	// reset expanderand turn backlight off (Bit 8 =1)
-	Delay(1000);
+//	LCDI2C_expanderWrite(lcdi2c.backlightval);	// reset expander and turn backlight off (Bit 8 =1)
+	Delay(50);
 //	Buffer_Tx1[0] = 0;
-#ifdef LCD_I2C_MJKDZ
-	Buffer_Tx1[0] = LCD_BACKLIGHT | En;
-	I2C_Master_BufferWrite(I2C1, Buffer_Tx1[0],1,Interrupt, LCD_I2C_ADDR);
-  	//put the LCD into 4 bit mode
-	// this is according to the hitachi HD44780 datasheet
-	// figure 24, pg 46
 
-	// next display function set 4 bit
-	LCDI2C_simple_send(0x02,0);
-	Delay_us(10000);	// stable 24
-
-	// next display function set 4 bit
-	LCDI2C_simple_send(0x02,0);
-	Delay_us(1000);	// stable 24
-
-	// next display function set 4 bit
-	LCDI2C_simple_send(0x0C,0);	// function set 2 lines, 5x8
-	Delay_us(500);
-	LCDI2C_simple_send(0x00,0);	// blinking cursor
-	LCDI2C_simple_send(0x0C,0);	// blinking cursor
-	Delay_us(100);
-//	LCDI2C_send(90, Rs);
-	Delay_us(4000);	// stable 24
-	LCDI2C_command(0x20 | 0x08);
-#endif
-
-#ifdef LCD_I2C_DFROBOT
+#ifdef USE_LCD
 	Buffer_Tx1[0] = 0;
-	Buffer_Tx1[0] = LCD_BACKLIGHT | En;
-	I2C_Master_BufferWrite(I2C1, Buffer_Tx1[0],1,Interrupt, LCD_I2C_ADDR);
-  	//put the LCD into 4 bit mode
-	// this is according to the hitachi HD44780 datasheet
-	// figure 24, pg 46
-	lcd_bl = LCD_BACKLIGHT;
-	// next display function set 4 bit
-	LCDI2C_simple_send(0x02,0);
-	Delay_us(10000);	// stable 24
+		Buffer_Tx1[0] = LCD_BACKLIGHT | En;
+		I2C_Master_BufferWrite(I2C1, Buffer_Tx1[0],1,Interrupt, LCD_I2C_ADDR);
+	  	//put the LCD into 4 bit mode
+		// this is according to the hitachi HD44780 datasheet
+		// figure 24, pg 46
+		lcd_bl = LCD_BACKLIGHT;
+		// next display function set 4 bit
+		LCDI2C_simple_send(0x02,0);
+		Delay_us(50);	// stable
 
-	// next display function set 4 bit
-	LCDI2C_simple_send(0x02,0);
-	Delay_us(1000);	// stable 24
+		// next display function set 4 bit
+		LCDI2C_simple_send(0x02,0);
+		Delay_us(50);	// stable
 
-	// next display function set 4 bit
-	LCDI2C_simple_send(0x08,0);	// function set 2 lines, 5x8
-	Delay_us(500);
-	LCDI2C_simple_send(0x00,0);	// blinking cursor
-	LCDI2C_simple_send(0x0C,0);	// blinking cursor
-	Delay_us(100);
-//	LCDI2C_send(90, Rs);
-	Delay_us(4000);	// stable 24
-//	LCDI2C_command(0x20 | 0x08);
-
+		// next display function set 4 bit
+		LCDI2C_simple_send(0x08,0);	// function set 2 lines, 5x8
+		Delay_us(50);
+		LCDI2C_simple_send(0x00,0);	// blinking cursor
+		LCDI2C_simple_send(0x0C,0);	// blinking cursor
+		Delay_us(50);
+	//	LCDI2C_send(90, Rs);
+		Delay_us(50);	// stable 24
+	//	LCDI2C_command(0x20 | 0x08);
 #endif
 
 
@@ -400,6 +363,7 @@ void LCDI2C_write4bits(uint8_t value) {
 volatile static uint8_t expandertmp[1] = {0x5};
 
 void LCDI2C_expanderWrite(uint8_t _data){
+#ifdef USE_LCD
 	//uint8_t expandertmp[0];
 	// uint8_t _revdata = _data&(1<<0)*8 + _data&(1<<1)*4 + _data&(1<<2)*2 + _data&(1<<3)*1;
 	Buffer_Tx1[0] = _data | lcdi2c.backlightval;
@@ -407,6 +371,7 @@ void LCDI2C_expanderWrite(uint8_t _data){
 //	I2C_WriteData(I2C1, (int)(_data) | lcdi2c.backlightval);  //printIIC((int)(_data) | _backlightval);
 //	I2C_GenerateSTOP(I2C1, ENABLE); //Wire.endTransmission();
 	I2C_Master_BufferWrite(I2C1, Buffer_Tx1[0],1,Interrupt, LCD_I2C_ADDR);
+#endif
 }
 
 

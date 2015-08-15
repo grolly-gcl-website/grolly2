@@ -28,6 +28,8 @@
 #define LCD_ENTRYSHIFTINCREMENT 0x01
 #define LCD_ENTRYSHIFTDECREMENT 0x00
 
+// #define USE_LCD	// the same define should be enabled in main.c
+
 // flags for display on/off control
 #define LCD_DISPLAYON 0x04
 #define LCD_DISPLAYOFF 0x00
@@ -78,7 +80,8 @@
 #endif
 
 
-// extern uint8_t Buffer_Tx1[4];
+extern uint8_t Buffer_Tx1[7];
+extern uint8_t Buffer_Tx2[7];
 
 /*#define En 0x04  // Enable bit
 #define Rw 0x02  // Read/Write bit

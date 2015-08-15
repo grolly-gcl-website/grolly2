@@ -563,6 +563,30 @@ void I2C_Slave_BufferReadWrite(I2C_TypeDef* I2Cx,I2C_ProgrammingModel Mode)
 
 }
 
+
+
+
+
+
+// http://electronics.stackexchange.com/questions/65719/i2c-slave-address-not-acknowledged-sometimes
+void terminate_i2c(void){
+	uint8_t i = 0;
+	uint8_t sda = 0;
+	sda = (GPIOB->IDR) & (1 << 11);	// test for SDA low
+	if (sda == 0) {
+		GPIOB->BSRR |= (1 << 10);	// clock high
+		Delay_us_(5);
+		for (i=0;i<10;i++) {
+			GPIOB->BRR |= (1 << 10);	// clock low
+			Delay_us_(5);
+			GPIOB->BSRR |= (1 << 10);	// clock high
+			Delay_us_(5);
+		}
+	}
+
+
+}
+
 /**
 * @brief  Initializes peripherals: I2Cx, GPIO, DMA channels .
   * @param  None
@@ -601,16 +625,40 @@ void I2C_LowLevel_Init(I2C_TypeDef* I2Cx)
 
     {
 
+
+
+    	// Configure PB0-2 pins as input pull-down for terminating possibly pending I2C connections
+    	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_11;
+    	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
+    	GPIO_Init(GPIOB, &GPIO_InitStructure);
+
+    	// SCL as Output
+    	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10;
+    	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+    	GPIO_Init(GPIOB, &GPIO_InitStructure);
+
+
+    	terminate_i2c();
+
+
+
+
         /* I2C2 clock enable */
         RCC_APB1PeriphClockCmd(RCC_APB1Periph_I2C2, ENABLE);
         /* I2C1 SDA and SCL configuration */
-        GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10;
+        GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10;		// SCL
         GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
         GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_OD;
         GPIO_Init(GPIOB, &GPIO_InitStructure);
 
-        GPIO_InitStructure.GPIO_Pin = GPIO_Pin_11;
-        GPIO_Init(GPIOB, &GPIO_InitStructure);
+        GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_OD;
+        GPIO_InitStructure.GPIO_Pin = GPIO_Pin_11;		// SDA
+          GPIO_Init(GPIOB, &GPIO_InitStructure);
+
+
+
+
+
 
         /* Enable I2C2 reset state */
         RCC_APB1PeriphResetCmd(RCC_APB1Periph_I2C2, ENABLE);
@@ -626,7 +674,7 @@ void I2C_LowLevel_Init(I2C_TypeDef* I2Cx)
     I2C_InitStructure.I2C_AcknowledgedAddress = I2C_AcknowledgedAddress_7bit;
     I2C_InitStructure.I2C_ClockSpeed = 400000;
     I2C_Init(I2C1, &I2C_InitStructure);
-    I2C_InitStructure.I2C_OwnAddress1 = 0x12;
+    I2C_InitStructure.I2C_OwnAddress1 = 0x10;
     I2C_Init(I2C2, &I2C_InitStructure);
 
     if (I2Cx == I2C1)

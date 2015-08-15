@@ -1,7 +1,7 @@
 /*
  *  Use this code free of charge, but leave this text box here,
  *  This code is distributed "as is" with no warranties.
- *  https://github.com/plantalog/ is main repository hub for Cadi project.
+ *  https://github.com/grolly-gcl-website/grolly2 is main repository hub for Cadi project.
  *
  *	27.08.2013 changed the virtaddvartab usage to copying the whole row or variables 0x05C0-0x0679
  *
@@ -9,9 +9,9 @@
  */
 
 
-#include "stm32f10x.h"
 
-// #include "main.h"
+#include "stm32f10x_conf.h"
+#include "stm32f10x.h"
 #include "stm32f10x_it.h"
 #include "stm32f10x_gpio.h"
 #include "stm32f10x_rcc.h"
@@ -19,7 +19,6 @@
 #include "misc.h"
 #include "stm32f10x_dma.h"
 #include "stm32f10x_exti.h"
-#include "stm32f10x_conf.h"
 #include "stm32f10x_usart.h"
 #include "stm32f10x_iwdg.h"
 #include "stm32f10x_i2c.h"
@@ -33,8 +32,8 @@
 //#include "ff9a/src/ff.h"
 #include "driver_sonar.h"
 #include "LiquidCrystal_I2C.h"
-#include "onewire.h"
 // #include "dht22.h"
+
 
 #define PROTOBUZZZ3			// use Protobuzzz v3 communications
 #define GROLLY_VER		2	// Grolly version (different piping)
@@ -396,7 +395,7 @@ volatile static uint8_t rx_packet_crc = 0; // RxBuffer and ZXn packet header CRC
 // DRIVER: Digital Temperature and Humidity sensor DHT22
 
 #define CADI_MB
-// #define USE_LCD					// the same define should be enabled in LiquidCrystal_I2C.c
+#define USE_LCD					// the same define should be enabled in LiquidCrystal_I2C.c
 
 // #define LCD_I2C_MJKDZ				// use mjkdz I2C expander for LCD
 #define LCD_I2C_DFROBOT			// use DFRobot I2C expander for LCD
@@ -587,42 +586,49 @@ volatile static uint8_t psi_max_speed = 0;
  #define MIXING_PUMP					0		// doser MOSFET on T8 */
 #endif
 
+
 // Grolly 2 (S/N: 001)
 
-#define FWTANK						0
-#define MIXTANK						1
-#define FWTANK_SONAR					0
-#define MIXTANK_SONAR					1
-#define	MTI_VALVE					1	// MixTank intake valve
-#define FWI_VALVE					2	// Fresh water intake valve
-#define BACK_VALVE					4	// Back valve for solution mixing
-#define	WI_VALVE					0
-#define WLINE_61_VALVE					9	// Watering lines valves
-#define WLINE_62_VALVE					3
-#define WLINE_63_VALVE					10
-#define WLINE_64_VALVE					11
-#define WLINE_65_VALVE					8
-#define WLINE_66_VALVE					12
+#ifdef GROLLYSN001
+#warning "GROLLYCONF: Using Grolly SN001 defines"
+	#define	FWTANK						0
+	#define MIXTANK						1
+	#define FWTANK_SONAR					0
+	#define MIXTANK_SONAR					1
+	#define	MTI_VALVE					1	// MixTank intake valve
+	#define FWI_VALVE					2	// Fresh water intake valve
+	#define BACK_VALVE					4	// Back valve for solution mixing
+	#define	WI_VALVE					0
+	#define WLINE_61_VALVE					9	// Watering lines valves
+	#define WLINE_62_VALVE					3
+	#define WLINE_63_VALVE					10
+	#define WLINE_64_VALVE					11
+	#define WLINE_65_VALVE					8
+	#define WLINE_66_VALVE					12
+#else
 
-/*
- // GROLLY 2 (002 and 003)
-#define FWTANK						0
-#define MIXTANK						1
-#define FWTANK_SONAR					0
-#define MIXTANK_SONAR					1
-#define	MTI_VALVE					11	// MixTank intake valve
-#define FWI_VALVE					10	// Fresh water intake valve
-#define BACK_VALVE					4	// Back valve for solution mixing
-#define	WI_VALVE					0
-#define WLINE_61_VALVE					6	// Watering lines valves
-#define WLINE_62_VALVE					3
-#define WLINE_63_VALVE					1
-#define WLINE_64_VALVE					7
-#define WLINE_65_VALVE					2
-#define WLINE_66_VALVE					12
+#warning "GROLLYCONF: Using Grolly SN002+ defines"
+// GROLLY 2 (002 and 003)
+	#define FWTANK						0
+	#define MIXTANK						1
+	#define FWTANK_SONAR					0
+	#define MIXTANK_SONAR					1
+	#define	MTI_VALVE					11	// MixTank intake valve
+	#define FWI_VALVE					10	// Fresh water intake valve
+	#define BACK_VALVE					4	// Back valve for solution mixing
+	#define	WI_VALVE					0
+	#define WLINE_61_VALVE					6	// Watering lines valves
+	#define WLINE_62_VALVE					3
+	#define WLINE_63_VALVE					1
+	#define WLINE_64_VALVE					7
+	#define WLINE_65_VALVE					2
+	#define WLINE_66_VALVE					12
 
 
-*/
+#endif
+
+
+
 
 #define MAX_SONAR_READ	400				// drop wrong reads
 
@@ -705,8 +711,35 @@ volatile static uint16_t psi_pump_btm_level = 0;
 volatile static uint16_t tank_windows_top[2];
 volatile static uint16_t tank_windows_bottom[2];
 
+
+
 ErrorStatus HSEStartUpStatus;
+/* Buffer of data to be received by I2C1 */
+uint8_t Buffer_Rx1[4];
+/* Buffer of data to be transmitted by I2C1 */
+//uint8_t Buffer_Tx1[4];
+
+/* Buffer of data to be received by I2C2 */
+uint8_t Buffer_Rx2[6];
+/* Buffer of data to be transmitted by I2C2 */
+//uint8_t Buffer_Tx2[4];
+
+
+
 FLASH_Status FlashStatus;
+/*
+// Buffer of data to be received by I2C1
+uint8_t Buffer_Rx1[7] = {0x5, 0x6,0x8,0xA, 0x6,0x8,0xA};
+// Buffer of data to be transmitted by I2C1
+//uint8_t Buffer_Tx1[4];
+
+uint8_t Buffer_Tx1[7] = {0x5, 0x6,0x8,0xA, 0x6,0x8,0xA};
+// Buffer of data to be received by I2C2
+uint8_t Buffer_Rx2[7] = {0x5, 0x6,0x8,0xA, 0x6,0x8,0xA};
+// Buffer of data to be transmitted by I2C2
+uint8_t Buffer_Tx2[7] = {0x5, 0x6,0x8,0xA, 0x6,0x8,0xA};
+
+*/
 
 volatile static uint16_t adcAverage[4];
 
@@ -738,15 +771,6 @@ volatile uint16_t wfCalArray[WFM_AMOUNT];
 #define EC_I2C_ADDR	0x30
 
 ErrorStatus HSEStartUpStatus;
-/* Buffer of data to be received by I2C1 */
-uint8_t Buffer_Rx1[7];
-/* Buffer of data to be transmitted by I2C1 */
-uint8_t Buffer_Tx1[7];
-
-/* Buffer of data to be received by I2C2 */
-uint8_t Buffer_Rx2[7];
-/* Buffer of data to be transmitted by I2C2 */
-uint8_t Buffer_Tx2[7];
 
 extern __IO uint8_t Tx_Idx1, Rx_Idx1;
 extern __IO uint8_t Tx_Idx2, Rx_Idx2;
@@ -1517,55 +1541,21 @@ void save_settings(void) { // wrapper for rx_ee, simplifies settings packet rece
 x = DMA1_FLAG_TC6;
 
 uint8_t ds_buf[9];
-
-void dsread(void) {
-	uint32_t i = 0;
-
-	OW_Init();
-	OW_Send(OW_SEND_RESET, "\xcc\x44", 2, NULL, NULL, OW_NO_READ);
-
-	// 0b10000010 0x82
-
-	// Ã�Â½Ã�Â°Ã�Â·Ã�Â½Ã�Â°Ã‘â€¡Ã�Â°Ã�ÂµÃ�Â¼ Ã‘â€žÃ‘Æ’Ã�Â½Ã�ÂºÃ‘â€ Ã�Â¸Ã‘Å½ Ã�Â´Ã�Â²Ã‘Æ’Ã‘â€¦Ã‘â€šÃ�Â°Ã�ÂºÃ‘â€šÃ�Â½Ã�Â¾Ã�Â³Ã�Â¾ Ã�Â²Ã‘â€¹Ã‘â€¦Ã�Â¾Ã�Â´Ã�Â° - Ã�Â¿Ã�Â¾Ã�Â´Ã�Â°Ã�ÂµÃ�Â¼ "Ã�Â¿Ã�Â¸Ã‘â€šÃ�Â°Ã�Â½Ã�Â¸Ã�Âµ" Ã�Â½Ã�Â° Ã‘Ë†Ã�Â¸Ã�Â½Ã‘Æ’
-
-//		RCC->APB2ENR |= RCC_APB2ENR_IOPAEN;     // Enable clock on GPIOC.
-	//  GPIOA->CRL      &= ~GPIO_CRL_CNF2;		// ... to PC3
-//	    GPIOA->CRL      |= (GPIO_CRL_CNF2_0 | GPIO_CRL_CNF2_1);
-//	    GPIOA->CRL  |= (GPIO_CRL_MODE2_1 | GPIO_CRL_MODE2_0);
-
-	OW_out_set_as_Power_pin();
-	GPIOA->BSRR |= (1 << 2);
-
-	// Ã�Â²Ã‘â€¹Ã�Â´Ã�ÂµÃ‘â‚¬Ã�Â¶Ã�Â¸Ã�Â²Ã�Â°Ã�ÂµÃ�Â¼ Ã�Â²Ã‘â‚¬Ã�ÂµÃ�Â¼Ã‘ï¿½ Ã�Â¸Ã�Â·Ã�Â¼Ã�ÂµÃ‘â‚¬Ã�ÂµÃ�Â½Ã�Â¸Ã‘ï¿½ (Ã�Â½Ã�Â°Ã�Â¿Ã‘â‚¬Ã�Â¸Ã�Â¼Ã�ÂµÃ‘â‚¬ 750 Ã�Â¼Ã‘ï¿½ Ã�Â´Ã�Â»Ã‘ï¿½ 12-Ã�Â±Ã�Â¸Ã‘â€šÃ�Â½Ã�Â¾Ã�Â³Ã�Â¾ Ã�Â¸Ã�Â·Ã�Â¼Ã�ÂµÃ‘â‚¬Ã�ÂµÃ�Â½Ã�Â¸Ã‘ï¿½)
-	for (i = 0; i < 2000000; i++) {
-
-	}
-
-//	    OW_Reset(); // reset
-
-	// Ã�Â²Ã�Â¾Ã‘ï¿½Ã‘ï¿½Ã‘â€šÃ�Â°Ã�Â½Ã�Â°Ã�Â²Ã�Â»Ã�Â¸Ã�Â²Ã�Â°Ã�ÂµÃ�Â¼ Ã‘â€žÃ‘Æ’Ã�Â½Ã�ÂºÃ‘â€ Ã�Â¸Ã‘Å½ Ã�Â¿Ã�ÂµÃ‘â‚¬Ã�ÂµÃ�Â´Ã�Â°Ã‘â€šÃ‘â€¡Ã�Â¸Ã�ÂºÃ�Â° UART
-	OW_out_set_as_TX_pin();
-
-	OW_Send(OW_SEND_RESET, "\xcc\xbe\xff\xff", 4, ds_buf, 2, 2);
-
-	OW_Reset();
-
-}
-
 uint16_t ph1_adc_val = 0;
 uint16_t ec1_adc_val = 0;
 
 static void lstasks(void *pvParameters) {
 	vTaskDelay(4000);
-//	dht_init_out();
+
 	uint8_t i = 0;
+//	uint8_t tmpdata[1] = {0};
 	uint32_t pwr_restart = 0; // next power restart for DHT sensors
-	OW_Init();
 	power_ctrl(PWR_DHT, 1); // enable power for DHT sensors
 	uint8_t i2c_ping = 0;
-//	OW_Init();
 	pwr_restart = RTC_GetCounter() + 60;
 	while (1) {
+
+		adcAverager();
 
 		if (pwr_restart < RTC_GetCounter()) {
 			power_ctrl(PWR_DHT, 0);
@@ -1575,64 +1565,33 @@ static void lstasks(void *pvParameters) {
 		}
 
 		// read pH
-//		phval_v = Buffer_Rx2[1] + (((uint16_t)Buffer_Rx2[0]<<8) & 0xFF00);	// !!!
-//		i2c_ping = I2C_Master_BufferWrite(I2C2,Buffer_Tx2,1,Polling, PH_I2C_ADDR);
-		/*		if (i2c_ping>0) {
-		 I2C_Master_BufferRead(I2C2,Buffer_Rx2,2,DMA, PH_I2C_ADDR);
-		 ph1_adc_val = (((uint16_t)Buffer_Rx2[0]<<8)&0xFF00) + (((uint16_t)Buffer_Rx2[1])&0xFF);
-		 }
-		 else {
-		 // restart I2C2 sensors bus
-		 I2C_DeInit(I2C2);
-		 I2C_LowLevel_Init(I2C2);
-		 } */
-
+		i2c_ping = 1;
 		vTaskDelay(100);
 
-		// read EC
-		/*		i2c_ping = 0;
-		 // i2c_ping = I2C_Master_BufferWrite(I2C2,Buffer_Tx2,1,Polling, EC_I2C_ADDR);
-		 i2c_ping = I2C_Master_BufferWrite(I2C2,Buffer_Tx2,1,Polling, EC_I2C_ADDR);
-		 if (i2c_ping>0) {
-		 I2C_Master_BufferRead(I2C2,Buffer_Rx2,4,Polling, EC_I2C_ADDR);
-		 vTaskDelay(150);
-		 ec1_adc_val = (((uint16_t)Buffer_Rx2[2]<<8)&0xFF00) + (((uint16_t)Buffer_Rx2[1])&0xFF);
+//		i2c_ping = I2C_Master_BufferWrite(I2C2, tmpdata[0],1,Interrupt, PH_I2C_ADDR);
+		if (i2c_ping>0) {
+			 ph1_adc_val = Buffer_Rx2[1] + (((uint16_t)Buffer_Rx2[0]<<8) & 0xFF00);
+			 I2C_Master_BufferRead(I2C2,Buffer_Rx2,2,DMA, PH_I2C_ADDR);
+			 i2c_ping--;
 		 }
 		 else {
+			 	i2c_ping = 10;
 		 // restart I2C2 sensors bus
-		 I2C_DeInit(I2C2);
-		 I2C_LowLevel_Init(I2C2);
-		 } */
+			 I2C_DeInit(I2C2);
+			 vTaskDelay(200);
+			 I2C_LowLevel_Init(I2C2);
+			 vTaskDelay(200);
+		 }
 
 		vTaskDelay(100);
 		psiStab();
 		dht_get_data_x(0);
+		vTaskDelay(50);
 		sonar_ping();
 		autoSafe();
-//		dsread();
-
-		/*
-		 PLUG_DISABLE = (1<<13);
-		 vTaskDelay(50);
-		 PLUG_ENABLE = (1<<13);
-		 vTaskDelay(50);
-		 dht2_get_data(); */
-		/*	for (i=0;i<50;i++) {
-		 PLUG_DISABLE = (1<<13);
-		 vTaskDelay(i);
-		 PLUG_ENABLE = (1<<13);
-		 vTaskDelay(i);
-		 }
-		 for (i=50;i>0;i--) {
-		 PLUG_DISABLE = (1<<13);
-		 vTaskDelay(i);
-		 PLUG_ENABLE = (1<<13);
-		 vTaskDelay(i);
-		 } */
-		// get_status_block(1);
-		//vTaskDelay(5000);
+		vTaskDelay(50);
 		dht_get_data_x(1);
-		vTaskDelay(500);
+		vTaskDelay(400);
 	}
 }
 
@@ -1659,7 +1618,7 @@ static void uart_task(void *pvParameters) {
 
 			packet_ready = 0;
 		}
-		vTaskDelay(30);
+		vTaskDelay(100);
 	}
 }
 
@@ -7196,11 +7155,10 @@ void displayClock(void *pvParameters) {
 	while (1) {
 
 		button = readButtons();
-		vTaskDelay(3);
-		vTaskDelay(5);
+		vTaskDelay(50);
 		if (enableClock == 1) {
 			runners = 24;
-			vTaskDelay(10);
+			vTaskDelay(50);
 			tmp = RTC_GetCounter();
 			DateTime = unix2DateTime(tmp);
 			LCDLine1[0] = (DateTime.day / 10) + 48;
@@ -7214,30 +7172,19 @@ void displayClock(void *pvParameters) {
 			LCDLine2[6] = 32;
 			LCDLine2[7] = 32;
 			Lcd_goto(0, 8);
-			//Lcd_write_8b(dht_byte_buf[0]);
-			//Lcd_write_8b(dht_byte_buf[1]);
 			Lcd_goto(1, 0);
 			Lcd_write_digit(DateTime.hour);
 			Lcd_write_digit(DateTime.min);
 			Lcd_write_digit(DateTime.sec);
-			vTaskDelay(19);
+			vTaskDelay(50);
 			button = readButtons();
-			vTaskDelay(3);
-			Lcd_write_str(" ");
-			Lcd_goto(1, 7);
-			vTaskDelay(10);
+			vTaskDelay(50);
+
 
 #ifdef I2C_MASTER
 //			    I2C_Master_BufferRead(I2C1,Buffer_Rx1,1,Polling, DEST_I2C_ADDR);
 #endif
 			curi2crxval = 10 + Buffer_Rx1[0];
-//				Lcd_write_digit(Buffer_Tx1[0]&0xFF);
-//				Lcd_write_digit(curi2crxval&0xFF);
-//				Lcd_write_8b(sonar_read[0]);
-//				Lcd_write_16b((sonar_read[1]-50)/10);
-			/*Lcd_goto(1,8);
-			 Lcd_write_8b(ds_buf[0]);
-			 Lcd_write_8b(ds_buf[1]); */
 
 			Lcd_goto(0, 9);
 			//Lcd_write_16b(wrtn_val);
@@ -7246,38 +7193,11 @@ void displayClock(void *pvParameters) {
 
 			Lcd_goto(1, 9);
 			//Lcd_write_16b(wrtn_val);
-			Lcd_write_16b(sonar_read[1]);
+			Lcd_write_16b(ph1_adc_val);
 
-			//Lcd_write_8b(packets_received);
-			//Lcd_write_8b(rx_packet_crc);
-			Lcd_goto(1, 7);
-			Lcd_write_16b(wrtn_addr);
-			//Lcd_write_8b(rxglobalcntr);
-			//Lcd_write_8b(rx_packet_crc);
-			//Lcd_write_8b(packetid_);
-			Lcd_write_8b(packets_received);
 
-			//copy_arr(&dht1_t_str, &LCDLine2, 4, 8, 0);
-			/* copy_arr(&dht1_rh_str, &LCDLine1, 4, 12, 0);
-			 copy_arr(&dht2_t_str, &LCDLine2, 4, 7, 0);
-			 copy_arr(&dht2_rh_str, &LCDLine2, 4, 12, 0); */
-			vTaskDelay(10);
-			if (button == BUTTON_FWD) {
-				//tempn++;
-				vTaskDelay(10);
-				Buffer_Tx1[0] = curi2ctxval++;
-#ifdef I2C_MASTER
-				// I2C_Master_BufferWrite(I2C1, Buffer_Tx1,1,Interrupt, 0x40);
-#endif
-			}
-			if (button == BUTTON_BCK) {
-				//tempn++;
-				vTaskDelay(10);
-				Buffer_Tx1[0] = curi2ctxval--;
-#ifdef I2C_MASTER
-				// I2C_Master_BufferWrite(I2C1, Buffer_Tx1,1,Interrupt, 0x40);
-#endif
-			}
+			vTaskDelay(50);
+
 			if (button == BUTTON_OK) {
 				vTaskDelay(100);
 				Lcd_clear();
@@ -7287,7 +7207,7 @@ void displayClock(void *pvParameters) {
 			}
 			vTaskDelay(10);
 		}
-		vTaskDelay(2);
+		vTaskDelay(50);
 	}
 	while (1) {
 	}
@@ -7432,7 +7352,7 @@ void vTaskLCDdraw(void *pvParameters) { // draws lcd
 		Lcd_write_arr(&LCDLine2, 16);
 
 		xTaskResumeAll();
-		vTaskDelay(17);
+		vTaskDelay(100);
 	}
 }
 
@@ -7663,7 +7583,7 @@ uint8_t main(void) {
 
 	psi_motor_init();
 
-	beep_overload(100);
+//	beep_overload(100);
 
 	// valves[5..8] on PA4-PA7 init, and valves [9..11] on PC10-PC12
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
@@ -7715,7 +7635,7 @@ uint8_t main(void) {
 
 //	Lcd_clear();
 //	dht_init();		// start TIM15
-	Delay(1000);
+//	Delay(1000);
 	power_ctrl(PWR_LCD, 1);
 	Delay(1000);
 
@@ -7723,7 +7643,7 @@ uint8_t main(void) {
 	flush_lcd_buffer(); // fills the LCD frame buffer with spaces
 //	Lcd_write_str("LCD1 ON!");
 
-//	I2C_init2();	// master-slave test send	(pH sensor)
+	I2C_init2();	// master-slave test send	(pH sensor)
 
 #ifdef I2C_SLAVE
 //	I2C_Slave_BufferReadWrite(I2C1, Interrupt);
@@ -7731,21 +7651,34 @@ uint8_t main(void) {
 
 	tmpdata[0] = 0;
 
-//	I2C_Master_BufferWrite(I2C2, tmpdata,1,Interrupt,  0x9A);
 
 	// === LCD init ===
 
 	i = 0;
 
+	// === LCD init ===
+#ifdef LCD_I2C_MJKDZ
+	I2C_Master_BufferWrite(I2C1, tmpdata,1,Interrupt,  0x40);
+	LCDI2C_init(0x40,16,2);	// I2C display adress is 0x20, but since https://my.st.com/public/STe2ecommunities/mcu/Lists/STM32Discovery/Flat.aspx?RootFolder=https%3a%2f%2fmy.st.com%2fpublic%2fSTe2ecommunities%2fmcu%2fLists%2fSTM32Discovery%2fstm32f4%20i2c%20pcf8574&FolderCTID=0x01200200770978C69A1141439FE559EB459D75800084C20D8867EAD444A5987D47BE638E0F&currentviews=619 we need increase it x2
+#endif
+
+#ifdef LCD_I2C_DFROBOT
+	I2C_Master_BufferWrite(I2C1, tmpdata,1,Interrupt,  0x4E);
+	LCDI2C_init(0x4E,16,2);	// I2C display adress is 0x20, but since https://my.st.com/public/STe2ecommunities/mcu/Lists/STM32Discovery/Flat.aspx?RootFolder=https%3a%2f%2fmy.st.com%2fpublic%2fSTe2ecommunities%2fmcu%2fLists%2fSTM32Discovery%2fstm32f4%20i2c%20pcf8574&FolderCTID=0x01200200770978C69A1141439FE559EB459D75800084C20D8867EAD444A5987D47BE638E0F&currentviews=619 we need increase it x2
+#endif
+	  // ------- Quick 3 blinks of backlight  -------------
+	  i=0;
+
 #ifdef USE_LCD
-	/*	LCDI2C_init(0x4E,16,2);
-	 LCDI2C_backlight(); // finish with backlight
-	 LCDI2C_clear();
-	 LCDI2C_write_String("Hello Buddy!");
-	 Delay_us(2000);
-	 LCDI2C_clear();
-	 LCDI2C_write_String("Let's grow!");
-	 Delay_us(2000); */
+	  LCDI2C_backlight(); // finish with backlight
+	  LCDI2C_clear();
+	  LCDI2C_write_String("Hello Buddy!");
+	  Delay_us(2000);
+	  LCDI2C_clear();
+	  LCDI2C_write_String("Let's grow!");
+	  Delay_us(2000);
+
+
 #endif
 
 	psi_m_low = PSI_M_LOW;
@@ -7754,20 +7687,20 @@ uint8_t main(void) {
 
 	sonar_init(); // init sonar ECHOs on PB8 and PB9 and TRIG on PC13
 
-	xTaskCreate(lstasks, (signed char*)"LST", configMINIMAL_STACK_SIZE, NULL,
-			tskIDLE_PRIORITY + 2, NULL);
+	xTaskCreate(lstasks, (signed char*)"LST", configMINIMAL_STACK_SIZE+50, NULL,
+			tskIDLE_PRIORITY + 1, NULL);
 	xTaskCreate(watering_program_trigger, (signed char*)"WP", 180, NULL,
 			tskIDLE_PRIORITY + 1, NULL);
 	xTaskCreate(uart_task, (signed char*)"UART", 100, NULL,
-			tskIDLE_PRIORITY + 2, NULL);
-	xTaskCreate(displayClock, (signed char*)"CLK", 140, NULL,
 			tskIDLE_PRIORITY + 1, NULL);
 	xTaskCreate(timerStateTrigger, (signed char*)"TIMERS",
 			configMINIMAL_STACK_SIZE+10, NULL, tskIDLE_PRIORITY + 1, NULL);
 	xTaskCreate(plugStateTrigger, (signed char*)"PLUGS",
 			configMINIMAL_STACK_SIZE+35, NULL, tskIDLE_PRIORITY + 1, NULL);
-	/*    xTaskCreate(vTaskLCDdraw,(signed char*)"LCDDRW",configMINIMAL_STACK_SIZE,
-	 NULL, tskIDLE_PRIORITY + 1, NULL); */
+	xTaskCreate(displayClock, (signed char*)"CLK", 140, NULL,
+			tskIDLE_PRIORITY + 1, NULL);
+	xTaskCreate(vTaskLCDdraw,(signed char*)"LCDDRW",configMINIMAL_STACK_SIZE,
+	 NULL, tskIDLE_PRIORITY + 1, NULL);
 
 	Delay_us(100);
 	beep_overload(1000);

@@ -130,9 +130,12 @@ function rx_ee_(input){
 	var addr = inputData[1];
 	var value = input.value;
 	// alert('addr='+addr+';val='+value);
-	 $.post('cm/cadi_bt_processor.php', {action: 'tx_packet', cmd:64, addr:addr, value:value}, function(data){
-	//	alert(data);
-	});
+	var i=0;
+//	for (i=0;i<3;i++) {
+		 $.post('cm/cadi_bt_processor.php', {action: 'tx_packet', cmd:64, addr:addr, value:value}, function(data){
+		//	alert(data);
+		});
+//	}
 }
 
 var g1;
@@ -234,7 +237,7 @@ $(document).ready(function() {
 		$.post('cm/cadi_bt_processor.php', {action: 'get_status_csv'}, function(data){
 		//	alert(data);
 			if (data.length>42) {
-				//$('#csv_string_box').html(data);
+				$('#csv_string_box').html(data);
 				var statusArray = data.split(',');
 				// display BTD State
 				$('#btd_state').html(statusArray[22]);
