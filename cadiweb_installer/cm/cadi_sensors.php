@@ -147,14 +147,14 @@ function save_tank_settings(){
 	<table>
 		<tr>
 			<td colspan="2" style="text-align:center;">
-				Water pressure stabilizer
+				Water pressure sensor levels
 			</td>
 		</tr>
 		<tr>
-			<td>Top psi level</td>
+			<td>Top level</td>
 			<td>
 				<input 
-					onChange="rx_ee_this(this)" 
+					onChange="rx_ee_(this)" 
 					type="text" 
 					value="" 
 					name="" 
@@ -162,10 +162,50 @@ function save_tank_settings(){
 			</td>
 		</tr>
 		<tr>
-			<td>Bottom psi level</td>
+			<td>Bottom level</td>
 			<td>
 				<input 
-					onChange="rx_ee_this(this)" 
+					onChange="rx_ee_(this)" 
+					type="text" 
+					value="" 
+					name="" 
+				/>
+			</td>
+		</tr>
+	</table>
+
+</div>
+
+<h3>pH level meter</h3>
+<div>
+	<table>
+		<tr>
+			<td colspan="2" style="text-align:center;">
+				pH sensor calibration
+			</td>
+		</tr>
+		<tr>
+			<td>Current ADC value&nbsp;</td>
+			<td>
+				<div id="sens_ph1_adc_val"></div>
+			</td>
+		</tr>
+		<tr>
+			<td>pH4</td>
+			<td>
+				<input 
+					onChange="rx_ee_(this)" 
+					type="text" 
+					value="" 
+					name="" 
+				/>
+			</td>
+		</tr>
+		<tr>
+			<td>pH7</td>
+			<td>
+				<input 
+					onChange="rx_ee_(this)" 
 					type="text" 
 					value="" 
 					name="" 

@@ -237,7 +237,7 @@ $(document).ready(function() {
 		$.post('cm/cadi_bt_processor.php', {action: 'get_status_csv'}, function(data){
 		//	alert(data);
 			if (data.length>42) {
-				$('#csv_string_box').html(data);
+				//$('#csv_string_box').html(data);
 				var statusArray = data.split(',');
 				// display BTD State
 				$('#btd_state').html(statusArray[22]);
@@ -253,7 +253,11 @@ $(document).ready(function() {
 				$('#cadi_temp').html('&nbsp;T: '+temp+'C');
 				$('#cadi_rh').html('rH: '+rh+'%');
 
-				var ph1_adc_val = data;
+
+				
+				var ph1_adc_val = statusArray[10];
+				$('#ph1_adc_val').html('pH: '+ph1_adc_val);
+				$('#sens_ph1_adc_val').html(ph1_adc_val);
 				//$('#csv_string').html(data);
 				
 
@@ -1249,14 +1253,8 @@ CSV here
 <br>
 <button onClick="run_demo()">Run demo</button>
 
-
-<br>
-<input type="text" value="1" id="status_block_ids" />
-<button onClick="get_status_block()">Get Status</button>
-<br>
 <br>
 
-<button onClick="get_ip()">Get IP</button>
 <button onClick="cw_reboot()">Reboot server</button><br>
 <button onClick="cadi_reset()">Cadi reset</button><br>
 ====================================
@@ -1271,25 +1269,6 @@ CSV here
 <br>
 
 
-
-<!-- 
-EEPROM read/write section
--->
-
-
-
-
-EEPROM<br>
-Address: <input type="text" id="ee_addr" /><br>
-16bit:
-<input type="text" id="ee16bit_value" /><br>
-<button onClick="eeRead()">Read</button>
-<button onClick="eeWrite(1)">Write</button><br>
-32bit:
-<input type="text" id="ee32bit_value" /><br>
-<button onClick="eeRead()">Read</button>
-<button onClick="eeWrite(2)">Write</button>
-<br>
 Status stream delay<input type="text" id="status_stream_delay" value="800"/>
 <br>
 
