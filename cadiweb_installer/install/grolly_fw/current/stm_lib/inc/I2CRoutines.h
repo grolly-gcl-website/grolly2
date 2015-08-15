@@ -19,8 +19,6 @@
   */
 /* Includes ------------------------------------------------------------------*/
 
-#define USE_LCD
-
 #include "stm32f10x.h"
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __I2CROUTINES_H

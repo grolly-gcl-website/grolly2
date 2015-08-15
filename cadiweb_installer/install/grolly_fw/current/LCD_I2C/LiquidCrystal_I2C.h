@@ -58,6 +58,7 @@
 #define LCD_I2C_DFROBOT
 
 #ifdef LCD_I2C_MJKDZ
+#warning "GROLLYCONF: MJKDZ backpack on 0x40 (0x20) I2C address used"
 // LiquidCrystal_I2C lcd(0x20, 4, 5, 6, 0, 1, 2, 3);
 #define LCD_I2C_ADDR 0x40
 #define LCD_BACKLIGHT 0x00
@@ -69,6 +70,8 @@
 #endif
 
 #ifdef LCD_I2C_DFROBOT
+
+#warning "GROLLYCONF: DFROBOT backpack on 0x4E (0x27) I2C address used"
 // LiquidCrystal_I2C lcd(0x27, 2, 1, 0, 4, 5, 6, 7);
 #define LCD_I2C_ADDR 0x4E
 #define LCD_BACKLIGHT 0x08

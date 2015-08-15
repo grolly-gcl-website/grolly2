@@ -252,10 +252,6 @@ void dht_init_x(uint8_t dht_id) {
 	EXTI_InitTypeDef EXTI_InitStructure;
 	NVIC_InitTypeDef NVIC_InitStructure;
 
-	uint8_t pin_src = 0;
-	uint32_t exti_line = 0;
-	uint8_t nvic_ch = 0;
-
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
 	gpio_cfg.GPIO_Mode = GPIO_Mode_IPU;
 
@@ -395,10 +391,13 @@ volatile static uint8_t rx_packet_crc = 0; // RxBuffer and ZXn packet header CRC
 // DRIVER: Digital Temperature and Humidity sensor DHT22
 
 #define CADI_MB
-#define USE_LCD					// the same define should be enabled in LiquidCrystal_I2C.c
 
 // #define LCD_I2C_MJKDZ				// use mjkdz I2C expander for LCD
 #define LCD_I2C_DFROBOT			// use DFRobot I2C expander for LCD
+
+
+
+
 #ifdef CADI_MB
 #define lcd_shift	11				// seems to be not used here anymore?
 #define use_gpio	GPIO_Pin_13		// last data pin number
@@ -512,6 +511,7 @@ volatile static uint16_t psi_mid = 0;
 #define	PLUG_INVERT		0		// enable reverse plugStateSet
 #define PLUG_AMOUNT		4
 volatile static uint16_t plugStateFlags; // this works
+uint8_t tmpdata[1];
 volatile static uint8_t plugSettings[PLUG_AMOUNT] = { 0, 1, 2, 3 }; // PLUG_AMOUNT - number of plugs HARDCODE
 // elementy massiva - nomera programm (ex "tajmerov"), sootvetstvujushih Plug'am.
 // 0 element - pervyj plug, 1 element - plug no 2, etc
@@ -568,23 +568,9 @@ volatile static uint8_t psi_max_speed = 0;
 #define RH_WINDOW_BOTTOM	0x0608	// pH window bottom adc value
 
 #define PSI_PUMP_TIM	TIM1	// Psi Pump Timer for PWMing
-// Grolly 1
-//these defines configure abstract layer for accessing Cadi devices
-// based on schematic picture used in Cadiweb panel
+
 #define GROLLY
-#ifdef GROLLY
-/*#define FWTANK						0
- #define MIXTANK						1
- #define PSI_PUMP_ID					0		// load ID for high pressure watering pump
- #define FWTANK_SONAR				0
- #define MIXTANK_SONAR				1
- #define	WI_VALVE					0
- #define FWI_VALVE					4
- #define WLINE_61_VALVE				1
- #define WLINE_62_VALVE				3
- #define WLINE_63_VALVE				2
- #define MIXING_PUMP					0		// doser MOSFET on T8 */
-#endif
+
 
 
 // Grolly 2 (S/N: 001)
@@ -716,30 +702,11 @@ volatile static uint16_t tank_windows_bottom[2];
 ErrorStatus HSEStartUpStatus;
 /* Buffer of data to be received by I2C1 */
 uint8_t Buffer_Rx1[4];
-/* Buffer of data to be transmitted by I2C1 */
-//uint8_t Buffer_Tx1[4];
-
 /* Buffer of data to be received by I2C2 */
 uint8_t Buffer_Rx2[6];
-/* Buffer of data to be transmitted by I2C2 */
-//uint8_t Buffer_Tx2[4];
-
 
 
 FLASH_Status FlashStatus;
-/*
-// Buffer of data to be received by I2C1
-uint8_t Buffer_Rx1[7] = {0x5, 0x6,0x8,0xA, 0x6,0x8,0xA};
-// Buffer of data to be transmitted by I2C1
-//uint8_t Buffer_Tx1[4];
-
-uint8_t Buffer_Tx1[7] = {0x5, 0x6,0x8,0xA, 0x6,0x8,0xA};
-// Buffer of data to be received by I2C2
-uint8_t Buffer_Rx2[7] = {0x5, 0x6,0x8,0xA, 0x6,0x8,0xA};
-// Buffer of data to be transmitted by I2C2
-uint8_t Buffer_Tx2[7] = {0x5, 0x6,0x8,0xA, 0x6,0x8,0xA};
-
-*/
 
 volatile static uint16_t adcAverage[4];
 
@@ -796,16 +763,12 @@ void hygroStatSettings(void);
 uint8_t readPercentVal(uint8_t value);
 void phMonSettings(void);
 void setTimer(uint8_t timerId);
-//void copy_arr(uint8_t *source, uint8_t *destination, uint8_t amount, uint8_t pos);
 void copy_arr(volatile uint8_t *source, volatile uint8_t *destination,
 		uint8_t amount, uint8_t pos, uint8_t src_pos);
 void Lcd_write_arr(volatile uint8_t *STRING, uint8_t chars);
 void Lcd_write_digit(uint8_t numb);
 void Delay_us(uint32_t delay);
 void buttonCalibration(void);
-void Init_pin_out(void);
-void Init_pin_in(void);
-void Init_lcd(void);
 void Lcd_write_data(uint8_t byte);
 void Lcd_write_cmd(uint8_t byte);
 void Lcd_clear(void);
@@ -827,15 +790,12 @@ RTC_DateTime unix2DateTime(uint32_t unixtime);
 uint32_t DateTime2unix(RTC_DateTime datetime);
 void EE_WriteWord(uint16_t Address, uint32_t Data);
 uint32_t EE_ReadWord(uint16_t Address);
-//void Lcd_print(char *STRING);
 void setCTimer(uint8_t timerId);
 uint32_t CTimerAdjust(uint32_t time);
 void plugStateSet(uint8_t plug, uint8_t state);
 void getPh();
 void psiStab(void);
 void getEc(void);
-//FRESULT string2log(char* str, uint8_t bytes);
-//FRESULT sdLog2(void);
 uint8_t adjust8bit(uint8_t val);
 void loggerSettings(void);
 uint8_t yesNoSelector(char str, uint8_t curval);
@@ -843,16 +803,12 @@ void loadSettings(void);
 void set4lowBits(uint8_t dta);
 void set4highBits(uint8_t dta);
 void flush_lcd_buffer(void);
-// void phStabSettings(void);
 void Lcd_write_16int( uint16_t);
 void saveButtonRanges(void);
 void readButtonRanges(void);
 void set16bit(uint16_t value);
 void convPh2str(uint8_t ph, char* phstr);
 uint8_t readPhVal(uint8_t value);
-//void dht_conv_data(void);
-//void dht_init(void);
-//void dht_init_out(void);
 void TIM3_IRQHandler(void);
 void TIM1_BRK_TIM15_IRQHandler(void);
 void dht_arr_displayer(void);
@@ -882,12 +838,9 @@ uint8_t crc_block(uint8_t input, volatile uint8_t *start_byte, uint8_t length);
 
 static void lstasks(void *pvParameters);
 static void uart_task(void *pvParameters);
-static void prvSetupHardware(void);
 static void displayClock(void *pvParameters);
 static void timerStateTrigger(void *pvParameters);
 static void plugStateTrigger(void *pvParameters);
-static void sdLog(void *pvParameters);
-static void phMonitor(void *pvParameters);
 static void vTaskaw(void *pvParameters);
 static void watering_program_trigger(void *pvParameters);
 void bluetooth_init(void);
@@ -902,7 +855,6 @@ void valve_test(void);
 void valve_feedback_init(void);
 void dosing_motor_control_init(void);
 void valve_motor_control_init(void);
-void valve_init(void); // startup valve config
 void EXTI15_10_IRQHandler(void);
 void water_level_input_init(void);
 void fertilizer_mixing_program_setup(uint8_t progId);
@@ -994,51 +946,7 @@ void I2C2SW_Stop(void);
  */
 volatile static uint8_t enableClock = 1; // run display clock, when nothing to do
 
-#define CO2_TOP		0x0619			// if ADC reading lower than this value, CO2 valve closes
-#define CO2_BTM		0x061A			// if ADC reading is higher than this value, CO2 valve opens
-#define CO2_400PPM	0x061B			//
-#define CO2_VALVE	2				// co2 valve id
-volatile static uint16_t curco2 = 0;
-volatile static uint16_t co2_400ppm = 0;
-volatile static uint16_t co2_top = 0; // higher value, lower CO2 level
-volatile static uint16_t co2_btm = 0;
-volatile static uint32_t next_co2_run = 0;
-volatile static uint16_t co2_timeout = 120;
-volatile static uint32_t co2_sens_start = 0; // when co2 sensor enabled
-volatile static uint8_t co2_sensor_ready = 0; //
 
-#define CO2_SENSOR_12V					1		// co2 sensor driven by 12V valve id
-volatile static uint8_t co2temp = 0;
-void getco2(void) {
-	/* 	uint16_t diff = 0;
-	 if (next_co2_run<RTC_GetCounter() && ((auto_failures&16)>>4)==0 && co2_sensor_ready==1){	// if it's time to make a measurement
-	 open_valve(CO2_SENSOR_12V);		// enable CO2 sensor 12V supply
-	 vTaskDelay(50);		// delay to
-	 co2temp |= (1<<1);
-	 curco2 = adcAverage[AVG_ADC_CO2];	// read current CO2 ADC value
-
-	 if (curco2>co2_btm && ((valveFlags&(1<<CO2_VALVE))>>CO2_VALVE)==0) {		// if current CO2 PPM level below needed and CO2 valve still closed
-	 co2temp |= (1<<2);
-	 open_valve(CO2_VALVE);	// open valve
-	 co2_sens_start = RTC_GetCounter();	// remember the CO2 stab start time
-	 }
-	 vTaskDelay(10);
-	 diff = (uint16_t)(RTC_GetCounter() - co2_sens_start);
-	 if (curco2<co2_top) {					// if CO2 level reached desired
-	 close_valve(CO2_VALVE);				// close CO2 valve
-	 close_valve(CO2_SENSOR_12V);		// disable sensor 12V supply
-	 next_co2_run = RTC_GetCounter()+10;	// +10 seconds delay until next measure
-	 co2temp |= (1<<3);
-	 }
-	 if (diff>co2_timeout) {				// if CO2 control timeout exceeded
-	 auto_failures |= (1<<4);		// set CO2 failure flag (bit 5)
-	 close_valve(CO2_VALVE);				// close CO2 valve
-	 close_valve(CO2_SENSOR_12V);		// disable sensor 12V supply
-	 co2temp |= (1<<4);
-	 }
-	 }
-	 */
-}
 
 int strlen(const char *str) {
 	const char *s;
@@ -1082,53 +990,7 @@ char *itoa(int n, char *s, int b) {
 	return strrev(s);
 }
 
-#define CO2_WARMUP	60			// co2 sensor warmup
-uint32_t co2_warmup_end = 0; // co sensor warmup finish time
 
-/* void co2_sens_supply(void){
- if (RTC_GetCounter()>co2_warmup_end) {
- co2_sensor_ready=1;
- }
- else {
- open_valve(CO2_SENSOR_12V);		// force 12v supply to co2 sensor
- co2_sensor_ready=0;
- }
- } */
-
-/* void co2_setup(void){
- uint16_t tmpval=0;
- Lcd_write_str("Set CO2 top lvl");
- Lcd_goto(1,0);
- Lcd_write_str("Curr = ");
- Lcd_write_16b(adcAverage[AVG_ADC_CO2]);
- vTaskDelay(3000);
- EE_ReadVariable(CO2_TOP, &co2_top);
- co2_top = adjust16bit_fast(co2_top, 1);
- EE_WriteVariable(CO2_TOP, co2_top);
- printOk();
- vTaskDelay(200);
- Lcd_write_str("Set CO2 btm lvl");
- Lcd_goto(1,0);
- Lcd_write_str("Curr = ");
- Lcd_write_16b(adcAverage[AVG_ADC_CO2]);
- vTaskDelay(3000);
- EE_ReadVariable(CO2_BTM, &co2_btm);
- tmpval = adjust16bit_fast(co2_btm, 1);
- EE_WriteVariable(CO2_BTM, co2_btm);
- printOk();
- vTaskDelay(200);
- Lcd_write_str("Set CO2=400ppm");
- Lcd_goto(1,0);
- Lcd_write_str("Curr = ");
- Lcd_write_16b(adcAverage[AVG_ADC_CO2]);
- vTaskDelay(3000);
- EE_ReadVariable(CO2_400PPM, &co2_400ppm);
- tmpval = adjust16bit_fast(co2_400ppm, 1);
- EE_WriteVariable(CO2_400PPM, co2_400ppm);
- printOk();
- vTaskDelay(200);
- loadSettings();
- } */
 
 void autoSafe(void) {
 	if (((auto_flags & 4) >> 2) == 1) {
@@ -1457,77 +1319,6 @@ void USART1_IRQHandler(void) // Protobuzzz v3
 	}
 }
 
-/* void USART1_IRQHandler(void)		// Protobuzz v2
- {
-
- if (USART_GetITStatus(BT_USART, USART_IT_RXNE) != RESET) {
- rxglobalcntr++;
- RxByte = USART_ReceiveData(BT_USART);	// get byte from Data Register
- #ifndef		PRODUCTION_BUILD
- RxBuffer[RxCounter++] = RxByte;			// write it into RxBuffer
- #endif
- rxcntr++;
- if (rxcntr>60000) {
- rxcntr = 0;
- }
- USART1->SR &= ~USART_FLAG_RXNE;			// clear Rx Not Empty flag
- }
-
-
-
- // sending packet in case of Tx Not Empty flag is set and buffer not sent completely yet
- if (txbuff_ne==1 && TxCounter<NbrOfDataToTransfer) {
- USART1->DR = TxBuffer[TxCounter++];	// write TxBuff byte into Data Register for sending
- }
- BT_USART->SR &= ~USART_SR_TC;		// clear Transfer Complete flag
-
- if (packet_ready==0) {
- if (rxm_state==RXM_CMD) {
- if (rx_pntr==0) {	// if packet buffer pointer is 0, it points to payload size (payload, including this size byte)
- packet_length=RxByte;	// get packet length
- }
- RxBuffer[rx_pntr++]=RxByte;	// receive byte into cmd buffer and increase command packet buffer pointer
- if (rx_pntr==(packet_length-3)) {	// if packet buffer pointer reached packet length (rely on RXM_NONE set later)
- // crc count
- rx_packet_crc = crc_block(48, &RxBuffer[0],(packet_length-4));	// 48 is XOR of "ZX2", -1 for skipping cmd id resp
- // crc check
- rxm_state=RXM_NONE; // RX machine state set to NONE, completes RX cycle
- rx_pntr=0;			// packet buffer pointer to 0
- prefixDetectionIdx = 0;
- if (rx_packet_crc==0) {	//
- packet_ready=1;	// packet received correctly and is ready to process
- }
- else {
- rx_flush();	// discard broken packet
- }
- }
- }
-
- if (RxByte==90) {
- // ready
- prefixDetectionIdx = 1;
- }
- else if (RxByte==88 && prefixDetectionIdx==1) {
- // steady
- prefixDetectionIdx = 2;
- }
- else if (prefixDetectionIdx==2) {
- if (RxByte==48) {
- // escaping zero
- }
- else if (RxByte==49){
- // settings
- rxm_state=RXM_SET;
- }
- else if (RxByte==50) {
- // command
- rxm_state=RXM_CMD;
- rx_flush();
- }
- prefixDetectionIdx = 0;
- }
- }
- } */
 
 void save_settings(void) { // wrapper for rx_ee, simplifies settings packet receiving
 	if (RxBuffer[0] == 5) { // 16 bit (5: size(1b), addr(2b), data(2b))
@@ -1547,8 +1338,6 @@ uint16_t ec1_adc_val = 0;
 static void lstasks(void *pvParameters) {
 	vTaskDelay(4000);
 
-	uint8_t i = 0;
-//	uint8_t tmpdata[1] = {0};
 	uint32_t pwr_restart = 0; // next power restart for DHT sensors
 	power_ctrl(PWR_DHT, 1); // enable power for DHT sensors
 	uint8_t i2c_ping = 0;
@@ -1568,7 +1357,6 @@ static void lstasks(void *pvParameters) {
 		i2c_ping = 1;
 		vTaskDelay(100);
 
-//		i2c_ping = I2C_Master_BufferWrite(I2C2, tmpdata[0],1,Interrupt, PH_I2C_ADDR);
 		if (i2c_ping>0) {
 			 ph1_adc_val = Buffer_Rx2[1] + (((uint16_t)Buffer_Rx2[0]<<8) & 0xFF00);
 			 I2C_Master_BufferRead(I2C2,Buffer_Rx2,2,DMA, PH_I2C_ADDR);
@@ -1618,7 +1406,7 @@ static void uart_task(void *pvParameters) {
 
 			packet_ready = 0;
 		}
-		vTaskDelay(100);
+		vTaskDelay(50);
 	}
 }
 
@@ -1714,7 +1502,6 @@ void run_uart_cmd(void) {
 	uint16_t addr = 0;
 	uint16_t val16 = 0;
 	uint16_t val16_2 = 0;
-	uint8_t val8 = 0;
 	uint32_t val32 = 0;
 	switch (RxBuffer[1]) {
 	// below 50 there are tasks that send responsewhen successfully executed
@@ -1850,10 +1637,6 @@ void run_uart_cmd(void) {
 	case 33: // 32 bit EEPROM value write
 		addr = ((((uint16_t) RxBuffer[2]) << 8) & 0xFF00)
 				+ (((uint16_t) RxBuffer[3]) & 0x00FF);
-	/*	val32 = ((((uint32_t) RxBuffer[4]) << 24) & 0xFF000000)
-				+ ((((uint32_t) RxBuffer[5]) << 16) & 0xFF0000)
-				+ ((((uint32_t) RxBuffer[6]) << 8) & 0xFF00)
-				+ (((uint32_t) RxBuffer[7]) & 0xFF); */
 		val32 = RxBuffer[4] * 16777216 + RxBuffer[5] * 65536 + RxBuffer[6] * 256
 								+ RxBuffer[7];
 		EE_WriteWord(addr, val32);
@@ -1969,8 +1752,6 @@ void settings2tx_buff(uint16_t addr, uint8_t amount) {
 void get_settings_dump(void) {
 	uint16_t i = 0;
 	uint8_t i2 = 0;
-	uint32_t tmpval = 0;
-	uint16_t addr = 0;
 	uint8_t tmpxor = 0;
 
 	/// preliminary 0,1,2,3
@@ -1997,13 +1778,11 @@ void get_settings_dump(void) {
 	vTaskDelay(100);
 
 	for (i = 0; i < ((SETTINGS_PACKET_SIZE / 16) - 1); i++) { // -1 HARDCODE
-//	for (i=0;i<32;i++) {
 		settings2tx_buff(
 				(SETTINGS_START_ADDR + ((((uint16_t) i) & 0x00FF) * 16)), 16); // 16 variables = 32 bytes
 		for (i2 = 0; i2 < 32; i2++) {
 			tmpxor ^= TxBuffer[i2];
 		}
-		// tmpxor ^= crc_block(0,&TxBuffer[0],32);
 
 		txbuff_ne = 0; // stop Tx transfers
 		NbrOfDataToTransfer = 32; //going to send 32 bits of settings
@@ -2043,8 +1822,6 @@ void get_settings_dump(void) {
 void get_settings_dump_(uint16_t amount, uint16_t startaddr) {
 	uint16_t i = 0;
 	uint8_t i2 = 0;
-	uint32_t tmpval = 0;
-	uint16_t addr = 0;
 	uint8_t tmpxor = 0;
 
 	/// preliminary ZX1, size and address offset
@@ -2125,21 +1902,13 @@ void run_doser_for(uint8_t pump_id, uint8_t amount, uint8_t speed) {
 	enable_dosing_pump(pump_id, 1);
 	vTaskDelay(2);
 	enable_dosing_pump(pump_id, speed);
-	// close_valves();
-	// open_valve(MTI_VALVE);
-	// open_valve(BACK_VALVE);
-	// psiOn();
 	while (now < finish) {
-		// psiStab();
-		// psiOn();
 		now = RTC_GetCounter();
 		IWDG_ReloadCounter();
 		vTaskDelay(10);
-//		send_resp();
 		get_status_block(1); // send status blocks
 		vTaskDelay(10);
 	}
-//	psiOff();
 	enable_dosing_pump(pump_id, 0);
 }
 
@@ -2273,7 +2042,13 @@ void get_settings_block(uint8_t block_number) {
 	txbuff_ne = 1; // signal to transmit packet
 }
 
-/* void onPacketType(uint8_t b) {
+
+
+/*
+ * Protobuzzz pseudocode
+ *
+ *
+ *  void onPacketType(uint8_t b) {
  // depending on packet type we transit to next state
  switch (b) {
  case 1: // for configuration packet type...
@@ -2368,11 +2143,6 @@ void get_status_block(uint8_t blockId) { // sends block with Cadi STATUS data
 		}
 
 		if (blockId == 4) { // state block 4
-//				TxBuffer[4] = currentEc;
-//				TxBuffer[5] = currentPh;
-//				TxBuffer[6] = phUnderOver+ecUnderOver*4;
-//				TxBuffer[7] = (uint8_t)(phWindowTop&(0xFF));
-//				TxBuffer[8] = (uint8_t)((phWindowBottom>>8)&(0xFF));
 			TxBuffer[9] = 00; // EMPTY
 			TxBuffer[10] = dosingPumpStateFlags2;
 			TxBuffer[11] = (uint8_t)(wfCalArray[0] & (0xFF));
@@ -2670,10 +2440,6 @@ void psi_motor_init(void) {
 	TIM_OCInitStruct.TIM_OCIdleState = TIM_OCIdleState_Set;
 	TIM_OCInitStruct.TIM_OCNIdleState = TIM_OCIdleState_Reset;
 
-	/*  TIM_OCInitStruct.TIM_OCMode = TIM_OCMode_PWM2;
-	 TIM_OCInitStruct.TIM_Pulse = 1000;
-	 TIM_OCInitStruct.TIM_OCIdleState = TIM_OCIdleState_Set;
-	 TIM_OCInitStruct.TIM_OCNIdleState = TIM_OCIdleState_Reset;*/
 	TIM_OC1Init(PSI_PUMP_TIM, &TIM_OCInitStruct); // Channel 1
 
 	TIM_Cmd(PSI_PUMP_TIM, ENABLE);
@@ -2696,7 +2462,6 @@ void psi_pwm_test(void) {
 			curpwm++;
 		}
 		PSI_PUMP_TIM->CCR1 = 1000 - curpwm * 10;
-//		PSI_PUMP_TIM->CCR2 = 1000-curpwm*10;
 		Lcd_clear();
 		Lcd_write_str("PSI PWM= ");
 		Lcd_write_8b(curpwm);
@@ -2734,11 +2499,8 @@ void tankLevelStabSetup(void) {
 void tankLevelStab(void) {
 #ifdef TANK_STAB_ENABLE
 	vTaskDelay(1);
-//	uint16_t tmp=0;
 	uint8_t supply_valve = 0;
-//	EE_ReadVariable(WATER_TANK_SUPPLY_VALVE,&tmp);
 	vTaskDelay(1);
-//	supply_valve = (uint8_t)(tmp&0x00FF);
 	if (((auto_flags & 2) >> 1) == 1) { // TANK STAB flag 1
 		if (sonar_read[FWTANK_SONAR] > (tank_windows_top[FWTANK] + 2)) {
 			open_valve(WI_VALVE);
@@ -2932,14 +2694,6 @@ void EXTI15_10_IRQHandler(void) {
 
 	}
 }
-
-/* void EXTI9_5_IRQHandler(void)
- {
- // Clear the  EXTI line 10-12 pending bit
- EXTI_ClearITPendingBit(EXTI_Line5);
- EXTI_ClearITPendingBit(EXTI_Line6);
- EXTI_ClearITPendingBit(EXTI_Line7);
- } */
 
 void eeprom_test(void) {
 	uint16_t addr = 1500;
@@ -3372,227 +3126,6 @@ void startWp(void) {
 	vTaskDelay(200);
 }
 
-/* Grolly 1
- * This Watering Program has following strategy:
- * - the mixing tank is always empty before watering program starts
- * - the watering solution volume is fixed for each watering
- * - water intaken by opening FWI valve (for Grolly ID 4)
- * - MIXTANK_SONAR is used for measuring distance to water edge,
- *  from the top of the tank where sonar installed
- *
- */
-
-/*
-
- void run_watering_program(uint8_t progId){
- enableClock=0;
- wpProgress = 2;
- wpStateFlags|=(1<<progId);	// set active flag for this program
- uint32_t wpStartTs = 0;
- wpStartTs = RTC_GetCounter();
- // FRESH WATER INTAKE
- wpProgress = 3;
- volatile uint16_t n=0;
- uint8_t i=0;
- uint32_t curN=0;
- uint32_t interval=0;
- uint32_t startime=0;
- uint32_t now=0;
- uint32_t overTime=4000000000;
- uint16_t fwl=0;
- uint16_t swl = 0;
- uint16_t curprcnt = 0;
- uint16_t vlm = 0;
- uint16_t addr=0;
- uint16_t fmpLink=0;
- uint16_t flags=0;
- uint16_t curLvl = 0;
- uint8_t got_fw = 0;
- uint8_t ninetenth=0;
- now = RTC_GetCounter();
- startime = now;
- wpProgress = 4;
- vTaskDelay(100);
- //
- //  Filling water strategy A
- *   The water is filled up in amount of 'volume',
- *    when there is less than 100% of watering program volume currently
- *    in the MIXTANK. This behavior expects already prepared solution in
- *    the MIXTANK, suitable for this (any, that could run) watering
- *    program
- *    swl - start water level
- *    fwl - final water level
- *
- *    !!! REMEMBER !!!
- *    More sonar read value, less water in the tank!
- *
- swl = sonar_read[MIXTANK_SONAR];			// remember start water level
- addr = WP_OFFSET+progId*WP_SIZE+WP_VOLUME;	// read the volume needed to add in MIXTANK
- EE_ReadVariable(addr, &vlm);
- vlm &= (uint16_t)0xFF;
- vTaskDelay(100);
- // 	volume &= (uint16_t)0x00FF;	// lower byte - WP volume, higher - WP rules
- fwl = tank_windows_bottom[MIXTANK] - sonar_read[MIXTANK_SONAR];	// how much water we have already
- Lcd_clear();
- // 14, 52, 66, 14
- Lcd_write_str("NW");		// 25
- Lcd_write_digit(fwl/100);
- Lcd_write_digit(fwl);
- Lcd_write_str("CL");		// 41
- Lcd_write_16b(sonar_read[MIXTANK_SONAR]);
- Lcd_goto(1,0);
- Lcd_write_str("BT");		// 66
- Lcd_write_16b(tank_windows_bottom[MIXTANK]);
- Lcd_write_str("VL");		// 10
- Lcd_write_16b(vlm);
- vTaskDelay(8000);
-
- volatile static uint8_t left = 0;							// indicates how much water let to fill
- if (fwl < (vlm/3)) {							// if current water level < than 1/3 of WP volume
- fwl = swl - vlm;						// get Final Water Level: now+WPvol
- Lcd_clear();
- Lcd_write_str("FW");
- Lcd_write_16b(fwl);
- Lcd_goto(1,0);
- Lcd_write_str("SW");
- Lcd_write_16b(swl);
- Lcd_write_str("VL");
- Lcd_write_16b(vlm);
- vTaskDelay(10000);
- open_valve(FWI_VALVE);	// FWI valve
- Lcd_clear();
- while (overTime > now) { // 5 seconds sonar should report >100% fill to close FWI valve
- left = (uint8_t)((sonar_read[MIXTANK_SONAR] - fwl)&(0xFF));
- if ( sonar_read[MIXTANK_SONAR] >= fwl){	// more sonar read - less water
- overTime = RTC_GetCounter() + 5;
- open_valve(FWI_VALVE);
- }
- Lcd_goto(0,0);
- Lcd_write_str("Left=");
- Lcd_write_digit(left/100);
- Lcd_write_digit(left);
- vTaskDelay(10);
- Lcd_goto(1,0);
- Lcd_write_str("Lvl=");
- Lcd_write_16b(sonar_read[MIXTANK_SONAR]);
- vTaskDelay(200);
- now = RTC_GetCounter();
- wpProgress = 5;
- }
- close_valve(FWI_VALVE);
- vTaskDelay(1000);
- wpProgress = 6;
-
- // mix fertilizers
- got_fw = (uint8_t)swl - (uint8_t)sonar_read[MIXTANK_SONAR];
- ninetenth = (uint8_t)((vlm*9)/10);
-
- for (i=0; i<FMP_PROGRAMS_AMOUNT; i++) {
- vTaskDelay(10);
- wpProgress = i+87;
- addr=0;
- // count current N value
- addr = WP_OFFSET+progId*WP_SIZE+WP_INTERVAL;
- interval = EE_ReadWord(addr);
- addr = WP_OFFSET+progId*WP_SIZE+WP_START;
- startime = EE_ReadWord(addr);
- vTaskDelay(100);
- addr = FMP_OFFSET+i*FMP_SIZE+FMP_TRIG_FREQUENCY_SHIFT;
- EE_ReadVariable(addr, &n);
- uint16_t enabled=0;
- uint8_t rest = 0;
- vTaskDelay(100);
- if (n>0) {
- curN = (RTC_GetCounter()-startime)/interval;
- vTaskDelay(100);
- wpProgress = 200;
- vTaskDelay(200);
- rest = curN%(n%256);	// lower byte of 16bit of FMP_TRIG_FREQUENCY_SHIFT
- enabled=1;
- }
- else {
- enabled=0;
- }
- vTaskDelay(50);
- fmpLink=n/256;	// higher byte of FMP_TRIG_FREQUENCY = WP link
- addr = 0;
- // addr = FMP_OFFSET+i*FMP_SIZE+FMP_DOSING_PUMP_ID_SHIFT;
- // EE_ReadVariable(addr, &enabled);	//
- if (fmpLink==progId && enabled>0) {
- wpProgress = 99;
- vTaskDelay(400);
- run_fertilizer_mixer_g2(i);
- wpProgress = 100+i;
- vTaskDelay(2000);
- }
- vTaskDelay(100);
- wpProgress = 8;
- }
- }
- vTaskDelay(50);
- wpProgress = 9;
- // open corresponding watering line valve(s)
- addr = WP_OFFSET+progId*WP_SIZE+WP_FLAGS;
- EE_ReadVariable(addr, &flags);
- for (i=1; i<=VALVE_AMOUNT; i++) {
- if (((flags>>i)&1)==1) {
- open_valve(i);
- }
- else {
- close_valve(i);
- }
- vTaskDelay(100);
- }
- wpProgress = 10;
- uint8_t srcomm = 0;
- uint16_t tmpval=0;
- srcomm = comm_state;	// backup curent commstate. to recover after watering
- comm_state = COMM_MONITOR_MODE;
- vTaskDelay(50);
- addr = WP_OFFSET+progId*WP_SIZE+WP_TIMEOUT;
- vlm=0;
- EE_ReadVariable(addr, &vlm);
- overTime = RTC_GetCounter();
- overTime += 0x0000FFFF&((uint32_t)vlm);	// volume used to retrieve timeout
- auto_flags |= (1<<2);// set overpressure autosafe flag
- auto_failures  &= ~1;	// reset PSI main failure flag
- auto_failures  &= ~(1<<3);	// reset PSI underpressure flag
- now = 0;
- // run watering
- auto_flags|=9;	// enable watering through psi stab function with underpressure trig
- vTaskDelay(30);
- while (((auto_failures&8)>>3)==0 && now<overTime) {
- Lcd_goto(0,0);
- Lcd_write_str("Left: ");
- Lcd_write_digit(wpProgress);
- vTaskDelay(500);
- psiStab();
- wpProgress = (uint8_t)(overTime-now);
- now=RTC_GetCounter();
- vTaskDelay(50);
- }
- auto_flags&=~(1);	// disable PSI stab function flag
- psiOff();
- //	if ((auto_flags&1)==1 && ((auto_failures&8)>>3)==0 && (auto_failures&1)==0 && comm_state==COMM_MONITOR_MODE) {			// PSI STAB flag is number 0
-
- wpProgress = 12;
- vTaskDelay(20000);	// release pressure in watering line
- comm_state = srcomm;	// recover comm_state
- auto_failures  &= ~(1<<3);	// reset PSI failure flag
- wpProgress = 13;
- vTaskDelay(1000);
- valve_init();	// close all valves
-
- addr = WP_OFFSET+progId*WP_SIZE+WP_LAST_RUN_SHIFT;
- EE_WriteWord(addr, wpStartTs);	// write last run time
-
- wpStateFlags &= ~(1<<progId); // sbrosit' flag
- enableClock=1;
- vTaskDelay(200);
- }
-
- */
-
 
 void wt_add_ferts_for_wp(uint8_t progId){
 	uint8_t i=0;
@@ -3715,15 +3248,12 @@ void run_watering_program_g2(uint8_t progId) {
 	uint32_t interval = 0;
 	uint32_t startime = 0;
 	uint32_t now = 0;
-	uint32_t overTime = 4000000000;
 	uint16_t fwl = 0;
 	uint16_t swl = 0;
-	uint16_t curprcnt = 0;
 	uint16_t vlm = 0;
 	uint16_t addr = 0;
 	uint16_t fmpLink = 0;
 	uint16_t flags = 0;
-	uint16_t curLvl = 0;
 	uint8_t got_fw = 0;
 	uint8_t ninetenth = 0;
 	now = RTC_GetCounter();
@@ -4055,14 +3585,8 @@ void get_fertilizer(uint8_t fertId, uint8_t secs) { // secs - number of seconds 
 	enable_dosing_pump(fertId, 0);
 }
 
-void valve_init(void) {
-	close_valve(3);
-	close_valve(4);
-	close_valve(0);
-	close_valve(1);
-	close_valve(2);
-}
 
+// the task, responsible for excuting the watering tasks and watering programs
 void watering_program_trigger(void *pvParameters) {
 	uint32_t curtime = 0;
 	uint32_t lastRun = 0;
@@ -4136,6 +3660,8 @@ void watering_program_trigger(void *pvParameters) {
 
 }
 
+
+// demo functions
 void effect11on(uint32_t delay) {
 	vTaskSuspendAll();
 	open_valve(WLINE_61_VALVE);
@@ -4438,6 +3964,7 @@ void wt_get_water(uint8_t amount) {
 	close_valves();
 }
 
+// simple mixing of watering solution in mixtank, within 'duration' seconds
 void wt_mixing(uint16_t duration){
 	uint32_t timeout = 0;
 	uint32_t now = 0;
@@ -4460,6 +3987,12 @@ void wt_mixing(uint16_t duration){
 	close_valves();
 }
 
+// Min the fertilizer into MixTank, mixing the solution after
+/* duration - seconds to circulate/mix the solution while the fertilizer added
+ * vol - seconds to mix the fertilizer in
+ * doserid - an id of the dosing pump
+ * spd - speed of the dosing pump
+ */
 void wt_mix_in(uint16_t duration, uint16_t vol, uint8_t doserid, uint8_t spd){
 	uint32_t timeout = 0;
 	uint32_t finishDosing = 0;
@@ -4495,6 +4028,7 @@ void wt_mix_in(uint16_t duration, uint16_t vol, uint8_t doserid, uint8_t spd){
 	close_valves();
 }
 
+// watering using single valve
 void wt_watering(uint16_t duration, uint8_t line_id){
 	uint32_t timeout = 0;
 	uint32_t now = 0;
@@ -4515,6 +4049,7 @@ void wt_watering(uint16_t duration, uint8_t line_id){
 	close_valves();
 }
 
+// water through the number of valves
 void wt_watering_x(uint16_t duration, uint16_t valveFlags){
 	uint32_t timeout = 0;
 	uint32_t now = 0;
@@ -4591,6 +4126,8 @@ void wt_mt_drain2level(uint16_t new_level, uint8_t drain_valve){
 	close_valves();
 }
 
+
+// executes the task, that was received from Cadiweb
 void run_watering_task(uint8_t pwt) {
 	uint16_t val16 = 0;
 	uint16_t val16_2 = 0;
@@ -4679,129 +4216,6 @@ void dht_init_exti(void) {
 
 }
 
-/*
- void dht_init(void){	// 150404
- // RCC Config
- // TIM15 clock enable
- RCC_APB2PeriphClockCmd(RCC_APB2Periph_TIM15, ENABLE);
-
- // GPIO Config
- GPIO_InitTypeDef GPIO_InitStructure;
-
- // TIM15 channel 2 pin (PB15) configuration
- GPIO_InitStructure.GPIO_Pin = GPIO_Pin_15;
- GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
- GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-
- GPIO_Init(GPIOB, &GPIO_InitStructure);
-
- // NVIC Config
-
- GPIO_PinRemapConfig(GPIO_Remap_TIM15, ENABLE);
- NVIC_InitTypeDef NVIC_InitStructure;
-
- // Enable the TIM15 global Interrupt
-
- NVIC_InitStructure.NVIC_IRQChannel = TIM1_BRK_TIM15_IRQn;
- NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
- NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
- NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
- NVIC_Init(&NVIC_InitStructure);
-
- TIM_ICInitStructure.TIM_Channel = TIM_Channel_2;
- TIM_ICInitStructure.TIM_ICPolarity = TIM_ICPolarity_Rising;
- //	   TIM_ICInitStructure.TIM_ICPolarity = TIM_ICPolarity_BothEdge;
- TIM_ICInitStructure.TIM_ICSelection = TIM_ICSelection_DirectTI;
- TIM_ICInitStructure.TIM_ICPrescaler = TIM_ICPSC_DIV1;
- TIM_ICInitStructure.TIM_ICFilter = 0x0;
-
- TIM_PWMIConfig(TIM15, &TIM_ICInitStructure);
-
- // Select the TIM15 Input Trigger: TI2FP2
- TIM_SelectInputTrigger(TIM15, TIM_TS_TI2FP2);
-
- // Select the slave Mode: Reset Mode
- TIM_SelectSlaveMode(TIM15, TIM_SlaveMode_Reset);
-
- // Enable the Master/Slave Mode
- TIM_SelectMasterSlaveMode(TIM15, TIM_MasterSlaveMode_Enable);
-
- // TIM enable counter
- TIM_Cmd(TIM15, ENABLE);
-
- // Enable the CC2 Interrupt Request
- TIM_ITConfig(TIM15, TIM_IT_CC2, ENABLE);
-
- }
-
-
-
- void dht_init_out(void){	// init GPIO pin as OUTput
- GPIOB->CRH      &= ~GPIO_CRH_CNF15;		// ... and PB15 for DHT triggering
- GPIOB->CRH   |= GPIO_CRH_MODE15_0;
- }
-
- void dht2_init_out(void){	// init GPIO pin as OUTput
- GPIOB->CRH      &= ~GPIO_CRH_CNF14;		// ... and PB15 for DHT triggering
- GPIOB->CRH   |= GPIO_CRH_MODE14_0;
- } */
-
-/******************************************************************************/
-/*            STM32F10x Peripherals Interrupt Handlers                        */
-/******************************************************************************/
-
-/*
- void TIM1_BRK_TIM15_IRQHandler(void)		// DHT moved from PA7 to PB15. 11.07.2013
- {
- //	if ((TIM_GetITStatus(TIM15, TIM_IT_CC2) != RESET) && (TIM_GetITStatus(TIM15, TIM_IT_CC2) != RESET))  {
- // Clear TIM3 Capture compare interrupt pending bit
-
- TIM_ClearITPendingBit(TIM15, TIM_IT_CC2);
- TIM_ClearITPendingBit(TIM15, TIM_IT_CC1);
-
- // Get the Input Capture value
- IC2Value = TIM15->CCR2;
-
- if (IC2Value != 0)
- {
- // Duty cycle computation
- DutyCycle = ((TIM15->CCR1) * 100) / IC2Value;
- icval++;
- }
- else
- {
- icval2++;
- DutyCycle = 0;
- Frequency = 0;
- }
-
-
-
- if (dht_bit_position>dht_shifter && dht_data_ready==0) {
- if (DutyCycle>25 && DutyCycle<35) {
- dht_byte_buf[dht_byte_pointer] &= ~(1<<(dht_bit_pointer));	// reset bit in dht_data[i]
- }
- else {
- dht_byte_buf[dht_byte_pointer] |= (1<<(dht_bit_pointer)); // set bit
- }
- if (dht_bit_pointer==0){
- dht_bit_pointer=7;
- dht_byte_pointer++;
- if (dht_byte_pointer==4) {
- dht_data_ready=1;
- dht_byte_pointer = 0;
- dht_bit_pointer = 7;
- }
- }
- else {
- dht_bit_pointer--;
- }
- }
- //	}
-
-
- }
- */
 
 void TIM1_UP_TIM16_IRQHandler(void) // mixtank sonar interrupt
 {
@@ -4865,51 +4279,6 @@ void TIM4_IRQHandler(void) {
 
 	}
 }
-
-/* void dht_get_data(void){	// function starts getting data from DHT22 sensor
- vTaskDelay(25);
- uint8_t i;
- for (i=0;i<5;i++) {
- dht_byte_buf[i]=0;
- }
- dht_bit_position = 0;
- dht_data_ready=0;
- dht_init_out();
- DHT2_0;
- vTaskDelay(5);
- DHT2_1;
- dht_init();
- vTaskDelay(200);
-
- vTaskDelay(5);
- dht_conv_data();
- } */
-
-/*
- void dht2_get_data(void){	// function starts getting data from DHT22 sensor
- vTaskDelay(25);
- uint8_t i;
- for (i=0;i<5;i++) {
- dht_byte_buf[i]=0;
- }
- dht_rise = 0;
- dht2_init_out();
-
- DHT1_0;
- IWDG_ReloadCounter();
- Delay_us_(21000);
- IWDG_ReloadCounter();
- DHT1_1;
- dht2_init();
- dht_bit_pointer = 7;
- dht_bit_position = 0;
- dht_byte_pointer = 0;
- dht_data_ready=0;
- dht_rise = 0;
- vTaskDelay(200);
- dht_conv_data();
- }
- */
 
 void dht_arr_displayer(void) {
 	button = 0;
@@ -5057,20 +4426,6 @@ void Lcd_write_32int(uint32_t d) {
 	int32str(d, &tmpstr);
 	copy_arr(&tmpstr, LCDLine2, 11, 0, 0);
 }
-
-/* void enablePlug5ms(uint8_t plug, uint16_t amount){	// 1 amount = 5ms
- RCC->APB1ENR |= RCC_APB1ENR_TIM2EN;   //enable TIM2 clock
- TIM2->PSC     = 40000-1;               //set divider for 5 milliseconds
- TIM2->ARR = amount;
- TIM2->CR1     = TIM_CR1_OPM;          //one pulse mode
- TIM2->CR1 |= TIM_CR1_CEN;
- plugStateSet(plug, 1);
- while((TIM2->SR & TIM_SR_UIF)==0){
- vTaskDelay(10);
- }
- plugStateSet(plug, 0);
- }
- */
 
 typedef struct {
 	uint32_t quot;
@@ -5647,9 +5002,6 @@ void readButtonRanges(void) {
 	}
 }
 
-/* FRESULT string2log(char* str, uint8_t bytes){
-
- } */
 
 void adcAverager(void) {
 	uint8_t i = 0;
@@ -5762,48 +5114,16 @@ void psiOff(void) {
 uint16_t psi_sw_speed = 1000; // 1000 - stop motor, 0 - full speed.
 
 void psiStab(void) {
-//	uint8_t stabFlag=0;
-//	uint8_t af1 = 0;
-//	uint8_t af2 = 0;
-	uint16_t factor = 0;
 	if ((auto_flags & 1) == 1&& ((auto_failures&8)>>3)==0 && (auto_failures&1)==0 && comm_state==COMM_MONITOR_MODE) { // PSI STAB flag is number 0
 		if	(adcAverage[AVG_ADC_PSI]>psi_pump_top_level) {
 				psi_sw_speed = 1000;
 				psiOff();
 			}
-		// vTaskDelay(1);
 		if (adcAverage[AVG_ADC_PSI]<psi_pump_btm_level) {
 			psi_sw_speed = (100-psi_max_speed)*10;
 			PSI_PUMP_TIM->CCR1 = (100-psi_max_speed)*10;
 		}
-	/*		if (adcAverage[AVG_ADC_PSI]>psi_pump_btm_level && adcAverage[AVG_ADC_PSI]<psi_pump_top_level) {
-	 // Cadi VSD range
-	 if (adcAverage[AVG_ADC_PSI] < psi_a) {
-	 // factor here is a number from 0 to 10, showing the rate of speed change
-	 factor = ((psi_pump_top_level + psi_pump_btm_level)/2 - adcAverage[AVG_ADC_PSI])/(((psi_pump_top_level - psi_pump_btm_level)/2)/10);
-	 psi_sw_speed -= factor*10;
-	 }
-	 if (adcAverage[AVG_ADC_PSI] > psi_b) {
-	 factor = ((adcAverage[AVG_ADC_PSI] - (psi_pump_top_level + psi_pump_btm_level)/2))/(((psi_pump_top_level - psi_pump_btm_level)/2)/10);
-	 psi_sw_speed += factor*10;
-	 }
-	 if (psi_sw_speed<((100-psi_m_low)*10)) {	// if software speed is > than minimum, then apply changes
-	 if (TIM2->CCR3>((100-psi_m_low)*10)) {
-	 psi_spin_up();
-	 }
-	 else {
-	 spf = 0;
-	 }
-	 TIM2->CCR3 = psi_sw_speed;	// apply speed change (decrease). 1000 - full stop
-	 TIM2->CCR4 = psi_sw_speed;
-	 }
-	 else {
-	 TIM2->CCR3 = 1000;		// otherwise stop motor hardware
-	 TIM2->CCR4 = 1000;
-	 }
 
-
-	 }*/
 	}
 	else {
 		psiOff();
@@ -5811,9 +5131,6 @@ void psiStab(void) {
 }
 
 void psiStabVsd(void) {
-//	uint8_t stabFlag=0;
-//	uint8_t af1 = 0;
-//	uint8_t af2 = 0;
 	uint16_t factor = 0;
 	if ((auto_flags & 1)
 			== 1&& ((auto_failures&8)>>3)==0 && (auto_failures&1)==0 && comm_state==COMM_MONITOR_MODE) { // PSI STAB flag is number 0
@@ -6017,58 +5334,7 @@ void plugStateTrigger(void *pvParameters) {
 }
 
 void psiSetup(void) { // REMOVE !!!
-/*	uint8_t curbutton=0, tmp;
- uint16_t curpsiadc=0, tmp2=0, tempvalue=0;
- comm_state=COMM_DIRECT_DRIVE;
- Lcd_clear();
- //	tmp2 = EE_PLUG_SETTINGS+PSI_PUMP_ID;
- EE_WriteVariable(tmp2, 80);		// HARDCODE!!! program (timer) id for booster pump
- plugSettings[tempvalue] = 80;
- Lcd_write_str("ADC psi reading");
- while (curbutton!=BUTTON_FWD){
- Lcd_goto(1,0);
- Lcd_write_str("TOP:");
- if (curbutton==BUTTON_BCK){
- //		plugStateSet(PSI_PUMP_ID, 1);
- }
- if (curbutton==BUTTON_OK){
- //			plugStateSet(PSI_PUMP_ID, 0);
- }
- if (curbutton==BUTTON_CNL){
- psi_pump_top_level = adcAverage[AVG_ADC_PSI];
- }
- vTaskDelay(25);
- Lcd_write_16b(adcAverage[AVG_ADC_PSI]);
- Lcd_write_str("/");
- Lcd_write_16b(psi_pump_top_level);
- curbutton=readButtons();
- }
- //	plugStateSet(PSI_PUMP_ID, 0);
- printOk();
- curbutton=0;
- while (curbutton!=BUTTON_FWD){
- Lcd_goto(1,0);
- Lcd_write_str("BTM:");
- if (curbutton==BUTTON_BCK){
- //			plugStateSet(PSI_PUMP_ID, 1);
- }
- if (curbutton==BUTTON_OK){
- //			plugStateSet(PSI_PUMP_ID, 0);
- }
- if (curbutton==BUTTON_CNL){
- psi_pump_btm_level = adcAverage[AVG_ADC_PSI];
- }
- vTaskDelay(10);
- Lcd_write_16b(adcAverage[AVG_ADC_PSI]);
- Lcd_write_str("/");
- Lcd_write_16b(psi_pump_btm_level);
- curbutton=readButtons();
- }
- //	plugStateSet(PSI_PUMP_ID, 0);
- comm_state=COMM_MONITOR_MODE;
- EE_WriteVariable(PSI_SENSOR_TOP, psi_pump_top_level);
- EE_WriteVariable(PSI_SENSOR_BTM, psi_pump_btm_level);
- printOk(); */
+
 }
 
 void I2C_init2(void) {
@@ -6093,20 +5359,7 @@ void I2C_init2(void) {
 
 	I2C_LowLevel_Init(I2C2);
 
-	/*	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB | RCC_APB2Periph_AFIO, ENABLE);
-	 GPIO_InitTypeDef GPIO_InitStructure;
-	 GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
-	 GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_OD;
-	 GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6 | GPIO_Pin_7;
-	 GPIO_Init(GPIOB, &GPIO_InitStructure);
-	 RCC_APB1PeriphClockCmd(RCC_APB1Periph_I2C1, ENABLE);
-	 I2C_InitTypeDef I2C_InitStructure;
-	 I2C_StructInit(&I2C_InitStructure);
-	 I2C_InitStructure.I2C_ClockSpeed = 100000;
-	 I2C_InitStructure.I2C_OwnAddress1 = 0x01;
-	 I2C_InitStructure.I2C_Ack = I2C_Ack_Enable;
-	 I2C_Init(I2C1, &I2C_InitStructure);
-	 I2C_Cmd(I2C1, ENABLE); */
+
 }
 
 void I2C2_init(void) {
@@ -6165,13 +5418,6 @@ uint8_t I2C_single_read(uint8_t HW_address, uint8_t addr) {
 		;
 	return data;
 }
-
-/*void delay()
- {
- for(volatile uint32_t del = 0; del<250000; del++){
-
- }
- } */
 
 // sends a value 0..255 via I2C
 void i2c_send_byte_test(uint8_t val) {
@@ -6496,7 +5742,6 @@ uint16_t adjust16bit(uint16_t val) {
 }
 
 uint16_t adjust16bit_fast(uint16_t val, uint8_t speed) {
-	char buffer[11];
 	if (val > 65534) {
 		val = 0;
 	}
@@ -6810,7 +6055,6 @@ void Lcd_write_arr2(uc8 *STRING, uint8_t chars) {
 	uint8_t i = 0;
 	for (i = 0; i < chars; i++) {
 		c = STRING[i];
-//		vTaskDelay(5);
 		Lcd_write_data(c);
 	}
 }
@@ -7075,13 +6319,7 @@ void RtcToTime(uint32_t cnt, RTC_Time *time) {
 
 // EOF mycontroller.ru RTC functions
 
-// function slides the buffer window for pH ADC values (and EC)
-void phMonitor(void *pvParameters) {
-	while (1) {
-		vTaskDelay(1);
-		adcAverager();
-	}
-}
+
 
 void copy_arr(volatile uint8_t *source, volatile uint8_t *destination,
 		uint8_t amount, uint8_t pos, uint8_t src_pos) {
@@ -7091,7 +6329,6 @@ void copy_arr(volatile uint8_t *source, volatile uint8_t *destination,
 	}
 }
 
-// copy_arr(&RxBuffer, &wt_args, 7, 0, 2);
 
 void psi_spin_up(void) {
 	PSI_PUMP_TIM->CCR1 = 1000
@@ -7128,15 +6365,12 @@ uint8_t skip_button_cal(void) {
 void displayClock(void *pvParameters) {
 	RTC_DateTime DateTime;
 	uint32_t tmp = 0;
-	uint8_t tempn = 0;
 	tmp = RTC_GetCounter();
 	fup_time = RTC_GetCounter() + 60;
 	if (tmp < 1388534400) {
 		RTC_SetCounter(1400000000);
 	}
 	Lcd_clear();
-
-//		displayAdcValues();
 
 	Lcd_write_str("Hello Buddy :)");
 	vTaskDelay(200);
@@ -7180,19 +6414,13 @@ void displayClock(void *pvParameters) {
 			button = readButtons();
 			vTaskDelay(50);
 
-
-#ifdef I2C_MASTER
-//			    I2C_Master_BufferRead(I2C1,Buffer_Rx1,1,Polling, DEST_I2C_ADDR);
-#endif
 			curi2crxval = 10 + Buffer_Rx1[0];
 
 			Lcd_goto(0, 9);
-			//Lcd_write_16b(wrtn_val);
 			Lcd_write_8b(resp_id);
 			Lcd_write_8b(resp_counter);
 
 			Lcd_goto(1, 9);
-			//Lcd_write_16b(wrtn_val);
 			Lcd_write_16b(ph1_adc_val);
 
 
@@ -7236,19 +6464,7 @@ uint8_t readButtons(void) {
 	}
 }
 
-uint8_t readButtons2(void) {
-	uint16_t curval = 0;
-	uint8_t i;
-	adcAverager();
-	curval = adcAverage[ADC_AVG_BUTTONS];
-	for (i = 0; i < 4; i++) {
-		if (curval > button_ranges[i * 2] + BUTTON_RANGE_SHRINKER
-				&& curval < button_ranges[i * 2 + 1] - BUTTON_RANGE_SHRINKER) {
-			return (i + 1);
-		}
-	}
-	return 0;
-}
+
 
 void AdcInit(void) {
 	// WARNING NTBU (needs to be updated)! shifting pins down to 0 from 1st, saves some space on discovery board
@@ -7316,21 +6532,7 @@ void Lcd_write_digit(uint8_t numb) {
 	}
 }
 
-void prvSetupHardware() {
-	// LOAD triggering control pins init
-	RCC->APB2ENR |= RCC_APB2ENR_IOPCEN; // Enable clock on GPIOC.
-	GPIOC->CRL &= ~GPIO_CRL_CNF0; // LOAD triggering from PC0...
-	GPIOC->CRL &= ~GPIO_CRL_CNF1;
-	GPIOC->CRL &= ~GPIO_CRL_CNF2;
-	GPIOC->CRL &= ~GPIO_CRL_CNF3; // ... to PC3
 
-	GPIOC->CRL |= GPIO_CRL_MODE0_0;
-	GPIOC->CRL |= GPIO_CRL_MODE1_0;
-	GPIOC->CRL |= GPIO_CRL_MODE2_0;
-	GPIOC->CRL |= GPIO_CRL_MODE3_0;
-}
-
-uint8_t tmpdata[1];
 
 void vTaskLCDdraw(void *pvParameters) { // draws lcd
 	tmpdata[0] = 0;
@@ -7365,10 +6567,7 @@ void lcd_restart(void) {
 	I2C_LowLevel_Init(I2C1);
 	// === LCD init ===
 
-#ifdef LCD_I2C_DFROBOT
-	LCDI2C_init(0x4E, 16, 2);
-#endif
-
+	LCDI2C_init(LCD_I2C_ADDR, 16, 2);
 }
 
 void int32str(uint32_t d, volatile char *out) {
@@ -7408,7 +6607,6 @@ void setPwmDc(uint8_t duty_cycle) { // duty_cycle in %
 }
 
 void setDoserSpeed(uint8_t doser, uint8_t speed) {
-	uint16_t spd = 0;
 	uint32_t speeds1 = 0, speeds2 = 0;
 	speeds1 = EE_ReadWord(DOSER_SPEEDS);
 	if (doser == 0) {
@@ -7505,7 +6703,7 @@ void dht_power_control_init(void) {
 	GPIO_Init(GPIOB, &init_pin);
 }
 
-uint8_t tmpdata[1];
+
 
 void power_ctrl(uint8_t device, uint8_t state) {
 	switch (device) {
@@ -7568,22 +6766,10 @@ uint8_t main(void) {
 	GPIOC->BRR |= (1 << 12);
 
 	dosing_motor_control_init();
-	uint8_t curpinstate = 0;
-	/*	while (1) {
-	 if (curpinstate == 0) {
-	 curpinstate = 1;
-	 GPIOC->BRR |= (1<<12);
-	 }
-	 else {
-	 curpinstate = 0;
-	 GPIOC->BSRR |= (1<<12);
-	 }
-	 Delay_us(100);
-	 }*/
+
 
 	psi_motor_init();
 
-//	beep_overload(100);
 
 	// valves[5..8] on PA4-PA7 init, and valves [9..11] on PC10-PC12
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
@@ -7622,54 +6808,30 @@ uint8_t main(void) {
 	RtcInit();
 
 	auto_failures = 0;
-	uint32_t i;
 
 	/* Unlock the Flash Program Erase controller */
 	FLASH_Unlock();
 	/* EEPROM Init */
 	EE_Init();
 	AdcInit();
-//	OW_Reset();
-
 	power_ctrl(PWR_LCD, 0);
-
-//	Lcd_clear();
-//	dht_init();		// start TIM15
-//	Delay(1000);
 	power_ctrl(PWR_LCD, 1);
 	Delay(1000);
 
 	loadSettings();
 	flush_lcd_buffer(); // fills the LCD frame buffer with spaces
-//	Lcd_write_str("LCD1 ON!");
 
 	I2C_init2();	// master-slave test send	(pH sensor)
-
-#ifdef I2C_SLAVE
-//	I2C_Slave_BufferReadWrite(I2C1, Interrupt);
-#endif
 
 	tmpdata[0] = 0;
 
 
 	// === LCD init ===
 
-	i = 0;
-
-	// === LCD init ===
-#ifdef LCD_I2C_MJKDZ
-	I2C_Master_BufferWrite(I2C1, tmpdata,1,Interrupt,  0x40);
-	LCDI2C_init(0x40,16,2);	// I2C display adress is 0x20, but since https://my.st.com/public/STe2ecommunities/mcu/Lists/STM32Discovery/Flat.aspx?RootFolder=https%3a%2f%2fmy.st.com%2fpublic%2fSTe2ecommunities%2fmcu%2fLists%2fSTM32Discovery%2fstm32f4%20i2c%20pcf8574&FolderCTID=0x01200200770978C69A1141439FE559EB459D75800084C20D8867EAD444A5987D47BE638E0F&currentviews=619 we need increase it x2
-#endif
-
-#ifdef LCD_I2C_DFROBOT
-	I2C_Master_BufferWrite(I2C1, tmpdata,1,Interrupt,  0x4E);
-	LCDI2C_init(0x4E,16,2);	// I2C display adress is 0x20, but since https://my.st.com/public/STe2ecommunities/mcu/Lists/STM32Discovery/Flat.aspx?RootFolder=https%3a%2f%2fmy.st.com%2fpublic%2fSTe2ecommunities%2fmcu%2fLists%2fSTM32Discovery%2fstm32f4%20i2c%20pcf8574&FolderCTID=0x01200200770978C69A1141439FE559EB459D75800084C20D8867EAD444A5987D47BE638E0F&currentviews=619 we need increase it x2
-#endif
-	  // ------- Quick 3 blinks of backlight  -------------
-	  i=0;
-
 #ifdef USE_LCD
+	  I2C_Master_BufferWrite(I2C1, tmpdata,1,Interrupt,  LCD_I2C_ADDR);
+	  LCDI2C_init(LCD_I2C_ADDR,16,2);	// I2C display adress is 0x20, but since https://my.st.com/public/STe2ecommunities/mcu/Lists/STM32Discovery/Flat.aspx?RootFolder=https%3a%2f%2fmy.st.com%2fpublic%2fSTe2ecommunities%2fmcu%2fLists%2fSTM32Discovery%2fstm32f4%20i2c%20pcf8574&FolderCTID=0x01200200770978C69A1141439FE559EB459D75800084C20D8867EAD444A5987D47BE638E0F&currentviews=619 we need increase it x2
+
 	  LCDI2C_backlight(); // finish with backlight
 	  LCDI2C_clear();
 	  LCDI2C_write_String("Hello Buddy!");
@@ -7677,8 +6839,6 @@ uint8_t main(void) {
 	  LCDI2C_clear();
 	  LCDI2C_write_String("Let's grow!");
 	  Delay_us(2000);
-
-
 #endif
 
 	psi_m_low = PSI_M_LOW;
@@ -7703,7 +6863,6 @@ uint8_t main(void) {
 	 NULL, tskIDLE_PRIORITY + 1, NULL);
 
 	Delay_us(100);
-	beep_overload(1000);
 
 	watchdog_init();	// start watchdog timer
 
@@ -7717,7 +6876,6 @@ uint8_t main(void) {
 
 void loadSettings(void) { // function loads the predefined data
 	uint16_t i, Address, Data;
-	char tmpstr[11], putstring[50];
 
 	for (i = 0; i < PLUG_AMOUNT; i++) {
 		Address = EE_PLUG_SETTINGS + i;
@@ -7745,9 +6903,7 @@ void loadSettings(void) { // function loads the predefined data
 		EE_ReadVariable(WFM_CAL_OFFSET + i, &wfCalArray[i]);
 	}
 
-	EE_ReadVariable(CO2_TOP, &co2_top);
-	EE_ReadVariable(CO2_BTM, &co2_btm);
-	EE_ReadVariable(CO2_400PPM, &co2_400ppm);
+
 
 	readButtonRanges();
 }
@@ -7771,47 +6927,11 @@ void Lcd_goto(uc8 x, uc8 y) {
 	if (x == 1) {
 		str += 0x40;
 	}
-//	Lcd_write_cmd(str);
 	LCDI2C_send(str, 0);
 	lcd_pointerx = y;
 	lcd_pointery = x;
 }
 
-// Cadi mainboard LCD Init (4bit direct mode)
-void Init_pin_out() {
-	// Cadi MB pins for LCD are following:
-	// data: PA15, PC10, PC11, PC12
-	// cmd: PD2, PB3, PB4
-
-	/*
-	 RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB|RCC_APB2Periph_GPIOC|RCC_APB2Periph_GPIOD, ENABLE);
-	 GPIO_InitTypeDef init_pin;
-	 init_pin.GPIO_Pin  = GPIO_Pin_10 | GPIO_Pin_11 | GPIO_Pin_12;
-	 init_pin.GPIO_Mode = GPIO_Mode_Out_PP;
-	 init_pin.GPIO_Speed = GPIO_Speed_50MHz;
-	 GPIO_Init(GPIOC, &init_pin);
-	 init_pin.GPIO_Pin  = GPIO_Pin_15;
-	 init_pin.GPIO_Mode = GPIO_Mode_Out_PP;
-	 init_pin.GPIO_Speed = GPIO_Speed_50MHz;
-	 GPIO_Init(GPIOA, &init_pin);
-	 init_pin.GPIO_Pin  = GPIO_Pin_3 | GPIO_Pin_4;
-	 init_pin.GPIO_Mode = GPIO_Mode_Out_PP;
-	 init_pin.GPIO_Speed = GPIO_Speed_50MHz;
-	 GPIO_Init(GPIOB, &init_pin);
-	 init_pin.GPIO_Pin  = GPIO_Pin_2;
-	 init_pin.GPIO_Mode = GPIO_Mode_Out_PP;
-	 init_pin.GPIO_Speed = GPIO_Speed_50MHz;
-	 GPIO_Init(GPIOD, &init_pin); */
-}
-
-void Init_pin_in() {
-	RCC_APB2PeriphClockCmd(lcd_init_port_data, ENABLE);
-	GPIO_InitTypeDef init_pin;
-	init_pin.GPIO_Pin = pin_d7 | pin_d6 | pin_d5 | pin_d4;
-	init_pin.GPIO_Mode = GPIO_Mode_IPD;
-	init_pin.GPIO_Speed = GPIO_Speed_50MHz;
-	GPIO_Init(lcd_port_data, &init_pin);
-}
 
 void Lcd_write_cmd(uint8_t cmd) {
 	Delay_us(6); // stable 240
@@ -7852,84 +6972,17 @@ void Lcd_write_data(uint8_t data) {
 }
 
 void set4highBits(uint8_t dta) { // setting higher 4 bits of word on corresponding GPIO pins
-/*	if (dta&16) {
- d4_1;
- }
- else {
- d4_0;
- }
- if (dta&32) {
- d5_1;
- }
- else {
- d5_0;
- }
- if (dta&64) {
- d6_1;
- }
- else {
- d6_0;
- }
- if (dta&128) {
- d7_1;
- }
- else {
- d7_0;
- } */
 }
 
 void set4lowBits(uint8_t dta) {
-	/*	if (dta&1) {
-	 d4_1;
-	 }
-	 else {
-	 d4_0;
-	 }
-	 if (dta&2) {
-	 d5_1;
-	 }
-	 else {
-	 d5_0;
-	 }
-	 if (dta&4) {
-	 d6_1;
-	 }
-	 else {
-	 d6_0;
-	 }
-	 if (dta&8) {
-	 d7_1;
-	 }
-	 else {
-	 d7_0;
-	 } */
+
 }
 
-void Init_lcd() {
-	Init_pin_out();
-	e_1;
-	rs_0;
-	rw_0;
-	Delay_us(100); // assume 10ms
-	set4lowBits(0b0010); // set 4 bit bus
-	e_0;
-	Delay_us(10); // assume 10ms
 
-	Lcd_write_cmd(0b00101000); // again, 4bit bus and the rest 4bits of whole command will get the destination now
-	Delay_us(10);
-	Lcd_write_cmd(Display_clear);
-	Lcd_write_cmd(0b00000110); // function set
-	Lcd_write_cmd(0b00001100); // display on cursor off
-	Lcd_write_cmd(Display_clear); // function set
-	Lcd_write_str("12345678");
-	Delay_us(10);
-}
 
 void Lcd_clear(void) {
-	// LCDI2C_clear();
 	Delay_us(500);
 	// next line responsible for direct LCD 4bit mode
-	// Lcd_write_cmd(Display_clear);
 	flush_lcd_buffer();
 	Lcd_goto(0, 0);
 }
