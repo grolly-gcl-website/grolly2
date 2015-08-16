@@ -991,6 +991,14 @@ function bt_autoconnect($macc, $rfcomm_n){
 		if ($connected == 0) {
 			exec(('kill -9 '.$logger_proc_id));	// terminate unsuccesfull streamer
 		}
+		else if ($connected == 1) {
+			$startupscriptfn = '/usr/lib/systemd/scripts/btd_start.sh';
+			exec("sed -i '/sleep 3/d' ".$startupscriptfn);	// remove previously inserted lines
+			exec("sed -i '/echo con,0,/d' ".$startupscriptfn);
+			$toput = 'echo con,0,'.$mac.', >> /srv/http/cm/daemon_cmd';	// after bt_daemon startup send it a connection request
+			exec("echo '\nsleep 3\n".$toput."' >> ".$startupscriptfn);
+			
+		}
 		echo PHP_EOL.'*** CONNECTION ATTEMPTS LEFT: '.$conn_attempts.PHP_EOL;
 		$conn_attempts--;
 	}

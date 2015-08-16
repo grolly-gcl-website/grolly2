@@ -119,7 +119,7 @@ fi
  
 # Cadi BTDaemon startup script and systemd service
 echo 'CWD> generating Cadi BTDaemon startup script'
-echo -e '#!/bin/sh\nsleep 10\ncd /srv/http/cm/\nphp /srv/http/cm/bt_daemon.php >> btds/btd_output &\nhciconfig hci0 up' > /usr/lib/systemd/scripts/btd_start.sh
+echo -e '#!/bin/sh\nsleep 10\nrfcomm release 0\nhciconfig hci0 down\ncd /srv/http/cm/\nphp /srv/http/cm/bt_daemon.php >> btds/btd_output &\nhciconfig hci0 up' > /usr/lib/systemd/scripts/btd_start.sh
  
 echo 'CWD> ... creating systemd service'
  
