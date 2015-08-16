@@ -328,7 +328,7 @@ function get_wp_block($wp_id){
 			</td>
 		</tr>
 		<tr>
-			<td title="в сантиметрах, уровня воды в баке">Количество воды, см</td>
+			<td title="в сантиметрах, уровня воды в баке">Количество воды, мм</td>
 			<td>
 				<input
 					onChange="rx_ee_(this)"

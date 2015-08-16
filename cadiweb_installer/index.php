@@ -316,8 +316,8 @@ $(document).ready(function() {
 				// offset for PSI gauge value
 				var psi_offset = -1;
 				// draw labels for tanks, displaying current level
-				$('#t3l_txt').html('2Top: '+statusArray[8]+'cm');
-				$('#t4l_txt').html('2Top: '+statusArray[9]+'cm');
+				$('#t3l_txt').html('2Top: '+statusArray[8]+'mm');
+				$('#t4l_txt').html('2Top: '+statusArray[9]+'mm');
 				var psi_gauge_val = (statusArray[14]*16)+psi_offset;
 				//if (psi_gauge_val) {
 					$('#psi_gauge_val').val(psi_gauge_val);
