@@ -995,8 +995,18 @@ function bt_autoconnect($macc, $rfcomm_n){
 			$startupscriptfn = '/usr/lib/systemd/scripts/btd_start.sh';
 			exec("sed -i '/sleep 3/d' ".$startupscriptfn);	// remove previously inserted lines
 			exec("sed -i '/echo con,0,/d' ".$startupscriptfn);
-			$toput = 'echo con,0,'.$mac.', >> /srv/http/cm/daemon_cmd';	// after bt_daemon startup send it a connection request
+			exec("sed -i '/echo stream_status,1/d' ".$startupscriptfn);
+			
+			// add new lines
+			$toput = 'echo con,0,'.$mac.', > /srv/http/cm/daemon_cmd';	// after bt_daemon startup send it a connection request
 			exec("echo '\nsleep 3\n".$toput."' >> ".$startupscriptfn);
+			exec('sync');	// save chages to disk
+		//	$toput2 = 'echo stream_status,1, > /srv/http/cm/daemon_cmd';
+		//	exec("echo '\nsleep 3\n".$toput2."' >> ".$startupscriptfn);
+			sleep(2);
+			stream_status(1);
+			sleep(2);
+			stream_status(1);
 			
 		}
 		echo PHP_EOL.'*** CONNECTION ATTEMPTS LEFT: '.$conn_attempts.PHP_EOL;
