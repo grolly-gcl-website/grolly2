@@ -28,16 +28,6 @@ cp /srv/http/cm/cadi_settings_dump /tmp/cadiwebtmp/cadi_settings_dump
 
 
 
-if [ "$1" == "forceccd" ]; then
-	echo 'CU> stopping CBTD service'
-	systemctl cbtd.service stop
-	echo 'CU> compiling CCD'
-	gcc -lrt /srv/http/install/ccd.c -o /srv/http/install/ccd
-else
-	echo 'skipping CCD update'
-
-fi
-
 # install Git (--needed to skip reinstall if already installed)
 echo 'CU> Installing Git'
 pacman -S --needed --noconfirm git
@@ -78,6 +68,20 @@ cp -rf /tmp/cadiwebtmp/cadi_settings_conf.csv /srv/http/cm/cadi_settings_conf.cs
 
 # recover Grolly eeprom dump
 cp -rf /tmp/cadiwebtmp/cadi_settings_dump /srv/http/cm/cadi_settings_dump
+
+
+
+if [ "$1" == "forceccd" ]; then
+	echo 'CU> stopping CBTD service'
+	systemctl stop cbtd
+	echo 'CU> compiling CCD'
+	gcc -lrt /srv/http/install/ccd.c -o /srv/http/install/ccd
+	systemctl start cbtd
+	
+else
+	echo 'skipping CCD update'
+
+fi
 
 
 
