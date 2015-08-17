@@ -185,8 +185,8 @@ function save_psi_settings(){
 	</tr>
 </table>
 <div id="psi_sldr"></div>
-0psi<input id="psi_0_psi" type="text" value="<?php echo $psi0psi; ?>" /> / 
-<input id="psi_32_psi" type="text" value="<?php echo $psi32psi; ?>" />32psi</br>
+0psi<input disabled style="width:60px;" id="psi_0_psi" type="text" value="<?php echo $psi0psi; ?>" /> / 
+<input disabled style="width:60px;" id="psi_32_psi" type="text" value="<?php echo $psi32psi; ?>" />32psi</br>
 	<table>
 		<tr><td colspan="2">===============================</td></tr>
 		<tr>
