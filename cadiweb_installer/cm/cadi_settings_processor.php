@@ -13,6 +13,31 @@ else {
 
 switch ($action) {
 	case 'tank_settings':
+		$strarr[0] = 'watertank_top_bottom';
+		$strarr[1] = $_POST['t3top'];	// fill the new top/bottom values into settings array
+		$strarr[2] = $_POST['t3btm'];
+		$strarr[3] = $_POST['t4top'];
+		$strarr[4] = $_POST['t4btm'];
+		$string = implode(',',$strarr);
+		cs_replace_string($string);
+		break;
+	case 'psi_settings':
+		$strarr[0] = 'psi_sensor';
+		$strarr[1] = $_POST['psi0psi'];	// fill the new top/bottom values into settings array
+		$strarr[2] = $_POST['psi32psi'];
+		$string = implode(',',$strarr);
+		cs_replace_string($string);
+		break;
+	case 'valve_settings':
+		
+		break;
+
+}
+
+// replaces full CSV string in Cadiweb settings file. String to replace found by first field match
+function cs_replace_string($string){
+		$string_arr = explode(',',$string);
+		$string_name = $string_arr[0];
 		$row = 0;
 		if (($handle = fopen("cadi_settings", "r")) !== FALSE) {
 		    // read a copy of file into array
@@ -22,17 +47,14 @@ switch ($action) {
 		    fclose($handle);
 		}
 		foreach ($settings_arr as $key=>$rowarr) {
-			if ($rowarr[0] == 'watertank_top_bottom') {	// find the config line for tank top/bottom settings
+			if ($rowarr[0] == $string_name) {	// find the config line for tank top/bottom settings
 				// found the $key needed
 				$keyfound = $key;
 			}
 		}
-		$settings_arr[$keyfound][1] = $_POST['t3top'];	// fill the new top/bottom values into settings array
-		$settings_arr[$keyfound][2] = $_POST['t3btm'];
-		$settings_arr[$keyfound][3] = $_POST['t4top'];
-		$settings_arr[$keyfound][4] = $_POST['t4btm'];
+		$settings_arr[$keyfound] = $string_arr;
 		
-		file_put_contents("cadi_settings",' ');	// flush settings file
+		file_put_contents('cadi_settings',' ');	// flush settings file
 
 		if (($handle = fopen("cadi_settings", "w")) !== FALSE) {
 			foreach ($settings_arr as $rows) {	// fill the new config file up
@@ -40,15 +62,7 @@ switch ($action) {
 			}
 			fclose($handle);
 		}
-
-
-		break;
-	case 'valve_settings':
-		
-		break;
-
 }
-
 
 
 ?>

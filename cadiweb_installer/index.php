@@ -58,7 +58,9 @@ $_SESSION['cadiweb_version'] = '1.0';
 	$svg_t3top = $_SESSION['settings_data']['watertank_top_bottom'][1];
 	$svg_t3btm  = $_SESSION['settings_data']['watertank_top_bottom'][2];
     	$svg_t4top = $_SESSION['settings_data']['watertank_top_bottom'][3];
-    	$svg_t4btm  = $_SESSION['settings_data']['watertank_top_bottom'][4];		
+    	$svg_t4btm  = $_SESSION['settings_data']['watertank_top_bottom'][4];	
+	$psi0psi_ = $_SESSION['settings_data']['psi_sensor'][1];
+	$psi32psi_ = $_SESSION['settings_data']['psi_sensor'][2];	
 ?>
 
 <script>
@@ -175,6 +177,9 @@ window.onload = function(){
 		$("#system_view_1").hide();
 //		get_status_block();
 		cadi_list_rfcomms();
+
+		<?php echo 'var psi0psi_ = '.$psi0psi_.';'.PHP_EOL; ?>
+		<?php echo 'var psi32psi_ = '.$psi32psi_.';'.PHP_EOL; ?>
 		//cadi_status_stream();
 	});
 
@@ -204,7 +209,7 @@ $(document).ready(function() {
 		svg.text(635, 120, 'B',{fill: 'green', strokeWidth: 0, id:'blooml'});
 		svg.text(635, 200, 'G',{fill: 'green', strokeWidth: 0, id:'growl'});
 
-
+/*
 		svg.text(610, 335, 'TF1',{fill: 'green', strokeWidth: 0, id:'tf1'});
 		svg.text(610, 355, 'TF2',{fill: 'green', strokeWidth: 0, id:'tf2'});
 		svg.text(610, 385, 'TF3',{fill: 'green', strokeWidth: 0, id:'tf3'});
@@ -212,7 +217,7 @@ $(document).ready(function() {
 
 		svg.text(610, 445, 'TSF',{fill: 'black', strokeWidth: 0, id:'tsf'});
 		svg.text(610, 465, 'CTSF',{fill: 'black', strokeWidth: 0, id:'ctsf'});
-
+*/
 		// draw tank levels in text
 		svg.text(150, 385, '2Top',{fill: 'white', strokeWidth: 1, stroke: "black", id:'t3l_txt'});
 		svg.text(390, 385, '2Top',{fill: 'white', strokeWidth: 1, stroke: "black", id:'t4l_txt'});
@@ -314,13 +319,16 @@ $(document).ready(function() {
 			$('#tank4_water').attr('height',t4h);
 			$('#tank4_water').attr('y',t4y);
 
-				$('#psi_adc_current').html(statusArray[14]); 
+				$('#psi_adc_current').html(statusArray[12]); 
 				// offset for PSI gauge value
 				var psi_offset = -1;
 				// draw labels for tanks, displaying current level
 				$('#t3l_txt').html('2Top: '+statusArray[8]+'mm');
 				$('#t4l_txt').html('2Top: '+statusArray[9]+'mm');
-				var psi_gauge_val = (statusArray[14]*16)+psi_offset;
+				// var psi_gauge_val = (statusArray[14]*16)+psi_offset;
+
+				var psi_gauge_val = ((statusArray[12]-psi0psi_)/((psi32_psi_ - psi0psi_)/32));
+				
 				//if (psi_gauge_val) {
 					$('#psi_gauge_val').val(psi_gauge_val);
 				//}

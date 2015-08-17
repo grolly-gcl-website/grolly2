@@ -13,6 +13,8 @@ session_start();
 	}
 	$minval = $_SESSION["settings_data"]["watertank_minmax_levels"][1];
 	$maxval = $_SESSION["settings_data"]["watertank_minmax_levels"][2];
+	$psi0psi = $_SESSION["settings_data"]["psi_sensor"][1];
+	$psi32psi = $_SESSION["settings_data"]["psi_sensor"][2];
 
 
 ?>
@@ -34,7 +36,8 @@ $(function() {
 <?php
 	echo 'var maxval = '.$maxval.';'.PHP_EOL;
 	echo 'var minval = '.$minval.';'.PHP_EOL;
-
+	echo 'var psi0psi = '.$psi0psi.';'.PHP_EOL;
+	echo 'var psi32psi = '.$psi32psi.';'.PHP_EOL;
 ?>
  	  
 
@@ -42,15 +45,22 @@ $(function() {
       range: true,
       min: 0,
       max: 4096,
-      values: [ 1500, 2000 ],
+      values: [ psi0psi, psi32psi ],
       slide: function( event, ui ) {
-	//alert(1);
-        // $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
 	$("#psi_0_psi").val(ui.values[0]);
 	$("#psi_32_psi").val(ui.values[1]);
-	// $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
-      }
-    });
+      },
+	change: function(event, ui) {
+		if (psi0psi != ui.values[0]) {		// 0 psi slider change event
+			psi0psi = ui.values[0];
+			save_psi_settings();
+		}
+		if (psi32psi != ui.values[1]) {		// 32 psi slider change event
+			psi32psi = ui.values[1];
+			save_psi_settings();
+		}
+	}
+    }); 	
 
  	
 	$( "#t3top_sldr, #t3btm_sldr, #t4top_sldr, #t4btm_sldr" ).slider({
@@ -111,6 +121,14 @@ function save_tank_settings(){
 	});
 }
 
+function save_psi_settings(){
+	var psi0psi = $('#psi0psi').val();
+	var psi32psi = $('#psi32psi').val();
+	$.post('cm/cadi_settings_processor.php', {action: 'psi_settings', psi0psi:psi0psi, psi32psi:psi32psi}, function(data){
+		alert('Saved!');
+	});
+}
+
 </script>
 
 
@@ -167,8 +185,8 @@ function save_tank_settings(){
 	</tr>
 </table>
 <div id="psi_sldr"></div>
-0psi<input id="psi_0_psi" type="text" value="1500" /> / 
-<input id="psi_32_psi" type="text" value="2000" />32psi</br>
+0psi<input id="psi_0_psi" type="text" value="<?php echo $psi0psi; ?>" /> / 
+<input id="psi_32_psi" type="text" value="<?php echo $psi32psi; ?>" />32psi</br>
 	<table>
 		<tr><td colspan="2">===============================</td></tr>
 		<tr>
