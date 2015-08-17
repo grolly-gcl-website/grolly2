@@ -60,7 +60,7 @@ $(function() {
 			save_psi_settings();
 		}
 	}
-    }); 	
+    });  	
 
  	
 	$( "#t3top_sldr, #t3btm_sldr, #t4top_sldr, #t4btm_sldr" ).slider({
@@ -122,10 +122,10 @@ function save_tank_settings(){
 }
 
 function save_psi_settings(){
-	var psi0psi = $('#psi0psi').val();
-	var psi32psi = $('#psi32psi').val();
-	$.post('cm/cadi_settings_processor.php', {action: 'psi_settings', psi0psi:psi0psi, psi32psi:psi32psi}, function(data){
-		alert('Saved!');
+	var psi0psiv = $('#psi_0_psi').val();
+	var psi32psiv = $('#psi_32_psi').val();
+	$.post('cm/cadi_settings_processor.php', {action: 'psi_settings', psi0psi:psi0psiv, psi32psi:psi32psiv}, function(data){
+		alert('Saved! '+psi0psiv+'/'+psi32psiv);
 	});
 }
 

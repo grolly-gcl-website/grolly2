@@ -65,6 +65,8 @@ $_SESSION['cadiweb_version'] = '1.0';
 
 <script>
 
+<?php echo 'var psi0psi_ = '.$psi0psi_.';'.PHP_EOL; ?>
+<?php echo 'var psi32psi_ = '.$psi32psi_.';'.PHP_EOL; ?>
 // replaced by rx_ee_(). Commented out 150809
 /*
 function rx_ee_bak(addr){	// CSX format data upload
@@ -178,8 +180,6 @@ window.onload = function(){
 //		get_status_block();
 		cadi_list_rfcomms();
 
-		<?php echo 'var psi0psi_ = '.$psi0psi_.';'.PHP_EOL; ?>
-		<?php echo 'var psi32psi_ = '.$psi32psi_.';'.PHP_EOL; ?>
 		//cadi_status_stream();
 	});
 
@@ -283,8 +283,11 @@ $(document).ready(function() {
 
 				// tank 3 water level redraw
 		
-			<?php echo 't3top = '.$svg_t3top.';'.PHP_EOL; ?>
-			<?php echo 't3btm = '.$svg_t3btm.';'.PHP_EOL; ?>
+			<?php
+			echo 't3top = '.$svg_t3top.';'.PHP_EOL;
+			echo 't3btm = '.$svg_t3btm.';'.PHP_EOL; 
+			?>
+
 			t3curlvl = statusArray[8]; 	// provide current level globally
 			if (statusArray[8]>t3top && statusArray[8]<t3btm) {
 				var lvl = Math.floor((275 * (t3btm-statusArray[8])/(t3btm-t3top)));
@@ -321,18 +324,12 @@ $(document).ready(function() {
 
 				$('#psi_adc_current').html(statusArray[12]); 
 				// offset for PSI gauge value
-				var psi_offset = -1;
 				// draw labels for tanks, displaying current level
 				$('#t3l_txt').html('2Top: '+statusArray[8]+'mm');
 				$('#t4l_txt').html('2Top: '+statusArray[9]+'mm');
-				// var psi_gauge_val = (statusArray[14]*16)+psi_offset;
 
-				var psi_gauge_val = ((statusArray[12]-psi0psi_)/((psi32_psi_ - psi0psi_)/32));
-				
-				//if (psi_gauge_val) {
-					$('#psi_gauge_val').val(psi_gauge_val);
-				//}
-				// $('#psi_val').html(statusArray[14]+'bar');
+				var psi_gauge_val = ((statusArray[12]-psi0psi_)/((psi32psi_ - psi0psi_)/32));
+				$('#psi_gauge_val').val(psi_gauge_val);
 
 				// get valve state circles' colors
 				var valves = statusArray[5];
@@ -1286,5 +1283,6 @@ Status stream delay<input type="text" id="status_stream_delay" value="800"/>
 <input type="text" value="0" id="video_stream" title="this value is N in '/dev/videoN'" /><button onClick="change_video()">Change video</button>
 </div>
 </div>
+
 </body>
 </html>

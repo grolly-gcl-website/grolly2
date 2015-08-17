@@ -30,4 +30,4 @@ watertank_minmax_levels,2000,100
 watertank_top_bottom,100,800,100,500
 
 # Pressure sensor settings
-psi_settings,1500,2000
+psi_settings,650,3000
