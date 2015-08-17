@@ -67,48 +67,7 @@ $_SESSION['cadiweb_version'] = '1.0';
 
 <?php echo 'var psi0psi_ = '.$psi0psi_.';'.PHP_EOL; ?>
 <?php echo 'var psi32psi_ = '.$psi32psi_.';'.PHP_EOL; ?>
-// replaced by rx_ee_(). Commented out 150809
-/*
-function rx_ee_bak(addr){	// CSX format data upload
-	var csx_data = $('#csxform').serialize();
-	alert('updating addr '+addr);
-	$.post('cm/cadi_bt_processor.php', {action: 'upload_csx', csx_data:csx_data}, function(data){
-		alert(data);
-		var number = $('#settings_number').val();	// amount of 16 bit variables to upload to cadi
-		$.post('cm/cadi_bt_processor.php', {action: 'rx_ee', addr:addr, number:2}, function(data){});	// 2 vars - HARDCODE	
-	});
-}
 
-
-
-
-
-function rx_ee(addr){	// CSX format data upload
-	var csx_data = $('#csxform').serialize();
-	alert('updating addr '+addr);
-	$.post('cm/cadi_bt_processor.php', {action: 'upload_csx', csx_data:csx_data}, function(data){
-		alert(data);
-		var number = $('#settings_number').val();	// amount of 16 bit variables to upload to cadi
-		$.post('cm/cadi_bt_processor.php', {action: 'tx_packet', cmd:115, addr:addr}, function(data){
-			alert(data);
-		});	// 2 vars - HARDCODE	
-	});
-}
-
-
-
-
-
-function rx_ee_this(input){	// semi-direct value upload
-	var inputName = input.name;
-	var inputData = inputName.split('_');
-	var addr = inputData[1];
-	var value = input.value;
-	$.post('cm/cadi_bt_processor.php', {action: 'tx_packet', cmd:64, addr:addr, value:value}, function(data){
-	});
-}
-
-*/
 
 function rx_ee_dir(addr, value){	// direct value upload
 //	$.post('cm/cadi_bt_processor.php', {action: 'rx_ee_dir', addr:addr, value:value}, function(data){
@@ -146,10 +105,10 @@ var g1;
 window.onload = function(){
 	var g1 = new JustGage({
 		id: "psi_gauge",
-		value: getRandomInt(0, 100),
+		value: getRandomInt(0, 60),
 		min: 0,
-		max: 90,
-		title: "Pressure",
+		max: 60,
+		title: "",
 		label: "PSI"
 	});
 
@@ -200,12 +159,21 @@ $(document).ready(function() {
  //   		var g = svg.group({stroke: 'black', strokeWidth: 2});
 
 		// draw cadi time 
-		svg.text(100, 445, 'Cadi time',{fill: 'red', strokeWidth: 0, fontSize: '29', id:'cadi_time2'});
-		svg.text(140, 515, 'Temp',{fill: 'green', strokeWidth: 0, id:'cadi_temp'});
-		svg.text(140, 535, 'rH',{fill: 'blue', strokeWidth: 0, id:'cadi_rh'});
+		svg.text(140, 500, 'Cadi time',{fill: 'red', strokeWidth: 0, fontSize: '29', id:'cadi_time2'});
+		svg.text(140, 570, 'Temp',{fill: 'green', strokeWidth: 0, id:'cadi_temp'});
+		svg.text(140, 590, 'rH',{fill: 'blue', strokeWidth: 0, id:'cadi_rh'});
+		svg.text(140, 620, 'pH',{fill: 'red', strokeWidth: 0, id:'ph1_adc_val'});
 
-		svg.text(140, 565, 'pH',{fill: 'red', strokeWidth: 0, id:'ph1_adc_val'});
+		svg.text(355, 690, 'Pressure',{fill: 'red', strokeWidth: 0, id:'pressure_label'});
 
+		// display CDD status text
+		svg.text(140, 530, 'CDD status',{fill: 'red', strokeWidth: 0, id:'cdds'});
+
+		// display auto_flags
+		svg.text(140, 550, 'auto_flags:',{fill: 'red', strokeWidth: 0, id:'auto_flags'});
+
+
+// fertilizers
 		svg.text(635, 120, 'B',{fill: 'green', strokeWidth: 0, id:'blooml'});
 		svg.text(635, 200, 'G',{fill: 'green', strokeWidth: 0, id:'growl'});
 
@@ -219,17 +187,11 @@ $(document).ready(function() {
 		svg.text(610, 465, 'CTSF',{fill: 'black', strokeWidth: 0, id:'ctsf'});
 */
 		// draw tank levels in text
-		svg.text(150, 385, '2Top',{fill: 'white', strokeWidth: 1, stroke: "black", id:'t3l_txt'});
-		svg.text(390, 385, '2Top',{fill: 'white', strokeWidth: 1, stroke: "black", id:'t4l_txt'});
+		svg.text(227, 380, 'XXXmm',{fill: 'white', strokeWidth: 1, stroke: "black", id:'t3l_txt'});
+		svg.text(450, 380, 'XXXmm',{fill: 'white', strokeWidth: 1, stroke: "black", id:'t4l_txt'});
 
 		// display pressure
 		svg.text(610, 445, '',{fill: 'red', strokeWidth: 0, fontSize: '30', id:'psi_val'});
-
-		// display CDD status text
-		svg.text(140, 475, 'CDD status',{fill: 'red', strokeWidth: 0, id:'cdds'});
-
-		// display auto_flags
-		svg.text(140, 495, 'auto_flags:',{fill: 'red', strokeWidth: 0, id:'auto_flags'});
 
 	}
 
@@ -325,8 +287,8 @@ $(document).ready(function() {
 				$('#psi_adc_current').html(statusArray[12]); 
 				// offset for PSI gauge value
 				// draw labels for tanks, displaying current level
-				$('#t3l_txt').html('2Top: '+statusArray[8]+'mm');
-				$('#t4l_txt').html('2Top: '+statusArray[9]+'mm');
+				$('#t3l_txt').html(statusArray[8]+'mm');
+				$('#t4l_txt').html(statusArray[9]+'mm');
 
 				var psi_gauge_val = ((statusArray[12]-psi0psi_)/((psi32psi_ - psi0psi_)/32));
 				$('#psi_gauge_val').val(psi_gauge_val);
@@ -1186,7 +1148,6 @@ fill = "#ababab;"
 
 
 <div id="csv_string_box">
-CSV here
 </div>
 
 
@@ -1199,7 +1160,7 @@ CSV here
 
 
 				</div style="width:100%; border: 1px solid red;">
-					<div id="svg_container" style="display:block; min-width:60%; min-height:665px; float:left; border:1px solid yrllow; position:absolute;">
+					<div id="svg_container" style="display:block; min-width:60%; min-height:700px; float:left; border:1px solid yrllow; position:absolute;">
 
 					</div>
 				</div>
