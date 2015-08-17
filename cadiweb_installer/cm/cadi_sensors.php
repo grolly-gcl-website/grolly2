@@ -37,6 +37,21 @@ $(function() {
 
 ?>
  	  
+
+    $( "#psi_sldr" ).slider({
+      range: true,
+      min: 0,
+      max: 4096,
+      values: [ 1500, 2000 ],
+      slide: function( event, ui ) {
+	//alert(1);
+        // $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+	$("#psi_0_psi").val(ui.values[0]);
+	$("#psi_32_psi").val(ui.values[1]);
+	// $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+      }
+    });
+
  	
 	$( "#t3top_sldr, #t3btm_sldr, #t4top_sldr, #t4btm_sldr" ).slider({
 	orientation: "horizontal",
@@ -144,14 +159,25 @@ function save_tank_settings(){
 
 <h3>Water Pressure Sensor</h3>
 <div>
+<b>Pressure sensor calibration</b>
+<table>
+	<tr>
+		<td>Current psi sensor ADC value: </td>
+		<td id="psi_adc_current">?</td>
+	</tr>
+</table>
+<div id="psi_sldr"></div>
+0psi<input id="psi_0_psi" type="text" value="1500" /> / 
+<input id="psi_32_psi" type="text" value="2000" />32psi</br>
 	<table>
+		<tr><td colspan="2">===============================</td></tr>
 		<tr>
 			<td colspan="2" style="text-align:center;">
-				Water pressure sensor levels
+				<b>Software pressure stabilization</b>
 			</td>
 		</tr>
 		<tr>
-			<td>Top level</td>
+			<td>Top pressure level</td>
 			<td>
 				<input 
 					onChange="rx_ee_(this)" 
@@ -162,7 +188,7 @@ function save_tank_settings(){
 			</td>
 		</tr>
 		<tr>
-			<td>Bottom level</td>
+			<td>Bottom pressure level</td>
 			<td>
 				<input 
 					onChange="rx_ee_(this)" 

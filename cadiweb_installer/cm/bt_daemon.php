@@ -574,7 +574,7 @@ function status_bin2csv($statbin){
 			$statarr['adc_avg'][1] = $adc_avg[1];	// ADC average value
 			$statarr['adc_avg'][2] = $adc_avg[2];	// ADC average value
 			$statarr['adc_avg'][3] = $adc_avg[3];	// ADC average value
-			$statarr['psi'] = round((($adc_avg[2]-600)/470), 2); 
+			$statarr['psi'] = round((($adc_avg[2]-600)/470), 2); 	// count pressure in BARs
 			$statarr['comm_state'] = ord($last_packet[4]);
 			$statarr['auto_flags'] = ord($last_packet[35]);
 			$statarr['wpProgress'] = ord($last_packet[36]);

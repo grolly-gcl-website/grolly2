@@ -261,7 +261,7 @@ $(document).ready(function() {
 				//$('#csv_string').html(data);
 				
 
-				var wpProgress = statusArray[18];
+				/* var wpProgress = statusArray[18];
 				$('#tf1').html(wpProgress);
 				var auto_failures = statusArray[19];
 				$('#tf2').html(auto_failures);
@@ -271,7 +271,7 @@ $(document).ready(function() {
 				var tsf = statusArray[3];		// timer state flags
 				$('#tsf').html(tsf);
 				var ctsf = statusArray[4];		// ctimer state flags
-				$('#ctsf').html(ctsf);
+				$('#ctsf').html(ctsf);	*/
 
 
 
@@ -313,6 +313,8 @@ $(document).ready(function() {
 			}
 			$('#tank4_water').attr('height',t4h);
 			$('#tank4_water').attr('y',t4y);
+
+				$('#psi_adc_current').html(statusArray[14]); 
 				// offset for PSI gauge value
 				var psi_offset = -1;
 				// draw labels for tanks, displaying current level

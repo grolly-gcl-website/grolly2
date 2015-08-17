@@ -28,3 +28,6 @@ watertank_minmax_levels,2000,100
 
 # water tank top and bottom levels (Fresh water first (top and bottom levels), and then MixTank)
 watertank_top_bottom,100,800,100,500
+
+# Pressure sensor settings
+psi_settings,1500,2000
