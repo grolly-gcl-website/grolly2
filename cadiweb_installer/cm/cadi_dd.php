@@ -159,7 +159,7 @@ function wt_mt_drain2level(){
 
 <div id="cadi_dd_accordion" style="width:100%;">
 	<div style="float:right; display:block; width:100%; right:0px;">	
-	<input type="checkbox" id="cdd_enabled" onClick="cdd_toggle(this)"> CDD: Cadi Direct Drive enabled
+<!---	<input type="checkbox" id="cdd_enabled" onClick="cdd_toggle(this)"> CDD: Cadi Direct Drive enabled  --->
 	<table>
 	<?php
 
@@ -178,7 +178,7 @@ function wt_mt_drain2level(){
 	$plug_amount = 4;
 
 //	echo '<tr><td><b>LOADS:</b></td></tr>';
-	for ($i=0; $i<$plug_amount; $i++) {
+/*	for ($i=0; $i<$plug_amount; $i++) {
 		echo '
 		<tr title="'.$_SESSION['settings_data'][2][$i+1].'">
 			<td style="text-align:right; width:15%;">'.$_SESSION['settings_data']['ac_loads'][$i+1].'</td>
@@ -192,7 +192,7 @@ function wt_mt_drain2level(){
 			</td>
 			<td></td>
 		</tr>';
-	}
+	}	*/
 	?>
 
 <!---	</table>

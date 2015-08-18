@@ -160,8 +160,8 @@ $(document).ready(function() {
 
 		// draw cadi time 
 		svg.text(140, 500, 'Cadi time',{fill: 'red', strokeWidth: 0, fontSize: '29', id:'cadi_time2'});
-		svg.text(140, 570, 'Temp',{fill: 'green', strokeWidth: 0, id:'cadi_temp'});
-		svg.text(140, 590, 'rH',{fill: 'blue', strokeWidth: 0, id:'cadi_rh'});
+		svg.text(140, 575, 'Temp',{fill: 'green', strokeWidth: 0, id:'cadi_temp'});
+		svg.text(140, 595, 'rH',{fill: 'blue', strokeWidth: 0, id:'cadi_rh'});
 		svg.text(140, 620, 'pH',{fill: 'red', strokeWidth: 0, id:'ph1_adc_val'});
 
 		svg.text(355, 690, 'Pressure',{fill: 'red', strokeWidth: 0, id:'pressure_label'});
@@ -339,14 +339,14 @@ $(document).ready(function() {
 				
 
 
-				if (statusArray[15]==51){	
+			/*	if (statusArray[15]==51){	
 					$('#cdds').html('CDD Enabled');
 					$('#cdds').attr('fill', 'green');
 				}
 				else {
 					$('#cdds').html('CDD Disabled');
 					$('#cdds').attr('fill', 'red');
-				}
+				} */
 				var af_bin = statusArray[17].toString(2);
 				$('#auto_flags').html(statusArray[17]+' ('+af_bin+')');
 
@@ -913,7 +913,7 @@ function mix_solution(){
        id="valve_8"
        inkscape:connector-curvature="0" />
     <path
-       style="stroke:#000000;stroke-width:2.42191815px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="stroke:#000000;stroke-width:5.42191815px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
 	fill = "#ababab;"
        d="m 362.46807,552.63975 60.49054,44.41823 0,-44.41823 -60.49054,44.41823 z"
        id="valve_1"
@@ -1039,7 +1039,7 @@ fill = "#ababab;"
     <path
        onClick="toggleValve(0);"
        fill = "#ababab;"
-       style="stroke:#000000;stroke-width:2.8900001px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="stroke:#000000;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m -126.87678,108.12915 87.216069,43.86607 0,-43.86607 -87.216069,43.86607 z"
        id="valve_0"
        inkscape:connector-curvature="0" />
