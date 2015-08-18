@@ -250,7 +250,7 @@ function wt_mt_drain2level(){
 
 		...REACH WATER LEVEL...
 		<br>
-		New level (cms):<input type="text" id="wt_mtrl_newlevel" /><br>
+		New level (mms):<input type="text" id="wt_mtrl_newlevel" /><br>
 		<button onClick="wt_mt_reach_level()">Reach new level</button>
 		<br>
 		<br>
@@ -258,7 +258,7 @@ function wt_mt_drain2level(){
 
 		...ADD WATER...
 		<br>
-		Amount (cms):<input type="text" id="wt_mtaw_amount" /><br>
+		Amount (mms):<input type="text" id="wt_mtaw_amount" /><br>
 		<button onClick="wt_mt_add_water()">Add water</button>
 		<br>
 		<br>
@@ -266,7 +266,7 @@ function wt_mt_drain2level(){
 		
 		... DRAIN TO THE LEVEL...
 		<br>
-		New level (cms):<input type="text" id="wt_dtl_newlevel" /><br>
+		New level (mms):<input type="text" id="wt_dtl_newlevel" /><br>
 		<select id="wt_dtl_drain_valve">
 		<?php 
 			for ($i=0; $i<$valves_amount; $i++) {
