@@ -3,9 +3,9 @@
 ac_loads,PSI pump,,,
 ac_loads_hints,High pressure pump,,,
 # SN002 and up
-valves, , Out3 , Out5, Out2,Back Valve, , Out 1, Out4, , , FWI, MTI, Out 6, , ,
+#valves, , Out3 , Out5, Out2,Back Valve, , Out 1, Out4, , , FWI, MTI, Out 6, , ,
 # SN001 (!!!!!!)
-#valves, , MTI , FWI, ,Back Valve, , , , Out 5, Out 1, Out 3, Out 4, Out 6, , ,
+valves, , MTI , FWI, ,Back Valve, , , , Out 5, Out 1, Out 3, Out 4, Out 6, , ,
 valves_hints,Out 1, Out 2, Out 3, Out 4, Back Valve, Fresh Water Intake, MixTank Intake, MixTank Intake, back to MixTank valve, Main Water Supply Valve
 dosing_pumps,Doser 1,Doser 3, Doser 2, Doser 4
 dosers_hints, ,N/C,GHE FloraDuo Bloom, GHE FloraDuo Grow
@@ -13,9 +13,16 @@ dosers_pwm_duty_cycles, 100,100,50,50
 
 # valves to display (if not full list displayed) and display order
 # S/N 001 (!!!!!!)
-#display_valves,1,2,4,9,10,11,8,12
+display_valves,1,2,4,9,10,11,8,12
 # S/N 002 and up
-display_valves,11,10,4,6,3,1,7,2,12
+#display_valves,11,10,4,6,3,1,7,2,12
+
+# SVG picture valve ids to Grolly valve ids
+# 0:WI,1:Out1,2:Out2...6:Out6,7:FWI,8:MTI,9:BackValve
+# SN001
+svg_valves,0,9,7,10,11,8,12,2,1,4
+# SN002+
+#svg_valves,0,6,3,1,7,2,12,10,11,4
 
 # output vaves only for SN001 (!!!!!!)
 # output_valves,9,10,11,8,12
@@ -30,4 +37,4 @@ watertank_minmax_levels,2000,100
 watertank_top_bottom,100,800,100,500
 
 # Pressure sensor settings
-psi_settings,650,3000
+psi_sensor,650,3000

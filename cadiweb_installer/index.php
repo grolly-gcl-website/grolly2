@@ -60,14 +60,19 @@ $_SESSION['cadiweb_version'] = '1.0';
     	$svg_t4top = $_SESSION['settings_data']['watertank_top_bottom'][3];
     	$svg_t4btm  = $_SESSION['settings_data']['watertank_top_bottom'][4];	
 	$psi0psi_ = $_SESSION['settings_data']['psi_sensor'][1];
-	$psi32psi_ = $_SESSION['settings_data']['psi_sensor'][2];	
+	$psi32psi_ = $_SESSION['settings_data']['psi_sensor'][2];
+	$js_svg_valves = 'var svg_valves = [';
+	for ($i=1;$i<10;$i++) {
+		$js_svg_valves .= $_SESSION['settings_data']['svg_valves'][$i].',';
+	}
+	$js_svg_valves .= $_SESSION['settings_data']['svg_valves'][10].'];';
 ?>
 
 <script>
 
 <?php echo 'var psi0psi_ = '.$psi0psi_.';'.PHP_EOL; ?>
 <?php echo 'var psi32psi_ = '.$psi32psi_.';'.PHP_EOL; ?>
-
+<?php echo $js_svg_valves; ?>
 
 function rx_ee_dir(addr, value){	// direct value upload
 //	$.post('cm/cadi_bt_processor.php', {action: 'rx_ee_dir', addr:addr, value:value}, function(data){
@@ -177,15 +182,7 @@ $(document).ready(function() {
 		svg.text(635, 120, 'B',{fill: 'green', strokeWidth: 0, id:'blooml'});
 		svg.text(635, 200, 'G',{fill: 'green', strokeWidth: 0, id:'growl'});
 
-/*
-		svg.text(610, 335, 'TF1',{fill: 'green', strokeWidth: 0, id:'tf1'});
-		svg.text(610, 355, 'TF2',{fill: 'green', strokeWidth: 0, id:'tf2'});
-		svg.text(610, 385, 'TF3',{fill: 'green', strokeWidth: 0, id:'tf3'});
-		svg.text(610, 405, 'TF4',{fill: 'green', strokeWidth: 0, id:'tf4'});
 
-		svg.text(610, 445, 'TSF',{fill: 'black', strokeWidth: 0, id:'tsf'});
-		svg.text(610, 465, 'CTSF',{fill: 'black', strokeWidth: 0, id:'ctsf'});
-*/
 		// draw tank levels in text
 		svg.text(227, 380, 'XXXmm',{fill: 'white', strokeWidth: 1, stroke: "black", id:'t3l_txt'});
 		svg.text(450, 380, 'XXXmm',{fill: 'white', strokeWidth: 1, stroke: "black", id:'t4l_txt'});
@@ -293,17 +290,18 @@ $(document).ready(function() {
 				var psi_gauge_val = ((statusArray[12]-psi0psi_)/((psi32psi_ - psi0psi_)/32));
 				$('#psi_gauge_val').val(psi_gauge_val);
 
-				// get valve state circles' colors
+				// get valve states colors
+				// svg_valves
 				var valves = statusArray[5];
 				for (var i=0;i<10;i++) {
-					if (valves.charAt(9-i)=="1") {
+					if (valves.charAt(15-svg_valves[i])=="1") {
 						$('#valve_'+i).attr('fill', 'green');
 					}
 					else {
 						$('#valve_'+i).attr('fill', 'red');
 					}
-				}
 
+				}
 
 				// Grolly PSI pump status
 				var psi_pump_state = parseInt(statusArray[21]);
@@ -908,25 +906,25 @@ function mix_solution(){
        inkscape:connector-curvature="0" />
     <path
 	fill = "none"
-       style="stroke:#000000;stroke-width:2.3386085px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 208.29633,445.66506 -44.52654,56.26335 44.52654,0 -44.52654,-56.26335 z"
        id="valve_8"
        inkscape:connector-curvature="0" />
     <path
-       style="stroke:#000000;stroke-width:5.42191815px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
 	fill = "#ababab;"
        d="m 362.46807,552.63975 60.49054,44.41823 0,-44.41823 -60.49054,44.41823 z"
        id="valve_1"
        inkscape:connector-curvature="0" />
     <path
-       style="stroke:#000000;stroke-width:2.42043948px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
 fill = "#ababab;"
        d="m 362.67329,601.14697 60.40446,44.42721 0,-44.42721 -60.40446,44.42721 z"
        id="valve_2"
        inkscape:connector-curvature="0" />
     <path
 	fill = "#ababab;"
-       style="stroke:#000000;stroke-width:2.4169898px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 362.68289,650.01252 60.21211,44.44219 0,-44.44219 -60.21211,44.44219 z"
        id="valve_3"
        inkscape:connector-curvature="0" />
@@ -1032,14 +1030,14 @@ fill = "#ababab;"
        sodipodi:nodetypes="ccscc" />
     <path
 	fill = "#505050;"
-       style="stroke:#000000;stroke-width:2.33817959px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m -14.925188,445.76536 -44.55315,56.20914 44.55315,0 -44.55315,-56.20914 z"
        id="valve_7"		
        inkscape:connector-curvature="0" />
     <path
        onClick="toggleValve(0);"
        fill = "#ababab;"
-       style="stroke:#000000;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m -126.87678,108.12915 87.216069,43.86607 0,-43.86607 -87.216069,43.86607 z"
        id="valve_0"
        inkscape:connector-curvature="0" />
@@ -1070,25 +1068,25 @@ fill = "#ababab;"
        inkscape:label="#rect4218" />
     <path
 	fill = "#ababab;"
-       style="stroke:#000000;stroke-width:2.41696525px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 363.34419,700.44418 60.20916,44.44347 0,-44.44347 -60.20916,44.44347 z"
        id="valve_4"
        inkscape:connector-curvature="0" />
     <path
 	fill = "#ababab;"
-       style="stroke:#000000;stroke-width:2.40726948px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 363.34178,750.43743 59.70893,44.45697 0,-44.45697 -59.70893,44.45697 z"
        id="valve_5"
        inkscape:connector-curvature="0" />
     <path
 	fill = "none"
-       style="stroke:#000000;stroke-width:2.33817959px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 349.41943,385.98992 -44.55315,56.20914 44.55315,0 -44.55315,-56.20914 z"
        id="valve_9"
        inkscape:connector-curvature="0" />
     <path
 	fill = "#ababab;"
-       style="stroke:#000000;stroke-width:2.40726233px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 363.34219,800.72297 59.70811,44.45731 0,-44.45731 -59.70811,44.45731 z"
        id="valve_6"
        inkscape:connector-curvature="0" />

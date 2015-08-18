@@ -563,7 +563,7 @@ function status_bin2csv($statbin){
 			$statarr['dht']['rh'] = ($dht[0]*256+$dht[1])/10;	// DHT sensor relative humidity
 			$statarr['timerStateFlags'] = str_pad(decbin(ord($last_packet[5])), 4, "0", STR_PAD_LEFT);
 			$statarr['cTimerStateFlags'] = str_pad(decbin(ord($last_packet[6])), 4, "0", STR_PAD_LEFT);
-			$statarr['valves'] = str_pad(decbin(((ord($last_packet[31])*256)+ord($last_packet[32]))), 10, "0", STR_PAD_LEFT);
+			$statarr['valves'] = str_pad(decbin(((ord($last_packet[31])*256)+ord($last_packet[32]))), 16, "0", STR_PAD_LEFT);
 			$statarr['plugs'] = str_pad(decbin(ord($last_packet[8])), 4, "0", STR_PAD_LEFT);
 			$statarr['wpStateFlags'] = decbin(ord($last_packet[9]));
 			$statarr['dosingPumpsFlags'] = str_pad(decbin(ord($last_packet[34])), 4, "0", STR_PAD_LEFT);
