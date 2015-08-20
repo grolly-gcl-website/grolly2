@@ -223,8 +223,9 @@ function wt_mt_drain2level(){
 		</tr>';
 	}
 
+/*
  // display all the valves
-/*	for ($i=0; $i<$valves_amount; $i++) {
+	for ($i=0; $i<$valves_amount; $i++) {
 		echo '
 		<tr class="valves_all" title="'.$_SESSION['settings_data']['valves_hints'][$i+1].'">
 			<td style="text-align:right; width:15%;">'.$_SESSION['settings_data']['valves'][$i+1].'</td>
@@ -238,9 +239,9 @@ function wt_mt_drain2level(){
 			</td>
 			<td></td>
 		</tr>';
-	} */
+	} 
 	
-
+*/
 
 	?>
 	<tr><td><button onClick="close_valves()">Close valves</button></td></tr>
@@ -353,25 +354,5 @@ function wt_mt_drain2level(){
 
 	</div>
 </div>
-<!--
-<div>
-	<h1>Get water</h1>
-Valve: 	<select id="f_gw_valve_id">
-		<option value="0">0</option>
-		<option value="1">1</option>
-		<option value="2">2</option>
-		<option value="3">3</option>
-	</select>
 
-Counter: 	<select id="f_gw_counter_id">
-		<option value="0">0</option>
-		<option value="1">1</option>
-		<option value="2">2</option>
-		<option value="3">3</option>
-	</select>
-<br>
-<input type="text" title="enter amount of water you want to get (in CL, integer value from 0 to 65535)" id="f_gw_amount" />
-<button>Get water</button>
-</div>
--->
 =====================

@@ -23,15 +23,10 @@ $_SESSION['cadiweb_version'] = '1.0';
 <link rel="stylesheet" href="css/resetcss.css">
 
 <link rel="stylesheet" href="js/jquery-ui-1.11.2.custom/jquery-ui.css">
-<!--- <link rel="stylesheet" href="css/jquery-ui-timepicker-addon.css"> -->
 <script src="js/jquery-1.11.2.min.js"></script>
 <script src="js/jquery-ui-1.11.2.custom/jquery-ui.min.js"></script>
 <script src="js/jquery-ui-timepicker-addon.js"></script>
 
-<!---
-<link rel="stylesheet" href="js/jquery-ui-1.10.3.custom/css/smoothness/jquery-ui-1.10.3.custom.css">
-<script src="js/jquery-ui-1.10.3.custom/js/jquery-1.9.1.js"></script>
-<script src="js/jquery-ui-1.10.3.custom/js/jquery-ui-1.10.3.custom.js"></script> -->
 <link rel="stylesheet" type="text/css" href="css/jquery.svg.css"> 
 <script type="text/javascript" src="js/svg/jquery.svg.js"></script>
 <script type="text/javascript" src="js/svg/jquery.svganim.js"></script>
@@ -40,7 +35,6 @@ $_SESSION['cadiweb_version'] = '1.0';
 
 <link rel="stylesheet" href="css/style.css">
 
-<!-- <script type="text/javascript" src="js/date.format.js"></script> -->
 
 <?php
 // load tank levels settings
@@ -75,7 +69,6 @@ $_SESSION['cadiweb_version'] = '1.0';
 <?php echo $js_svg_valves; ?>
 
 function rx_ee_dir(addr, value){	// direct value upload
-//	$.post('cm/cadi_bt_processor.php', {action: 'rx_ee_dir', addr:addr, value:value}, function(data){
 	$.post('cm/cadi_bt_processor.php', {action: 'tx_packet', cmd:64, addr:addr, value:value}, function(data){
 		alert(addr+'/'+value);
 	});
@@ -97,13 +90,10 @@ function rx_ee_(input){
 	var inputData = inputName.split('_');
 	var addr = inputData[1];
 	var value = input.value;
-	// alert('addr='+addr+';val='+value);
 	var i=0;
-//	for (i=0;i<3;i++) {
-		 $.post('cm/cadi_bt_processor.php', {action: 'tx_packet', cmd:64, addr:addr, value:value}, function(data){
-		//	alert(data);
-		});
-//	}
+	$.post('cm/cadi_bt_processor.php', {action: 'tx_packet', cmd:64, addr:addr, value:value}, function(data){
+		
+	});
 }
 
 var g1;
@@ -141,10 +131,8 @@ window.onload = function(){
 
 		$( ".btn_" ).button();
 		$("#system_view_1").hide();
-//		get_status_block();
 		cadi_list_rfcomms();
 
-		//cadi_status_stream();
 	});
 
 
@@ -201,14 +189,12 @@ $(document).ready(function() {
 		$.post('cm/cadi_bt_processor.php', {action: 'get_status_csv'}, function(data){
 		//	alert(data);
 			if (data.length>42) {
-				//$('#csv_string_box').html(data);
 				var statusArray = data.split(',');
 				// display BTD State
 				$('#btd_state').html(statusArray[22]);
 
 				if (statusArray[0]>1000000000) {  // workaround for first lost char of CSV (shared memory)
 					var date = new Date(statusArray[0]*1000);
-					//var date2 = date.substr(0,16);
 					var datestring = date.toString().substr(0,24);
 					$('#cadi_time2').html(datestring);
 				}
@@ -222,7 +208,7 @@ $(document).ready(function() {
 				var ph1_adc_val = statusArray[10];
 				$('#ph1_adc_val').html('pH: '+ph1_adc_val);
 				$('#sens_ph1_adc_val').html(ph1_adc_val);
-				//$('#csv_string').html(data);
+				$('#csv_string').html(data);
 				
 
 				/* var wpProgress = statusArray[18];
@@ -260,13 +246,9 @@ $(document).ready(function() {
 			$('#tank3_water').attr('height',t3h);
 			$('#tank3_water').attr('y',t3y);
 
-	
-			// $('#ph1_adc_val').html('&nbsp;pH: '+ph1_adc_val);
-
-
-				// tank 4 water lvl redraw
-			<?php echo 't4top = '.$svg_t4top.';'.PHP_EOL; ?>
-			<?php echo 't4btm = '.$svg_t4btm.';'.PHP_EOL; ?>
+			// tank 4 water lvl redraw
+			<?php echo 't4top = '.$svg_t4top.';'.PHP_EOL;
+				echo 't4btm = '.$svg_t4btm.';'.PHP_EOL; ?>
 
 			t4curlvl = statusArray[9];	// provide current level globally
 			if (statusArray[9]>t4top && statusArray[9]<t4btm) {
@@ -281,8 +263,7 @@ $(document).ready(function() {
 			$('#tank4_water').attr('height',t4h);
 			$('#tank4_water').attr('y',t4y);
 
-				$('#psi_adc_current').html(statusArray[12]); 
-				// offset for PSI gauge value
+				$('#psi_adc_current').html(statusArray[12]);
 				// draw labels for tanks, displaying current level
 				$('#t3l_txt').html(statusArray[8]+'mm');
 				$('#t4l_txt').html(statusArray[9]+'mm');
@@ -291,7 +272,7 @@ $(document).ready(function() {
 				$('#psi_gauge_val').val(psi_gauge_val);
 
 				// get valve states colors
-				// svg_valves
+				// 'svg_valves' line from cadi_settings config file
 				var valves = statusArray[5];
 				for (var i=0;i<10;i++) {
 					if (valves.charAt(15-svg_valves[i])=="1") {
@@ -704,8 +685,8 @@ function mix_solution(){
 
 <div class="ral">
 <b id="btd_state">BTD state</b>
-<button onClick="download_csx(1)">Reload Cadi Settings</button>
-<div class="lcso">Downloading Cadi settings. Please wait ...</div>
+<button onClick="download_csx(1)">Reload Grolly Settings</button>
+<div class="lcso">Downloading Grolly settings. Please wait ...</div>
 <input type="hidden" value="0" id="csxdl_interval" />
 <!--
 <button class="btn_ fr" onClick="check_plug()">Apply settings</button>
