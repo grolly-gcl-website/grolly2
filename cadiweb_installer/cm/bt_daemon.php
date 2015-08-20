@@ -4,51 +4,53 @@
 date_default_timezone_set('UTC');
 // "echo > cadi_settings_dump" flushes file before downloading new settings from Cadi
 
+$CURRENT_PATH = realpath(dirname(__FILE__));
+require_once($CURRENT_PATH . '/cadi_settings.php');
+
+$INITIAL_DATE = "20141231";
+$SET_DATE_CMD = 'date +%Y%m%d -s "' . $INITIAL_DATE . '"';
+$BT_DAEMON_OS_UBUNTU = 0;
+$BT_DAEMON_OS_ARCH = 1;
+
 $fp_cs = fopen('cadi_status.csv', 'w');
 $fp_sresp = fopen('serialresp.out', 'rb');
 
 stream_set_blocking($fp_cs, 0);
 stream_set_blocking($fp_sresp, 0);
 
-$respfs = 0;
-
 $settings = array();
 
-include_once('cadi_settings.php');
-//$btd_os = 0;	// Ubuntu (default)
-$btd_os = 1;	// ArchLinux
-exec('date +%Y%m%d -s "20141231"');
+$btd_os = $BT_DAEMON_OS_ARCH;
+exec($SET_DATE_CMD);
 
 echo "Bluetooth daemon for Cadi started";
 $btd_cmd_file = 'daemon_cmd';
 // initial Cadi BTDaemon settings load
 file_put_contents($btd_cmd_file,'reload_settings,');
-$respfs = 0;
+
 $ping_delay = 0;
 $cycle_counter = 0;
 $video = 0;
-$status_stream_enabled = 0;		// shows if status stream enabled
+$status_stream_enabled = 0; // shows if status stream enabled
 $tank = '';
 $packet_id = 1;
 $repeat_last_cmd = 0;	
-$NbrOfDataToSend = 0;	// amount of 16bit variables of settings dump to send
-$TxCounter = 0;		// settings transmit pointer
-$sbsa = 0;			// Settings Block Start Address
+$NbrOfDataToSend = 0;       // amount of 16bit variables of settings dump to send
+$TxCounter = 0;             // settings transmit pointer
+$sbsa = 0;                  // Settings Block Start Address
 
 $execmd = 'echo';
 
-$NbrOfDataToRead = 0;	// amount of 16bit variables of settings dump to read from Cadi
-$RxCounter = 0;		// settings Rx pointer
-$sbsa2 = 0;			// starting address in EEPROM memory of cadi
+$NbrOfDataToRead = 0;       // amount of 16bit variables of settings dump to read from Cadi
+$RxCounter = 0;             // settings Rx pointer
+$sbsa2 = 0;                 // starting address in EEPROM memory of cadi
 $ee_addr = 0;
 
 $globcounter = 0;
 
-
-
 //----- SHARED MEMORY CONFIGURATION -----
-$SEMAPHORE_KEY = 674839575;   			//Semaphore unique key
-$SHARED_MEMORY_KEY = 910538672;   	//Shared memory unique key
+$SEMAPHORE_KEY = 674839575;     //Semaphore unique key
+$SHARED_MEMORY_KEY = 910538672; //Shared memory unique key
 $shared_memory_id = 0;
 $semaphore_id = 0;
 $rxbs = 1000;	// rx buffer size in shared memory
@@ -79,24 +81,24 @@ $r_pntrs['conf'] = $smarr['w_conf_bp'];
 
 
 // load SVG display settings
+echo 'Loading SVG tank defaults'.PHP_EOL;
+// setting tank water polygon parameters (defaults) SVG
+$GLOBALS['tank'][3]['top'] = 14;	// Maximum water level (distance in cm to sonar installed on top of the water tank)
+$GLOBALS['tank'][3]['bottom'] = 100;	// minimum water level
+$GLOBALS['tank'][3]['svg']['height'] = 400;	// SVG water polygon height
+$GLOBALS['tank'][3]['svg']['tank_top'] = 20;	// SVG water polygon top offset
 
-		echo 'Loading SVG tank defaults'.PHP_EOL;
-		// setting tank water polygon parameters (defaults) SVG
-		$GLOBALS['tank'][3]['top'] = 14;	// Maximum water level (distance in cm to sonar installed on top of the water tank)
-		$GLOBALS['tank'][3]['bottom'] = 100;	// minimum water level
-		$GLOBALS['tank'][3]['svg']['height'] = 400;	// SVG water polygon height
-		$GLOBALS['tank'][3]['svg']['tank_top'] = 20;	// SVG water polygon top offset
+$GLOBALS['tank'][4]['top'] = 7;
+$GLOBALS['tank'][4]['bottom'] = 47;
+$GLOBALS['tank'][4]['svg']['height'] = 430;
+$GLOBALS['tank'][4]['svg']['tank_top'] = 300;
+$settings['photo_divider'] = 80;
+$settings['fsd'] = 37;
+$settings['csd'] = 25000;
+$settings['sppd'] = 80;
+$settings['srtrs'] = 150;
+print_r($tank);
 
-		$GLOBALS['tank'][4]['top'] = 7;
-		$GLOBALS['tank'][4]['bottom'] = 47;
-		$GLOBALS['tank'][4]['svg']['height'] = 430;
-		$GLOBALS['tank'][4]['svg']['tank_top'] = 300;
-		$settings['photo_divider'] = 80;
-		$settings['fsd'] = 37;
-		$settings['csd'] = 25000;
-		$settings['sppd'] = 80;
-		$settings['srtrs'] = 150;
-		print_r($tank);
 
 function make_photoshot($time){
 	exec('fswebcam -r 800x600 --jpeg 100 --save /srv/http/imgs/sht'.$time.'.jpg');
@@ -155,7 +157,6 @@ while(1){
 					echo PHP_EOL.'*** Running automatic connection script'.PHP_EOL;
 					bt_autoconnect($mac, intval($rfcomm));
 					//file_put_contents($btd_cmd_file,'stream,'.$rfcomm.',');
-					$respfs = 0;
 					break;
 				case 'discon':	// opposite to 'con'
 					echo PHP_EOL.'*** Running automatic dis-connection script'.PHP_EOL;
@@ -179,17 +180,16 @@ while(1){
 					exec($tmpcmddd);
 					// $execmd = "cat /dev/".$cmd_arr[1]." > serialresp.out &";
 					$execmd = "/srv/http/cm/ccd > /dev/null &";	// start CCD
-					$respfs = 0;
 					// sleep(10);
 					$status_stream_enabled = 1;		// shows if status stream enabled
 					break;
 				case 'release':
 					$execmd = 'rfcomm release 0 ; rm -rf /dev/'.$cmd_arr[1].' ; rm -rf /dev/cadi';
 					exec($execmd);
-					if ($btd_os==0) {
+					if ($btd_os == $BT_DAEMON_OS_UBUNTU) {
 						$execmd = 'service bluetooth restart';	// Ubuntu 12.04 LTS
 					}
-					if ($btd_os==1) {
+					if ($btd_os == $BT_DAEMON_OS_ARCH) {
 						$execmd = "'./bt_restart_arch.sh'";	// ArchLinux for Raspberry Pi
 					}
 					exec($execmd);
@@ -1016,19 +1016,16 @@ function bt_autoconnect($macc, $rfcomm_n){
 }
 
 
-
-
-
 function bt_autodisconnect($mac, $rfcomm_n){
 	global $btd_os;
 	$execmd = "'kill -9 $(pidof rfcomm)'";
 				
 	$execmd = 'rfcomm release 0 ; rm -rf /dev/'.$rfcomm_n.' ; rm -rf /dev/cadi';
 	exec($execmd);
-	if ($btd_os==0) {
+	if ($btd_os == $BT_DAEMON_OS_UBUNTU) {
 		$execmd = 'service bluetooth restart';	// Ubuntu 12.04 LTS
 	}
-	if ($btd_os==1) {
+	if ($btd_os == $BT_DAEMON_OS_ARCH) {
 		$execmd = "'./bt_restart_arch.sh'";	// ArchLinux for Raspberry Pi
 	}
 	exec($execmd);

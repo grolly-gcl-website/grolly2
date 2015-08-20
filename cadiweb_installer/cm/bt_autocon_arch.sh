@@ -38,21 +38,15 @@ ln -s /dev/rfcomm$RFNUM /dev/cadi
 echo '...streaming >>>>>>'
 
 if [ $VERSION = 1 ]; then
-	# start Cadi Communication Daemon
+    # start Cadi Communication Daemon
     /srv/http/cm/ccd > /dev/null &
 else
-	# streaming using linux cat for rfcomm port
+    # streaming using linux cat for rfcomm port
     cat /dev/rfcomm$RFNUM > serialresp.out &
 fi
-
-
 
 
 LOGGER_PID=$!
 
 echo 'streamer pid='$LOGGER_PID
-
-
-
 echo 'bt_restart Archlinux edition executed'
-
