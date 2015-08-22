@@ -32,6 +32,8 @@
 #define SONAR1_FALL		!((GPIOB->IDR)>>8 & 1)
 #define SONAR2_FALL		!((GPIOB->IDR)>>9 & 1)
 
+#define SONAR_MAX_READING	3000
+
 volatile static uint16_t	sonar_read[SONAR_AMOUNT];	// 2 sonars on pins PA6 and PA7 with trig on PC4
 volatile static uint16_t	sonar_mm[SONAR_AMOUNT];
 #endif

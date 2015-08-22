@@ -4252,7 +4252,9 @@ void EXTI9_5_IRQHandler(void) {
 	if (EXTI_GetITStatus(EXTI_Line8) != RESET) {
 		EXTI_ClearITPendingBit(EXTI_Line8);
 		if (SONAR1_FALL) {
-			sonar_read[0] = SONAR_TIM->CNT - sonar1_rise;
+			if ((SONAR_TIM->CNT - sonar1_rise)<SONAR_MAX_READING) {
+				sonar_read[0] = SONAR_TIM->CNT - sonar1_rise;
+			}
 		} else {
 			sonar1_rise = SONAR_TIM->CNT;
 		}
@@ -4260,7 +4262,9 @@ void EXTI9_5_IRQHandler(void) {
 	if (EXTI_GetITStatus(EXTI_Line9) != RESET) {
 		EXTI_ClearITPendingBit(EXTI_Line9);
 		if (SONAR2_FALL) {
-			sonar_read[1] = SONAR_TIM->CNT - sonar2_rise;
+			if ((SONAR_TIM->CNT - sonar2_rise)<SONAR_MAX_READING) {
+				sonar_read[1] = SONAR_TIM->CNT - sonar2_rise;
+			}
 		} else {
 			sonar2_rise = SONAR_TIM->CNT;
 		}

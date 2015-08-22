@@ -208,7 +208,7 @@ $(document).ready(function() {
 				var ph1_adc_val = statusArray[10];
 				$('#ph1_adc_val').html('pH: '+ph1_adc_val);
 				$('#sens_ph1_adc_val').html(ph1_adc_val);
-				$('#csv_string').html(data);
+				//$('#csv_string').html(data);
 				
 
 				/* var wpProgress = statusArray[18];
