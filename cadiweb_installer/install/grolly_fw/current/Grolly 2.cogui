@@ -39,11 +39,11 @@
 <input factoryID="org.coocox.component.ui.editors.repository.RepositoryElementFactory">&#x0A;<subPage horizontalPosition="0" selectedItemId="0" subPageIndex="2" verticalPosition="0"/>
 </input>
 </editor>
-<editor id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" partName="main.c" path="D:/repos/grolly2/cadiweb_installer/install/grolly_fw/current/main.c" title="main.c" tooltip="D:/repos/grolly2/cadiweb_installer/install/grolly_fw/current/main.c" workbook="DefaultEditorWorkbook">
+<editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" partName="main.c" path="D:/repos/grolly2/cadiweb_installer/install/grolly_fw/current/main.c" title="main.c" tooltip="D:/repos/grolly2/cadiweb_installer/install/grolly_fw/current/main.c" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Grolly 2/main.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="392" selectionTopPixel="0"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="189778" selectionTopPixel="137180"/>
 </editor>
-<editor activePart="true" focus="true" id="org.coocox.builder.ui.editors.ConfigEditor" name="" partName="Configuration" title="Configuration" tooltip="" workbook="DefaultEditorWorkbook">
+<editor id="org.coocox.builder.ui.editors.ConfigEditor" name="" partName="Configuration" title="Configuration" tooltip="" workbook="DefaultEditorWorkbook">
 <input factoryID="org.coocox.builder.ui.persistent.PersistentElementFactory">
 <org.coocox.builder.ui.editors.ConfigEditor horizontalPosition="0" subTagIndex="1" verticalPosition="0"/>
 </input>
@@ -103,7 +103,7 @@
 </editors>
 <views>
 <view id="org.coocox.builder.ui.views.ProjectView" partName="Project">
-<viewState CommonNavigator.LINKING_ENABLED="0" horizontalPosition="0" org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets="0" verticalPosition="42">
+<viewState CommonNavigator.LINKING_ENABLED="0" horizontalPosition="0" org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets="0" verticalPosition="41">
 <expanded>
 <element path="/Grolly 2"/>
 <element path="/Grolly 2/cadi_libs"/>
@@ -132,7 +132,7 @@
 <viewState/>
 </view>
 </views>
-<perspectives activePart="org.coocox.builder.ui.editors.ConfigEditor" activePerspective="org.coocox.builder.perspective.CoBuilder">
+<perspectives activePart="org.eclipse.cdt.ui.editor.CEditor" activePerspective="org.coocox.builder.perspective.CoBuilder">
 <perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
 <descriptor class="org.coocox.builder.ui.PerspectiveCoBuilder" id="org.coocox.builder.perspective.CoBuilder" label="CooCox CoBuilder"/>
 <alwaysOnActionSet id="org.coocox.component.ui.actionSet"/>
@@ -221,7 +221,6 @@
 <navigationHistory>
 <editors>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Grolly 2/main.c"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Grolly 2/stm_lib/inc/I2CRoutines.h"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Grolly 2/LCD_I2C/LiquidCrystal_I2C.c"/>
 <editor factoryID="org.coocox.builder.ui.persistent.PersistentElementFactory" id="org.coocox.builder.ui.editors.ConfigEditor">
 <org.coocox.builder.ui.editors.ConfigEditor horizontalPosition="0" subTagIndex="1" verticalPosition="0"/>
@@ -230,31 +229,11 @@
 <org.coocox.builder.ui.editors.ConfigEditor horizontalPosition="0" subTagIndex="1" verticalPosition="0"/>
 </editor>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Grolly 2/main.c"/>
+<editor factoryID="org.coocox.builder.ui.persistent.PersistentElementFactory" id="org.coocox.builder.ui.editors.ConfigEditor">
+<org.coocox.builder.ui.editors.ConfigEditor horizontalPosition="0" subTagIndex="1" verticalPosition="0"/>
+</editor>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Grolly 2/main.c"/>
 </editors>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="192260" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="7618" y="0"/>
-</item>
-<item historyLabel="I2CRoutines.h" index="1">
-<position info="not_deleted" x="1003" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="7618" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="28290" y="28"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="28037" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="190733" y="31"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="4808" y="20"/>
-</item>
 <item historyLabel="main.c" index="0">
 <position info="not_deleted" x="4997" y="0"/>
 </item>
@@ -351,7 +330,7 @@
 <item historyLabel="main.c" index="0">
 <position info="not_deleted" x="170258" y="13"/>
 </item>
-<item historyLabel="LiquidCrystal_I2C.c" index="2">
+<item historyLabel="LiquidCrystal_I2C.c" index="1">
 <position info="not_deleted" x="5815" y="2"/>
 </item>
 <item historyLabel="main.c" index="0">
@@ -363,16 +342,38 @@
 <item historyLabel="main.c" index="0">
 <position info="not_deleted" x="43731" y="0"/>
 </item>
-<item historyLabel="Configuration" index="3"/>
+<item historyLabel="Configuration" index="2"/>
 <item historyLabel="main.c" index="0">
 <position info="not_deleted" x="324" y="0"/>
 </item>
+<item historyLabel="Configuration" index="2"/>
 <item historyLabel="Configuration" index="3"/>
-<item historyLabel="Configuration" index="4"/>
-<item historyLabel="main.c" index="5">
+<item historyLabel="main.c" index="4">
 <position info="not_deleted" x="392" y="0"/>
 </item>
-<item active="true" historyLabel="Configuration" index="4"/>
+<item historyLabel="Configuration" index="3"/>
+<item historyLabel="Configuration" index="5"/>
+<item historyLabel="main.c" index="6">
+<position info="not_deleted" x="392" y="0"/>
+</item>
+<item historyLabel="main.c" index="6">
+<position info="not_deleted" x="120475" y="0"/>
+</item>
+<item historyLabel="main.c" index="6">
+<position info="not_deleted" x="121138" y="0"/>
+</item>
+<item historyLabel="main.c" index="6">
+<position info="not_deleted" x="147885" y="6"/>
+</item>
+<item historyLabel="main.c" index="6">
+<position info="not_deleted" x="30788" y="0"/>
+</item>
+<item historyLabel="main.c" index="6">
+<position info="not_deleted" x="147529" y="5"/>
+</item>
+<item active="true" historyLabel="main.c" index="6">
+<position info="not_deleted" x="120406" y="0"/>
+</item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
 </page>
@@ -380,6 +381,9 @@
 <actionBarAdvisor/>
 </window>
 <mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="driver_sonar.h" tooltip="Grolly 2/cadi_libs/inc/driver_sonar.h">
+<persistable path="/Grolly 2/cadi_libs/inc/driver_sonar.h"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="I2CRoutines.h" tooltip="Grolly 2/stm_lib/inc/I2CRoutines.h">
 <persistable path="/Grolly 2/stm_lib/inc/I2CRoutines.h"/>
 </file>
@@ -418,9 +422,6 @@
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f10x_tim.c" tooltip="Grolly 2/stm_lib/src/stm32f10x_tim.c">
 <persistable path="/Grolly 2/stm_lib/src/stm32f10x_tim.c"/>
-</file>
-<file factoryID="org.eclipse.ui.ide.FileStoreEditorInputFactory" id="org.eclipse.ui.DefaultTextEditor" name="ccRMhX57.s" tooltip="C:\Users\le\AppData\Local\Temp\ccRMhX57.s">
-<persistable uri="file:/C:/Users/le/AppData/Local/Temp/ccRMhX57.s"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="core_cm3.c" tooltip="Grolly 2/cmsis/core_cm3.c">
 <persistable path="/Grolly 2/cmsis/core_cm3.c"/>

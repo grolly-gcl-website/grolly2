@@ -4043,9 +4043,15 @@ void wt_watering(uint16_t duration, uint8_t line_id){
 		now = RTC_GetCounter();
 		vTaskDelay(200);
 		psiOn();
+		IWDG_ReloadCounter();
 	}
 	psiOff();
-	vTaskDelay(1000);
+	timeout += 5;			// HARDCODE
+	while (now<timeout) {
+		now = RTC_GetCounter();
+		vTaskDelay(200);
+		IWDG_ReloadCounter();
+	}
 	close_valves();
 }
 
@@ -4064,9 +4070,15 @@ void wt_watering_x(uint16_t duration, uint16_t valveFlags){
 		now = RTC_GetCounter();
 		vTaskDelay(200);
 		psiOn();
+		IWDG_ReloadCounter();
 	}
 	psiOff();
-	vTaskDelay(1000);
+	timeout += 5;			// HARDCODE
+	while (now<timeout) {
+		now = RTC_GetCounter();
+		vTaskDelay(200);
+		IWDG_ReloadCounter();
+	}
 	close_valves();
 }
 
@@ -6855,7 +6867,7 @@ uint8_t main(void) {
 			tskIDLE_PRIORITY + 1, NULL);
 	xTaskCreate(watering_program_trigger, (signed char*)"WP", 180, NULL,
 			tskIDLE_PRIORITY + 1, NULL);
-	xTaskCreate(uart_task, (signed char*)"UART", 100, NULL,
+	xTaskCreate(uart_task, (signed char*)"UART", 150, NULL,
 			tskIDLE_PRIORITY + 1, NULL);
 	xTaskCreate(timerStateTrigger, (signed char*)"TIMERS",
 			configMINIMAL_STACK_SIZE+10, NULL, tskIDLE_PRIORITY + 1, NULL);

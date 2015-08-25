@@ -88,8 +88,8 @@
       <target file="startup_stm32f10x_md_vl.o" lastModified="14f30eb9735">
          <source file="..\..\..\cmsis_boot\startup\startup_stm32f10x_md_vl.c" lastModified="13843cf2fc0"/>
       </target>
-      <target file="main.o" lastModified="14f5108cb45">
-         <source file="..\..\..\main.c" lastModified="14f5108784d"/>
+      <target file="main.o" lastModified="14f55a45afb">
+         <source file="..\..\..\main.c" lastModified="14f55a3a6e5"/>
       </target>
       <target file="stm32f10x_usart.o" lastModified="14f30ebb9b0">
          <source file="..\..\..\stm_lib\src\stm32f10x_usart.c" lastModified="12e9ef2ce20"/>
