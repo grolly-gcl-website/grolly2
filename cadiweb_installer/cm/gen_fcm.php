@@ -172,12 +172,12 @@ function csx2sca($csx){
 
 function get_fert_selector($fert_id){		// fill selector with fertilizer options
 	$dosers_amount = 4;
-	for ($i=1; $i<$dosers_amount; $i++) {		// skip id=0, if its Mixing Pump
+	for ($i=0; $i<$dosers_amount; $i++) {		// skip id=0, if its Mixing Pump
 		echo '<option value="'.$i.'"';
 		if ($i == $fert_id) {
 			echo ' selected';
 		}
-		echo ' title="'.$_SESSION['settings_data']['dosing_pumps'][$i+1].'">'.$i.': '.$_SESSION['settings_data']['dosers_hints'][$i+1].'</option>';
+		echo ' title="'.$_SESSION['settings_data']['dosing_pumps'][$i+1].'">'.$i.': '.$_SESSION['settings_data']['dosing_pumps'][$i+1].'</option>';
 	}
 	echo '</select>';
 }

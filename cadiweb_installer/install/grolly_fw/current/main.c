@@ -594,7 +594,7 @@ volatile static uint8_t psi_max_speed = 0;
 #else
 
 #warning "GROLLYCONF: Using Grolly SN002+ defines"
-// GROLLY 2 (002 and 003)
+// GROLLY 2 (002 and up)
 	#define FWTANK						0
 	#define MIXTANK						1
 	#define FWTANK_SONAR					0
@@ -772,7 +772,7 @@ void buttonCalibration(void);
 void Lcd_write_data(uint8_t byte);
 void Lcd_write_cmd(uint8_t byte);
 void Lcd_clear(void);
-void Return_home(void);
+// void Return_home(void);
 void Lcd_goto(uc8 x, uc8 y);
 void Lcd_write_str(volatile uint8_t *STRING);
 char* adc2str(uint_fast16_t d, volatile char* out);
@@ -996,7 +996,7 @@ void autoSafe(void) {
 	if (((auto_flags & 4) >> 2) == 1) {
 		// disable PSI pump in case of over pressure. PSI_OVERPRESSURE sets max
 		if (adcAverage[AVG_ADC_PSI] > PSI_OVERPRESSURE) {
-			psiOff();
+//			psiOff();
 			wpProgress = 61;
 		}
 
@@ -1009,7 +1009,7 @@ void autoSafe(void) {
 				&& (auto_flags & 1) == 1) { // underpressure auto
 			if (now > fup_time) {
 				wpProgress = 62;
-				psiOff();
+//				psiOff();
 				auto_failures |= 8; // set PSI program failure flag
 			}
 		} else {
@@ -1372,7 +1372,7 @@ static void lstasks(void *pvParameters) {
 		 }
 
 		vTaskDelay(100);
-		psiStab();
+//		psiStab();
 		dht_get_data_x(0);
 		vTaskDelay(50);
 		sonar_ping();
@@ -1717,7 +1717,7 @@ void run_watering_pump(uint32_t seconds) {
 		vTaskDelay(100);
 		IWDG_ReloadCounter();
 	}
-	TIM1->CCR1 = 1000;
+	psiOff();
 }
 
 void run_watering_pump_task(uint16_t secs){
@@ -1905,9 +1905,10 @@ void run_doser_for(uint8_t pump_id, uint8_t amount, uint8_t speed) {
 	while (now < finish) {
 		now = RTC_GetCounter();
 		IWDG_ReloadCounter();
-		vTaskDelay(10);
+		vTaskDelay(200);
 		get_status_block(1); // send status blocks
-		vTaskDelay(10);
+		IWDG_ReloadCounter();
+		vTaskDelay(200);
 	}
 	enable_dosing_pump(pump_id, 0);
 }
@@ -2512,7 +2513,23 @@ void tankLevelStab(void) {
 	}
 #endif
 }
+/*
+	#define FWTANK						0
+	#define MIXTANK						1
+	#define FWTANK_SONAR					0
+	#define MIXTANK_SONAR					1
+	#define	MTI_VALVE					11	// MixTank intake valve
+	#define FWI_VALVE					10	// Fresh water intake valve
+	#define BACK_VALVE					4	// Back valve for solution mixing
+	#define	WI_VALVE					0
+	#define WLINE_61_VALVE					6	// Watering lines valves
+	#define WLINE_62_VALVE					3
+	#define WLINE_63_VALVE					1
+	#define WLINE_64_VALVE					7
+	#define WLINE_65_VALVE					2
+	#define WLINE_66_VALVE					12
 
+*/
 
 void open_valve(uint8_t valveId){
 	if (valveId > 0 && valveId < 5) {		// [PA4-PA7]
@@ -4009,13 +4026,16 @@ void wt_mix_in(uint16_t duration, uint16_t vol, uint8_t doserid, uint8_t spd){
 	close_valves();		// close all valves before doing anything
 	open_valve(MTI_VALVE);		// open MIXTANK valve for incoming water
 	open_valve(BACK_VALVE);		// open desired valve_id for watering out
+	vTaskDelay(100);
+	psiOn();
+	run_doser_for(doserid,vol,spd);
 	while (now<timeout) {
-		if (now < finishDosing) {
+/*		if (now < finishDosing) {
 			enable_dosing_pump(doserid, spd);
 		}
 		else {
 			enable_dosing_pump(doserid, 0);
-		}
+		} */
 		now = RTC_GetCounter();
 		IWDG_ReloadCounter();
 		vTaskDelay(200);
@@ -6863,7 +6883,7 @@ uint8_t main(void) {
 
 	sonar_init(); // init sonar ECHOs on PB8 and PB9 and TRIG on PC13
 
-	xTaskCreate(lstasks, (signed char*)"LST", configMINIMAL_STACK_SIZE+50, NULL,
+	xTaskCreate(lstasks, (signed char*)"LST", 128, NULL,
 			tskIDLE_PRIORITY + 1, NULL);
 	xTaskCreate(watering_program_trigger, (signed char*)"WP", 180, NULL,
 			tskIDLE_PRIORITY + 1, NULL);
@@ -7003,7 +7023,7 @@ void Lcd_clear(void) {
 	Lcd_goto(0, 0);
 }
 
-void Return_home() {
+/* void Return_home() {
 	Lcd_write_cmd(0b0000001);
-}
+} */
 
