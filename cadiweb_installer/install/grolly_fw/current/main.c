@@ -1266,11 +1266,11 @@ void USART1_IRQHandler(void) // Protobuzzz v3
 	}
 
 	// sending packet in case of Tx Not Empty flag is set and buffer not sent completely yet
-	if (txbuff_ne == 1 && TxCounter < NbrOfDataToTransfer) {
+/*	if (txbuff_ne == 1 && TxCounter < NbrOfDataToTransfer) {
 		USART1->DR = TxBuffer[TxCounter++]; // write TxBuff byte into Data Register for sending
 	}
 	BT_USART->SR &= ~USART_SR_TC; // clear Transfer Complete flag
-
+*/
 	if (packet_ready == 0) {
 		if (rxm_state == RXM_CMD) {
 			if (rx_pntr == 0) { // if packet buffer pointer is 0, it points to payload size (payload, including this size byte)
@@ -1426,7 +1426,32 @@ void tx_flush(void) {
 	}
 }
 
+
 void push_tx(void) {
+	txbuff_ne = 0; // stop Tx transfers
+	NbrOfDataToTransfer = TxBuffer[3] + 1; // packet size with code 13
+	TxBuffer[TxBuffer[3]] = 13;
+	TxCounter = 0; // reset tx buffer pointer
+	txbuff_ne = 1;
+//	BT_USART->DR = TxBuffer[TxCounter++]; //vozmozhno, tak budet luchshe (bez otpravki lishnego nulja)
+
+	uart_dma_init(NbrOfDataToTransfer, &TxBuffer);
+	while (DMA_GetFlagStatus(DMA1_FLAG_TC4) == RESET ) {
+			vTaskDelay(20);
+			IWDG_ReloadCounter();
+	}
+/*	while (NbrOfDataToTransfer > 0) {
+
+		vTaskDelay(20);
+		IWDG_ReloadCounter();
+	} */
+	vTaskDelay(50);
+	IWDG_ReloadCounter();
+//	tx_flush(); // flush Tx buffer
+	txbuff_ne = 0; // packet sent, reset tx not empty flag
+}
+
+void push_tx_(void) {
 	txbuff_ne = 0; // stop Tx transfers
 	NbrOfDataToTransfer = TxBuffer[3] + 1; // packet size with code 13
 	TxBuffer[TxBuffer[3]] = 13;
@@ -2191,6 +2216,10 @@ void get_status_block(uint8_t blockId) { // sends block with Cadi STATUS data
 void DMA1_Channel4_IRQHandler(void) {
 	if (DMA1->ISR & DMA_ISR_TCIF4) {
 	}
+	if (DMA1->ISR & DMA_ISR_HTIF4) {
+	}
+	if (DMA1->ISR & DMA_ISR_TCIF4) {
+	}
 }
 
 void DMA1_Channel5_IRQHandler(void) {
@@ -2199,7 +2228,109 @@ void DMA1_Channel5_IRQHandler(void) {
 	}
 }
 
+// 56566
+void uart_dma_init(uint8_t size, uint8_t *txbuff) {
+	// disable channel 4 of DMA
+	DMA1_Channel4->CCR &= (uint16_t)(~DMA_CCR1_EN);
+	if ((RCC->AHBENR & RCC_AHBENR_DMA1EN) != RCC_AHBENR_DMA1EN) {
+				RCC->AHBENR |=RCC_AHBENR_DMA1EN;
+	}
+	DMA1_Channel4->CMAR = (uint32_t) &TxBuffer[0];
+	DMA1_Channel4->CPAR = (uint32_t) &(USART1->DR);
+	DMA1_Channel4->CNDTR = size;
+
+	// DMA1_Channel4->CCR |=  DMA_DIR_PeripheralDST | DMA_MemoryInc_Enable | DMA_Priority_VeryHigh;
+	DMA1_Channel4->CCR |= ((uint32_t)0x00003091);
+
+
+	USART1->CR3 |= USART_CR3_DMAT;
+    /* Enable the selected DMAy Channelx */
+	DMA1_Channel4->CCR |= DMA_CCR1_EN;
+
+//	BT_USART->SR &= ~USART_SR_TC; // clear Transfer Complete flag
+	NVIC_EnableIRQ(DMA1_Channel4_IRQn);
+}
+
+// 56616
+// based on ST examples (working)
+void uart_dma_init_(uint8_t size, uint8_t *txbuff) {
+	  DMA_InitTypeDef DMA_InitStructure;
+
+	  DMA_Cmd(DMA1_Channel4, DISABLE);
+	  /* USARTy_Tx_DMA_Channel (triggered by USARTy Tx event) Config */
+	  DMA_DeInit(DMA1_Channel4);
+	  DMA_InitStructure.DMA_PeripheralBaseAddr = 0x40013804;
+	  DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t) &TxBuffer[0];
+	  DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralDST;
+	  DMA_InitStructure.DMA_BufferSize = size;
+	  DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
+	  DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;
+	  DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Byte;
+	  DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_Byte;
+	  DMA_InitStructure.DMA_Mode = DMA_Mode_Normal;
+	  DMA_InitStructure.DMA_Priority = DMA_Priority_VeryHigh;
+	  DMA_InitStructure.DMA_M2M = DMA_M2M_Disable;
+	  DMA_Init(DMA1_Channel4, &DMA_InitStructure);
+
+	  USART_DMACmd(USART1, USART_DMAReq_Tx, ENABLE);
+	  DMA_Cmd(DMA1_Channel4, ENABLE);
+
+	  NVIC_EnableIRQ(DMA1_Channel4_IRQn);
+
+
+}
+
 void bluetooth_init(void) {
+	NVIC_InitTypeDef NVIC_InitStructure;
+	GPIO_InitTypeDef GPIO_InitStructure;
+
+	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_AFIO, ENABLE);
+
+	NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_Init(&NVIC_InitStructure);
+
+	// Tx on PA9 as alternate function push-pull
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9;
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
+	GPIO_Init(GPIOA, &GPIO_InitStructure);
+
+	/* Rx on PA10 as input floating */
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+	GPIO_Init(GPIOA, &GPIO_InitStructure);
+
+
+	USART_InitTypeDef USART_InitStructure;
+
+	// USART 1 init
+	USART_DeInit(USART1);
+	uart_dma_init(40,&TxBuffer);
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE);
+
+	USART_InitStructure.USART_BaudRate = 9600;
+	USART_InitStructure.USART_WordLength = USART_WordLength_8b;
+	USART_InitStructure.USART_StopBits = USART_StopBits_1;
+	USART_InitStructure.USART_Parity = USART_Parity_No;
+	USART_InitStructure.USART_HardwareFlowControl =
+			USART_HardwareFlowControl_None;
+	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
+	USART_Init(USART1, &USART_InitStructure);
+
+	USART_ClearFlag(USART1,
+			USART_FLAG_CTS | USART_FLAG_LBD | USART_FLAG_TC | USART_FLAG_RXNE);
+	USART1->CR1 |= USART_CR1_RXNEIE;
+//	USART1->CR1 |= USART_CR1_TCIE;
+
+	USART_Cmd(USART1, ENABLE);
+	NVIC_EnableIRQ(USART1_IRQn);
+}
+
+void bluetooth_init_old(void) {
 	NVIC_InitTypeDef NVIC_InitStructure;
 	GPIO_InitTypeDef GPIO_InitStructure;
 

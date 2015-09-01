@@ -150,8 +150,8 @@
     <File name="LCD_I2C/LiquidCrystal_I2C.h" path="LCD_I2C/LiquidCrystal_I2C.h" type="1"/>
     <File name="stm_lib/src/stm32f10x_i2c.c" path="stm_lib/src/stm32f10x_i2c.c" type="1"/>
     <File name="LCD_I2C/delay.h" path="LCD_I2C/delay.h" type="1"/>
-    <File name="stm_lib/inc" path="" type="2"/>
     <File name="stm_lib/src/stm32f10x_it.c" path="stm_lib/src/stm32f10x_it.c" type="1"/>
+    <File name="stm_lib/inc" path="" type="2"/>
     <File name="FreeRTOSConfig.h" path="FreeRTOSConfig.h" type="1"/>
     <File name="freertos/Source/include/mpu_wrappers.h" path="freertos/Source/include/mpu_wrappers.h" type="1"/>
     <File name="main.c" path="main.c" type="1"/>
