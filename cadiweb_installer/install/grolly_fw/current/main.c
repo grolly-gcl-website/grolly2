@@ -1433,37 +1433,15 @@ void push_tx(void) {
 	TxBuffer[TxBuffer[3]] = 13;
 	TxCounter = 0; // reset tx buffer pointer
 	txbuff_ne = 1;
-//	BT_USART->DR = TxBuffer[TxCounter++]; //vozmozhno, tak budet luchshe (bez otpravki lishnego nulja)
 
 	uart_dma_init(NbrOfDataToTransfer, &TxBuffer);
 	while (DMA_GetFlagStatus(DMA1_FLAG_TC4) == RESET ) {
 			vTaskDelay(20);
 			IWDG_ReloadCounter();
 	}
-/*	while (NbrOfDataToTransfer > 0) {
-
-		vTaskDelay(20);
-		IWDG_ReloadCounter();
-	} */
 	vTaskDelay(50);
 	IWDG_ReloadCounter();
 //	tx_flush(); // flush Tx buffer
-	txbuff_ne = 0; // packet sent, reset tx not empty flag
-}
-
-void push_tx_(void) {
-	txbuff_ne = 0; // stop Tx transfers
-	NbrOfDataToTransfer = TxBuffer[3] + 1; // packet size with code 13
-	TxBuffer[TxBuffer[3]] = 13;
-	TxCounter = 0; // reset tx buffer pointer
-	txbuff_ne = 1;
-	BT_USART->DR = TxBuffer[TxCounter++]; //vozmozhno, tak budet luchshe (bez otpravki lishnego nulja)
-	while (TxCounter < NbrOfDataToTransfer) {
-		vTaskDelay(5);
-		IWDG_ReloadCounter();
-	}
-	NbrOfDataToTransfer = 0;
-	tx_flush(); // flush Tx buffer
 	txbuff_ne = 0; // packet sent, reset tx not empty flag
 }
 
@@ -1810,7 +1788,7 @@ void get_settings_dump(void) {
 		}
 
 		txbuff_ne = 0; // stop Tx transfers
-		NbrOfDataToTransfer = 32; //going to send 32 bits of settings
+		NbrOfDataToTransfer = 32; //going to send 32 bytes of settings
 		TxCounter = 0; // reset tx buffer pointer
 		txbuff_ne = 1;
 		BT_USART->DR = TxBuffer[TxCounter++]; // volshebnyj pendal
@@ -1857,15 +1835,15 @@ void get_settings_dump_(uint16_t amount, uint16_t startaddr) {
 	TxBuffer[4] = (uint8_t)((((amount / 16) * 32) + 12) & 0x00FF); // packet size LSB
 	TxBuffer[5] = (uint8_t)((startaddr >> 8) & 0x00FF); // address offset HSB
 	TxBuffer[6] = (uint8_t)((startaddr) & 0x00FF);
-	txbuff_ne = 0; // stop Tx transfers
+
+
 	NbrOfDataToTransfer = 7; //going to send 32 bits of settings
-	TxCounter = 0; // reset tx buffer pointer
-	txbuff_ne = 1;
-	BT_USART->DR = TxBuffer[TxCounter++]; // volshebnyj pendal
-	while (TxCounter < NbrOfDataToTransfer) {
-		vTaskDelay(5);
-		IWDG_ReloadCounter();
+	uart_dma_init(NbrOfDataToTransfer, &TxBuffer);
+	while (DMA_GetFlagStatus(DMA1_FLAG_TC4) == RESET ) {
+			vTaskDelay(50);
+			IWDG_ReloadCounter();
 	}
+
 	vTaskDelay(15);
 	tmpxor = crc_block(0, &TxBuffer[0], 7);
 	tx_flush(); // flush Tx buffer
@@ -1874,24 +1852,20 @@ void get_settings_dump_(uint16_t amount, uint16_t startaddr) {
 	vTaskDelay(100);
 
 	for (i = 0; i < (amount / 16); i++) { //  HARDCODE
-//	for (i=0;i<32;i++) {
 		settings2tx_buff((startaddr + ((((uint16_t) i) & 0x00FF) * 16)), 16); // 16 variables = 32 bytes
 		for (i2 = 0; i2 < 32; i2++) {
 			tmpxor ^= TxBuffer[i2];
 		}
-		// tmpxor ^= crc_block(0,&TxBuffer[0],32);
 
-		txbuff_ne = 0; // stop Tx transfers
 		NbrOfDataToTransfer = 32; //going to send 32 bits of settings
-		TxCounter = 0; // reset tx buffer pointer
-		txbuff_ne = 1;
-		BT_USART->DR = TxBuffer[TxCounter++]; // volshebnyj pendal
-		while (TxCounter < NbrOfDataToTransfer) {
-			vTaskDelay(1);
-			IWDG_ReloadCounter();
+
+		uart_dma_init(NbrOfDataToTransfer, &TxBuffer);
+		while ((DMA_GetFlagStatus(DMA1_FLAG_TC4) == RESET) && (((BT_USART->SR) & USART_SR_TC) == 0)) {
+				vTaskDelay(30);
+				IWDG_ReloadCounter();
 		}
+		IWDG_ReloadCounter();
 		tx_flush(); // flush Tx buffer
-		txbuff_ne = 0; // packet sent, reset tx not empty flag
 	}
 
 	/// postliminary 0,1,2,3
@@ -1900,15 +1874,8 @@ void get_settings_dump_(uint16_t amount, uint16_t startaddr) {
 	}
 
 	TxBuffer[0] = tmpxor;
-	txbuff_ne = 0; // stop Tx transfers
-	NbrOfDataToTransfer = 4; //going to send 32 bits of settings
-	TxCounter = 0; // reset tx buffer pointer
-	txbuff_ne = 1;
-	BT_USART->DR = TxBuffer[TxCounter++]; // volshebnyj pendal
-	while (TxCounter < NbrOfDataToTransfer) {
-		vTaskDelay(1);
-		IWDG_ReloadCounter();
-	}
+
+	push_tx();
 	vTaskDelay(15);
 	tx_flush(); // flush Tx buffer
 	txbuff_ne = 0; // packet sent, reset tx not empty flag
@@ -2247,7 +2214,7 @@ void uart_dma_init(uint8_t size, uint8_t *txbuff) {
     /* Enable the selected DMAy Channelx */
 	DMA1_Channel4->CCR |= DMA_CCR1_EN;
 
-//	BT_USART->SR &= ~USART_SR_TC; // clear Transfer Complete flag
+	BT_USART->SR &= ~USART_SR_TC; // clear Transfer Complete flag
 	NVIC_EnableIRQ(DMA1_Channel4_IRQn);
 }
 

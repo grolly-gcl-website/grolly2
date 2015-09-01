@@ -88,8 +88,8 @@
       <target file="startup_stm32f10x_md_vl.o" lastModified="14f8a380504">
          <source file="..\..\..\cmsis_boot\startup\startup_stm32f10x_md_vl.c" lastModified="13843cf2fc0"/>
       </target>
-      <target file="main.o" lastModified="14f8ae13098">
-         <source file="..\..\..\main.c" lastModified="14f8ae0dc03"/>
+      <target file="main.o" lastModified="14f8b1d6b8e">
+         <source file="..\..\..\main.c" lastModified="14f8b1d5a7c"/>
       </target>
       <target file="LiquidCrystal_I2C.o" lastModified="14f8a380ed5">
          <source file="..\..\..\LCD_I2C\LiquidCrystal_I2C.c" lastModified="14f28d45a78"/>
