@@ -3279,20 +3279,22 @@ void wt_add_ferts_for_wp(uint8_t progId){
 	 				enabled = 0;
 	 			}
 	 			vTaskDelay(50);
-//	 			fmpLink = (n / 256); // higher byte of FMP_TRIG_FREQUENCY = WP link
-	 			fmpLink = (n / 256) - 1; // higher byte of FMP_TRIG_FREQUENCY = WP link. -1 for assuming Link 1 will link to WP0
-	 			addr = 0;
-	 			// addr = FMP_OFFSET+i*FMP_SIZE+FMP_DOSING_PUMP_ID_SHIFT;
-	 			// EE_ReadVariable(addr, &enabled);	//
-	 			if (fmpLink == progId && enabled > 0) {
-	 				wpProgress = 99;
-	 				vTaskDelay(400);
-	 				run_fertilizer_mixer_g2(i);
-	 				wpProgress = 100 + i;
-	 				vTaskDelay(2000);
-	 			}
-	 			vTaskDelay(100);
-	 			wpProgress = 8;
+	 			fmpLink = (n / 256); // higher byte of FMP_TRIG_FREQUENCY = WP link
+				if (fmpLink>0) {
+					fmpLink -= 1;
+					addr = 0;
+					// addr = FMP_OFFSET+i*FMP_SIZE+FMP_DOSING_PUMP_ID_SHIFT;
+					// EE_ReadVariable(addr, &enabled);	//
+					if (fmpLink == progId && enabled > 0) {
+						wpProgress = 99;
+						vTaskDelay(400);
+						run_fertilizer_mixer_g2(i);
+						wpProgress = 100 + i;
+						vTaskDelay(2000);
+					}
+					vTaskDelay(100);
+					wpProgress = 8;
+				}
 	 		}
 }
 
@@ -3449,19 +3451,24 @@ void run_watering_program_g2(uint8_t progId) {
 				enabled = 0;
 			}
 			vTaskDelay(50);
-			fmpLink = (n / 256) - 1; // higher byte of FMP_TRIG_FREQUENCY = WP link
-			addr = 0;
-			// addr = FMP_OFFSET+i*FMP_SIZE+FMP_DOSING_PUMP_ID_SHIFT;
-			// EE_ReadVariable(addr, &enabled);	//
-			if (fmpLink == progId && enabled > 0) {
-				wpProgress = 99;
-				vTaskDelay(400);
-				run_fertilizer_mixer_g2(i);
-				wpProgress = 100 + i;
-				vTaskDelay(2000);
+
+			fmpLink = (n>>8)&0x00FF; // higher byte of FMP_TRIG_FREQUENCY = WP link
+//			fmpLink = (n / 256); // higher byte of FMP_TRIG_FREQUENCY = WP link
+			if (fmpLink>0) {
+				fmpLink -= 1;
+				addr = 0;
+				// addr = FMP_OFFSET+i*FMP_SIZE+FMP_DOSING_PUMP_ID_SHIFT;
+				// EE_ReadVariable(addr, &enabled);	//
+				if (fmpLink == progId && enabled > 0) {
+					wpProgress = 99;
+					vTaskDelay(400);
+					run_fertilizer_mixer_g2(i);
+					wpProgress = 100 + i;
+					vTaskDelay(2000);
+				}
+				vTaskDelay(100);
+				wpProgress = 8;
 			}
-			vTaskDelay(100);
-			wpProgress = 8;
 		}
 	}
 	vTaskDelay(50);
@@ -3553,6 +3560,7 @@ void run_fertilizer_mixer_g2(uint8_t progId) {
 	vTaskDelay(50);
 	addr = FMP_OFFSET + progId * FMP_SIZE + FMP_DOSING_PUMP_ID_SHIFT;
 	EE_ReadVariable(addr, &dosingPumpId);
+
 	wpProgress = 95;
 	vTaskDelay(40);
 	IWDG_ReloadCounter();
@@ -4137,9 +4145,11 @@ void wt_mix_in(uint16_t duration, uint16_t vol, uint8_t doserid, uint8_t spd){
 		now = RTC_GetCounter();
 		IWDG_ReloadCounter();
 		vTaskDelay(200);
+		wpProgress = vol%256;
 		psiOn();
 		IWDG_ReloadCounter();
 	}
+
 	psiOff();
 	enable_dosing_pump(doserid, 0);
 	vTaskDelay(500);
