@@ -2641,9 +2641,15 @@ void open_valve(uint8_t valveId){
 		GPIOC->BRR |= (1 << (valveId + 5));
 	}
 
+#ifdef DEBUG_ON
+	else if (valveId > 7 && valveId < 10) {		// [PA11-PA14]
+		GPIOA->BRR |= (1 << (valveId + 3));
+	}
+#else
 	else if (valveId > 7 && valveId < 12) {		// [PA11-PA14]
 		GPIOA->BRR |= (1 << (valveId + 3));
 	}
+#endif
 
 	else if (valveId == 12){
 		GPIOA->BRR |= (1 << 8);			// PA8
@@ -2661,9 +2667,15 @@ void close_valve(uint8_t valveId){
 		GPIOC->BSRR |= (1 << (valveId + 5));
 	}
 
+#ifdef DEBUG_ON
+	else if (valveId > 7 && valveId < 10) {		// [PA11-PA14]
+		GPIOA->BSRR |= (1 << (valveId + 3));
+	}
+#else
 	else if (valveId > 7 && valveId < 12) {		// [PA11-PA14]
 		GPIOA->BSRR |= (1 << (valveId + 3));
 	}
+#endif
 
 	else if (valveId == 12){
 		GPIOA->BSRR |= (1 << 8);
@@ -3342,7 +3354,7 @@ void run_watering_program_g2(uint8_t progId) {
 	wpStartTs = RTC_GetCounter();
 	// FRESH WATER INTAKE
 	wpProgress = 3;
-	volatile uint16_t n = 0;
+	uint16_t n = 0;
 	uint8_t i = 0;
 	uint32_t curN = 0;
 	uint32_t interval = 0;
@@ -6845,12 +6857,18 @@ uint8_t main(void) {
 	// valves[5..8] on PA4-PA7 init, and valves [9..11] on PC10-PC12
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
 
+#ifdef DEBUG_ON
+	init_pin.GPIO_Pin = GPIO_Pin_4 | GPIO_Pin_5 | GPIO_Pin_6 | GPIO_Pin_7 | GPIO_Pin_8
+				| GPIO_Pin_9 | GPIO_Pin_10 | GPIO_Pin_11 | GPIO_Pin_12 | GPIO_Pin_15;
+#else
 	GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE); // PA13 and PA14 use as GPIO
 	GPIO_PinRemapConfig(GPIO_Remap_SWJ_Disable, ENABLE);
 
 	init_pin.GPIO_Pin = GPIO_Pin_4 | GPIO_Pin_5 | GPIO_Pin_6 | GPIO_Pin_7 | GPIO_Pin_8
 			| GPIO_Pin_9 | GPIO_Pin_10 | GPIO_Pin_11 | GPIO_Pin_12 | GPIO_Pin_13
 			| GPIO_Pin_14 | GPIO_Pin_15;
+
+#endif
 	init_pin.GPIO_Mode = GPIO_Mode_Out_PP;
 	init_pin.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_Init(GPIOA, &init_pin);
