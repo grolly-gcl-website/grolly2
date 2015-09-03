@@ -3256,7 +3256,7 @@ void startWp(void) {
 	vTaskDelay(200);
 }
 
-
+/*
 void wt_add_ferts_for_wp(uint8_t progId){
 	uint8_t i=0;
 	uint16_t addr = 0;
@@ -3312,6 +3312,9 @@ void wt_add_ferts_for_wp(uint8_t progId){
 				}
 	 		}
 }
+
+
+*/
 
 // Drain all water from mixtank on selected output
 void wt_mt_empty(uint8_t output){
@@ -3547,7 +3550,11 @@ void run_fertilizer_mixer_g2(uint8_t progId) {
 
 	vTaskDelay(50);
 
-	uint16_t dosingTime, dosingPumpId, circulationMixingTime, addr;
+	uint16_t dosingTime = 0;
+	uint16_t dosingPumpId = 0;
+	uint16_t circulationMixingTime = 0;
+	uint16_t addr = 0;
+
 	uint32_t dosingEndTime = 0;
 
 	addr = FMP_OFFSET + progId * FMP_SIZE + FMP_DOSING_TIME_SHIFT;
@@ -6835,6 +6842,7 @@ void relay_test(void) {
 }
 
 uint8_t main(void) {
+
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC | RCC_APB2Periph_AFIO, ENABLE);
 	GPIO_InitTypeDef init_pin;
 
@@ -6867,6 +6875,7 @@ uint8_t main(void) {
 	init_pin.GPIO_Pin = GPIO_Pin_4 | GPIO_Pin_5 | GPIO_Pin_6 | GPIO_Pin_7 | GPIO_Pin_8
 			| GPIO_Pin_9 | GPIO_Pin_10 | GPIO_Pin_11 | GPIO_Pin_12 | GPIO_Pin_13
 			| GPIO_Pin_14 | GPIO_Pin_15;
+
 
 #endif
 	init_pin.GPIO_Mode = GPIO_Mode_Out_PP;
@@ -6953,7 +6962,9 @@ uint8_t main(void) {
 
 	Delay_us(100);
 
+#ifndef DEBUG_ON
 	watchdog_init();	// start watchdog timer
+#endif
 
 	/* Start the scheduler. */
 
