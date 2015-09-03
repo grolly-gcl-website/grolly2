@@ -363,7 +363,7 @@ volatile uint32_t water_counter[WFM_AMOUNT];
 #define VALVE_SENSOR_PORT			GPIOA
 #define VALVE_SENSOR_PORT_SOURCE	GPIO_PortSourceGPIOA
 #define	VALVE_FAILURE_TIMEOUT		600	// timeout for valve open/close function to avoid hanging if valve broken
-#define DRAIN_VALVE_ID				1
+
 // Valve variables
 volatile static uint16_t valveFlags;
 #endif	// EOF VALVES DEFINITIONS
@@ -577,6 +577,7 @@ volatile static uint8_t psi_max_speed = 0;
 
 #ifdef GROLLYSN001
 #warning "GROLLYCONF: Using Grolly SN001 defines"
+
 	#define	FWTANK						0
 	#define MIXTANK						1
 	#define FWTANK_SONAR					0
@@ -591,6 +592,7 @@ volatile static uint8_t psi_max_speed = 0;
 	#define WLINE_64_VALVE					11
 	#define WLINE_65_VALVE					8
 	#define WLINE_66_VALVE					12
+	#define DRAIN_VALVE_ID					15
 #else
 
 #warning "GROLLYCONF: Using Grolly SN002+ defines"
@@ -609,6 +611,7 @@ volatile static uint8_t psi_max_speed = 0;
 	#define WLINE_64_VALVE					7
 	#define WLINE_65_VALVE					2
 	#define WLINE_66_VALVE					12
+	#define DRAIN_VALVE_ID					15	// this valve is used for draining
 
 
 #endif
@@ -3286,7 +3289,7 @@ void wt_add_ferts_for_wp(uint8_t progId){
 					// addr = FMP_OFFSET+i*FMP_SIZE+FMP_DOSING_PUMP_ID_SHIFT;
 					// EE_ReadVariable(addr, &enabled);	//
 					if (fmpLink == progId && enabled > 0) {
-						wpProgress = 99;
+					//	wpProgress = 99;
 						vTaskDelay(400);
 						run_fertilizer_mixer_g2(i);
 						wpProgress = 100 + i;
@@ -3298,60 +3301,40 @@ void wt_add_ferts_for_wp(uint8_t progId){
 	 		}
 }
 
-#define WT_MIN_LVL_DIV	3		// divider for watering amount, to detect minimum level needed
+// Drain all water from mixtank on selected output
+void wt_mt_empty(uint8_t output){
 
-void run_watering_program_g2_new(uint8_t progId){
-	uint16_t addr = 0;
-	open_valve(MTI_VALVE);	// test for click sound
-	vTaskDelay(100);
-	close_valve(MTI_VALVE);
+}
 
+// flush Grolly2 piping with fresh water, to use Fresh Water supply (eg spraying)
+void wt_flush_piping(void){
+	// open drain valve
+	open_valve(DRAIN_VALVE_ID);
+	// open fresh water valve
+	open_valve(FWI_VALVE);
+	// run main pump for a while
+	psiOn();
+	vTaskDelay(1000);
+	IWDG_ReloadCounter();
 
-	uint16_t minimum_level = 0;
-	uint16_t amount = 0;
-	// First, check if we have enough water in the MixTank
+	// close drain valve and wait a while  to refill the piping with fresh water fully
+	close_valve(DRAIN_VALVE_ID);
+	vTaskDelay(1000);
 
-	// Get the minimum water level, below which Grolly mixes up the new solution
-	minimum_level = tank_windows_bottom[MIXTANK] - (amount / WT_MIN_LVL_DIV);
-	if (sonar_read[MIXTANK_SONAR] > minimum_level) {	// make a new fert. solution for watering
-		wt_mt_add_water(amount,0);
-	}
+	// open drain valve again, so the water with hrsh sound goes out
+	open_valve(DRAIN_VALVE_ID);
 
-	wt_add_ferts_for_wp(progId);
+	IWDG_ReloadCounter();
+	psiOff();
 
-	// start watering then
+	//
 
-	uint32_t wpStartTs = 0;
-	wpStartTs = RTC_GetCounter();
-	wt_watering(10, 9);	// run watering for 10 seconds on valve id 9
-	addr = WP_OFFSET + progId * WP_SIZE + WP_LAST_RUN_SHIFT;
-	EE_WriteWord(addr, wpStartTs); // write last run time
 }
 
 
-/*void open_valves(uint16_t valveFlags){
-	uint8_t i = 0;
-	uint8_t flag = 0;
-	for (i=0; i<16; i++) {
-		flag = 0;
-		flag = (valveFlags >> i) & 1;
-		if (flag == 1) {
-			open_valve(i);
-		}
-		else {
-			close_valve(i);
-		}
-
-	}
-
-} */
-
+#define WT_MIN_LVL_DIV	3		// divider for watering amount, to detect minimum level needed
 
 void run_watering_program_g2(uint8_t progId) {
-
-
-
-
 	enableClock = 0;
 	wpProgress = 2;
 	wpStateFlags |= (1 << progId); // set active flag for this program
@@ -3454,7 +3437,7 @@ void run_watering_program_g2(uint8_t progId) {
 
 			fmpLink = (n>>8)&0x00FF; // higher byte of FMP_TRIG_FREQUENCY = WP link
 //			fmpLink = (n / 256); // higher byte of FMP_TRIG_FREQUENCY = WP link
-			if (fmpLink>0) {
+			if (fmpLink>0 && fmpLink<255) {
 				fmpLink -= 1;
 				addr = 0;
 				// addr = FMP_OFFSET+i*FMP_SIZE+FMP_DOSING_PUMP_ID_SHIFT;
@@ -3561,15 +3544,15 @@ void run_fertilizer_mixer_g2(uint8_t progId) {
 	addr = FMP_OFFSET + progId * FMP_SIZE + FMP_DOSING_PUMP_ID_SHIFT;
 	EE_ReadVariable(addr, &dosingPumpId);
 
-	wpProgress = 95;
+	wpProgress = 200-progId;
 	vTaskDelay(40);
 	IWDG_ReloadCounter();
 	addr = 0;
 	addr = FMP_OFFSET + progId * FMP_SIZE + FMP_AFTERMIX_TIME_SHIFT;
-	wpProgress = 94;
+//	wpProgress = 94;
 	vTaskDelay(40);
 	EE_ReadVariable(addr, &circulationMixingTime);
-	wpProgress = 93;
+//	wpProgress = 93;
 	vTaskDelay(40);
 	IWDG_ReloadCounter();
 //	dosingEndTime = RTC_GetCounter() + (uint32_t) dosingTime;
@@ -3581,62 +3564,6 @@ void run_fertilizer_mixer_g2(uint8_t progId) {
 
 }
 
-void run_fertilizer_mixer(uint8_t progId) {
-
-	// start mixing pump
-//	enable_dosing_pump(MIXING_PUMP,1);	// Grolly has Mixing pump connected to T8 MOSFET of Cadi MB 1402
-	close_valve(FWI_VALVE);
-
-	vTaskDelay(50);
-
-	uint16_t dosingTime, dosingPumpId, circulationMixingTime, addr;
-	uint32_t dosingEndTime = 0;
-
-	addr = FMP_OFFSET + progId * FMP_SIZE + FMP_DOSING_TIME_SHIFT;
-	EE_ReadVariable(addr, &dosingTime);
-	vTaskDelay(50);
-	addr = FMP_OFFSET + progId * FMP_SIZE + FMP_DOSING_PUMP_ID_SHIFT;
-	EE_ReadVariable(addr, &dosingPumpId);
-	wpProgress = 95;
-	vTaskDelay(400);
-	addr = 0;
-	addr = FMP_OFFSET + progId * FMP_SIZE + FMP_AFTERMIX_TIME_SHIFT;
-	wpProgress = 94;
-	vTaskDelay(400);
-	EE_ReadVariable(addr, &circulationMixingTime);
-	wpProgress = 93;
-	vTaskDelay(400);
-	dosingEndTime = RTC_GetCounter() + (uint32_t) dosingTime;
-	wpProgress = 92;
-	vTaskDelay(400);
-	enable_dosing_pump(dosingPumpId, 101); // OPASNO!!! dosingPumpId - 16-bit, while function requires 8-bit
-	wpProgress = 91;
-	vTaskDelay(400);
-	while (RTC_GetCounter() < dosingEndTime) {
-		wpProgress = 91;
-		vTaskDelay(100);
-	}
-	wpProgress = 90;
-	vTaskDelay(400);
-	enable_dosing_pump(dosingPumpId, 0);
-	wpProgress = 89;
-	vTaskDelay(400);
-
-	run_circulation_pump(circulationMixingTime);
-	vTaskDelay(50);
-}
-
-void run_circulation_pump(uint16_t time) {
-	uint32_t endTime = 0;
-	endTime = RTC_GetCounter() + time;
-//	enable_dosing_pump(MIXING_PUMP,1);	// Grolly has Mixing pump connected to T8 MOSFET of Cadi MB 1402
-	close_valve(FWI_VALVE);
-	while (RTC_GetCounter() < endTime) {
-		vTaskDelay(10);
-//		enable_dosing_pump(MIXING_PUMP,1);
-	}
-//	enable_dosing_pump(MIXING_PUMP,0);
-}
 
 void enable_dosing_pump2(uint8_t pumpId, uint8_t state) {
 	if (state == 1) {
