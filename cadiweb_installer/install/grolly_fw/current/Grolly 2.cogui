@@ -31,6 +31,8 @@
 <part id="18"/>
 <part id="19"/>
 <part id="20"/>
+<part id="21"/>
+<part id="22"/>
 </presentation>
 </folder>
 </info>
@@ -45,7 +47,7 @@
 </editor>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" partName="main.c" path="D:/repos/grolly2/cadiweb_installer/install/grolly_fw/current/main.c" title="main.c" tooltip="D:/repos/grolly2/cadiweb_installer/install/grolly_fw/current/main.c" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Grolly 2/main.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="85974" selectionTopPixel="53040"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="182061" selectionTopPixel="132934"/>
 </editor>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="FreeRTOS.h" partName="FreeRTOS.h" path="D:/repos/cadi-gcl/stm32f100/basic_examples/grolly2_fw_template/freertos/Source/include/FreeRTOS.h" title="FreeRTOS.h" tooltip="D:/repos/cadi-gcl/stm32f100/basic_examples/grolly2_fw_template/freertos/Source/include/FreeRTOS.h" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Grolly 2/freertos/Source/include/FreeRTOS.h"/>
@@ -109,15 +111,23 @@
 </editor>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f10x_usart.c" partName="stm32f10x_usart.c" path="D:/repos/grolly2/cadiweb_installer/install/grolly_fw/current/stm_lib/src/stm32f10x_usart.c" title="stm32f10x_usart.c" tooltip="D:/repos/grolly2/cadiweb_installer/install/grolly_fw/current/stm_lib/src/stm32f10x_usart.c" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Grolly 2/stm_lib/src/stm32f10x_usart.c"/>
-<editorState selectionHorizontalPixel="0" selectionLength="126" selectionOffset="17332" selectionTopPixel="8720"/>
+<editorState selectionHorizontalPixel="0" selectionLength="1" selectionOffset="17392" selectionTopPixel="8720"/>
 </editor>
 <editor id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f10x_dma.h" partName="stm32f10x_dma.h" path="D:/repos/grolly2/cadiweb_installer/install/grolly_fw/current/stm_lib/inc/stm32f10x_dma.h" title="stm32f10x_dma.h" tooltip="D:/repos/grolly2/cadiweb_installer/install/grolly_fw/current/stm_lib/inc/stm32f10x_dma.h" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Grolly 2/stm_lib/inc/stm32f10x_dma.h"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="7351" selectionTopPixel="3500"/>
+<editorState selectionHorizontalPixel="0" selectionLength="2" selectionOffset="7385" selectionTopPixel="3480"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="system_stm32f10x.h" partName="system_stm32f10x.h" path="D:/repos/grolly2/cadiweb_installer/install/grolly_fw/current/cmsis_boot/system_stm32f10x.h" title="system_stm32f10x.h" tooltip="D:/repos/grolly2/cadiweb_installer/install/grolly_fw/current/cmsis_boot/system_stm32f10x.h" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Grolly 2/cmsis_boot/system_stm32f10x.h"/>
+<editorState selectionHorizontalPixel="0" selectionLength="2" selectionOffset="912" selectionTopPixel="180"/>
+</editor>
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="system_stm32f10x.c" partName="system_stm32f10x.c" path="D:/repos/grolly2/cadiweb_installer/install/grolly_fw/current/cmsis_boot/system_stm32f10x.c" title="system_stm32f10x.c" tooltip="D:/repos/grolly2/cadiweb_installer/install/grolly_fw/current/cmsis_boot/system_stm32f10x.c" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Grolly 2/cmsis_boot/system_stm32f10x.c"/>
+<editorState selectionHorizontalPixel="0" selectionLength="4" selectionOffset="4484" selectionTopPixel="2000"/>
 </editor>
 <editor activePart="true" focus="true" id="org.coocox.builder.ui.editors.ConfigEditor" name="" partName="Configuration" title="Configuration" tooltip="" workbook="DefaultEditorWorkbook">
 <input factoryID="org.coocox.builder.ui.persistent.PersistentElementFactory">
-<org.coocox.builder.ui.editors.ConfigEditor horizontalPosition="0" subTagIndex="1" verticalPosition="73"/>
+<org.coocox.builder.ui.editors.ConfigEditor horizontalPosition="0" subTagIndex="1" verticalPosition="0"/>
 </input>
 </editor>
 </editors>
@@ -126,6 +136,8 @@
 <viewState CommonNavigator.LINKING_ENABLED="0" horizontalPosition="0" org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets="0" verticalPosition="0">
 <expanded>
 <element path="/Grolly 2"/>
+<element path="/Grolly 2/cmsis_boot"/>
+<element path="/Grolly 2/stm_lib"/>
 </expanded>
 <selection>
 <element path="/Grolly 2/main.c"/>
@@ -138,7 +150,9 @@
 <view id="org.coocox.codebugger.trace.ui.traceview" partName="Semihosting">
 <viewState/>
 </view>
-<view id="org.eclipse.debug.ui.DebugView" partName="Debug"/>
+<view id="org.eclipse.debug.ui.DebugView" partName="Debug">
+<viewState/>
+</view>
 <view id="org.eclipse.ui.console.ConsoleView" partName="Console">
 <viewState/>
 </view>
@@ -147,7 +161,7 @@
 <viewState/>
 </view>
 </views>
-<perspectives activePart="org.coocox.builder.ui.editors.ConfigEditor" activePerspective="org.coocox.builder.perspective.CoBuilder">
+<perspectives activePart="org.coocox.component.ui.ComponentView" activePerspective="org.coocox.builder.perspective.CoBuilder">
 <perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
 <descriptor class="org.coocox.builder.ui.PerspectiveCoBuilder" id="org.coocox.builder.perspective.CoBuilder" label="CooCox CoBuilder"/>
 <alwaysOnActionSet id="org.coocox.component.ui.actionSet"/>
@@ -243,42 +257,43 @@
 <alwaysOnActionSet id="org.eclipse.ui.actionSet.openFiles"/>
 <alwaysOnActionSet id="org.eclipse.debug.ui.breakpointActionSet"/>
 <alwaysOnActionSet id="org.eclipse.debug.ui.debugActionSet"/>
-<hide_menu_item_id id="org.coocox.builder.ui.newFile"/>
 <hide_menu_item_id id="org.coocox.builder.ui.newFolder"/>
-<hide_menu_item_id id="org.coocox.builder.ui.openFile"/>
+<hide_menu_item_id id="org.coocox.welcome.ui.action.repository"/>
 <hide_menu_item_id id="org.eclipse.ui.file.save"/>
-<hide_menu_item_id id="org.eclipse.ui.file.saveAs"/>
+<hide_menu_item_id id="org.eclipse.jdt.ui.refactoring.menu"/>
 <hide_menu_item_id id="org.eclipse.ui.file.saveAll"/>
+<hide_menu_item_id id="org.coocox.builder.ui.rebuild"/>
+<hide_menu_item_id id="org.coocox.builder.ui.openFile"/>
+<hide_menu_item_id id="org.eclipse.ui.file.saveAs"/>
 <hide_menu_item_id id="org.coocox.builder.rcp.projectMenu"/>
 <hide_menu_item_id id="org.coocox.builder.rcp.flashMenu"/>
-<hide_menu_item_id id="org.coocox.builder.ui.showHelpViewAction"/>
-<hide_menu_item_id id="org.coocox.component.ui.ShowRepositoryAction"/>
 <hide_menu_item_id id="org.coocox.builder.ui.debug"/>
-<hide_menu_item_id id="org.coocox.builder.ui.build"/>
-<hide_menu_item_id id="org.coocox.builder.ui.rebuild"/>
-<hide_menu_item_id id="org.eclipse.jdt.ui.refactoring.menu"/>
-<hide_menu_item_id id="org.eclipse.jdt.ui.source.menu"/>
+<hide_menu_item_id id="org.coocox.builder.ui.showHelpViewAction"/>
+<hide_menu_item_id id="org.coocox.builder.ui.newFile"/>
 <hide_menu_item_id id="org.coocox.builder.ui.actions.ConfigurationAction"/>
+<hide_menu_item_id id="org.eclipse.jdt.ui.source.menu"/>
+<hide_menu_item_id id="org.coocox.builder.ui.build"/>
 <hide_menu_item_id id="org.coocox.welcome.ui.action.welcome"/>
-<hide_menu_item_id id="org.coocox.welcome.ui.action.repository"/>
-<hide_toolbar_item_id id="org.coocox.builder.ui.newProject"/>
-<hide_toolbar_item_id id="org.coocox.builder.ui.newFile"/>
-<hide_toolbar_item_id id="org.eclipse.ui.file.save"/>
-<hide_toolbar_item_id id="org.coocox.component.ui.ShowRepositoryAction"/>
-<hide_toolbar_item_id id="org.coocox.builder.ui.build"/>
-<hide_toolbar_item_id id="org.coocox.builder.ui.rebuild"/>
-<hide_toolbar_item_id id="org.coocox.builder.ui.debug"/>
-<hide_toolbar_item_id id="org.coocox.codebugger.configuration.coideProgramDownloadAction"/>
-<hide_toolbar_item_id id="org.coocox.codebugger.configuration.coideFlashEraseAction"/>
+<hide_menu_item_id id="org.coocox.component.ui.ShowRepositoryAction"/>
 <hide_toolbar_item_id id="org.coocox.builder.ui.actions.TargetManageAction"/>
-<hide_toolbar_item_id id="org.coocox.builder.ui.actions.ConfigurationAction"/>
-<hide_toolbar_item_id id="org.coocox.welcome.ui.action.welcome"/>
+<hide_toolbar_item_id id="org.coocox.builder.ui.newProject"/>
 <hide_toolbar_item_id id="org.coocox.welcome.ui.action.repository"/>
+<hide_toolbar_item_id id="org.eclipse.ui.file.save"/>
+<hide_toolbar_item_id id="org.coocox.builder.ui.rebuild"/>
+<hide_toolbar_item_id id="org.coocox.codebugger.configuration.coideFlashEraseAction"/>
+<hide_toolbar_item_id id="org.coocox.builder.ui.debug"/>
+<hide_toolbar_item_id id="org.coocox.builder.ui.newFile"/>
+<hide_toolbar_item_id id="org.coocox.builder.ui.actions.ConfigurationAction"/>
 <hide_toolbar_item_id id="org.eclipse.ui.edit.text.toggleShowSelectedElementOnly"/>
+<hide_toolbar_item_id id="org.coocox.builder.ui.build"/>
+<hide_toolbar_item_id id="org.coocox.welcome.ui.action.welcome"/>
+<hide_toolbar_item_id id="org.coocox.component.ui.ShowRepositoryAction"/>
+<hide_toolbar_item_id id="org.coocox.codebugger.configuration.coideProgramDownloadAction"/>
 <view id="org.eclipse.ui.console.ConsoleView"/>
 <view id="org.eclipse.debug.ui.DebugView"/>
 <view id="org.coocox.codebugger.trace.ui.traceview"/>
 <view id="org.eclipse.debug.ui.VariableView"/>
+<view id="org.coocox.component.ui.ComponentView"/>
 <view id="org.coocox.builder.ui.views.ProjectView"/>
 <fastViewBars/>
 <viewLayoutRec closeable="false" id="org.eclipse.debug.ui.DebugView"/>
@@ -299,7 +314,7 @@
 </folder>
 </info>
 <info folder="true" part="org.eclipse.ui.internal.ViewStack@854e43" ratio="0.6993464" ratioLeft="642" ratioRight="276" relationship="4" relative="org.eclipse.ui.internal.ViewStack@1e57e86">
-<folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">
+<folder activePageID="org.eclipse.debug.ui.DebugView" appearance="2" expanded="2">
 <page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
 <page content="org.eclipse.debug.ui.DebugView" label="Debug"/>
 <page content="org.eclipse.debug.ui.BreakpointView" label="LabelNotFound"/>
@@ -310,15 +325,17 @@
 </folder>
 </info>
 <info folder="true" part="org.eclipse.ui.internal.ViewStack@11d7481" ratio="0.5" ratioLeft="636" ratioRight="636" relationship="2" relative="org.eclipse.ui.internal.ViewStack@854e43">
-<folder activePageID="org.coocox.codebugger.trace.ui.traceview" appearance="2" expanded="2">
+<folder activePageID="org.coocox.component.ui.ComponentView" appearance="2" expanded="2">
 <page content="org.coocox.codebugger.trace.ui.traceview" label="Semihosting"/>
 <page content="org.eclipse.debug.ui.VariableView" label="Variables"/>
+<page content="org.coocox.component.ui.ComponentView" label="Components"/>
 <page content="org.eclipse.debug.ui.ExpressionView" label="LabelNotFound"/>
 <page content="org.eclipse.debug.ui.MemoryView" label="LabelNotFound"/>
 <page content="org.eclipse.cdt.debug.ui.memory.memorybrowser.MemoryBrowser" label="LabelNotFound"/>
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
 <part id="0"/>
 <part id="1"/>
+<part id="2"/>
 </presentation>
 </folder>
 </info>
@@ -341,73 +358,20 @@
 <editors>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Grolly 2/main.c"/>
 <editor factoryID="org.coocox.builder.ui.persistent.PersistentElementFactory" id="org.coocox.builder.ui.editors.ConfigEditor">
-<org.coocox.builder.ui.editors.ConfigEditor/>
+<org.coocox.builder.ui.editors.ConfigEditor horizontalPosition="0" subTagIndex="1" verticalPosition="0"/>
 </editor>
 <editor factoryID="org.coocox.builder.ui.persistent.PersistentElementFactory" id="org.coocox.builder.ui.editors.ConfigEditor">
-<org.coocox.builder.ui.editors.ConfigEditor horizontalPosition="0" subTagIndex="1" verticalPosition="73"/>
+<org.coocox.builder.ui.editors.ConfigEditor/>
+</editor>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Grolly 2/main.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Grolly 2/stm_lib/src/stm32f10x_usart.c"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Grolly 2/stm_lib/inc/stm32f10x_dma.h"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Grolly 2/cmsis_boot/system_stm32f10x.h"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Grolly 2/cmsis_boot/system_stm32f10x.c"/>
+<editor factoryID="org.coocox.builder.ui.persistent.PersistentElementFactory" id="org.coocox.builder.ui.editors.ConfigEditor">
+<org.coocox.builder.ui.editors.ConfigEditor horizontalPosition="0" subTagIndex="1" verticalPosition="0"/>
 </editor>
 </editors>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="69354" y="13"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="57031" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="69354" y="13"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="70065" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="57074" y="98"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="109217" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="122590" y="9"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="108777" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="101024" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="113032" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="102563" y="23"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="51075" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="63411" y="16"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="51070" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="63411" y="16"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="106197" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="108408" y="23"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="109274" y="0"/>
-</item>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="109269" y="9"/>
-</item>
-<item historyLabel="Configuration" index="1"/>
-<item historyLabel="main.c" index="0">
-<position info="not_deleted" x="109269" y="9"/>
-</item>
 <item historyLabel="main.c" index="0">
 <position info="not_deleted" x="101861" y="0"/>
 </item>
@@ -492,7 +456,64 @@
 <item historyLabel="main.c" index="0">
 <position info="not_deleted" x="85974" y="0"/>
 </item>
-<item active="true" historyLabel="Configuration" index="2"/>
+<item historyLabel="Configuration" index="1"/>
+<item historyLabel="Configuration" index="2"/>
+<item historyLabel="main.c" index="3">
+<position info="not_deleted" x="80642" y="0"/>
+</item>
+<item historyLabel="main.c" index="3">
+<position info="not_deleted" x="176534" y="0"/>
+</item>
+<item historyLabel="main.c" index="3">
+<position info="not_deleted" x="175772" y="0"/>
+</item>
+<item historyLabel="stm32f10x_usart.c" index="4">
+<position info="not_deleted" x="17332" y="126"/>
+</item>
+<item historyLabel="stm32f10x_dma.h" index="5">
+<position info="not_deleted" x="7385" y="2"/>
+</item>
+<item historyLabel="system_stm32f10x.h" index="6">
+<position info="not_deleted" x="912" y="2"/>
+</item>
+<item historyLabel="system_stm32f10x.c" index="7">
+<position info="not_deleted" x="4484" y="4"/>
+</item>
+<item historyLabel="main.c" index="3">
+<position info="not_deleted" x="98627" y="0"/>
+</item>
+<item historyLabel="main.c" index="3">
+<position info="not_deleted" x="175772" y="0"/>
+</item>
+<item historyLabel="main.c" index="3">
+<position info="not_deleted" x="178872" y="0"/>
+</item>
+<item historyLabel="main.c" index="3">
+<position info="not_deleted" x="41984" y="7"/>
+</item>
+<item historyLabel="main.c" index="3">
+<position info="not_deleted" x="98883" y="0"/>
+</item>
+<item historyLabel="main.c" index="3">
+<position info="not_deleted" x="100108" y="23"/>
+</item>
+<item historyLabel="main.c" index="3">
+<position info="not_deleted" x="100509" y="0"/>
+</item>
+<item historyLabel="main.c" index="3">
+<position info="not_deleted" x="21689" y="24"/>
+</item>
+<item historyLabel="main.c" index="3">
+<position info="not_deleted" x="98875" y="0"/>
+</item>
+<item historyLabel="main.c" index="3">
+<position info="not_deleted" x="100108" y="23"/>
+</item>
+<item historyLabel="Configuration" index="8"/>
+<item historyLabel="main.c" index="3">
+<position info="not_deleted" x="182061" y="0"/>
+</item>
+<item active="true" historyLabel="Configuration" index="8"/>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
 </page>
@@ -502,26 +523,14 @@
 <mruList>
 <file factoryID="org.coocox.builder.ui.persistent.PersistentElementFactory" id="org.coocox.builder.ui.editors.ConfigEditor" name="" tooltip="">
 <persistable>
-<org.coocox.builder.ui.editors.ConfigEditor horizontalPosition="0" subTagIndex="1" verticalPosition="73"/>
+<org.coocox.builder.ui.editors.ConfigEditor horizontalPosition="0" subTagIndex="1" verticalPosition="0"/>
 </persistable>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="modbus_slave.c" tooltip="io_board/modbus_slave.c">
-<persistable path="/io_board/modbus_slave.c"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="system_stm32f10x.c" tooltip="Grolly 2/cmsis_boot/system_stm32f10x.c">
+<persistable path="/Grolly 2/cmsis_boot/system_stm32f10x.c"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="core_cm3.c" tooltip="io_board/cmsis/core_cm3.c">
-<persistable path="/io_board/cmsis/core_cm3.c"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" tooltip="io_board/main.c">
-<persistable path="/io_board/main.c"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="core_cm3.c" tooltip="discovery_modbus/cmsis/core_cm3.c">
-<persistable path="/discovery_modbus/cmsis/core_cm3.c"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="controller.h" tooltip="discovery_modbus/controller.h">
-<persistable path="/discovery_modbus/controller.h"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" tooltip="discovery_modbus/main.c">
-<persistable path="/discovery_modbus/main.c"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="system_stm32f10x.h" tooltip="Grolly 2/cmsis_boot/system_stm32f10x.h">
+<persistable path="/Grolly 2/cmsis_boot/system_stm32f10x.h"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="modbus_slave.c" tooltip="io_board/modbus_slave.c">
 <persistable path="/io_board/modbus_slave.c"/>
@@ -541,11 +550,20 @@
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" tooltip="discovery_modbus/main.c">
 <persistable path="/discovery_modbus/main.c"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f10x_dma.h" tooltip="Grolly 2/stm_lib/inc/stm32f10x_dma.h">
-<persistable path="/Grolly 2/stm_lib/inc/stm32f10x_dma.h"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="modbus_slave.c" tooltip="io_board/modbus_slave.c">
+<persistable path="/io_board/modbus_slave.c"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="LiquidCrystal_I2C.h" tooltip="Grolly 2/LCD_I2C/LiquidCrystal_I2C.h">
-<persistable path="/Grolly 2/LCD_I2C/LiquidCrystal_I2C.h"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="core_cm3.c" tooltip="io_board/cmsis/core_cm3.c">
+<persistable path="/io_board/cmsis/core_cm3.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" tooltip="io_board/main.c">
+<persistable path="/io_board/main.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="core_cm3.c" tooltip="discovery_modbus/cmsis/core_cm3.c">
+<persistable path="/discovery_modbus/cmsis/core_cm3.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="controller.h" tooltip="discovery_modbus/controller.h">
+<persistable path="/discovery_modbus/controller.h"/>
 </file>
 </mruList>
 </workbench>

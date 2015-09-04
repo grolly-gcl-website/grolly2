@@ -761,7 +761,7 @@ volatile static uint8_t runners = 0;
 
 volatile static uint16_t ee_dump_pointer = 0; // pointer for eeprom dump transmission
 
-void send_ee_dump(void);
+// void send_ee_dump(void);
 void hygroStatSettings(void);
 uint8_t readPercentVal(uint8_t value);
 void phMonSettings(void);
@@ -882,7 +882,6 @@ void setTimerSelector(void);
 uint8_t idSelector(uint8_t min, uint8_t max, uint8_t curid);
 void printOk(void);
 void get_fertilizer(uint8_t fertId, uint8_t secs);
-void get_settings_block(uint8_t block_number);
 void rx_flush(void);
 void adcAverager(void);
 void get_status_block(uint8_t blockId);
@@ -895,7 +894,6 @@ uint16_t adjustFlags(uint16_t flags, uint8_t from, uint8_t to);
 void setDoserSpeed(uint8_t doser, uint8_t speed);
 void send_resp(uint8_t cmd_uid);
 void send_resp_x(uint8_t cmd_uid, uint8_t x);	// send multiple responses
-void send_ee_block(uint16_t addr);
 void eeprom_test(void);
 void push_tx(void);
 void psi_motor_init(void);
@@ -906,7 +904,6 @@ uint8_t skip_button_cal(void);
 void psiOff(void);
 void I2C_init2(void);
 void Delay_us_(uint32_t delay);
-void get_settings_dump(void);
 void get_settings_dump_(uint16_t amount, uint16_t startaddr);
 void settings2tx_buff(uint16_t addr, uint8_t amount);
 void mix_solution(uint32_t seconds);
@@ -1492,17 +1489,7 @@ void water_lines(uint8_t source, uint16_t target, uint16_t amount) {
 	open_valves(target);
 }
 
-// sends dump of eeprom in standart ZX1 packts of 39bytes size (32bytes payload)
-void send_ee_dump(void) {
-	uint16_t eevarcntr = 0;
-	uint16_t addr = 0;
-	while (eevarcntr < EE_DUMPSIZE) {
-		addr = EE_DUMPSTART + eevarcntr;
-		send_ee_block(addr);
-		eevarcntr += 16; // 16 variables - dump block size accepted by send_ee_block(addr);
-		vTaskDelay(2);
-	}
-}
+
 
 void run_uart_cmd(void) {
 	uint16_t addr = 0;
@@ -1531,7 +1518,6 @@ void run_uart_cmd(void) {
 		close_valve(RxBuffer[2]);
 		break;
 	case 6:
-		get_settings_block(RxBuffer[2]);
 		break;
 	case 8:
 		if (comm_state == COMM_DIRECT_DRIVE) {
@@ -1546,7 +1532,6 @@ void run_uart_cmd(void) {
 		run_doser_for(RxBuffer[2], RxBuffer[3], RxBuffer[4]);
 		break;
 	case 10:
-//			valve_failed = RxBuffer[2];
 		fup_time = RTC_GetCounter() + 60;
 		auto_failures = 0;
 		wpProgress = 0;
@@ -1599,7 +1584,6 @@ void run_uart_cmd(void) {
 		loadSettings();
 		break;
 	case 20:
-//			valve_busy=0;
 		break;
 	case 21:
 		break;
@@ -1686,19 +1670,14 @@ void run_uart_cmd(void) {
 		addr = ((uint16_t) RxBuffer[2] + (uint16_t) RxBuffer[3] * 256);
 		send_ee_addr(addr, 2);
 		break;
-	case 59: // send block of EEPROM values
-		addr = ((uint16_t) RxBuffer[2] + (uint16_t) RxBuffer[3] * 256);
-		send_ee_block(addr);
+	case 59:
 		break;
-	case 60: // send full EEPROM dump (use 61 instead)
-		send_ee_dump();
+	case 60:
 		break;
-	case 61: // Request packet 90,88,50,7,61,10,0  (xor CRC = 10)
-		get_settings_dump(); // Protobuzzz v3 and newer
-		// the ones not needed to send additional confirmation response
+	case 61:
 		break;
 	case 62: // Request packet 90,88,50,11,62,sizeL,sizeH,addrL,addrH,crc,0
-		get_settings_dump_(SETTINGS_PACKET_SIZE, SETTINGS_START_ADDR);
+//		get_settings_dump_(SETTINGS_PACKET_SIZE, SETTINGS_START_ADDR);
 		// the ones not needed to send additional confirmation response
 		break;
 	case 63: // Request packet 90,88,50,11,63,sizeL,sizeH,addrL,addrH,crc,0  (most advanced)
@@ -1755,74 +1734,6 @@ void settings2tx_buff(uint16_t addr, uint8_t amount) {
 	}
 }
 
-void get_settings_dump(void) {
-	uint16_t i = 0;
-	uint8_t i2 = 0;
-	uint8_t tmpxor = 0;
-
-	/// preliminary 0,1,2,3
-	TxBuffer[0] = 90;
-	TxBuffer[1] = 88;
-	TxBuffer[2] = 49;
-	TxBuffer[3] = (uint8_t)(
-			((((SETTINGS_PACKET_SIZE / 16) * 32) + 10) >> 8) & 0x00FF); // HSByte first
-	TxBuffer[4] = (uint8_t)((((SETTINGS_PACKET_SIZE / 16) * 32) + 10) & 0x00FF); // LSByte
-	txbuff_ne = 0; // stop Tx transfers
-	NbrOfDataToTransfer = 5; //going to send 32 bits of settings
-	TxCounter = 0; // reset tx buffer pointer
-	txbuff_ne = 1;
-	BT_USART->DR = TxBuffer[TxCounter++]; // volshebnyj pendal
-	while (TxCounter < NbrOfDataToTransfer) {
-		vTaskDelay(5);
-		IWDG_ReloadCounter();
-	}
-	vTaskDelay(15);
-	tmpxor = crc_block(0, &TxBuffer[0], 5);
-	tx_flush(); // flush Tx buffer
-	txbuff_ne = 0; // packet sent, reset tx not empty flag
-
-	vTaskDelay(100);
-
-	for (i = 0; i < ((SETTINGS_PACKET_SIZE / 16) - 1); i++) { // -1 HARDCODE
-		settings2tx_buff(
-				(SETTINGS_START_ADDR + ((((uint16_t) i) & 0x00FF) * 16)), 16); // 16 variables = 32 bytes
-		for (i2 = 0; i2 < 32; i2++) {
-			tmpxor ^= TxBuffer[i2];
-		}
-
-		txbuff_ne = 0; // stop Tx transfers
-		NbrOfDataToTransfer = 32; //going to send 32 bytes of settings
-		TxCounter = 0; // reset tx buffer pointer
-		txbuff_ne = 1;
-		BT_USART->DR = TxBuffer[TxCounter++]; // volshebnyj pendal
-		while (TxCounter < NbrOfDataToTransfer) {
-			vTaskDelay(1);
-			IWDG_ReloadCounter();
-		}
-		tx_flush(); // flush Tx buffer
-		txbuff_ne = 0; // packet sent, reset tx not empty flag
-	}
-
-	/// postliminary 0,1,2,3
-	for (i2 = 1; i2 < 5; i2++) {
-		TxBuffer[i2] = i2;
-	}
-
-	TxBuffer[0] = tmpxor;
-	txbuff_ne = 0; // stop Tx transfers
-	NbrOfDataToTransfer = 4; //going to send 32 bits of settings
-	TxCounter = 0; // reset tx buffer pointer
-	txbuff_ne = 1;
-	BT_USART->DR = 0; // volshebnyj pendal
-	while (TxCounter < NbrOfDataToTransfer) {
-		vTaskDelay(1);
-		IWDG_ReloadCounter();
-	}
-	vTaskDelay(15);
-	tx_flush(); // flush Tx buffer
-	txbuff_ne = 0; // packet sent, reset tx not empty flag
-
-}
 
 // get block of EEPROM from 'startaddr' offset, with size of 'amount'
 void get_settings_dump_(uint16_t amount, uint16_t startaddr) {
@@ -1980,62 +1891,6 @@ void send_ee_addr(uint16_t addr, uint8_t type) { // sends EEPROM cell contents v
 		vTaskDelay(1);
 	}
 	txbuff_ne = 0;
-}
-
-void send_ee_block(uint16_t addr) {
-	uint32_t val32;
-	uint8_t i = 0, pointer = 6;
-	// types: 0 - 8 bit, 1 - 16bit, 2 - 32bit
-	TxBuffer[0] = 90; // "Z"	-	ZX1 means settings
-	TxBuffer[1] = 88; // "X"
-	TxBuffer[2] = 49; // "1"
-	TxBuffer[3] = 39; // packet size is 39bytes for settings block of 32b
-	TxBuffer[4] = RxBuffer[2]; // start address lower byte
-	TxBuffer[5] = RxBuffer[3]; // higher byte
-	for (i = 0; i < 8; i++) {
-		val32 = 0;
-		val32 = EE_ReadWord(addr + i * 2);
-		// at this point data converted into bytes - higher first.
-		// Note this when convert back on receiving (rx_ee() function)
-		TxBuffer[pointer++] = (uint8_t)((val32 >> 24) & 0xFF);
-		TxBuffer[pointer++] = (uint8_t)((val32 >> 16) & 0xFF);
-		TxBuffer[pointer++] = (uint8_t)((val32 >> 8) & 0xFF);
-		TxBuffer[pointer++] = (uint8_t)((val32)) & 0xFF;
-	}
-
-	TxBuffer[pointer] = crc_block(0, &TxBuffer[0], (TxBuffer[3] - 1));
-	NbrOfDataToTransfer = TxBuffer[3];
-	TxCounter = 0;
-	txbuff_ne = 1;
-	while (TxCounter < NbrOfDataToTransfer) {
-		vTaskDelay(1);
-	}
-	txbuff_ne = 0;
-	tx_flush();
-
-}
-
-void get_settings_block(uint8_t block_number) {
-	/* block_number is a number from 0 to N, where N is a
-	 * Settings memory array length / 8
-	 * 8 - is a default block size for this function
-	 */
-	uint8_t i = 0;
-	uint16_t addr = 0, tmpbuf = 0;
-	TxBuffer[0] = 90; // Z
-	TxBuffer[1] = 88; // X
-	TxBuffer[2] = 49; // sending settings
-	TxBuffer[3] = 42; // packet size (ZX0+packet_size+payload). Payload is 8bytes. Here, packet size means only payload with size byte, not like in STATUS packets, where size means full packet size
-	TxBuffer[4] = block_number;
-	for (i = 0; i < 18; i++) { // 18 blocks x 2bytes = 36bytes
-		// here goes EEPROM reading loop, that puts payload data into TX buff, equipped with appropriate packet header
-		addr = SETTINGS_START_ADDR + block_number * 18 + i * 2; // address for 18 variable (16bit each) block
-		EE_ReadVariable(addr, &tmpbuf); // read 16 bit variable
-		TxBuffer[5 + i * 2] = (uint8_t)(tmpbuf * 0xFF00) >> 8; // place it into..
-		TxBuffer[5 + i * 2 + 1] = (uint8_t)(tmpbuf * 0xFF); // ..two parts
-		vTaskDelay(1);
-	}
-	txbuff_ne = 1; // signal to transmit packet
 }
 
 
@@ -2198,7 +2053,7 @@ void DMA1_Channel5_IRQHandler(void) {
 	}
 }
 
-// 56566
+
 void uart_dma_init(uint8_t size, uint8_t *txbuff) {
 	// disable channel 4 of DMA
 	DMA1_Channel4->CCR &= (uint16_t)(~DMA_CCR1_EN);
@@ -2221,13 +2076,13 @@ void uart_dma_init(uint8_t size, uint8_t *txbuff) {
 	NVIC_EnableIRQ(DMA1_Channel4_IRQn);
 }
 
-// 56616
-// based on ST examples (working)
+// based on ST examples (working, but bigger binary)
 void uart_dma_init_(uint8_t size, uint8_t *txbuff) {
 	  DMA_InitTypeDef DMA_InitStructure;
 
 	  DMA_Cmd(DMA1_Channel4, DISABLE);
-	  /* USARTy_Tx_DMA_Channel (triggered by USARTy Tx event) Config */
+
+	  // USART1_Tx_DMA_Channel (triggered by USARTy Tx event) Config
 	  DMA_DeInit(DMA1_Channel4);
 	  DMA_InitStructure.DMA_PeripheralBaseAddr = 0x40013804;
 	  DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t) &TxBuffer[0];
@@ -2294,7 +2149,6 @@ void bluetooth_init(void) {
 	USART_ClearFlag(USART1,
 			USART_FLAG_CTS | USART_FLAG_LBD | USART_FLAG_TC | USART_FLAG_RXNE);
 	USART1->CR1 |= USART_CR1_RXNEIE;
-//	USART1->CR1 |= USART_CR1_TCIE;
 
 	USART_Cmd(USART1, ENABLE);
 	NVIC_EnableIRQ(USART1_IRQn);
@@ -2490,6 +2344,7 @@ void psi_motor_init_tim2(void) {
 	TIM_OCStructInit(&TIM_OCInitStruct);
 	TIM_OCInitStruct.TIM_OutputState = TIM_OutputState_Enable;
 	TIM_OCInitStruct.TIM_OCMode = TIM_OCMode_PWM1;
+
 	// Initial duty cycle equals 0%. Value can range from zero to 1000.
 	TIM_OCInitStruct.TIM_Pulse = 0; // 0 .. 1000 (0=Always Off, 1000=Always On)
 
@@ -2516,7 +2371,6 @@ void psi_motor_init(void) {
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP; // Alt Function - Push Pull
 	GPIO_Init(GPIOB, &GPIO_InitStructure);
-//	GPIO_PinRemapConfig(GPIO_Remap_TIM1, ENABLE);        // Map TIM3_CH3 to GPIOC.Pin8, TIM3_CH4 to GPIOC.Pin9
 
 	// Let PWM frequency equal 100Hz.
 	// Let period equal 1000. Therefore, timer runs from zero to 1000. Gives 0.1Hz resolution.
@@ -2761,7 +2615,6 @@ void EXTI15_10_IRQHandler(void) {
 					dht_byte_buf[dht_byte_pointer] &= ~(1 << (dht_bit_pointer)); // reset bit in dht_data[i]
 				} else {
 					dht_byte_buf[dht_byte_pointer] |= (1 << (dht_bit_pointer)); // set bit
-					// GPIOB->BRR = (1<<15);	// debug
 				}
 
 				if (dht_bit_pointer == 0) {
@@ -2789,18 +2642,16 @@ void EXTI15_10_IRQHandler(void) {
 		EXTI_ClearITPendingBit(EXTI_Line14);
 
 		if ((GPIOB->IDR & (1 << 14)) == 0 && dht_rise > 0) {
-			// GPIOB->BSRR = (1<<15);	// debug
 			dht_period = TIM15->CNT;
 			TIM15->CNT = 0;
 			DutyCycle = (dht_rise * 100) / dht_period;
 			if (dht_bit_position > DHT1_DATA_START_POINTER
 					&& dht_data_ready == 0) {
 
-				if (DutyCycle > 60 && DutyCycle < 75) { // magic constants 56/
+				if (DutyCycle > 60 && DutyCycle < 75) { // magic constants 56/  HARDCODE DHT specific
 					dht_byte_buf[dht_byte_pointer] &= ~(1 << (dht_bit_pointer)); // reset bit in dht_data[i]
 				} else {
 					dht_byte_buf[dht_byte_pointer] |= (1 << (dht_bit_pointer)); // set bit
-					// GPIOB->BRR = (1<<15);	// debug
 				}
 
 				if (dht_bit_pointer == 0) {
@@ -3186,7 +3037,6 @@ void fertilizer_mixing_program_setup(uint8_t progId) {
 	EE_WriteVariable(addr, tempvalue);
 
 	// set circulation pump mixing time
-//	addr = FMP_OFFSET+progId*FMP_SIZE+FMP_CIRCULATION_MIXING_TIME_SHIFT;
 	EE_ReadVariable(addr, &tempvalue);
 	Lcd_clear();
 	Lcd_write_str("Aftermix time"); // setting the time for running circulation pump to mix the fertilizer into solution
@@ -3210,7 +3060,6 @@ void fertilizer_mixing_program_setup(uint8_t progId) {
 	EE_WriteVariable(addr, tempvalue);
 
 	// set ENABLED/DISABLED status for this program
-//	addr = FMP_OFFSET+progId*FMP_SIZE+FMP_ENABLE;
 	EE_ReadVariable(addr, &tempvalue);
 	Lcd_clear();
 	Lcd_write_str("ENABLE FMP?");
@@ -3235,7 +3084,6 @@ void startWp(void) {
 	Lcd_write_str("?");
 	button = 0;
 	while (button != BUTTON_OK && button != BUTTON_CNL) {
-//		dht_get_data();
 		vTaskDelay(30);
 		button = readButtons();
 	}
@@ -3256,65 +3104,6 @@ void startWp(void) {
 	vTaskDelay(200);
 }
 
-/*
-void wt_add_ferts_for_wp(uint8_t progId){
-	uint8_t i=0;
-	uint16_t addr = 0;
-	uint32_t interval = 0;
-	uint32_t startime = 0;
-	uint16_t enabled = 0;
-	uint8_t rest = 0;
-	uint32_t curN = 0;
-	uint16_t n = 0;
-	uint16_t fmpLink = 0;
-
-	 for (i = 0; i < FMP_PROGRAMS_AMOUNT; i++) {
-	 			vTaskDelay(10);
-	 			wpProgress = i + 87;
-	 			addr = 0;
-	 			// count current N value
-	 			addr = WP_OFFSET + progId * WP_SIZE + WP_INTERVAL;
-	 			interval = EE_ReadWord(addr);
-	 			addr = WP_OFFSET + progId * WP_SIZE + WP_START;
-	 			startime = EE_ReadWord(addr);
-	 			vTaskDelay(100);
-	 			addr = FMP_OFFSET + i * FMP_SIZE + FMP_TRIG_FREQUENCY_SHIFT;
-	 			EE_ReadVariable(addr, &n);
-	 			vTaskDelay(100);
-	 			enabled = 0;
-	 			rest = 0;
-	 			if (n > 0) {
-	 				curN = (RTC_GetCounter() - startime) / interval;
-	 				vTaskDelay(100);
-	 				wpProgress = 200;
-	 				vTaskDelay(200);
-	 				rest = curN % (n % 256); // lower byte of 16bit of FMP_TRIG_FREQUENCY_SHIFT
-	 				enabled = 1;
-	 			} else {
-	 				enabled = 0;
-	 			}
-	 			vTaskDelay(50);
-	 			fmpLink = (n / 256); // higher byte of FMP_TRIG_FREQUENCY = WP link
-				if (fmpLink>0) {
-					fmpLink -= 1;
-					addr = 0;
-					// addr = FMP_OFFSET+i*FMP_SIZE+FMP_DOSING_PUMP_ID_SHIFT;
-					// EE_ReadVariable(addr, &enabled);	//
-					if (fmpLink == progId && enabled > 0) {
-					//	wpProgress = 99;
-						vTaskDelay(400);
-						run_fertilizer_mixer_g2(i);
-						wpProgress = 100 + i;
-						vTaskDelay(2000);
-					}
-					vTaskDelay(100);
-					wpProgress = 8;
-				}
-	 		}
-}
-
-
-*/
 
 // Drain all water from mixtank on selected output
 void wt_mt_empty(uint8_t output){
@@ -3451,12 +3240,9 @@ void run_watering_program_g2(uint8_t progId) {
 			vTaskDelay(50);
 
 			fmpLink = (n>>8)&0x00FF; // higher byte of FMP_TRIG_FREQUENCY = WP link
-//			fmpLink = (n / 256); // higher byte of FMP_TRIG_FREQUENCY = WP link
 			if (fmpLink>0 && fmpLink<255) {
 				fmpLink -= 1;
 				addr = 0;
-				// addr = FMP_OFFSET+i*FMP_SIZE+FMP_DOSING_PUMP_ID_SHIFT;
-				// EE_ReadVariable(addr, &enabled);	//
 				if (fmpLink == progId && enabled > 0) {
 					wpProgress = 99;
 					vTaskDelay(400);
@@ -3471,6 +3257,7 @@ void run_watering_program_g2(uint8_t progId) {
 	}
 	vTaskDelay(50);
 	wpProgress = 9;
+
 	// open corresponding watering line valve(s)
 	addr = WP_OFFSET + progId * WP_SIZE + WP_FLAGS;
 	EE_ReadVariable(addr, &flags);
@@ -3478,14 +3265,6 @@ void run_watering_program_g2(uint8_t progId) {
 	open_valve(MTI_VALVE); // MixTank intake line valve open
 	open_valves(flags);
 
-/*	for (i = 1; i <= VALVE_AMOUNT; i++) { // open output lines
-		if (((flags >> i) & 1) == 1) {
-			open_valve(i);
-		} else {
-			close_valve(i);
-		}
-		vTaskDelay(100);
-	} */
 	wpProgress = 10; // test
 	uint8_t srcomm = 0;
 	uint16_t tmpval = 0;
@@ -3498,33 +3277,7 @@ void run_watering_program_g2(uint8_t progId) {
 
 	wt_watering_x(vlm,flags);
 
-/*	overTime = RTC_GetCounter();
-	overTime += 0x0000FFFF & ((uint32_t) vlm); // volume used to retrieve timeout
-	auto_flags |= (1 << 2); // set overpressure autosafe flag  !!!!! (psiOn())
-	auto_failures &= ~1; // reset PSI main failure flag	!!!!! (psiOn())
-	auto_failures &= ~(1 << 3); // reset PSI underpressure flag	!!!!! (psiOn())
 
-
-
-	open_valve(MTI_VALVE);	// water intake line open
-
-	now = 0;
-	// run watering
-	auto_flags |= 9; // enable watering through psi stab function with underpressure trig !!!!! (psiOn())
-	vTaskDelay(30);
-	psiOn();
-	vTaskDelay(30);
-	while (((auto_failures & 8) >> 3) == 0 && now < overTime) {
-		IWDG_ReloadCounter();
-		vTaskDelay(500);
-		psiOn();
-		wpProgress = (uint8_t)(overTime - now);
-		now = RTC_GetCounter();
-		vTaskDelay(50);
-	}
-	psiOff();
-
-	*/
 
 	addr = WP_OFFSET + progId * WP_SIZE + WP_LAST_RUN_SHIFT;
 	EE_WriteWord(addr, wpStartTs); // write last run time
@@ -3536,8 +3289,6 @@ void run_watering_program_g2(uint8_t progId) {
 	wpProgress = 13;
 	vTaskDelay(1000);
 	close_valves(); // close all valves
-
-
 
 	wpStateFlags &= ~(1 << progId); // sbrosit' flag
 	enableClock = 1;
@@ -3568,13 +3319,10 @@ void run_fertilizer_mixer_g2(uint8_t progId) {
 	IWDG_ReloadCounter();
 	addr = 0;
 	addr = FMP_OFFSET + progId * FMP_SIZE + FMP_AFTERMIX_TIME_SHIFT;
-//	wpProgress = 94;
 	vTaskDelay(40);
 	EE_ReadVariable(addr, &circulationMixingTime);
-//	wpProgress = 93;
 	vTaskDelay(40);
 	IWDG_ReloadCounter();
-//	dosingEndTime = RTC_GetCounter() + (uint32_t) dosingTime;
 
 	// void wt_mix_in(uint16_t duration, uint16_t vol, uint8_t doserid, uint8_t spd)
 	wt_mix_in(circulationMixingTime,dosingTime,dosingPumpId,1);
@@ -3591,7 +3339,7 @@ void enable_dosing_pump2(uint8_t pumpId, uint8_t state) {
 		dosingPumpStateFlags &= ~(1 << pumpId);
 	}
 
-	state = 1 - state; // 0% pwm means running motor
+	state = 1 - state; // 0% pwm means running motor, 100% - motor stopped
 
 	if (pumpId == 0) {
 		TIM3->CCR1 = state * 1000;
@@ -3926,7 +3674,6 @@ void run_demo2(void) {
 	for (x=0;x<15;x++) {
 		trig_valve(x);
 	}
-	beep_overload(100);
 	uint8_t i = 0;
 	effect11on(1000);
 	effect11off(1000);
@@ -4056,7 +3803,7 @@ void wt_mixing(uint16_t duration){
 	close_valves();
 }
 
-// Min the fertilizer into MixTank, mixing the solution after
+// Mix the fertilizer into MixTank, mixing the solution after
 /* duration - seconds to circulate/mix the solution while the fertilizer added
  * vol - seconds to mix the fertilizer in
  * doserid - an id of the dosing pump
@@ -4068,7 +3815,6 @@ void wt_mix_in(uint16_t duration, uint16_t vol, uint8_t doserid, uint8_t spd){
 	uint32_t now = 0;
 
 	now = RTC_GetCounter();
-//	timeout = RTC_GetCounter() + 15;	// HARDCODE
 	finishDosing = vol;
 	finishDosing &= 0xFFFF;
 	finishDosing += now;
@@ -4082,12 +3828,6 @@ void wt_mix_in(uint16_t duration, uint16_t vol, uint8_t doserid, uint8_t spd){
 	psiOn();
 	run_doser_for(doserid,vol,spd);
 	while (now<timeout) {
-/*		if (now < finishDosing) {
-			enable_dosing_pump(doserid, spd);
-		}
-		else {
-			enable_dosing_pump(doserid, 0);
-		} */
 		now = RTC_GetCounter();
 		IWDG_ReloadCounter();
 		vTaskDelay(200);
@@ -4155,10 +3895,6 @@ void wt_watering_x(uint16_t duration, uint16_t valveFlags){
 	}
 	close_valves();
 }
-
-
-
-
 
 // get water into MixTank from the water 'source', reaching 'level' desired. Default source - :FWI
 void wt_mt_reach_level(uint16_t new_level, uint8_t source){
@@ -4305,29 +4041,10 @@ void dht_init_exti(void) {
 
 void TIM1_UP_TIM16_IRQHandler(void) // mixtank sonar interrupt
 {
-	/*  if (TIM_GetITStatus(TIM16, TIM_IT_CC1) != RESET) {
-	 // Clear TIM16 Capture compare interrupt pending bit
-	 TIM_ClearITPendingBit(TIM16, TIM_IT_CC1);
-
-	 // Get the Input Capture value
-	 if ((TIM16->CNT) < MAX_SONAR_READ && (TIM16->CNT)>0) {
-	 sonar_read[MIXTANK_SONAR] = TIM16->CNT;
-	 }
-	 TIM16->CNT = 0;
-	 } */
 }
 
 void TIM1_TRG_COM_TIM17_IRQHandler(void) // fresh water tank sonar interrupt
 {
-	/*	if (TIM_GetITStatus(TIM17, TIM_IT_CC1) != RESET) {
-	 // Clear TIM16 Capture compare interrupt pending bit
-	 TIM_ClearITPendingBit(TIM17, TIM_IT_CC1);
-	 // Get the Input Capture value
-	 if (!(GPIOB->IDR & (1<<9)) && (TIM17->CNT < MAX_SONAR_READ) && ((TIM17->CNT) > 0)) {
-	 sonar_read[FWTANK_SONAR]=SONAR_TIM->CNT;
-	 }
-	 TIM17->CNT = 0;
-	 } */
 }
 
 // Irq handler for sonars
@@ -4445,7 +4162,6 @@ void hygroStatSettings(void) {
 	Lcd_write_str("Set bottom lvl");
 	vTaskDelay(10);
 	EE_ReadVariable(RH_WINDOW_BOTTOM, &rh_value);
-//	phval = adc2ph(phadcvalue);
 	rh_val = readPercentVal(rh_value);
 	vTaskDelay(10);
 	EE_WriteVariable(RH_WINDOW_BOTTOM, rh_val);
@@ -4871,80 +4587,6 @@ void buttonCalibration(void) { // buttons calibration function
 	Lcd_clear();
 }
 
-void buttonCalibration2(void) { // buttons calibration function / became ol 08.09.2014
-	Lcd_clear();
-	Lcd_goto(0, 0);
-	uint16_t button_val[4], diff;
-	Lcd_clear();
-	Lcd_goto(0, 0);
-	Lcd_write_arr("<", 1);
-	Delay_us(30000);
-	adcAverager();
-	Delay_us(100);
-	button_val[0] = adcAverage[ADC_AVG_BUTTONS];
-	Lcd_goto(0, 0);
-	Lcd_write_arr("OK", 2);
-	Delay_us(30000);
-	adcAverager();
-	Delay_us(100);
-	button_val[1] = adcAverage[ADC_AVG_BUTTONS];
-	Lcd_goto(0, 0);
-	Lcd_write_arr("CANCEL", 6);
-	Delay_us(30000);
-	adcAverager();
-	Delay_us(100);
-	button_val[2] = adcAverage[ADC_AVG_BUTTONS];
-	Lcd_clear();
-	Lcd_write_arr(">", 1);
-	Delay_us(30000);
-	adcAverager();
-	Delay_us(100);
-	button_val[3] = adcAverage[ADC_AVG_BUTTONS];
-
-	if ((button_val[3] >> 3) < (button_val[0] >> 3)) {
-		buttonReverse = 1;
-	} else if ((button_val[3] >> 3) > (button_val[0] >> 3)) {
-		buttonReverse = 0;
-	} else {
-		buttonReverse = 2; //means loading button settings from EEPROM
-	}
-	if (buttonReverse == 0) {
-		diff = ((button_val[1] - button_val[0]) / 2) - 5;
-		button_ranges[0] = (button_val[0] - diff / 2);
-		button_ranges[1] = button_val[0] + diff;
-		button_ranges[2] = button_val[1] - diff;
-		diff = ((button_val[2] - button_val[1]) / 2) - 5;
-		button_ranges[3] = button_val[1] + diff;
-		button_ranges[4] = button_val[2] - diff;
-		diff = ((button_val[3] - button_val[2]) / 2) - 5;
-		button_ranges[5] = button_val[2] + diff;
-		button_ranges[6] = button_val[3] - diff;
-		button_ranges[7] = (button_val[3] + diff / 2);
-		saveButtonRanges();
-	} else if (buttonReverse == 1) {
-		diff = ((button_val[0] - button_val[1]) / 2) - 5;
-		button_ranges[0] = button_val[0] - diff;
-		button_ranges[1] = button_val[0] + diff;
-		button_ranges[2] = button_val[1] - diff;
-		diff = ((button_val[1] - button_val[2]) / 2) - 5;
-		button_ranges[3] = button_val[1] + diff;
-		button_ranges[4] = button_val[2] - diff;
-		diff = ((button_val[2] - button_val[3]) / 2) - 5;
-		button_ranges[5] = button_val[2] + diff;
-		button_ranges[6] = button_val[3] - diff;
-		button_ranges[7] = button_val[3] + diff;
-		saveButtonRanges();
-	} else {
-		Lcd_write_str("EEPROM buttons");
-		readButtonRanges();
-	}
-
-	if (button_ranges[0] > button_ranges[8]) {
-		buttonReverse = 1;
-	}
-	Lcd_goto(0, 0);
-	Lcd_write_str("Complete");
-}
 
 // display ADC values on LCD
 void displayAdcValues(void) {
@@ -4974,32 +4616,7 @@ void displayAdcValues(void) {
 #endif
 }
 
-void displayAdcValues_bak(void) {
-#ifdef TEST_MODE
-	Lcd_clear();
-	vTaskDelay(500);
-	button = 0;
-	while (button != BUTTON_OK) {
-		button = readButtons();
-		Lcd_goto(0, 0);
-		Lcd_write_str("1:");
-		Lcd_write_digit(ADC1->JDR1 / 100);
-		Lcd_write_digit(ADC1->JDR1);
-		Lcd_write_str(" 2:");
-		Lcd_write_digit(ADC1->JDR2 / 100);
-		Lcd_write_digit(ADC1->JDR2);
-		Lcd_goto(1, 0);
-		Lcd_write_str("3:");
-		Lcd_write_digit(ADC1->JDR3 / 100);
-		Lcd_write_digit(ADC1->JDR3);
-		Lcd_write_str(" 4:");
-		Lcd_write_digit(ADC1->JDR4 / 100);
-		Lcd_write_digit(ADC1->JDR4);
-		vTaskDelay(20);
-	}
-	Lcd_clear();
-#endif
-}
+
 
 void display_usart_rx2(void) { // another usart test fr displaying RxBuffer contents
 	uint8_t i = 0;
@@ -5047,7 +4664,6 @@ void display_usart_rx(void) {
 		Lcd_write_str(" ");
 		Lcd_write_digit(prefixDetectionIdx);
 		Lcd_write_digit(rx_pntr);
-//			copy_arr(&RxBuffer, &LCDLine2, 5,11,0);
 		vTaskDelay(20);
 	}
 	Lcd_clear();
@@ -5398,16 +5014,7 @@ void plugStateTrigger(void *pvParameters) {
 				} else if (plugType == 4) {
 					// watering and circulation pumps for watering controller
 				} else if (plugType == 5) {
-					/*	if (auto_flags&1==1 && (auto_failures&1)==0) {			// PSI STAB flag is number 0
-					 if (adcAverage[AVG_ADC_PSI]>psi_pump_top_level) {
-					 plugStateSet(PSI_PUMP_ID, 0);
-					 }
-					 vTaskDelay(1);
-					 if (adcAverage[AVG_ADC_PSI]<psi_pump_btm_level) {
-					 plugStateSet(PSI_PUMP_ID, 1);
-					 }
-					 }	*/
-					// psi pump pressure stabilizer
+
 				}
 				if (plugType == 254) {
 
@@ -5423,9 +5030,6 @@ void plugStateTrigger(void *pvParameters) {
 	}
 }
 
-void psiSetup(void) { // REMOVE !!!
-
-}
 
 void I2C_init2(void) {
 	// STMicroelectronics IORoutines example
@@ -5664,7 +5268,6 @@ void programRunner(uint8_t programId) {
 		setCTimer(--tmp8);
 		break;
 	case 10: // co2 stabilizer
-//		co2_setup();
 		break;
 	case 11: // pressure stabilizer setup
 		break;
@@ -5677,7 +5280,6 @@ void programRunner(uint8_t programId) {
 		hygroStatSettings();
 		break;
 	case 16: // pH stab setup
-//		phStabSettings();
 		break;
 	case 17: // doser settings
 		break;
@@ -6822,26 +6424,8 @@ void power_ctrl(uint8_t device, uint8_t state) {
 
 }
 
-void beep_overload(uint16_t amount) {
-	TIM1->CCR1 = 600;
-	Delay_us((uint32_t) amount);
-	TIM1->CCR1 = 1000;
-}
 
-void relay_test(void) {
-	TIM3->CCR1 = 1000;
-	TIM3->CCR2 = 1000;
-	TIM3->CCR3 = 1000;
-	TIM3->CCR4 = 1000;
-	Delay_us(30000);
-	TIM3->CCR1 = 0;
-	TIM3->CCR2 = 0;
-	TIM3->CCR3 = 0;
-	TIM3->CCR4 = 0;
-	Delay_us(30000);
-}
-
-uint8_t main(void) {
+void main(void) {
 
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC | RCC_APB2Periph_AFIO, ENABLE);
 	GPIO_InitTypeDef init_pin;
@@ -6909,14 +6493,15 @@ uint8_t main(void) {
 
 	/* Unlock the Flash Program Erase controller */
 	FLASH_Unlock();
-	/* EEPROM Init */
+
+	/* Emulated EEPROM Init */
 	EE_Init();
 	AdcInit();
-	power_ctrl(PWR_LCD, 0);
-	power_ctrl(PWR_LCD, 1);
+	power_ctrl(PWR_LCD, 0);		// disable the LCD power
+	power_ctrl(PWR_LCD, 1);		// and enable it back again
 	Delay(1000);
 
-	loadSettings();
+	loadSettings();		// loads user defined settings
 	flush_lcd_buffer(); // fills the LCD frame buffer with spaces
 
 	I2C_init2();	// master-slave test send	(pH sensor)
@@ -6966,8 +6551,7 @@ uint8_t main(void) {
 	watchdog_init();	// start watchdog timer
 #endif
 
-	/* Start the scheduler. */
-
+	/* Start the FreeRTOSscheduler. */
 	vTaskStartScheduler();
 
 	while (1)
@@ -7086,8 +6670,4 @@ void Lcd_clear(void) {
 	flush_lcd_buffer();
 	Lcd_goto(0, 0);
 }
-
-/* void Return_home() {
-	Lcd_write_cmd(0b0000001);
-} */
 
