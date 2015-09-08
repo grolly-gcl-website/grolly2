@@ -1449,7 +1449,8 @@ static void lstasks(void *pvParameters) {
 	uint32_t pwr_restart = 0; // next power restart for DHT sensors
 	power_ctrl(PWR_DHT, 1); // enable power for DHT sensors
 	uint8_t i2c_ping = 0;
-	uint32_t ad5934val = 0;
+
+	uint32_t tmp = 0;
 	pwr_restart = RTC_GetCounter() + 60;
 	while (1) {
 
@@ -1487,9 +1488,10 @@ static void lstasks(void *pvParameters) {
 		// AD5934 Main Task
 		vTaskDelay(100);
 
-		// out = ((((uint32_t)magnitude)<<16)&0xFFFF0000) | ((uint32_t)real)&0xFFFF;
-
-		ec1_adc_val = (uint16_t)(runSweep()&0xFFFF);
+		tmp = runSweep();
+		if (tmp<(~((uint32_t)0))) {
+			ec1_adc_val = tmp;
+		}
 
 		vTaskDelay(100);
 //		psiStab();
@@ -6619,7 +6621,7 @@ void displayClock(void *pvParameters) {
 
 			Lcd_goto(0, 9);
 			Lcd_write_8b(ad5934_read_data(AD5934_STATUS_REG));
-			Lcd_write_8b(adg_conf[1]);
+			Lcd_write_8b(adg_conf[0]);
 
 			Lcd_goto(1, 9);
 			Lcd_write_16b(ec1_adc_val);

@@ -4,8 +4,8 @@
       <target file="stm32f10x_spi.o" lastModified="14f867e1a08">
          <source file="..\..\..\stm_lib\src\stm32f10x_spi.c" lastModified="12e9ef2ce20"/>
       </target>
-      <target file="ad5934.o" lastModified="14fa9fd3c6d">
-         <source file="..\..\..\cadi_libs\src\ad5934.c" lastModified="14fa9fd21a5"/>
+      <target file="ad5934.o" lastModified="14faac83bd8">
+         <source file="..\..\..\cadi_libs\src\ad5934.c" lastModified="14faac7ec4f"/>
       </target>
       <target file="stm32f10x_iwdg.o" lastModified="14f867e2285">
          <source file="..\..\..\stm_lib\src\stm32f10x_iwdg.c" lastModified="12e9ef2ce20"/>
@@ -94,8 +94,8 @@
       <target file="startup_stm32f10x_md_vl.o" lastModified="14f867daee0">
          <source file="..\..\..\cmsis_boot\startup\startup_stm32f10x_md_vl.c" lastModified="13843cf2fc0"/>
       </target>
-      <target file="main.o" lastModified="14fa99059f6">
-         <source file="..\..\..\main.c" lastModified="14fa99003f6"/>
+      <target file="main.o" lastModified="14faac838c0">
+         <source file="..\..\..\main.c" lastModified="14faac7d3e5"/>
       </target>
       <target file="LiquidCrystal_I2C.o" lastModified="14f867db897">
          <source file="..\..\..\LCD_I2C\LiquidCrystal_I2C.c" lastModified="14f28d45a78"/>

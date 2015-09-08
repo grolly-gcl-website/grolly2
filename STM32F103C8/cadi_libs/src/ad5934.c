@@ -15,95 +15,20 @@ uint32_t incre_freq = 975; // Set freq increment
 uint8_t adg_conf[2];
 
 
+// init ADG715 switch to use for EC or Temp measurements, or EC or Temp calibration
 void init_adg715(uint8_t mode){
 	range_mode = mode;
 	adg_conf[0] = mode;
 	uint8_t i=0;
-
-
-		I2C_Master_BufferWrite(I2C2,adg_conf,1,Polling, ADG715_ADDR);
-		Delay_us_(100000);
-
-
-		// huge piece of code for ADG715 specific readout
-		__IO uint32_t temp = 0;
-		__IO uint32_t Timeout = 0;
-		uint8_t Address = 0;
-					   Timeout = 0xFFFF;
-					/* Send START condition */
-					I2C2->CR1 |= CR1_START_Set;
-					/* Wait until SB flag is set: EV5  */
-					while ((I2C2->SR1&0x0001) != 0x0001)
-					{
-						if (Timeout-- == 0)
-							return Error;
-					}
-					/* Send slave address */
-					/* Reset the address bit0 for read */
-					//SlaveAddress |= OAR1_ADD0_Set;
-					Address = (ADG715_ADDR|1);
-					/* Send the slave address */
-					I2C2->DR = Address;
-					/* Wait until ADDR is set: EV6_3, then program ACK = 0, clear ADDR
-					and program the STOP just after ADDR is cleared. The EV6_3
-					software sequence must complete before the current byte end of transfer.*/
-					/* Wait until ADDR is set */
-					Timeout = 0xFFFF;
-					while ((I2C2->SR1&0x0002) != 0x0002)
-					{
-						if (Timeout-- == 0)
-							return Error;
-					}
-					/* Clear ACK bit */
-					I2C2->CR1 &= CR1_ACK_Reset;
-					/* Disable all active IRQs around ADDR clearing and STOP programming because the EV6_3
-					software sequence must complete before the current byte end of transfer */
-					__disable_irq();
-					/* Clear ADDR flag */
-					temp = I2C2->SR2;
-					/* Program the STOP */
-					I2C2->CR1 |= CR1_STOP_Set;
-					/* Re-enable IRQs */
-					__enable_irq();
-					/* Wait until a data is received in DR register (RXNE = 1) EV7 */
-					while ((I2C2->SR1 & 0x00040) != 0x000040);
-					/* Read the data */
-					adg_conf[1] = I2C2->DR;
-					/* Make sure that the STOP bit is cleared by Hardware before CR1 write access */
-					while ((I2C2->CR1&0x200) == 0x200);
-					/* Enable Acknowledgement to be ready for another reception */
-					I2C2->CR1 |= CR1_ACK_Set;
-		Delay_us_(100000);
-
+	// write config
+	I2C_Master_BufferWrite(EVAL0349_I2CX,adg_conf,1,Polling, ADG715_ADDR);
+	Delay_us_(100000);
+	// and read it back for assurance. Could be disabled to enhance the speed
+	I2C_Master_BufferRead(EVAL0349_I2CX, adg_conf, 1,DMA,ADG715_ADDR);
+	Delay_us_(100000);
 }
 
-
-uint8_t ad5934_read_byte(uint8_t addr){
-	uint8_t buf = 0;
-		uint8_t i = 0;
-		for (i=0;i<8;i++) {		// send address
-			gpio_set(11,(AD5934_ADDR|1),i);
-			Delay_us_(2);
-			sck_low();
-			Delay_us_(3);
-			sck_high();
-			Delay_us_(5);
-		}
-		read_ack();
-		for (i=0;i<8;i++) {		// send address
-			gpio_set(11,addr,i);
-			Delay_us_(2);
-			sck_low();
-			Delay_us_(3);
-			sck_high();
-			Delay_us_(5);
-		}
-		read_ack();
-
-
-		return buf;
-}
-
+// setup for AD5934 (following the AN-1252)
 void init_ad5934(void){
   // 1. Reset
   ad5934_write_data(AD5934_CTRL_R1, 0x01);    // range 1, gain x1
@@ -135,41 +60,47 @@ void init_ad5934(void){
 }
 
 
+
 void ad5934_write_data(int addr, int data){
 	uint8_t buf[2];
-	buf[0] = addr;
-	buf[1] = data;
-	I2C_Master_BufferWrite(I2C2,buf,2,DMA, AD5934_ADDR);
+	buf[0] = addr;	// AD5934 register address to be written
+	buf[1] = data;	// register data to be written
+	I2C_Master_BufferWrite(EVAL0349_I2CX,buf,2,DMA, AD5934_ADDR);
 
 }
 
+// set pointer and read the data from AD5934
 uint8_t ad5934_read_data(int addr){
 	uint8_t buf[2];
 	buf[0] = AD5934_SET_ADDR_PNTR;
 	buf[1] = addr;
 
-	I2C_Master_BufferWrite(I2C2,buf,2,DMA, AD5934_ADDR);
+	// send Set Pointer command to AD5934
+	I2C_Master_BufferWrite(EVAL0349_I2CX,buf,2,DMA, AD5934_ADDR);
 
 	Delay_us_(1000);
-	I2C_Master_BufferRead(I2C2, buf, 1,DMA,AD5934_ADDR);
+	// Read the data from AD5934. It sends the data from the register address with pointer set
+	I2C_Master_BufferRead(EVAL0349_I2CX, buf, 1,DMA,AD5934_ADDR);
 	vTaskDelay(50);
 	return buf[0];
 }
 
-
+/*
 uint8_t ad5934_read_data_byte(int addr){
 	uint8_t buf[2];
 	buf[0] = AD5934_SET_ADDR_PNTR;
 	buf[1] = addr;
 
-	I2C_Master_BufferWrite(I2C2,buf,2,DMA, AD5934_ADDR);
+	I2C_Master_BufferWrite(EVAL0349_I2CX,buf,2,DMA, AD5934_ADDR);
 
 	Delay_us_(1000);
-	I2C_Master_BufferRead(I2C2, buf, 1,DMA,AD5934_ADDR);
+	I2C_Master_BufferRead(EVAL0349_I2CX, buf, 1,DMA,AD5934_ADDR);
 	vTaskDelay(50);
 	return buf[0];
 }
+*/
 
+// convert signed integer to unsigned one
 uint8_t mod4int(uint8_t arg){
 	if (arg>127) {
 		arg = ~(arg) + 1;
@@ -178,6 +109,7 @@ uint8_t mod4int(uint8_t arg){
 
 }
 
+// read AD5934
 uint32_t runSweep(uint8_t mode) {
     uint32_t ec = 0;
 	uint16_t re = 0;
@@ -217,79 +149,53 @@ uint32_t runSweep(uint8_t mode) {
 		flag = ad5934_read_data(AD5934_STATUS_REG)& 2;
 
 		if (flag==2) {
-
+			// read two bytes of real part
 			R1 = ad5934_read_data(AD5934_REAL_DATA_R1);
 			R2 = ad5934_read_data(AD5934_REAL_DATA_R2);
 			re = (R1 << 8) | R2;
 			re &= ~(1 << 15);
 
-
-
+			// and read two another bytes of Imaginary part
 			R1  = mod4int(ad5934_read_data(AD5934_IMG_DATA_R1));
 			R2  = mod4int(ad5934_read_data(AD5934_IMG_DATA_R2));
 
-
-
 			img = (R1 << 8) | R2;
 
-			img &= ~(1 << 15);	// reset signedness flag if present
-
-
-	//		freq = (((uint16_t)(ad5934_read_data(AD5934_START_FREQ_R2)<<8))&0xFF00) + (((uint16_t)ad5934_read_data(AD5934_START_FREQ_R3))&0x00FF);
-	//		mag = sqrt(pow(double(re),2)+pow(double(img),2));
+			// here we need to calculate square root of powed real + powed imaginary
+			// first calculate (real^2+img^2)
 			tmp = (re*re)+(img*img);
-			mag = asqrt(tmp);
+			mag = asqrt(tmp);			// and square root
 //			ec += freq;
 			vTaskDelay(50);
 
-            if (range_mode==LOW_RANGE_CONDUCTIVITY) {
-                ec = mag;
-            }
-            else if (range_mode==HIGH_RANGE_CONDUCTIVITY) {
-                ec = mag;
-            }
-            else {
-                return 0;
-            }
-
+			// detect edge of range to switch feedback resistor
             if (mag>15000 && range_mode==LOW_RANGE_CONDUCTIVITY) {
-  //          	init_adg715(HIGH_RANGE_CONDUCTIVITY);
+            	init_adg715(HIGH_RANGE_CONDUCTIVITY);
             }
-
-
             else if (mag<2500 && range_mode==HIGH_RANGE_CONDUCTIVITY) {
-  //          	init_adg715(LOW_RANGE_CONDUCTIVITY);
+            	init_adg715(LOW_RANGE_CONDUCTIVITY);
             }
 
-            if (mode==LOW_RANGE_CONDUCTIVITY) {
-
+            else {	// if no range switches, then calculate current EC
+				if (range_mode==LOW_RANGE_CONDUCTIVITY) {
+					ec = mag/10;	// calculate EC for 25uS..2500uS range (CN0349)
+					return ec;
+				}
+				else if (range_mode==HIGH_RANGE_CONDUCTIVITY) {
+					ec = mag;		// calculate EC for 0.5ms..200ms range
+					return ec;
+				}
+				else {
+					return ~(ec);	// wrong reading
+				}
             }
 
-            if (mode==HIGH_RANGE_CONDUCTIVITY) {
-
-            }
-            return ec;
+            return ~(ec);			// wrong reading
 
 		}
 	}
 	ad5934_write_data(AD5934_CTRL_R1,(ad5934_read_data(AD5934_CTRL_R1) & 0x07) | 0xA0);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

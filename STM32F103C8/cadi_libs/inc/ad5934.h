@@ -44,6 +44,8 @@
 #define AD5934_CTRL_R1 0x80
 #define AD5934_CTRL_R2 0x81
 
+#define EVAL0349_I2CX	I2C2	// I2C bus number for EC sensor
+
 
 
 /**
@@ -55,5 +57,5 @@
 
 void init_ad5934(void);
 void init_adg715(uint8_t mode);
-
+uint8_t mod4int(uint8_t arg);
 uint16_t asqrt(uint32_t x);
