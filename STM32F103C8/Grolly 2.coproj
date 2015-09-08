@@ -6,7 +6,7 @@
       <Compile>
         <Option name="OptimizationLevel" value="0"/>
         <Option name="UseFPU" value="0"/>
-        <Option name="UserEditCompiler" value="-D&quot;assert_param(expr)=((void)0)&quot;;"/>
+        <Option name="UserEditCompiler" value="-D&quot;assert_param(expr)=((void)0)&quot;; -DUSE_LCD"/>
         <Option name="SupportCPlusplus" value="0"/>
         <Includepaths>
           <Includepath path="."/>
@@ -81,26 +81,28 @@
     <File name="cmsis_boot/startup" path="" type="2"/>
     <File name="freertos/Source/timers.c" path="freertos/Source/timers.c" type="1"/>
     <File name="stm_lib/src/misc.c" path="stm_lib/src/misc.c" type="1"/>
-    <File name="stm_lib/src/stm32f10x_spi.c" path="stm_lib/src/stm32f10x_spi.c" type="1"/>
-    <File name="freertos/Source/include" path="" type="2"/>
+    <File name="cadi_libs/inc/ad5934.h" path="cadi_libs/inc/ad5934.h" type="1"/>
     <File name="stm_lib/src/stm32f10x_iwdg.c" path="stm_lib/src/stm32f10x_iwdg.c" type="1"/>
+    <File name="freertos/Source/include" path="" type="2"/>
+    <File name="stm_lib/src/stm32f10x_spi.c" path="stm_lib/src/stm32f10x_spi.c" type="1"/>
     <File name="cmsis_boot/stm32f10x.h" path="cmsis_boot/stm32f10x.h" type="1"/>
     <File name="cmsis_boot/stm32f10x_conf.h" path="cmsis_boot/stm32f10x_conf.h" type="1"/>
     <File name="stm_lib/inc/stm32f10x_flash.h" path="stm_lib/inc/stm32f10x_flash.h" type="1"/>
     <File name="cmsis/core_cm3.c" path="cmsis/core_cm3.c" type="1"/>
     <File name="LCD_I2C/I2C.h" path="LCD_I2C/I2C.h" type="1"/>
     <File name="stm_lib/inc/stm32f10x_spi.h" path="stm_lib/inc/stm32f10x_spi.h" type="1"/>
-    <File name="stm_lib/src/stm32f10x_adc.c" path="stm_lib/src/stm32f10x_adc.c" type="1"/>
-    <File name="stm_lib/inc/stm32f10x_dma.h" path="stm_lib/inc/stm32f10x_dma.h" type="1"/>
-    <File name="freertos/Source/readme.txt" path="freertos/Source/readme.txt" type="1"/>
     <File name="freertos/heap_2.c" path="freertos/heap_2.c" type="1"/>
+    <File name="stm_lib/src/stm32f10x_adc.c" path="stm_lib/src/stm32f10x_adc.c" type="1"/>
+    <File name="freertos/Source/readme.txt" path="freertos/Source/readme.txt" type="1"/>
+    <File name="stm_lib/inc/stm32f10x_dma.h" path="stm_lib/inc/stm32f10x_dma.h" type="1"/>
     <File name="stm_lib/inc/stm32f10x_iwdg.h" path="stm_lib/inc/stm32f10x_iwdg.h" type="1"/>
-    <File name="cadi_libs/src/dht22.c" path="cadi_libs/src/dht22.c" type="1"/>
     <File name="freertos/Source/include/task.h" path="freertos/Source/include/task.h" type="1"/>
+    <File name="cadi_libs/src/dht22.c" path="cadi_libs/src/dht22.c" type="1"/>
     <File name="stm_lib/src/stm32f10x_usart.c" path="stm_lib/src/stm32f10x_usart.c" type="1"/>
     <File name="freertos/Source/portable/ARM_CM3/portmacro.h" path="freertos/Source/portable/ARM_CM3/portmacro.h" type="1"/>
     <File name="LCD_I2C/LiquidCrystal_I2C.c" path="LCD_I2C/LiquidCrystal_I2C.c" type="1"/>
     <File name="freertos/Source/include/croutine.h" path="freertos/Source/include/croutine.h" type="1"/>
+    <File name="cadi_libs/inc/delays.h" path="cadi_libs/inc/delays.h" type="1"/>
     <File name="stm_lib/src/stm32f10x_pwr.c" path="stm_lib/src/stm32f10x_pwr.c" type="1"/>
     <File name="stm_lib/src/stm32f10x_gpio.c" path="stm_lib/src/stm32f10x_gpio.c" type="1"/>
     <File name="stm_lib/inc/stm32f10x_gpio.h" path="stm_lib/inc/stm32f10x_gpio.h" type="1"/>
@@ -110,15 +112,17 @@
     <File name="LCD_I2C" path="" type="2"/>
     <File name="cmsis_boot/system_stm32f10x.c" path="cmsis_boot/system_stm32f10x.c" type="1"/>
     <File name="stm_lib/src/eeprom.c" path="stm_lib/src/eeprom.c" type="1"/>
-    <File name="LCD_I2C/delay.c" path="LCD_I2C/delay.c" type="1"/>
     <File name="stm_lib/inc/misc.h" path="stm_lib/inc/misc.h" type="1"/>
+    <File name="LCD_I2C/delay.c" path="LCD_I2C/delay.c" type="1"/>
     <File name="stm_lib/inc/eeprom.h" path="stm_lib/inc/eeprom.h" type="1"/>
     <File name="freertos/Source/include/portable.h" path="freertos/Source/include/portable.h" type="1"/>
     <File name="freertos/Source/include/FreeRTOS.h" path="freertos/Source/include/FreeRTOS.h" type="1"/>
     <File name="cmsis/core_cm3.h" path="cmsis/core_cm3.h" type="1"/>
+    <File name="cadi_libs/src/ad5934.c" path="cadi_libs/src/ad5934.c" type="1"/>
     <File name="stm_lib/src/stm32f10x_exti.c" path="stm_lib/src/stm32f10x_exti.c" type="1"/>
     <File name="stm_lib/src/stm32f10x_rcc.c" path="stm_lib/src/stm32f10x_rcc.c" type="1"/>
     <File name="cadi_libs" path="" type="2"/>
+    <File name="cadi_libs/src/delays.c" path="cadi_libs/src/delays.c" type="1"/>
     <File name="stm_lib/inc/stm32f10x_it.h" path="stm_lib/inc/stm32f10x_it.h" type="1"/>
     <File name="cadi_libs/inc/driver_sonar.h" path="cadi_libs/inc/driver_sonar.h" type="1"/>
     <File name="freertos/Source/portable" path="" type="2"/>
@@ -127,23 +131,23 @@
     <File name="cadi_libs/inc" path="" type="2"/>
     <File name="cadi_libs/src" path="" type="2"/>
     <File name="stm_lib/inc/I2CRoutines.h" path="stm_lib/inc/I2CRoutines.h" type="1"/>
-    <File name="stm_lib/src/stm32f10x_dma.c" path="stm_lib/src/stm32f10x_dma.c" type="1"/>
     <File name="freertos/Source/include/projdefs.h" path="freertos/Source/include/projdefs.h" type="1"/>
+    <File name="stm_lib/src/stm32f10x_dma.c" path="stm_lib/src/stm32f10x_dma.c" type="1"/>
     <File name="freertos/Source/include/StackMacros.h" path="freertos/Source/include/StackMacros.h" type="1"/>
     <File name="stm_lib/src" path="" type="2"/>
     <File name="cmsis" path="" type="2"/>
     <File name="stm_lib" path="" type="2"/>
-    <File name="stm_lib/inc/stm32f10x_exti.h" path="stm_lib/inc/stm32f10x_exti.h" type="1"/>
     <File name="cadi_libs/src/driver_sonar.c" path="cadi_libs/src/driver_sonar.c" type="1"/>
+    <File name="stm_lib/inc/stm32f10x_exti.h" path="stm_lib/inc/stm32f10x_exti.h" type="1"/>
+    <File name="stm_lib/src/stm32f10x_flash.c" path="stm_lib/src/stm32f10x_flash.c" type="1"/>
     <File name="freertos/Source/list.c" path="freertos/Source/list.c" type="1"/>
     <File name="stm_lib/src/I2CRoutines.c" path="stm_lib/src/I2CRoutines.c" type="1"/>
-    <File name="stm_lib/src/stm32f10x_flash.c" path="stm_lib/src/stm32f10x_flash.c" type="1"/>
     <File name="freertos/Source/MemMang" path="" type="2"/>
     <File name="freertos/Source/include/list.h" path="freertos/Source/include/list.h" type="1"/>
     <File name="stm_lib/inc/stm32f10x_adc.h" path="stm_lib/inc/stm32f10x_adc.h" type="1"/>
-    <File name="cmsis_boot/system_stm32f10x.h" path="cmsis_boot/system_stm32f10x.h" type="1"/>
-    <File name="freertos" path="" type="2"/>
     <File name="freertos/Source/portable/ARM_CM3/port.c" path="freertos/Source/portable/ARM_CM3/port.c" type="1"/>
+    <File name="freertos" path="" type="2"/>
+    <File name="cmsis_boot/system_stm32f10x.h" path="cmsis_boot/system_stm32f10x.h" type="1"/>
     <File name="stm_lib/inc/stm32f10x_rcc.h" path="stm_lib/inc/stm32f10x_rcc.h" type="1"/>
     <File name="stm_lib/inc/stm32f10x_i2c.h" path="stm_lib/inc/stm32f10x_i2c.h" type="1"/>
     <File name="freertos/Source/croutine.c" path="freertos/Source/croutine.c" type="1"/>
@@ -154,7 +158,7 @@
     <File name="stm_lib/inc" path="" type="2"/>
     <File name="FreeRTOSConfig.h" path="FreeRTOSConfig.h" type="1"/>
     <File name="freertos/Source/include/mpu_wrappers.h" path="freertos/Source/include/mpu_wrappers.h" type="1"/>
-    <File name="main.c" path="main.c" type="1"/>
     <File name="freertos/Source/queue.c" path="freertos/Source/queue.c" type="1"/>
+    <File name="main.c" path="main.c" type="1"/>
   </Files>
 </Project>
