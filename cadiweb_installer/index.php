@@ -211,7 +211,7 @@ $(document).ready(function() {
 				$('#sens_ph1_adc_val').html(ph1_adc_val);
 
 				var ec1_adc_val = statusArray[11];
-				$('#ec1_adc_val').html('EC: '+ec1_adc_val);
+				$('#ec1_adc_val').html('EC: '+ec1_adc_val+' uS');
 				// $('#sens_ph1_adc_val').html(ec1_adc_val);
 
 
