@@ -156,6 +156,7 @@ $(document).ready(function() {
 		svg.text(140, 575, 'Temp',{fill: 'green', strokeWidth: 0, id:'cadi_temp'});
 		svg.text(140, 595, 'rH',{fill: 'blue', strokeWidth: 0, id:'cadi_rh'});
 		svg.text(140, 620, 'pH',{fill: 'red', strokeWidth: 0, id:'ph1_adc_val'});
+		svg.text(140, 645, 'EC',{fill: 'orange', strokeWidth: 0, id:'ec1_adc_val'});
 
 		svg.text(355, 690, 'Pressure',{fill: 'red', strokeWidth: 0, id:'pressure_label'});
 
@@ -208,6 +209,12 @@ $(document).ready(function() {
 				var ph1_adc_val = statusArray[10];
 				$('#ph1_adc_val').html('pH: '+ph1_adc_val);
 				$('#sens_ph1_adc_val').html(ph1_adc_val);
+
+				var ec1_adc_val = statusArray[11];
+				$('#ec1_adc_val').html('EC: '+ec1_adc_val);
+				// $('#sens_ph1_adc_val').html(ec1_adc_val);
+
+
 				//$('#csv_string').html(data);
 				
 

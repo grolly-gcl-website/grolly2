@@ -16,12 +16,14 @@
 #include "stm32f10x_gpio.h"
 #include "stm32f10x_rcc.h"
 #include "stm32f10x_tim.h"
+#include "delays.h"
 #include "misc.h"
 #include "stm32f10x_dma.h"
 #include "stm32f10x_exti.h"
 #include "stm32f10x_usart.h"
 #include "stm32f10x_iwdg.h"
 #include "stm32f10x_i2c.h"
+#include "ad5934.h"
 #include "I2CRoutines.h"
 #include "FreeRTOS.h"
 #include "task.h"
@@ -44,6 +46,13 @@ volatile static uint16_t rxglobalcntr = 0;
 volatile static uint8_t packetid_ = 0;
 volatile static uint16_t wrtn_addr = 0;
 volatile static uint16_t wrtn_val = 0;
+
+uint8_t ds_buf[9];
+uint16_t ph1_adc_val = 0;
+uint16_t ec1_adc_val = 0;
+
+extern uint8_t adg_conf[2];
+extern uint8_t range_mode;
 
 /*
  *  Power control for peripheral devices
@@ -903,7 +912,6 @@ void co2_sens_supply(void);
 uint8_t skip_button_cal(void);
 void psiOff(void);
 void I2C_init2(void);
-void Delay_us_(uint32_t delay);
 void get_settings_dump_(uint16_t amount, uint16_t startaddr);
 void settings2tx_buff(uint16_t addr, uint8_t amount);
 void mix_solution(uint32_t seconds);
@@ -1329,15 +1337,13 @@ void save_settings(void) { // wrapper for rx_ee, simplifies settings packet rece
 	}
 }
 
-x = DMA1_FLAG_TC6;
+// x = DMA1_FLAG_TC6;
 
-uint8_t ds_buf[9];
-uint16_t ph1_adc_val = 0;
-uint16_t ec1_adc_val = 0;
+
 
 static void lstasks(void *pvParameters) {
 	vTaskDelay(4000);
-
+	uint32_t tmp=0;
 	uint32_t pwr_restart = 0; // next power restart for DHT sensors
 	power_ctrl(PWR_DHT, 1); // enable power for DHT sensors
 	uint8_t i2c_ping = 0;
@@ -1370,8 +1376,14 @@ static void lstasks(void *pvParameters) {
 			 I2C_LowLevel_Init(I2C2);
 			 vTaskDelay(200);
 		 }
+		vTaskDelay(100);
+		tmp = runSweep();
+		if (tmp<(~((uint32_t)0))) {
+			ec1_adc_val = tmp;
+		}
 
 		vTaskDelay(100);
+#ifndef DEBUG_ON
 //		psiStab();
 		dht_get_data_x(0);
 		vTaskDelay(50);
@@ -1380,6 +1392,7 @@ static void lstasks(void *pvParameters) {
 		vTaskDelay(50);
 		dht_get_data_x(1);
 		vTaskDelay(400);
+#endif
 	}
 }
 
@@ -1950,8 +1963,8 @@ void get_status_block(uint8_t blockId) { // sends block with Cadi STATUS data
 			TxBuffer[21] = (uint8_t)((sonar_read[MIXTANK_SONAR] >> 8) & (0xFF));
 			TxBuffer[22] = (uint8_t)(ph1_adc_val & (0xFF)); // ADC1 average reading
 			TxBuffer[23] = (uint8_t)(((ph1_adc_val) >> 8) & (0xFF));
-			TxBuffer[24] = (uint8_t)(adcAverage[1] & (0xFF)); // ADC2 average reading
-			TxBuffer[25] = (uint8_t)(((adcAverage[1]) >> 8) & (0xFF));
+			TxBuffer[24] = (uint8_t)(ec1_adc_val & (0xFF)); // ADC2 average reading
+			TxBuffer[25] = (uint8_t)(((ec1_adc_val) >> 8) & (0xFF));
 			TxBuffer[26] = (uint8_t)(adcAverage[2] & (0xFF)); // ADC3 average reading
 			TxBuffer[27] = (uint8_t)(((adcAverage[2]) >> 8) & (0xFF));
 			TxBuffer[28] = (uint8_t)(adcAverage[3] & (0xFF)); // ADC4 average reading
@@ -4497,13 +4510,6 @@ char* adc2str(uint_fast16_t d, volatile char* out) {
 	return out;
 }
 
-void Delay_us_(uint32_t delay) { // adjusted for 8mhz
-	volatile uint32_t del = 0;
-	del = delay * 3;
-	while (del--) {
-
-	}
-}
 
 void Delay_us(uint32_t delay) {
 	volatile uint32_t del = 0;
@@ -6071,12 +6077,12 @@ void displayClock(void *pvParameters) {
 	vTaskDelay(200);
 	Lcd_clear();
 	if (skip_button_cal() == 0) {
-		Lcd_clear();
+/*		Lcd_clear();
 		Lcd_write_str("First, calibrate");
 		Lcd_goto(1, 0);
 		Lcd_write_str("the buttons...");
 		vTaskDelay(2000);
-		buttonCalibration();
+		buttonCalibration(); */
 	}
 	while (1) {
 
@@ -6108,12 +6114,12 @@ void displayClock(void *pvParameters) {
 
 			curi2crxval = 10 + Buffer_Rx1[0];
 
-			Lcd_goto(0, 9);
-			Lcd_write_8b(resp_id);
-			Lcd_write_8b(resp_counter);
+			Lcd_goto(0, 8);
+			Lcd_write_8b(range_mode);
+			Lcd_write_8b(adg_conf[0]);
 
 			Lcd_goto(1, 9);
-			Lcd_write_16b(ph1_adc_val);
+			Lcd_write_16b(ec1_adc_val);
 
 
 			vTaskDelay(50);
@@ -6530,7 +6536,7 @@ void main(void) {
 
 	sonar_init(); // init sonar ECHOs on PB8 and PB9 and TRIG on PC13
 
-	xTaskCreate(lstasks, (signed char*)"LST", 128, NULL,
+	xTaskCreate(lstasks, (signed char*)"LST", 200, NULL,
 			tskIDLE_PRIORITY + 1, NULL);
 	xTaskCreate(watering_program_trigger, (signed char*)"WP", 180, NULL,
 			tskIDLE_PRIORITY + 1, NULL);
@@ -6540,12 +6546,18 @@ void main(void) {
 			configMINIMAL_STACK_SIZE+10, NULL, tskIDLE_PRIORITY + 1, NULL);
 	xTaskCreate(plugStateTrigger, (signed char*)"PLUGS",
 			configMINIMAL_STACK_SIZE+35, NULL, tskIDLE_PRIORITY + 1, NULL);
+#ifdef USE_LCD
 	xTaskCreate(displayClock, (signed char*)"CLK", 140, NULL,
 			tskIDLE_PRIORITY + 1, NULL);
 	xTaskCreate(vTaskLCDdraw,(signed char*)"LCDDRW",configMINIMAL_STACK_SIZE,
 	 NULL, tskIDLE_PRIORITY + 1, NULL);
+#endif
 
 	Delay_us(100);
+
+	init_adg715(LOW_RANGE_CONDUCTIVITY);
+	init_adg715(LOW_RANGE_CONDUCTIVITY);
+	init_ad5934();
 
 #ifndef DEBUG_ON
 	watchdog_init();	// start watchdog timer
