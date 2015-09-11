@@ -382,7 +382,7 @@ Status I2C_Master_BufferWrite(I2C_TypeDef* I2Cx, uint8_t* pBuffer,  uint32_t Num
             if (Timeout-- == 0) {
                 return Error;
             }
-    		IWDG_ReloadCounter();
+
         }
         Timeout = 0xFFFF;
         /* Send slave address */
@@ -397,7 +397,7 @@ Status I2C_Master_BufferWrite(I2C_TypeDef* I2Cx, uint8_t* pBuffer,  uint32_t Num
             if (Timeout-- == 0) {
                 return Error;
             }
-    		IWDG_ReloadCounter();
+    							// should be removed in production
         }
         Timeout = 0xFFFF;
         /* Clear ADDR flag by reading SR2 register */
@@ -418,7 +418,7 @@ Status I2C_Master_BufferWrite(I2C_TypeDef* I2Cx, uint8_t* pBuffer,  uint32_t Num
                 if (Timeout-- == 0) {
                     return Error;
                 }
-        		IWDG_ReloadCounter();
+
             }
             Timeout = 0xFFFF;
             /* Disable the DMA1 Channel 4 */
@@ -432,7 +432,7 @@ Status I2C_Master_BufferWrite(I2C_TypeDef* I2Cx, uint8_t* pBuffer,  uint32_t Num
         	 if (Timeout-- == 0) {
                     return Error;
         	 }
-       		IWDG_ReloadCounter();
+
         }
         Timeout = 0xFFFF;
         /* Program the STOP */
@@ -442,7 +442,7 @@ Status I2C_Master_BufferWrite(I2C_TypeDef* I2Cx, uint8_t* pBuffer,  uint32_t Num
        	 if (Timeout-- == 0) {
                    return Error;
        	 }
-       	 IWDG_ReloadCounter();
+
         }
         Timeout = 0xFFFF;
 
@@ -457,7 +457,7 @@ Status I2C_Master_BufferWrite(I2C_TypeDef* I2Cx, uint8_t* pBuffer,  uint32_t Num
         /* Wait until SB flag is set: EV5 */
         while ((I2Cx->SR1&0x0001) != 0x0001)
         {
-    		IWDG_ReloadCounter();
+
             if (Timeout-- == 0) {
                 return Error;
             }
@@ -473,7 +473,7 @@ Status I2C_Master_BufferWrite(I2C_TypeDef* I2Cx, uint8_t* pBuffer,  uint32_t Num
         /* Wait until ADDR is set: EV6 */
         while ((I2Cx->SR1 &0x0002) != 0x0002)
         {
-    		IWDG_ReloadCounter();
+
             if (Timeout-- == 0)
                 return Error;
         }

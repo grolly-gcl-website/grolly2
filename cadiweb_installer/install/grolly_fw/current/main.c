@@ -2,7 +2,7 @@
  *  Use this code free of charge, but leave this text box here,
  *  This code is distributed "as is" with no warranties.
  *  https://github.com/grolly-gcl-website/grolly2 is main repository hub for Cadi project.
- *
+ *	gcl.engineering
  *	27.08.2013 changed the virtaddvartab usage to copying the whole row or variables 0x05C0-0x0679
  *
  *
@@ -30,15 +30,18 @@
 #include "queue.h"
 #include "stm32f10x_flash.h"
 #include "eeprom.h"
-//#include "ff9a/src/diskio.h"
-//#include "ff9a/src/ff.h"
 #include "driver_sonar.h"
 #include "LiquidCrystal_I2C.h"
-// #include "dht22.h"
 
 
 #define PROTOBUZZZ3			// use Protobuzzz v3 communications
 #define GROLLY_VER		2	// Grolly version (different piping)
+
+
+
+#ifdef USE_EC				// enables EC monitor feature
+	#define USE_EVAL0349
+#endif
 
 #define CMD_CONF_AMOUNT	10	// number of Command Execution Confirmations to be sent
 volatile static uint8_t packets_received = 0;
@@ -157,9 +160,7 @@ void dht_1(uint8_t dht_id) {
 void dht_req_x(uint8_t dht_id) {
 	dht_init_out_x(dht_id);
 	dht_0(dht_id);
-//	IWDG_ReloadCounter();
 	Delay_us_(21000);
-//	IWDG_ReloadCounter();
 	dht_1(dht_id);
 
 	dht_init_x(dht_id);
@@ -1273,12 +1274,6 @@ void USART1_IRQHandler(void) // Protobuzzz v3
 		USART1->SR &= ~USART_FLAG_RXNE; // clear Rx Not Empty flag
 	}
 
-	// sending packet in case of Tx Not Empty flag is set and buffer not sent completely yet
-/*	if (txbuff_ne == 1 && TxCounter < NbrOfDataToTransfer) {
-		USART1->DR = TxBuffer[TxCounter++]; // write TxBuff byte into Data Register for sending
-	}
-	BT_USART->SR &= ~USART_SR_TC; // clear Transfer Complete flag
-*/
 	if (packet_ready == 0) {
 		if (rxm_state == RXM_CMD) {
 			if (rx_pntr == 0) { // if packet buffer pointer is 0, it points to payload size (payload, including this size byte)
@@ -1337,9 +1332,6 @@ void save_settings(void) { // wrapper for rx_ee, simplifies settings packet rece
 	}
 }
 
-// x = DMA1_FLAG_TC6;
-
-
 
 static void lstasks(void *pvParameters) {
 	vTaskDelay(4000);
@@ -1363,6 +1355,7 @@ static void lstasks(void *pvParameters) {
 		i2c_ping = 1;
 		vTaskDelay(100);
 
+// read pH value
 		if (i2c_ping>0) {
 			 ph1_adc_val = Buffer_Rx2[1] + (((uint16_t)Buffer_Rx2[0]<<8) & 0xFF00);
 			 I2C_Master_BufferRead(I2C2,Buffer_Rx2,2,DMA, PH_I2C_ADDR);
@@ -1370,21 +1363,25 @@ static void lstasks(void *pvParameters) {
 		 }
 		 else {
 			 	i2c_ping = 10;
-		 // restart I2C2 sensors bus
+			 	// restart I2C2 sensors bus
 			 I2C_DeInit(I2C2);
 			 vTaskDelay(200);
 			 I2C_LowLevel_Init(I2C2);
 			 vTaskDelay(200);
 		 }
+
+// read EC value
+#ifdef USE_EVAL0349
 		vTaskDelay(100);
 		tmp = runSweep();
 		if (tmp<(~((uint32_t)0))) {
 			ec1_adc_val = tmp;
 		}
+#endif
 
 		vTaskDelay(100);
 #ifndef DEBUG_ON
-//		psiStab();
+//		psiStab();		// FAILED on SN002 ?
 		dht_get_data_x(0);
 		vTaskDelay(50);
 		sonar_ping();
@@ -1454,7 +1451,6 @@ void push_tx(void) {
 	}
 	vTaskDelay(50);
 	IWDG_ReloadCounter();
-//	tx_flush(); // flush Tx buffer
 	txbuff_ne = 0; // packet sent, reset tx not empty flag
 }
 
@@ -6381,7 +6377,7 @@ void watchdog_init(void) {
 	 = LsiFreq/(32 * 4)
 	 = LsiFreq/128
 	 */
-	IWDG_SetReload(LsiFreq / 2);
+	IWDG_SetReload(LsiFreq / 1);
 
 	/* Reload IWDG counter */
 	IWDG_ReloadCounter();
@@ -6553,11 +6549,13 @@ void main(void) {
 	 NULL, tskIDLE_PRIORITY + 1, NULL);
 #endif
 
+#ifdef USE_EVAL0349
 	Delay_us(100);
 
+	init_adg715(LOW_RANGE_CONDUCTIVITY);	// init Switch for mEC measurement in Low Conductivity range
 	init_adg715(LOW_RANGE_CONDUCTIVITY);
-	init_adg715(LOW_RANGE_CONDUCTIVITY);
-	init_ad5934();
+	init_ad5934();							// init AD5934
+#endif
 
 #ifndef DEBUG_ON
 	watchdog_init();	// start watchdog timer
