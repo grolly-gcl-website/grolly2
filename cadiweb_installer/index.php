@@ -11,656 +11,608 @@
 
 <!doctype html>
 <html lang="en">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Cadi web UI</title>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Cadi web UI</title>
 
-    <link rel="stylesheet" type="text/css" href="css/resetcss.css">
-    <link rel="stylesheet" type="text/css" href="js/jquery-ui-1.11.2.custom/jquery-ui.css">
-    <link rel="stylesheet" type="text/css" href="css/jquery.svg.css"> 
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    
-    <script src="js/jquery-1.11.2.min.js"></script>
-    <script src="js/jquery-ui-1.11.2.custom/jquery-ui.min.js"></script>
-    <script src="js/jquery-ui-timepicker-addon.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/resetcss.css">
+        <link rel="stylesheet" type="text/css" href="js/jquery-ui-1.11.2.custom/jquery-ui.css">
+        <link rel="stylesheet" type="text/css" href="css/jquery.svg.css"> 
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        
+        <script src="js/jquery-1.11.2.min.js"></script>
+        <script src="js/jquery-ui-1.11.2.custom/jquery-ui.min.js"></script>
+        <script src="js/jquery-ui-timepicker-addon.js"></script>
 
-    <script type="text/javascript" src="js/svg/jquery.svg.js"></script>
-    <script type="text/javascript" src="js/svg/jquery.svganim.js"></script>
-    <script src="js/raphael-min.js"></script>
-    <script src="js/justgage.js"></script>
+        <script type="text/javascript" src="js/svg/jquery.svg.js"></script>
+        <script type="text/javascript" src="js/svg/jquery.svganim.js"></script>
+        <script src="js/raphael-min.js"></script>
+        <script src="js/justgage.js"></script>
 
-<?php
-    // load tank levels settings
-    $row = 1;
-    if (($handle = fopen("cm/cadi_settings", "r")) !== FALSE) {
-        while (($rowarr = fgetcsv($handle, 1000, ",")) !== FALSE) {
-            $num = count($_SESSION['settings_data'][$row]);
-            if (substr($rowarr[0],0,1)!='#') {
-                $_SESSION['settings_data'][($rowarr[0])] = $rowarr;
-                $row++;
-            }
-        }
-        fclose($handle);
-    }
-
-    $svg_t3top = $_SESSION['settings_data']['watertank_top_bottom'][1];
-    $svg_t3btm = $_SESSION['settings_data']['watertank_top_bottom'][2];
-    $svg_t4top = $_SESSION['settings_data']['watertank_top_bottom'][3];
-    $svg_t4btm = $_SESSION['settings_data']['watertank_top_bottom'][4];    
-    $psi0psi_ = $_SESSION['settings_data']['psi_sensor'][1];
-    $psi32psi_ = $_SESSION['settings_data']['psi_sensor'][2];
-    $js_svg_valves = 'var svg_valves = [';
-    for ($i=1;$i<10;$i++) {
-        $js_svg_valves .= $_SESSION['settings_data']['svg_valves'][$i].',';
-    }
-    $js_svg_valves .= $_SESSION['settings_data']['svg_valves'][10].'];';
-?>
-
-    <script>
         <?php
             // TODO: Move this out to separate file
-            echo 'var psi0psi_ = '.$psi0psi_.';'.PHP_EOL;
-            echo 'var psi32psi_ = '.$psi32psi_.';'.PHP_EOL;
-            echo $js_svg_valves; ?>
-
-        function rx_ee_dir(addr, value) {
-            // direct value upload
-            $.post(
-                'cm/cadi_bt_processor.php',
-                {action: 'tx_packet', cmd:64, addr:addr, value:value},
-                function(data) { alert(addr+'/'+value); }
-            );
-        }
-
-        /**
-         Helper function that checks if the object has property
-         */
-        function hasProperty(object, property) {
-            return object ? hasOwnProperty.call(object, key) : false;
-        }
-
-        /**
-         Helper function that returns address from provided input
-        */
-        function getAddrFromInput(input) {
-            if (! hasProperty(input, 'name'))
-                throw "Input does not have 'name' property";
-
-            var inputData = input.name.split('_');
-
-            if (inputData.length < 1)
-                throw "Invalid input format";
-
-            return inputData[0];
-        }
-
-        /* accepts the <input>. The 'name' of <input> should be in format:
-         aaa_bbb_ccc, where
-            - aaa: fields group name (should not intersect with other groups if setting appeared twice)
-            - bbb: value address in eeprom
-            - ccc: something else
-        the value is extracted from the 'value' property of <input>
-        */
-        function rx_ee_(input) {
-            var addr = getAddrFromInput(input);
-            var value = input.value;
-            $.post('cm/cadi_bt_processor.php', {action: 'tx_packet', cmd:64, addr:addr, value:value});
-        }
-
-        // XXX: is 'g1' needed as a global variable? It's not used anywhere
-        // TODO: refactor this bit of code
-        var g1;
-        window.onload = function() {
-            var g1 = new JustGage({
-                id: "psi_gauge",
-                value: getRandomInt(0, 60),
-                min: 0,
-                max: 60,
-                title: "",
-                label: "PSI"
-            });
-
-            setInterval(function() {
-                var gaugeVal = $('#psi_gauge_val').val();
-                g1.refresh(gaugeVal);
-            }, 500);
-        }; 
-
-        $(function() {
-            $( "#cadi_tabs" ).tabs({
-                beforeLoad: function( event, ui ) {
-                    ui.jqXHR.error(function() {
-                    ui.panel.html(
-                    "Couldn't load this tab. We'll try to fix this as soon as possible. " +
-                    "If this wouldn't be a demo." );
-                    });
+            // load tank levels settings
+            $row = 1;
+            if (($handle = fopen("cm/cadi_settings", "r")) !== FALSE) {
+                while (($rowarr = fgetcsv($handle, 1000, ",")) !== FALSE) {
+                    $num = count($_SESSION['settings_data'][$row]);
+                    if (substr($rowarr[0],0,1)!='#') {
+                        $_SESSION['settings_data'][($rowarr[0])] = $rowarr;
+                        $row++;
+                    }
                 }
-            });
-            $('#svg_container').svg({onLoad: drawMapLayer});
-            $( ".btn_" ).button();
-            $("#system_view_1").hide();
-            cadi_list_rfcomms();
-        });
+                fclose($handle);
+            }
 
-        $(document).ready(function() {
-            cadi_status_stream();
-        });
+            $svg_t3top = $_SESSION['settings_data']['watertank_top_bottom'][1];
+            $svg_t3btm = $_SESSION['settings_data']['watertank_top_bottom'][2];
+            $svg_t4top = $_SESSION['settings_data']['watertank_top_bottom'][3];
+            $svg_t4btm = $_SESSION['settings_data']['watertank_top_bottom'][4];    
+            $psi0psi_ = $_SESSION['settings_data']['psi_sensor'][1];
+            $psi32psi_ = $_SESSION['settings_data']['psi_sensor'][2];
+            $js_svg_valves = 'var svg_valves = [';
+            for ($i=1;$i<10;$i++) {
+                $js_svg_valves .= $_SESSION['settings_data']['svg_valves'][$i].',';
+            }
+            $js_svg_valves .= $_SESSION['settings_data']['svg_valves'][10].'];';
+        ?>
 
-        var t3curlvl = 0; // TODO: remove, this is only written but never read
-        var t4curlvl = 0; // TODO: remove, this is only written but never read
-
-        function drawMapLayer(svg) {
-            // draw water levels
-            // tank max level in pixels
-            // draw cadi time 
-            svg.text(140, 500, 'Cadi time',{fill: 'red', strokeWidth: 0, fontSize: '29', id:'cadi_time2'});
-            svg.text(140, 575, 'Temp',{fill: 'green', strokeWidth: 0, id:'cadi_temp'});
-            svg.text(140, 595, 'rH',{fill: 'blue', strokeWidth: 0, id:'cadi_rh'});
-            svg.text(140, 620, 'pH',{fill: 'red', strokeWidth: 0, id:'ph1_adc_val'});
-            svg.text(140, 645, 'EC',{fill: 'orange', strokeWidth: 0, id:'ec1_adc_val'});
-
-            svg.text(355, 690, 'Pressure',{fill: 'red', strokeWidth: 0, id:'pressure_label'});
-
-            // display CDD status text
-            svg.text(140, 530, 'CDD status',{fill: 'red', strokeWidth: 0, id:'cdds'});
-
-            // display auto_flags
-            svg.text(140, 550, 'auto_flags:',{fill: 'red', strokeWidth: 0, id:'auto_flags'});
-
-            // fertilizers
-            svg.text(635, 120, 'B',{fill: 'green', strokeWidth: 0, id:'blooml'});
-            svg.text(635, 200, 'G',{fill: 'green', strokeWidth: 0, id:'growl'});
-
-            // draw tank levels in text
-            svg.text(227, 380, 'XXXmm',{fill: 'white', strokeWidth: 1, stroke: "black", id:'t3l_txt'});
-            svg.text(450, 380, 'XXXmm',{fill: 'white', strokeWidth: 1, stroke: "black", id:'t4l_txt'});
-
-            // display pressure
-            svg.text(610, 445, '',{fill: 'red', strokeWidth: 0, fontSize: '30', id:'psi_val'});
-        }
-
-        function redraw_svg_layer() {
-        $.post('cm/cadi_bt_processor.php', {action: 'get_status_csv'}, function(data) {
-            if (data.length > 42) {
-                var statusArray = data.split(',');
-                // display BTD State
-                $('#btd_state').html(statusArray[22]);
-
-                if (statusArray[0] > 1000000000) {
-                    // workaround for first lost char of CSV (shared memory)
-                    var date = new Date(statusArray[0]*1000);
-                    var datestring = date.toString().substr(0,24);
-                    $('#cadi_time2').html(datestring);
-                }
-
-                var temp = parseFloat(statusArray[1]).toFixed(1);
-                var rh = parseFloat(statusArray[2]).toFixed(1);
-                $('#cadi_temp').html('&nbsp;T: '+temp+'C');
-                $('#cadi_rh').html('rH: '+rh+'%');
-
-                var ph1_adc_val = statusArray[10];
-                $('#ph1_adc_val').html('pH: '+ph1_adc_val);
-                $('#sens_ph1_adc_val').html(ph1_adc_val);
-
-                var ec1_adc_val = statusArray[11];
-                $('#ec1_adc_val').html('EC: '+ec1_adc_val+' uS');
-
-                // $('#sens_ph1_adc_val').html(ec1_adc_val);
-                // $('#csv_string').html(data);
-                /* var wpProgress = statusArray[18];
-                $('#tf1').html(wpProgress);
-                var auto_failures = statusArray[19];
-                $('#tf2').html(auto_failures);
-                var runners = statusArray[20];
-                $('#tf3').html(runners);
-
-                var tsf = statusArray[3];        // timer state flags
-                $('#tsf').html(tsf);
-                var ctsf = statusArray[4];        // ctimer state flags
-                $('#ctsf').html(ctsf);    */
-
-                // tank 3 water level redraw
-        
+        <script>
             <?php
-            echo 't3top = '.$svg_t3top.';'.PHP_EOL;
-            echo 't3btm = '.$svg_t3btm.';'.PHP_EOL; 
-            ?>
+                // TODO: Move this out to separate file
+                echo 'var psi0psi_ = '.$psi0psi_.';'.PHP_EOL;
+                echo 'var psi32psi_ = '.$psi32psi_.';'.PHP_EOL;
+                echo $js_svg_valves; ?>
 
-            t3curlvl = statusArray[8];     // provide current level globally
-            if (statusArray[8]>t3top && statusArray[8]<t3btm) {
-                var lvl = Math.floor((275 * (t3btm-statusArray[8])/(t3btm-t3top)));
-                var t3h = 275 - lvl;
-                var t3y = 167 + lvl;
+            function rx_ee_dir(addr, value) {
+                // direct value upload
+                $.post(
+                    'cm/cadi_bt_processor.php',
+                    {action: 'tx_packet', cmd:64, addr:addr, value:value},
+                    function(data) { alert(addr+'/'+value); }
+                );
             }
-            else {
-                t3h = 275;
-                t3y = 167;
+
+            /**
+             Helper function that checks if the object has property
+             */
+            function hasProperty(object, property) {
+                return object ? hasOwnProperty.call(object, key) : false;
             }
-            $('#tank3_water').attr('height',t3h);
-            $('#tank3_water').attr('y',t3y);
 
-            // tank 4 water lvl redraw
-            <?php echo 't4top = '.$svg_t4top.';'.PHP_EOL;
-                echo 't4btm = '.$svg_t4btm.';'.PHP_EOL; ?>
+            /**
+             Helper function that returns address from provided input
+            */
+            function getAddrFromInput(input) {
+                if (! hasProperty(input, 'name'))
+                    throw "Input does not have 'name' property";
 
-            t4curlvl = statusArray[9];    // provide current level globally
-            if (statusArray[9]>t4top && statusArray[9]<t4btm) {
-                var lvl2 = Math.floor((250 * (t4btm-statusArray[9])/(t4btm-t4top)));
-                var t4h = lvl2;
-                var t4y = 200 + 243 - lvl2;
+                var inputData = input.name.split('_');
+
+                if (inputData.length < 1)
+                    throw "Invalid input format";
+
+                return inputData[0];
             }
-            else {
-                t4h = 243;
-                t4y = 200;
+
+            /* accepts the <input>. The 'name' of <input> should be in format:
+             aaa_bbb_ccc, where
+                - aaa: fields group name (should not intersect with other groups if setting appeared twice)
+                - bbb: value address in eeprom
+                - ccc: something else
+            the value is extracted from the 'value' property of <input>
+            */
+            function rx_ee_(input) {
+                var addr = getAddrFromInput(input);
+                var value = input.value;
+                $.post('cm/cadi_bt_processor.php', {action: 'tx_packet', cmd:64, addr:addr, value:value});
             }
-            $('#tank4_water').attr('height',t4h);
-            $('#tank4_water').attr('y',t4y);
 
-                $('#psi_adc_current').html(statusArray[12]);
-                // draw labels for tanks, displaying current level
-                $('#t3l_txt').html(statusArray[8]+'mm');
-                $('#t4l_txt').html(statusArray[9]+'mm');
+            // XXX: is 'g1' needed as a global variable? It's not used anywhere
+            // TODO: refactor this bit of code
+            var g1;
+            window.onload = function() {
+                var g1 = new JustGage({
+                    id: "psi_gauge",
+                    value: getRandomInt(0, 60),
+                    min: 0,
+                    max: 60,
+                    title: "",
+                    label: "PSI"
+                });
 
-                var psi_gauge_val = ((statusArray[12]-psi0psi_)/((psi32psi_ - psi0psi_)/32));
-                $('#psi_gauge_val').val(psi_gauge_val);
+                setInterval(function() {
+                    var gaugeVal = $('#psi_gauge_val').val();
+                    g1.refresh(gaugeVal);
+                }, 500);
+            }; 
 
-                // get valve states colors
-                // 'svg_valves' line from cadi_settings config file
-                var valves = statusArray[5];
-                for (var i=0;i<10;i++) {
-                    if (valves.charAt(15-svg_valves[i])=="1") {
-                        $('#valve_'+i).attr('fill', 'green');
+            $(function() {
+                $( "#cadi_tabs" ).tabs({
+                    beforeLoad: function( event, ui ) {
+                        ui.jqXHR.error(function() {
+                        ui.panel.html(
+                        "Couldn't load this tab. We'll try to fix this as soon as possible. " +
+                        "If this wouldn't be a demo." );
+                        });
                     }
-                    else {
-                        $('#valve_'+i).attr('fill', 'red');
-                    }
-
-                }
-
-                // Grolly PSI pump status
-                var psi_pump_state = parseInt(statusArray[21]);
-                if (psi_pump_state==100) {
-                    $('#psi_pump').attr('fill', 'red');
-                }
-                else if (psi_pump_state>1 && psi_pump_state<100) {
-                    $('#psi_pump').attr('fill', 'green');
-                }
-                else {
-                    $('#psi_pump').attr('fill', 'red');
-                }
-
-                // Grolly mix pump status
-                if (statusArray[16].charAt(3)=="1") {
-                    $('#mix_pump').attr('fill', 'green');
-                }
-                else {
-                    $('#mix_pump').attr('fill', 'red');
-                }
-
-
-                // dosing pumps status squares colors
-                for (var i=1;i<5;i++) {
-                    if (statusArray[16].charAt(4-i)=="1") {
-                        $('#cdp'+i).attr('fill', 'green');
-                    }
-                    else {
-                        $('#cdp'+i).attr('fill', 'red');
-                    }
-                }
-
-                
-
-
-            /*    if (statusArray[15]==51){    
-                    $('#cdds').html('CDD Enabled');
-                    $('#cdds').attr('fill', 'green');
-                }
-                else {
-                    $('#cdds').html('CDD Disabled');
-                    $('#cdds').attr('fill', 'red');
-                } */
-                var af_bin = statusArray[17].toString(2);
-                $('#auto_flags').html(statusArray[17]+' ('+af_bin+')');
-
-                var vs_flag = $('#vs_flag').is(':checked');
-                if (vs_flag==1) {
-                    d = new Date();
-                //    alert('vs checked');
-                    $("#cadi_img").attr("src", "img/curimage.jpeg?"+d.getTime());
-                }
-            }
-        });
-    }
-
-    function get_ip(){
-        $.post('cm/cadi_bt_processor.php', {action: 'get_ip'}, function(data){
-            alert(data);
-        });
-    }
-
-    function change_video(){
-        var new_video =$("#video_stream").val();
-        $.post('cm/cadi_bt_processor.php', {action: 'change_video', new_video:new_video}, function(data){
-            alert('new video='+new_video+' ----- '+data);
-        });
-    }
-
-    function toggleValve(valveId){
-        alert(valveId);
-    }
-
-    function bt_connect(){
-        //alert('start');
-        var mac = $('#bind_mac').val();
-        var rfcomm = "rfcomm"+$("#rfcomm_nr").val();
-        $.post('cm/cadi_bt_processor.php', {action: 'bt_connect', mac:mac, rfcomm: rfcomm}, function(data){
-            cadi_list_rfcomms();
-            $('#main_output').html(data);
-        //    alert(data);
-        });
-        //alert('connecting');
-    }
-
-
-
-    function bt_restart(){
-        alert('restarting');
-        $.post('cm/cadi_bt_processor.php', {action: 'bt_restart'}, function(data){
-            alert('restarted');
-            cadi_list_rfcomms();
-            $('#main_output').html(data);
-        });
-    }
-
-    function run_watering_pump(){
-        var secs = $("#run_watering_secs").val();
-        $.post('cm/cadi_bt_processor.php', {action: 'tx_packet', cmd: '35', secs:secs}, function(data){
-            cadi_list_rfcomms();
-        });
-
-    }
-
-    function run_demo(){
-        alert("Demo!");
-        $.post('cm/cadi_bt_processor.php', {action: 'tx_packet', cmd: '34'}, function(data){
-            cadi_list_rfcomms();
-        });
-
-    }
-
-    function rcmd(cmd){        // packet created directly in packet processor
-        $.post('cm/cadi_bt_processor.php', {action: 'tx_packet', cmd: cmd}, function(data){
-            $('#main_output').html(data);
-        });
-    }
-
-    function bt_disconnect(){
-        btd_stream_status(0);    // Stop pinging Cadi before disconnect
-//        setTimeout(function(){}, 100);
-        var rfcomm = "rfcomm"+$("#rfcomm_nr").val();
-        $.post('cm/cadi_bt_processor.php', {action: 'bt_disconnect', rfcomm:rfcomm}, function(data){
-            alert('disconnected');
-            cadi_list_rfcomms();
-            $('#main_output').html(data);
-    
-        });
-    }
-
-    function get_status_block(){
-        var blocks = $('#status_block_ids').val();
-        var block_ids = blocks.split(',');
-        for (i=0; i<block_ids.length;i++){
-//            $.post('cm/cadi_bt_processor.php', {action: 'tx_packet', cmd: 7, block_id:block_ids[i]}, function(data){
-//            });
-            $.post('cm/cadi_bt_processor.php', {action: 'get_status'}, function(data){
-                blocks = data.split('---socalledseparator---');
-                $('#status_block').html(blocks[0]);
-                $('#system_view_2').html(blocks[1]);
-                d = new Date();
-                var vs_flag = $('#vs_flag').is(':checked');
-                if (vs_flag==1) {
-                    alert('vs checked');
-                    $("#cadi_img").attr("src", "img/curimage.jpeg?"+d.getTime());
-                }
+                });
+                $('#svg_container').svg({onLoad: drawMapLayer});
+                $( ".btn_" ).button();
+                $("#system_view_1").hide();
+                cadi_list_rfcomms();
             });
-        }
-    }
 
+            $(document).ready(function() {
+                cadi_status_stream();
+            });
 
+            var t3curlvl = 0; // XXX: also used in another file
+            var t4curlvl = 0; // XXX: also used in another file
 
-    function check_plug(){
-        alert("checking!");
-        $(function(){
-            $('#radio_plug1').attr('checked','checked');
-            $('#plug1_radio').attr('checked','checked');
-            $('#plug1_radio1').attr('checked','true');
-            $("radio_").buttonset("refresh");
-            $("#radio_plug1").buttonset("refresh");
-        });
-    }
+            function drawMapLayer(svg) {
+                // draw water levels
+                // tank max level in pixels
+                // draw cadi time 
+                svg.text(140, 500, 'Cadi time',{fill: 'red', strokeWidth: 0, fontSize: '29', id:'cadi_time2'});
+                svg.text(140, 575, 'Temp',{fill: 'green', strokeWidth: 0, id:'cadi_temp'});
+                svg.text(140, 595, 'rH',{fill: 'blue', strokeWidth: 0, id:'cadi_rh'});
+                svg.text(140, 620, 'pH',{fill: 'red', strokeWidth: 0, id:'ph1_adc_val'});
+                svg.text(140, 645, 'EC',{fill: 'orange', strokeWidth: 0, id:'ec1_adc_val'});
 
-    function cadi_bt_scan(){
-    //    alert('rfcomm scan');
-    //    $('#main_output').html('scanning..');
-        $.post('cm/cadi_bt_processor.php', {action: 'rfcomm_scan'}, function(data){
-            $('#bind_mac').html(data);
-    //        alert('Scanning complete!');
-    //        alert(data);
-    //        cadi_list_rfcomms();
-        });  
-    }
+                svg.text(355, 690, 'Pressure',{fill: 'red', strokeWidth: 0, id:'pressure_label'});
 
-    function cw_reboot(){    // reboots the machine, running CadiWeb server
-        if (confirm('Reboot Cadi server?')) {
-            $.post('cm/cadi_bt_processor.php', {action: 'reboot'}, function(data){
-            }); 
-        }
-    }
+                // display CDD status text
+                svg.text(140, 530, 'CDD status',{fill: 'red', strokeWidth: 0, id:'cdds'});
 
-    function cadi_reset(){
-        if (confirm('Reset Cadi?')) {
-            rcmd(13);
-        }
-    }
+                // display auto_flags
+                svg.text(140, 550, 'auto_flags:',{fill: 'red', strokeWidth: 0, id:'auto_flags'});
 
-    function cadi_list_rfcomms(){
-    //    alert('listing binds');
-        $.post('cm/cadi_bt_processor.php', {action: 'rfcomm_list_binded'}, function(data){
-            $('#binded_rfcomms').html(data);
-        });
-    }
+                // fertilizers
+                svg.text(635, 120, 'B',{fill: 'green', strokeWidth: 0, id:'blooml'});
+                svg.text(635, 200, 'G',{fill: 'green', strokeWidth: 0, id:'growl'});
 
-    function stopSerialRead(psid){
-    //alert('call'+psid);
-        $.post('cm/cadi_bt_processor.php', {action: 'stop_serial_read', process:psid}, function(data){
-            cadi_list_rfcomms();
-    //        alert('kill -9 sent');
-        });  
-    }
+                // draw tank levels in text
+                svg.text(227, 380, 'XXXmm',{fill: 'white', strokeWidth: 1, stroke: "black", id:'t3l_txt'});
+                svg.text(450, 380, 'XXXmm',{fill: 'white', strokeWidth: 1, stroke: "black", id:'t4l_txt'});
 
-    function bt_tx_packet() {
-        var data = $('#tx_data_packet').val();
-        $.post('cm/cadi_bt_processor.php', {action: 'tx_packet', data: data}, function(data){
-            cadi_list_rfcomms();
-            alert(data);
-        });  
-    } 
+                // display pressure
+                svg.text(610, 445, '',{fill: 'red', strokeWidth: 0, fontSize: '30', id:'psi_val'});
+            }
 
+            function redraw_svg_layer() {
+                $.post('cm/cadi_bt_processor.php', {action: 'get_status_csv'}, function(data) {
+                    // XXX: what is 42?
+                    // exit early
+                    if (data.length <= 42) {
+                        return;
+                    }
 
-    function bt_tx() {
-        var data = $('#tx_data').val();
-        $.post('cm/cadi_bt_processor.php', {action: 'tx', cmd: '1', plug_id:'1', state:data}, function(data){
-            cadi_list_rfcomms();
-    //        alert('kill -9 sent');
-        });  
-    }
+                    var statusArray = data.split(',');
+                    // display BTD State
+                    $('#btd_state').html(statusArray[22]);
 
-    function plugStateSet(plug, state){
-    //    alert('oga');
-        $.post('cm/cadi_bt_processor.php', {action: 'tx_packet', cmd: '1', plug:plug, state:state}, function(data){
-            cadi_list_rfcomms();
-    //        alert(data);
-        });  
-    }
+                    if (statusArray[0] > 1000000000) {
+                        // workaround for first lost char of CSV (shared memory)
+                        var date = new Date(statusArray[0]*1000);
+                        var datestring = date.toString().substr(0,24);
+                        $('#cadi_time2').html(datestring);
+                    }
 
-    function bt_setdd() {
-        $.post('cm/cadi_bt_processor.php', {action: 'tx_packet', cmd: '2'}, function(data){
-            cadi_list_rfcomms();
-    //        alert(data);
-        });  
-    }
+                    var temp = parseFloat(statusArray[1]).toFixed(1);
+                    var rh = parseFloat(statusArray[2]).toFixed(1);
+                    $('#cadi_temp').html('&nbsp;T: '+temp+'C');
+                    $('#cadi_rh').html('rH: '+rh+'%');
 
+                    var ph1_adc_val = statusArray[10];
+                    $('#ph1_adc_val').html('pH: '+ph1_adc_val);
+                    $('#sens_ph1_adc_val').html(ph1_adc_val);
 
-    function cadi_status_stream(){
-        var state = $('#flag_status_stream').is(':checked');
-        if (state==1) {
-//            var interval = setInterval(function(){get_status_block()},1000);    // enables drawing SVG with PHP
-            var delay=$("#status_stream_delay").val();
-            var interval = setInterval(function(){redraw_svg_layer()},delay);    // enables SVG draw with JS
-            $('#status_stream_interval').val(interval);
-            //alert(interval+' created');
-        }
-        if (state==0) {
-            var interval = $('#status_stream_interval').val();
-            // alert(interval+' cleared');
-            clearInterval(interval);
-        }
-    }
+                    var ec1_adc_val = statusArray[11];
+                    $('#ec1_adc_val').html('EC: '+ec1_adc_val+' uS');
 
-    
-function cadi_view(viewId){
-    switch (viewId) {
-        case 1:
-            $("#system_view_1").show();
-            $("#system_view_2").hide();
-            break;
-        case 2:
-            $("#system_view_2").show();
-            $("#system_view_1").hide();
-            break;
-    } 
+                    // $('#sens_ph1_adc_val').html(ec1_adc_val);
+                    // $('#csv_string').html(data);
+                    /* var wpProgress = statusArray[18];
+                    $('#tf1').html(wpProgress);
+                    var auto_failures = statusArray[19];
+                    $('#tf2').html(auto_failures);
+                    var runners = statusArray[20];
+                    $('#tf3').html(runners);
 
-}
+                    var tsf = statusArray[3];        // timer state flags
+                    $('#tsf').html(tsf);
+                    var ctsf = statusArray[4];        // ctimer state flags
+                    $('#ctsf').html(ctsf);    */
 
-function btd_stream_status(newStatus){
-    //    alert();
-        $.post('cm/cadi_bt_processor.php', {action: 'btd_stream_start', status: newStatus}, function(data){
-    //        cadi_list_rfcomms();
-    //        alert('Streaming to server cache');
-        });  
-}
+                    // tank 3 water level redraw
+            
+                    <?php echo 'var t3top = '.$svg_t3top.';'.PHP_EOL;
+                        echo 'var t3btm = '.$svg_t3btm.';'.PHP_EOL; 
+                    ?>
 
-function redraw_update_log(){
-        $.post('cm/cadi_bt_processor.php', {action: 'redraw_update_log'}, function(data){
-            $('cadi_update_log').html(data);
-        });  
-}
+                    t3curlvl = statusArray[8];     // provide current level globally
+                    var t3h = 0, t3y = 0;
+                    if (statusArray[8]>t3top && statusArray[8]<t3btm) {
+                        var lvl = Math.floor((275 * (t3btm-statusArray[8])/(t3btm-t3top)));
+                        t3h = 275 - lvl;
+                        t3y = 167 + lvl;
+                    } else {
+                        t3h = 275;
+                        t3y = 167;
+                    }
 
-function cadiweb_update(){
-        btd_stream_status(0);
-        $.post('cm/cadi_bt_processor.php', {action: 'cadiweb_update'}, function(data){});
-        alert("Do not use Cadiweb control panel until server finishes software upgrade with reboot!");
-        var log_upd_int_id = setInterval(function(){redraw_update_log},1000);    // enables SVG draw with JS
-        $('#log_interval_id').val(log_upd_int_id);
-}
+                    $('#tank3_water').attr('height',t3h);
+                    $('#tank3_water').attr('y',t3y);
 
-function stop_log_stream(){
-        var  interval = $('#log_interval_id').val();
-        clearInterval(interval);
-}
+                    // tank 4 water lvl redraw
+                    <?php echo 't4top = '.$svg_t4top.';'.PHP_EOL;
+                        echo 't4btm = '.$svg_t4btm.';'.PHP_EOL; ?>
 
-function eeRead() {
-    var addr = $('#ee_addr').val();
-    $.post('cm/cadi_bt_processor.php', {action: 'tx_packet', cmd:18, addr:addr}, function(data){
-        alert('EEPROM value read');
-        var out = data.split('seppy');
-        $('ee16bit_value').val(out[0]);
-        $('ee32bit_value').val(out[1]);
-    });  
-}
+                    t4curlvl = statusArray[9];    // provide current level globally
+                    var t4h = 0, t4y = 0;
+                    if (statusArray[9]>t4top && statusArray[9]<t4btm) {
+                        var lvl2 = Math.floor((250 * (t4btm-statusArray[9])/(t4btm-t4top)));
+                        t4h = lvl2;
+                        t4y = 200 + 243 - lvl2;
+                    } else {
+                        t4h = 243;
+                        t4y = 200;
+                    }
 
-function eeWrite(dataType) {
-    var addr = $('#ee_addr').val();
-    var cmd=0;
-    switch ($dataType) {
-        case 1:
-            var value = $('#ee16bit_value').val();
-            cmd = 15;
-            break;
-        case 2:
-            var value = $('#ee32bit_value').val();
-            cmd = 16;
-            break;
-    }
-    $.post('cm/cadi_bt_processor.php', {action: 'tx_packet', data_type:dataType, value:value, cmd:cmd}, function(data){
-        alert('EEPROM value sent');
-    }); 
- 
-}
+                    $('#tank4_water').attr('height',t4h);
+                    $('#tank4_water').attr('y',t4y);
 
-function enable_dlsettings_overlay(state){
-    if (state==1) {
-        $('.lcso').css('display', 'block');
-    }
-    else {
-        $('.lcso').css('display', 'none');
-    }
-}
+                    $('#psi_adc_current').html(statusArray[12]);
+                    // draw labels for tanks, displaying current level
+                    $('#t3l_txt').html(statusArray[8]+'mm');
+                    $('#t4l_txt').html(statusArray[9]+'mm');
 
+                    var psi_gauge_val = ((statusArray[12]-psi0psi_)/((psi32psi_ - psi0psi_)/32));
+                    $('#psi_gauge_val').val(psi_gauge_val);
 
+                    // get valve states colors
+                    // 'svg_valves' line from cadi_settings config file
+                    var valves = statusArray[5];
+                    for (var i=0;i<10;i++) {
+                        if (valves.charAt(15-svg_valves[i])=="1") {
+                            $('#valve_'+i).attr('fill', 'green');
+                        } else {
+                            $('#valve_'+i).attr('fill', 'red');
+                        }
+                    }
 
+                    // Grolly PSI pump status
+                    var psi_pump_state = parseInt(statusArray[21]);
+                    if (psi_pump_state==100) {
+                        $('#psi_pump').attr('fill', 'red');
+                    } else if (psi_pump_state>1 && psi_pump_state<100) {
+                        $('#psi_pump').attr('fill', 'green');
+                    } else {
+                        $('#psi_pump').attr('fill', 'red');
+                    }
 
+                    // Grolly mix pump status
+                    if (statusArray[16].charAt(3)=="1") {
+                        $('#mix_pump').attr('fill', 'green');
+                    } else {
+                        $('#mix_pump').attr('fill', 'red');
+                    }
 
+                    // dosing pumps status squares colors
+                    for (var i=1;i<5;i++) {
+                        if (statusArray[16].charAt(4-i)=="1") {
+                            $('#cdp'+i).attr('fill', 'green');
+                        } else {
+                            $('#cdp'+i).attr('fill', 'red');
+                        }
+                    }
 
-function download_csx(type){
-    enable_dlsettings_overlay(1);
-    var interval_csxdl = $('#csxdl_interval').val();
-    clearInterval(interval_csxdl);
-    setTimeout(function(){ }, 1000);
-    $.post('cm/cadi_bt_processor.php', {action: 'dl_settings'}, function(data){
-        // alert(data);
-        var interval_csxdl = setInterval(function(){csx_dl_proc(type)},1000);    
-        $('#csxdl_interval').val(interval_csxdl);    
-    });
-}
+                    /*
+                    if (statusArray[15]==51){    
+                        $('#cdds').html('CDD Enabled');
+                        $('#cdds').attr('fill', 'green');
+                    }
+                    else {
+                        $('#cdds').html('CDD Disabled');
+                        $('#cdds').attr('fill', 'red');
+                    } */
 
+                    var af_bin = statusArray[17].toString(2);
+                    $('#auto_flags').html(statusArray[17]+' ('+af_bin+')');
 
-
-
-// running during Cadi settings download
-function csx_dl_proc(type){
-    
-    $.post('cm/cadi_bt_processor.php', {action: 'check_dl_set_status'}, function(data){
-        
-        var tmparr = data.split('v0t0n0');
-        var btdState = tmparr[1];
-        if (btdState == "1") {                // if BTDaemon is idle
-            var interval_csxdl = $('#csxdl_interval').val();
-            clearInterval(interval_csxdl);         //, clear interval for checking status
-            if (type==0) {
-                $.post('cm/csx_get_table.php', {}, function(data){
-                    $('#csxform').html(data);    //  and reload settings table
+                    var vs_flag = $('#vs_flag').is(':checked');
+                    if (vs_flag==1) {
+                        d = new Date();
+                        $("#cadi_img").attr("src", "img/curimage.jpeg?"+d.getTime());
+                    }
                 });
             }
-            enable_dlsettings_overlay(0);
-        }    
-    });
 
-    
-}
+            function get_ip() {
+                $.post('cm/cadi_bt_processor.php', {action: 'get_ip'}, function(data) {
+                    alert(data);
+                });
+            }
 
+            function change_video() {
+                var new_video =$("#video_stream").val();
+                $.post('cm/cadi_bt_processor.php', {action: 'change_video', new_video:new_video}, function(data){
+                    alert('new video='+new_video+' ----- '+data);
+                });
+            }
 
-function mix_solution(){
-    var secs = $('#run_watering_secs').val();
-    $.post('cm/cadi_bt_processor.php', {action: 'tx_packet', cmd:38, secs:secs}, function(data){
-        
-    });  
+            function toggleValve(valveId) {
+                alert(valveId);
+            }
 
-}
+            function bt_connect() {
+                //alert('start');
+                var mac = $('#bind_mac').val();
+                var rfcomm = "rfcomm"+$("#rfcomm_nr").val();
+                $.post('cm/cadi_bt_processor.php', {action: 'bt_connect', mac:mac, rfcomm: rfcomm}, function(data) {
+                    cadi_list_rfcomms();
+                    $('#main_output').html(data);
+                });
+            }
 
+            function bt_restart() {
+                alert('restarting');
+                $.post('cm/cadi_bt_processor.php', {action: 'bt_restart'}, function(data){
+                    alert('restarted');
+                    cadi_list_rfcomms();
+                    $('#main_output').html(data);
+                });
+            }
 
-</script>
-</head>
+            function run_watering_pump() {
+                var secs = $("#run_watering_secs").val();
+                $.post('cm/cadi_bt_processor.php', {action: 'tx_packet', cmd: '35', secs:secs}, function(data){
+                    cadi_list_rfcomms();
+                });
+            }
+
+            function run_demo() {
+                alert("Demo!");
+                $.post('cm/cadi_bt_processor.php', {action: 'tx_packet', cmd: '34'}, function(data){
+                    cadi_list_rfcomms();
+                });
+            }
+
+            function rcmd(cmd) {
+                // packet created directly in packet processor
+                $.post('cm/cadi_bt_processor.php', {action: 'tx_packet', cmd: cmd}, function(data){
+                    $('#main_output').html(data);
+                });
+            }
+
+            function bt_disconnect() {
+                btd_stream_status(0);    // Stop pinging Cadi before disconnect
+                var rfcomm = "rfcomm"+$("#rfcomm_nr").val();
+                $.post('cm/cadi_bt_processor.php', {action: 'bt_disconnect', rfcomm:rfcomm}, function(data) {
+                    alert('disconnected');
+                    cadi_list_rfcomms();
+                    $('#main_output').html(data);
+                });
+            }
+
+            function get_status_block() {
+                var blocks = $('#status_block_ids').val();
+                var block_ids = blocks.split(',');
+                for (var i=0; i < block_ids.length; i++) {
+                    $.post('cm/cadi_bt_processor.php', {action: 'get_status'}, function(data){
+                        blocks = data.split('---socalledseparator---');
+                        $('#status_block').html(blocks[0]);
+                        $('#system_view_2').html(blocks[1]);
+                        var d = new Date();
+                        var vs_flag = $('#vs_flag').is(':checked');
+                        if (vs_flag==1) {
+                            alert('vs checked');
+                            $("#cadi_img").attr("src", "img/curimage.jpeg?"+d.getTime());
+                        }
+                    });
+                }
+            }
+
+            function check_plug() {
+                alert("checking!");
+                $(function(){
+                    $('#radio_plug1').attr('checked','checked');
+                    $('#plug1_radio').attr('checked','checked');
+                    $('#plug1_radio1').attr('checked','true');
+                    $("radio_").buttonset("refresh");
+                    $("#radio_plug1").buttonset("refresh");
+                });
+            }
+
+            function cadi_bt_scan() {
+                $.post('cm/cadi_bt_processor.php', {action: 'rfcomm_scan'}, function(data) {
+                    $('#bind_mac').html(data);
+                });  
+            }
+
+            function cw_reboot() {
+                // reboots the machine, running CadiWeb server
+                if (confirm('Reboot Cadi server?')) {
+                    $.post('cm/cadi_bt_processor.php', {action: 'reboot'}, function(data) {
+                    });
+                }
+            }
+
+            function cadi_reset(){
+                if (confirm('Reset Cadi?')) {
+                    rcmd(13);
+                }
+            }
+
+            function cadi_list_rfcomms(){
+                $.post('cm/cadi_bt_processor.php', {action: 'rfcomm_list_binded'}, function(data) {
+                    $('#binded_rfcomms').html(data);
+                });
+            }
+
+            function stopSerialRead(psid){
+                $.post('cm/cadi_bt_processor.php', {action: 'stop_serial_read', process:psid}, function(data) {
+                    cadi_list_rfcomms();
+                });  
+            }
+
+            function bt_tx_packet() {
+                var data = $('#tx_data_packet').val();
+                $.post('cm/cadi_bt_processor.php', {action: 'tx_packet', data: data}, function(data) {
+                    cadi_list_rfcomms();
+                    alert(data);
+                });
+            }
+
+            function bt_tx() {
+                var data = $('#tx_data').val();
+                $.post('cm/cadi_bt_processor.php', {action: 'tx', cmd: '1', plug_id:'1', state:data}, function(data) {
+                    cadi_list_rfcomms();
+                });
+            }
+
+            function plugStateSet(plug, state){
+                $.post('cm/cadi_bt_processor.php', {action: 'tx_packet', cmd: '1', plug:plug, state:state}, function(data) {
+                    cadi_list_rfcomms();
+                });  
+            }
+
+            function bt_setdd() {
+                $.post('cm/cadi_bt_processor.php', {action: 'tx_packet', cmd: '2'}, function(data){
+                    cadi_list_rfcomms();
+                });  
+            }
+
+            function cadi_status_stream() {
+                var state = $('#flag_status_stream').is(':checked');
+                switch (state) {
+                    case 0:
+                        var interval = $('#status_stream_interval').val();
+                        clearInterval(interval);
+                        break;
+                    case 1:
+                        var delay=$("#status_stream_delay").val();
+                        var interval = setInterval(function(){redraw_svg_layer()},delay);    // enables SVG draw with JS
+                        $('#status_stream_interval').val(interval);
+                        break;
+                }
+            }
+     
+            function cadi_view(viewId) {
+                switch (viewId) {
+                    case 1:
+                        $("#system_view_1").show();
+                        $("#system_view_2").hide();
+                        break;
+                    case 2:
+                        $("#system_view_2").show();
+                        $("#system_view_1").hide();
+                        break;
+                } 
+            }
+
+            function btd_stream_status(newStatus){
+                $.post('cm/cadi_bt_processor.php', {action: 'btd_stream_start', status: newStatus}, function(data) {
+                    // cadi_list_rfcomms();
+                    // alert('Streaming to server cache');
+                });
+            }
+
+            function redraw_update_log(){
+                $.post('cm/cadi_bt_processor.php', {action: 'redraw_update_log'}, function(data) {
+                    $('cadi_update_log').html(data);
+                });
+            }
+
+            function cadiweb_update(){
+                btd_stream_status(0);
+                $.post('cm/cadi_bt_processor.php', {action: 'cadiweb_update'}, function(data){});
+                alert("Do not use Cadiweb control panel until server finishes software upgrade with reboot!");
+                var log_upd_int_id = setInterval(function(){redraw_update_log},1000);    // enables SVG draw with JS
+                $('#log_interval_id').val(log_upd_int_id);
+            }
+
+            function stop_log_stream(){
+                var  interval = $('#log_interval_id').val();
+                clearInterval(interval);
+            }
+
+            function eeRead() {
+                var addr = $('#ee_addr').val();
+                $.post('cm/cadi_bt_processor.php', {action: 'tx_packet', cmd:18, addr:addr}, function(data){
+                    alert('EEPROM value read');
+                    var out = data.split('seppy');
+                    $('ee16bit_value').val(out[0]);
+                    $('ee32bit_value').val(out[1]);
+                });  
+            }
+
+            function eeWrite(dataType) {
+                var addr = $('#ee_addr').val();
+                var cmd=0;
+                switch ($dataType) {
+                    case 1:
+                        var value = $('#ee16bit_value').val();
+                        cmd = 15;
+                        break;
+                    case 2:
+                        var value = $('#ee32bit_value').val();
+                        cmd = 16;
+                        break;
+                }
+                $.post('cm/cadi_bt_processor.php', {action: 'tx_packet', data_type:dataType, value:value, cmd:cmd}, function(data){
+                    alert('EEPROM value sent');
+                }); 
+             
+            }
+
+            function enable_dlsettings_overlay(state){
+                if (state==1) {
+                    $('.lcso').css('display', 'block');
+                } else {
+                    $('.lcso').css('display', 'none');
+                }
+            }
+
+            function download_csx(type){
+                enable_dlsettings_overlay(1);
+                var interval_csxdl = $('#csxdl_interval').val();
+                clearInterval(interval_csxdl);
+                setTimeout(function(){ }, 1000);
+                $.post('cm/cadi_bt_processor.php', {action: 'dl_settings'}, function(data){
+                    // alert(data);
+                    var interval_csxdl = setInterval(function(){csx_dl_proc(type)},1000);    
+                    $('#csxdl_interval').val(interval_csxdl);    
+                });
+            }
+
+            // running during Cadi settings download
+            function csx_dl_proc(type){
+                $.post('cm/cadi_bt_processor.php', {action: 'check_dl_set_status'}, function(data){
+                    var tmparr = data.split('v0t0n0');
+                    var btdState = tmparr[1];
+                    if (btdState == "1") {                // if BTDaemon is idle
+                        var interval_csxdl = $('#csxdl_interval').val();
+                        clearInterval(interval_csxdl);         //, clear interval for checking status
+                        if (type==0) {
+                            $.post('cm/csx_get_table.php', {}, function(data){
+                                $('#csxform').html(data);    //  and reload settings table
+                            });
+                        }
+                        enable_dlsettings_overlay(0);
+                    }
+                });
+            }
+
+            function mix_solution(){
+                var secs = $('#run_watering_secs').val();
+                $.post('cm/cadi_bt_processor.php', {action: 'tx_packet', cmd:38, secs:secs}, function(data){
+                    
+                });  
+            }
+        </script>
+    </head>
 <body>
 <input type="hidden" id="status_stream_interval" value="" />
 <div id="cadi_tabs">
