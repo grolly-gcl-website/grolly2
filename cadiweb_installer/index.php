@@ -613,53 +613,51 @@
             }
         </script>
     </head>
-<body>
-<input type="hidden" id="status_stream_interval" value="" />
-<div id="cadi_tabs">
-<ul>
-<li><a href="#tabs-1">Status</a></li>
-<li><a href="cm/cadi_timers.php">Timers</a></li>
-<li><a href="cm/cadi_watering.php">Watering</a></li>
-<li><a href="cm/cadi_fertilization.php">Fertilization</a></li>
-<li><a href="cm/cadi_sensors.php">Sensors</a></li>
-<li><a href="cm/cadi_advanced.php">Advanced</a></li>
-<!--<li><a href="cm/cadi_dd.php">Direct drive</a></li> -->
-</ul>
+    <body>
+        <input type="hidden" id="status_stream_interval" value="" />
 
-<div id="csv_string"></div>
+        <div id="cadi_tabs">
+            <ul>
+                <li><a href="#tabs-1">Status</a></li>
+                <li><a href="cm/cadi_timers.php">Timers</a></li>
+                <li><a href="cm/cadi_watering.php">Watering</a></li>
+                <li><a href="cm/cadi_fertilization.php">Fertilization</a></li>
+                <li><a href="cm/cadi_sensors.php">Sensors</a></li>
+                <li><a href="cm/cadi_advanced.php">Advanced</a></li>
+                <!--<li><a href="cm/cadi_dd.php">Direct drive</a></li> -->
+            </ul>
 
-<div class="ral">
-<b id="btd_state">BTD state</b>
-<button onClick="download_csx(1)">Reload Grolly Settings</button>
-<div class="lcso">Downloading Grolly settings. Please wait ...</div>
-<input type="hidden" value="0" id="csxdl_interval" />
-<!--
-<button class="btn_ fr" onClick="check_plug()">Apply settings</button>
-<button class="btn_ fr">Reload settings</button>
--->
-</div>
-<div id="tabs-1">
-<input type="checkbox" checked id="flag_status_stream" onClick="cadi_status_stream()" />Stream STATUS (from server cache)
-<input type="checkbox" id="vs_flag" /> also Video
-<button class="btn_" id="cadi_view_cam" onClick="cadi_view(1)">Cam</button>
-<button class="btn_" id="cadi_view_map" onClick="cadi_view(2)">Map</button>
-<br>
-<table>
-    <tr>
-        <td style="vertical-align:top;">
-            <div id="system_view_1">
-                <div id="status_block" style="float:left;">
-                    <?php include_once('cm/status_view_1.php'); ?>
-                </div>
-                <img id="cadi_img" style="float:right;" src="img/curimage.jpeg?" />
+            <div id="csv_string"></div>
+
+            <div class="ral">
+                <b id="btd_state">BTD state</b>
+                <button onClick="download_csx(1)">Reload Grolly Settings</button>
+                <div class="lcso">Downloading Grolly settings. Please wait ...</div>
+                <input type="hidden" value="0" id="csxdl_interval" />
+                <!--
+                <button class="btn_ fr" onClick="check_plug()">Apply settings</button>
+                <button class="btn_ fr">Reload settings</button>
+                -->
             </div>
-            <div id="system_view_2" style="border: 0px solid blue;">
-                <div style="float:left;">
-                    <div style="float:left;">
+            <div id="tabs-1">
+                <input type="checkbox" checked id="flag_status_stream" onClick="cadi_status_stream()" />Stream STATUS (from server cache)
+                <input type="checkbox" id="vs_flag" /> also Video
+                <button class="btn_" id="cadi_view_cam" onClick="cadi_view(1)">Cam</button>
+                <button class="btn_" id="cadi_view_map" onClick="cadi_view(2)">Map</button>
+                <br>
 
-
-
-
+                <table>
+                    <tr>
+                        <td style="vertical-align:top;">
+                            <div id="system_view_1">
+                                <div id="status_block" style="float:left;">
+                                    <?php // XXX: this import is missing // include_once(dirname(__FILE__) . '/cm/status_view_1.php'); ?>
+                                </div>
+                                <img id="cadi_img" style="float:right;" src="img/curimage.jpeg?" />
+                            </div>
+                            <div id="system_view_2" style="border: 0px solid blue;">
+                                <div style="float:left;">
+                                    <div style="float:left;">
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
@@ -1064,25 +1062,11 @@ fill = "#ababab;"
   </g>
 </svg>
 
-
-
-
-
-
-
-
 <div id="csv_string_box">
 </div>
 
-
-
-
-
-
 <div id="psi_gauge" style="width:300px; height:240px; float:left; position: absolute; display: block; top:585px; left:270px;"></div>
 <input type="hidden" id="psi_gauge_val" value="0" />
-
-
                 </div style="width:100%; border: 1px solid red;">
                     <div id="svg_container" style="display:block; min-width:60%; min-height:700px; float:left; border:1px solid yrllow; position:absolute;">
 
@@ -1169,5 +1153,5 @@ Status stream delay<input type="text" id="status_stream_delay" value="800"/>
 </div>
 </div>
 
-</body>
+    </body>
 </html>
