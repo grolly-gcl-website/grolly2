@@ -230,41 +230,35 @@
                                 <div style="float:left;">
                                     <div style="float:left;">
                                         <?php echo file_get_contents(dirname(__FILE__) . '/res/interface.svg'); ?>
-<div id="csv_string_box">
-</div>
-
-<div id="psi_gauge" style="width:300px; height:240px; float:left; position: absolute; display: block; top:585px; left:270px;"></div>
-<input type="hidden" id="psi_gauge_val" value="0" />
-                </div style="width:100%; border: 1px solid red;">
-                    <div id="svg_container" style="display:block; min-width:60%; min-height:700px; float:left; border:1px solid yrllow; position:absolute;">
-
-                    </div>
-                </div>
-        </td>
-        <td>
-            <div style="float:right; border: 0px solid blue;">
-                <?php include_once('cm/cadi_dd.php'); ?>
-            </div>
-        </td>
-    </tr>    
-</table>
+                                        <div id="csv_string_box"></div>
+                                        <div id="psi_gauge" style="width:300px; height:240px; float:left; position: absolute; display: block; top:585px; left:270px;"></div>
+                                        <input type="hidden" id="psi_gauge_val" value="0" />
+                                    </div style="width:100%; border: 1px solid red;">
+                                    <div id="svg_container" style="display:block; min-width:60%; min-height:700px; float:left; border:1px solid yrllow; position:absolute;">
+                                    </div>
+                                </div>
+                        </td>
+                        <td>
+                            <div style="float:right; border: 0px solid blue;">
+                                <?php include_once(dirname(__FILE__) . '/cm/cadi_dd.php'); ?>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
     =================================================    
-    <br>
+                <br><br>
 
-<br> 
-    <div onClick="cadi_bt_scan();" style="display:inline; border: 1px solid red;">Scan</div>
-    <select id="bind_mac" name="bind_mac">
-    <option>Scan to get the list</option>
-    </select>
-    <button onClick="bt_connect();" style="display:inline; border: 1px solid red;">Connect</button>
-    RFCOMM NUMBER:
-    <input type="text" style="width: 40px;" value="0" id="rfcomm_nr" /><br>
-    Binded RFCOMM list (<button onclick="cadi_list_rfcomms();" style="display:inline; border: 1px solid red;">refresh</button>):
-    <div id="binded_rfcomms">
-        
-    </div>
-    <button class="btn_" onClick="btd_stream_status(1);">BTD status stream ON</button>
-    <button class="btn_" onClick="btd_stream_status(0);">BTD status stream OFF</button>
+                <div onClick="cadi_bt_scan();" style="display:inline; border: 1px solid red;">Scan</div>
+                <select id="bind_mac" name="bind_mac">
+                    <option>Scan to get the list</option>
+                </select>
+
+                <button onClick="bt_connect();" style="display:inline; border: 1px solid red;">Connect</button>
+                RFCOMM NUMBER: <input type="text" style="width: 40px;" value="0" id="rfcomm_nr" /><br>
+                Binded RFCOMM list (<button onclick="cadi_list_rfcomms();" style="display:inline; border: 1px solid red;">refresh</button>):
+                <div id="binded_rfcomms"> </div>
+                <button class="btn_" onClick="btd_stream_status(1);">BTD status stream ON</button>
+                <button class="btn_" onClick="btd_stream_status(0);">BTD status stream OFF</button>
 <!--    <div title="use this field to send the data to Cadi while connected" id="tx_form">
         <input type="text" name="tx_data" id="tx_data" />
         <div onClick="bt_tx_packet()">Send</div>    
@@ -276,11 +270,10 @@
         <div onClick="bt_tx()">Send packet</div>    
     </div> -->
 
-<br>
-
-    =================================================    
-    <br>
-    <br>
+                <br>
+                =================================================    
+                <br>
+                <br>
 
 <!--  <div onClick="bt_setdd()">Set DD</div>    
 
@@ -288,38 +281,35 @@
 <div onClick="plugStateSet('1','0')">Disable P1</div>  -->
 
 
-<br>
-==========================================
-
-<br>
-
-
-<br>
-<button onClick="run_demo()">Run demo</button>
-
-<br>
-
-<button onClick="cw_reboot()">Reboot server</button><br>
-<button onClick="cadi_reset()">Cadi reset</button><br>
-====================================
-<br>
-<button onClick="cadiweb_update()">Cadiweb software update</button><br>
-<input type="hidden" id="log_interval_id" value="0" />
-<div>
-    <textarea size="10" id="cadi_update_log"></textarea>
-</div>
-<button onClick=stop_log_stream();>Stop log stream</button>
-====================================
-<br>
+                <br>
+                ==========================================
+                <br>
 
 
-Status stream delay<input type="text" id="status_stream_delay" value="800"/>
-<br>
+                <br>
+                <button onClick="run_demo()">Run demo</button>
+                <br>
+
+                <button onClick="cw_reboot()">Reboot server</button><br>
+                <button onClick="cadi_reset()">Cadi reset</button><br>
+                ====================================
+                <br>
+                <button onClick="cadiweb_update()">Cadiweb software update</button><br>
+                <input type="hidden" id="log_interval_id" value="0" />
+                <div>
+                    <textarea size="10" id="cadi_update_log"></textarea>
+                </div>
+                <button onClick=stop_log_stream();>Stop log stream</button>
+                ====================================
+                <br>
+                Status stream delay<input type="text" id="status_stream_delay" value="800"/>
+                <br>
 
 
-<input type="text" value="0" id="video_stream" title="this value is N in '/dev/videoN'" /><button onClick="change_video()">Change video</button>
-</div>
-</div>
+                <input type="text" value="0" id="video_stream" title="this value is N in '/dev/videoN'" />
+                <button onClick="change_video()">Change video</button>
+            </div>
+        </div>
 
     </body>
 </html>
