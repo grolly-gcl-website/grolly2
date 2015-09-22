@@ -15,11 +15,7 @@ $_SESSION['cadiweb_version'] = '1.0';
 <head>
 <meta charset="utf-8">
 <title>Cadi web UI</title>
-<!---
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
-<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-<link rel="stylesheet" href="/resources/demos/style.css">  -->
+
 <link rel="stylesheet" href="css/resetcss.css">
 
 <link rel="stylesheet" href="js/jquery-ui-1.11.2.custom/jquery-ui.css">
