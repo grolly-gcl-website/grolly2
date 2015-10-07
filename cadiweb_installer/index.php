@@ -66,20 +66,6 @@
                     var ec1_adc_val = statusArray[11];
                     $('#ec1_adc_val').html('EC: '+ec1_adc_val+' uS');
 
-                    // $('#sens_ph1_adc_val').html(ec1_adc_val);
-                    // $('#csv_string').html(data);
-                    /* var wpProgress = statusArray[18];
-                    $('#tf1').html(wpProgress);
-                    var auto_failures = statusArray[19];
-                    $('#tf2').html(auto_failures);
-                    var runners = statusArray[20];
-                    $('#tf3').html(runners);
-
-                    var tsf = statusArray[3];        // timer state flags
-                    $('#tsf').html(tsf);
-                    var ctsf = statusArray[4];        // ctimer state flags
-                    $('#ctsf').html(ctsf);    */
-
                     // tank 3 water level redraw
             
                     <?php echo 'var t3top = '.$svg_t3top.';'.PHP_EOL;
@@ -163,16 +149,6 @@
                         }
                     }
 
-                    /*
-                    if (statusArray[15]==51){    
-                        $('#cdds').html('CDD Enabled');
-                        $('#cdds').attr('fill', 'green');
-                    }
-                    else {
-                        $('#cdds').html('CDD Disabled');
-                        $('#cdds').attr('fill', 'red');
-                    } */
-
                     var af_bin = statusArray[17].toString(2);
                     $('#auto_flags').html(statusArray[17]+' ('+af_bin+')');
 
@@ -196,7 +172,6 @@
                 <li><a href="cm/cadi_fertilization.php">Fertilization</a></li>
                 <li><a href="cm/cadi_sensors.php">Sensors</a></li>
                 <li><a href="cm/cadi_advanced.php">Advanced</a></li>
-                <!--<li><a href="cm/cadi_dd.php">Direct drive</a></li> -->
             </ul>
 
             <div id="csv_string"></div>
@@ -206,10 +181,6 @@
                 <button onClick="download_csx(1)">Reload Grolly Settings</button>
                 <div class="lcso">Downloading Grolly settings. Please wait ...</div>
                 <input type="hidden" value="0" id="csxdl_interval" />
-                <!--
-                <button class="btn_ fr" onClick="check_plug()">Apply settings</button>
-                <button class="btn_ fr">Reload settings</button>
-                -->
             </div>
             <div id="tabs-1">
                 <input type="checkbox" checked id="flag_status_stream" onClick="cadi_status_stream()" />Stream STATUS (from server cache)
@@ -260,27 +231,12 @@
                 <div id="binded_rfcomms"> </div>
                 <button class="btn_" onClick="btd_stream_status(1);">BTD status stream ON</button>
                 <button class="btn_" onClick="btd_stream_status(0);">BTD status stream OFF</button>
-<!--    <div title="use this field to send the data to Cadi while connected" id="tx_form">
-        <input type="text" name="tx_data" id="tx_data" />
-        <div onClick="bt_tx_packet()">Send</div>    
-    </div> 
 
-
-      <div title="send ZX2[1],[1],[1]" id="tx_form">
-        <input type="text" name="tx_data_packet" id="tx_data_packet" />
-        <div onClick="bt_tx()">Send packet</div>    
-    </div> -->
 
                 <br>
                 =================================================    
                 <br>
                 <br>
-
-<!--  <div onClick="bt_setdd()">Set DD</div>    
-
-<div onClick="plugStateSet('1','1')">Enable P1</div>
-<div onClick="plugStateSet('1','0')">Disable P1</div>  -->
-
 
                 <br>
                 ==========================================

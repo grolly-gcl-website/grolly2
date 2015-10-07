@@ -42,3 +42,5 @@ function print_vars() {
     echo 'var psi32psi_ = '.$psi32psi_.';'.PHP_EOL;
     echo $js_svg_valves;
 }
+
+?>
