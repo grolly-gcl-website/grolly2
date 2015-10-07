@@ -168,30 +168,7 @@
        d="m 337.18243,386.7805 0,-221.86992 c 0,0 -4.37903,-22.98981 -23.71966,-22.98981 -19.34063,0 -79.18712,-0.72983 -79.18712,-0.72983 l -15.69146,0 c 0,0 -18.24586,1.09475 -18.24586,16.05636 0,14.96163 0,14.96163 0,14.96163 l 26.63896,0.36493 c 0,0 -1.82456,-8.39311 7.29836,-8.75803"
        id="path3185"
        inkscape:connector-curvature="0" />
-    <path
-    fill = "none"
-       style="stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 208.29633,445.66506 -44.52654,56.26335 44.52654,0 -44.52654,-56.26335 z"
-       id="valve_8"
-       inkscape:connector-curvature="0" />
-    <path
-       style="stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-    fill = "#ababab;"
-       d="m 362.46807,552.63975 60.49054,44.41823 0,-44.41823 -60.49054,44.41823 z"
-       id="valve_1"
-       inkscape:connector-curvature="0" />
-    <path
-       style="stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-fill = "#ababab;"
-       d="m 362.67329,601.14697 60.40446,44.42721 0,-44.42721 -60.40446,44.42721 z"
-       id="valve_2"
-       inkscape:connector-curvature="0" />
-    <path
-    fill = "#ababab;"
-       style="stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 362.68289,650.01252 60.21211,44.44219 0,-44.44219 -60.21211,44.44219 z"
-       id="valve_3"
-       inkscape:connector-curvature="0" />
+
     <path
     fill = "#ababab;"
        style="stroke:#000000;stroke-width:2.8900001px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -293,17 +270,65 @@ fill = "#ababab;"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccscc" />
     <path
-    fill = "#505050;"
-       style="stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m -14.925188,445.76536 -44.55315,56.20914 44.55315,0 -44.55315,-56.20914 z"
-       id="valve_7"        
-       inkscape:connector-curvature="0" />
-    <path
        onClick="toggleValve(0);"
        fill = "#ababab;"
        style="stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m -126.87678,108.12915 87.216069,43.86607 0,-43.86607 -87.216069,43.86607 z"
        id="valve_0"
+       inkscape:connector-curvature="0" />
+    <path
+       style="stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+    fill = "#ababab;"
+       d="m 362.46807,552.63975 60.49054,44.41823 0,-44.41823 -60.49054,44.41823 z"
+       id="valve_1"
+       inkscape:connector-curvature="0" />
+    <path
+       style="stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+fill = "#ababab;"
+       d="m 362.67329,601.14697 60.40446,44.42721 0,-44.42721 -60.40446,44.42721 z"
+       id="valve_2"
+       inkscape:connector-curvature="0" />
+    <path
+    fill = "#ababab;"
+       style="stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 362.68289,650.01252 60.21211,44.44219 0,-44.44219 -60.21211,44.44219 z"
+       id="valve_3"
+       inkscape:connector-curvature="0" />
+    <path
+    fill = "#ababab;"
+       style="stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 363.34419,700.44418 60.20916,44.44347 0,-44.44347 -60.20916,44.44347 z"
+       id="valve_4"
+       inkscape:connector-curvature="0" />
+    <path
+    fill = "#ababab;"
+       style="stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 363.34178,750.43743 59.70893,44.45697 0,-44.45697 -59.70893,44.45697 z"
+       id="valve_5"
+       inkscape:connector-curvature="0" />
+    <path
+    fill = "#ababab;"
+       style="stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 363.34219,800.72297 59.70811,44.45731 0,-44.45731 -59.70811,44.45731 z"
+       id="valve_6"
+       inkscape:connector-curvature="0" />
+    <path
+    fill = "#505050;"
+       style="stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m -14.925188,445.76536 -44.55315,56.20914 44.55315,0 -44.55315,-56.20914 z"
+       id="valve_7"        
+       inkscape:connector-curvature="0" />
+   <path
+    fill = "none"
+       style="stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 208.29633,445.66506 -44.52654,56.26335 44.52654,0 -44.52654,-56.26335 z"
+       id="valve_8"
+       inkscape:connector-curvature="0" />
+    <path
+    fill = "none"
+       style="stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 349.41943,385.98992 -44.55315,56.20914 44.55315,0 -44.55315,-56.20914 z"
+       id="valve_9"
        inkscape:connector-curvature="0" />
     <path
        style="fill:none;stroke:#000000;stroke-width:2.8900001px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -330,30 +355,7 @@ fill = "#ababab;"
        x="108"
        y="162"
        inkscape:label="#rect4218" />
-    <path
-    fill = "#ababab;"
-       style="stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 363.34419,700.44418 60.20916,44.44347 0,-44.44347 -60.20916,44.44347 z"
-       id="valve_4"
-       inkscape:connector-curvature="0" />
-    <path
-    fill = "#ababab;"
-       style="stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 363.34178,750.43743 59.70893,44.45697 0,-44.45697 -59.70893,44.45697 z"
-       id="valve_5"
-       inkscape:connector-curvature="0" />
-    <path
-    fill = "none"
-       style="stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 349.41943,385.98992 -44.55315,56.20914 44.55315,0 -44.55315,-56.20914 z"
-       id="valve_9"
-       inkscape:connector-curvature="0" />
-    <path
-    fill = "#ababab;"
-       style="stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 363.34219,800.72297 59.70811,44.45731 0,-44.45731 -59.70811,44.45731 z"
-       id="valve_6"
-       inkscape:connector-curvature="0" />
+
     <path
        style="fill:none;stroke:#000000;stroke-width:2.8900001px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 362.53664,733.59945 -23.62828,0 0,31.09107 23.62828,0"
