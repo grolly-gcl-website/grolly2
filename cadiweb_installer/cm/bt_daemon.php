@@ -933,7 +933,7 @@ function bt_autoconnect($macc, $rfcomm_n){
 	$timeout = time() + 200;	// HARDCODE
 	$now = time();
 	echo 'BT Autoconnect'.PHP_EOL;
-	$conn_attempts = 20;		// nuber of attempts to connect
+	$conn_attempts = 20;		// number of attempts to connect
 	$repair_every = 5;		// re-pair every N attempts to get 'connected'
 	while ($conn_attempts>0 && $connected==0) {
 		// *** re-pair bluetooth connection
@@ -998,7 +998,7 @@ function bt_autoconnect($macc, $rfcomm_n){
 			exec("sed -i '/echo con,0,/d' ".$startupscriptfn);
 			exec("sed -i '/echo stream_status,1/d' ".$startupscriptfn);
 			
-			// add new lines
+			// add new lines into startup file for automatic connection establishment
 			$toput = 'echo con,0,'.$mac.', > /srv/http/cm/daemon_cmd';	// after bt_daemon startup send it a connection request
 			exec("echo '\nsleep 3\n".$toput."' >> ".$startupscriptfn);
 			exec('sync');	// save chages to disk

@@ -77,6 +77,8 @@ cp -rf /tmp/cadiwebtmp/cadi_settings_conf.csv /srv/http/cm/cadi_settings_conf.cs
 # recover Grolly eeprom dump
 cp -rf /tmp/cadiwebtmp/cadi_settings_dump /srv/http/cm/cadi_settings_dump
 
+#change permissions for daemon_cmd (autoconnect fix)
+chmod 777 /srv/http/cm/daemon_cmd
 
 
 if [ "$1" == "forceccd" ]; then

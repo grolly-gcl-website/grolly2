@@ -43,6 +43,8 @@
                         return;
                     }
 
+			$('#csv_string').html(data);
+
                     var statusArray = data.split(',');
                     // display BTD State
                     $('#btd_state').html(statusArray[22]);
