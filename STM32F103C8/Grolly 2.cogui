@@ -309,49 +309,34 @@
 <view id="org.coocox.builder.ui.views.ProjectView"/>
 <fastViewBars/>
 <viewLayoutRec closeable="false" id="org.eclipse.debug.ui.DebugView"/>
-<layout>
-<mainWindow>
-<info folder="true" part="org.eclipse.ui.internal.ViewStack@1e30abe">
-<folder activePageID="org.coocox.builder.ui.views.ProjectView" appearance="2" expanded="2">
-<page content="org.coocox.builder.ui.views.ProjectView" label="Project"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
-<part id="0"/>
+<layout>&#x0A;<mainWindow>&#x0A;<info folder="true" part="org.eclipse.ui.internal.ViewStack@1e30abe">&#x0A;<folder activePageID="org.coocox.builder.ui.views.ProjectView" appearance="2" expanded="2">&#x0A;<page content="org.coocox.builder.ui.views.ProjectView" label="Project"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
 </presentation>
 </folder>
 </info>
-<info folder="true" part="stickyFolderRight" ratio="0.75" ratioLeft="954" ratioRight="318" relationship="2" relative="org.eclipse.ui.internal.ViewStack@1e30abe">
-<folder appearance="2" expanded="2">
-<page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
+<info folder="true" part="stickyFolderRight" ratio="0.75" ratioLeft="954" ratioRight="318" relationship="2" relative="org.eclipse.ui.internal.ViewStack@1e30abe">&#x0A;<folder appearance="2" expanded="2">&#x0A;<page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.internal.introview" label="LabelNotFound"/>
 </folder>
 </info>
-<info folder="true" part="org.eclipse.ui.internal.ViewStack@b0c18f" ratio="0.6993464" ratioLeft="642" ratioRight="276" relationship="4" relative="org.eclipse.ui.internal.ViewStack@1e30abe">
-<folder activePageID="org.eclipse.debug.ui.DebugView" appearance="2" expanded="2">
-<page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@b0c18f" ratio="0.6993464" ratioLeft="642" ratioRight="276" relationship="4" relative="org.eclipse.ui.internal.ViewStack@1e30abe">&#x0A;<folder activePageID="org.eclipse.debug.ui.DebugView" appearance="2" expanded="2">&#x0A;<page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
 <page content="org.eclipse.debug.ui.DebugView" label="Debug"/>
 <page content="org.eclipse.debug.ui.BreakpointView" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
-<part id="0"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
 <part id="1"/>
 </presentation>
 </folder>
 </info>
-<info folder="true" part="org.eclipse.ui.internal.ViewStack@151daef" ratio="0.5" ratioLeft="636" ratioRight="636" relationship="2" relative="org.eclipse.ui.internal.ViewStack@b0c18f">
-<folder activePageID="org.coocox.codebugger.trace.ui.traceview" appearance="2" expanded="2">
-<page content="org.coocox.codebugger.trace.ui.traceview" label="Semihosting"/>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@151daef" ratio="0.5" ratioLeft="636" ratioRight="636" relationship="2" relative="org.eclipse.ui.internal.ViewStack@b0c18f">&#x0A;<folder activePageID="org.coocox.codebugger.trace.ui.traceview" appearance="2" expanded="2">&#x0A;<page content="org.coocox.codebugger.trace.ui.traceview" label="Semihosting"/>
 <page content="org.eclipse.debug.ui.VariableView" label="Variables"/>
 <page content="org.eclipse.debug.ui.ExpressionView" label="LabelNotFound"/>
 <page content="org.eclipse.debug.ui.MemoryView" label="LabelNotFound"/>
 <page content="org.eclipse.cdt.debug.ui.memory.memorybrowser.MemoryBrowser" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
-<part id="0"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
 <part id="1"/>
 </presentation>
 </folder>
 </info>
-<info folder="true" part="org.eclipse.ui.internal.ViewStack@fc829c" ratio="0.75" ratioLeft="954" ratioRight="318" relationship="2" relative="org.eclipse.ui.internal.ViewStack@1e30abe">
-<folder appearance="2" expanded="2">
-<page content="org.eclipse.cdt.dsf.debug.ui.disassembly.view" label="LabelNotFound"/>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@fc829c" ratio="0.75" ratioLeft="954" ratioRight="318" relationship="2" relative="org.eclipse.ui.internal.ViewStack@1e30abe">&#x0A;<folder appearance="2" expanded="2">&#x0A;<page content="org.eclipse.cdt.dsf.debug.ui.disassembly.view" label="LabelNotFound"/>
 <page content="org.eclipse.ui.views.ContentOutline" label="LabelNotFound"/>
 <page content="org.eclipse.debug.ui.RegisterView" label="LabelNotFound"/>
 <page content="org.coocox.coassistant.view.CoAssistantView_debug" label="LabelNotFound"/>
@@ -534,6 +519,18 @@
 <actionBarAdvisor/>
 </window>
 <mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="eeprom.h" tooltip="Grolly 2/stm_lib/inc/eeprom.h">
+<persistable path="/Grolly 2/stm_lib/inc/eeprom.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="ad5934.h" tooltip="Grolly 2/cadi_libs/inc/ad5934.h">
+<persistable path="/Grolly 2/cadi_libs/inc/ad5934.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f10x_iwdg.c" tooltip="Grolly 2/stm_lib/src/stm32f10x_iwdg.c">
+<persistable path="/Grolly 2/stm_lib/src/stm32f10x_iwdg.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" tooltip="Grolly 2/main.c">
+<persistable path="/Grolly 2/main.c"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="startup_stm32f10x_md_vl.c" tooltip="Grolly 2/cmsis_boot/startup/startup_stm32f10x_md_vl.c">
 <persistable path="/Grolly 2/cmsis_boot/startup/startup_stm32f10x_md_vl.c"/>
 </file>
@@ -561,17 +558,8 @@
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="tasks.c" tooltip="Grolly 2/freertos/Source/tasks.c">
 <persistable path="/Grolly 2/freertos/Source/tasks.c"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="driver_sonar.c" tooltip="Grolly 2/cadi_libs/src/driver_sonar.c">
-<persistable path="/Grolly 2/cadi_libs/src/driver_sonar.c"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="delays.c" tooltip="Grolly 2/cadi_libs/src/delays.c">
-<persistable path="/Grolly 2/cadi_libs/src/delays.c"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="delays.h" tooltip="Grolly 2/cadi_libs/inc/delays.h">
-<persistable path="/Grolly 2/cadi_libs/inc/delays.h"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="dht22.h" tooltip="Grolly 2/cadi_libs/inc/dht22.h">
-<persistable path="/Grolly 2/cadi_libs/inc/dht22.h"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="ad5934.h" tooltip="Grolly 2/cadi_libs/inc/ad5934.h">
+<persistable path="/Grolly 2/cadi_libs/inc/ad5934.h"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="driver_sonar.h" tooltip="Grolly 2/cadi_libs/inc/driver_sonar.h">
 <persistable path="/Grolly 2/cadi_libs/inc/driver_sonar.h"/>

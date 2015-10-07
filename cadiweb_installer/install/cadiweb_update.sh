@@ -51,6 +51,14 @@ cp -rf js/* /srv/http/js/
 echo 'CU> ...stylesheets...'
 cp -rf css/* /srv/http/css/
 
+# includes
+echo 'CU> ...includes...'
+cp -rf css/* /srv/http/includes/
+
+# resources
+echo 'CU> ...resources (eg SVG)...'
+cp -rf css/* /srv/http/res/
+
 # installation files and stuff
 echo 'CU> ...installation routines and stuff...'
 cp -rf install/* /srv/http/install/

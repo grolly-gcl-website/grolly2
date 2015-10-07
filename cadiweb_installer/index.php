@@ -30,13 +30,14 @@
         <script src="js/justgage.js"></script>
         <script src="js/cadi.js"></script>
         <script>
-        <?php
+<?php
             include(dirname(__FILE__) . '/includes/js.php');
-            print_vars(); ?>
+            print_vars();
+?>
 
             function redraw_svg_layer() {
                 $.post('cm/cadi_bt_processor.php', {action: 'get_status_csv'}, function(data) {
-                    // XXX: what is 42?
+                    // XXX: what is 42? the minimum length of expected csv string
                     // exit early
                     if (data.length <= 42) {
                         return;
@@ -222,7 +223,7 @@
                         <td style="vertical-align:top;">
                             <div id="system_view_1">
                                 <div id="status_block" style="float:left;">
-                                    <?php // XXX: this file is missing // include_once(dirname(__FILE__) . '/cm/status_view_1.php'); ?>
+                                    <?php // XXX: this file is missing (needed to display camera view) // include_once(dirname(__FILE__) . '/cm/status_view_1.php'); ?>
                                 </div>
                                 <img id="cadi_img" style="float:right;" src="img/curimage.jpeg?" />
                             </div>
