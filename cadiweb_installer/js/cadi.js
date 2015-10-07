@@ -272,11 +272,11 @@ function bt_setdd() {
 function cadi_status_stream() {
     var state = $('#flag_status_stream').is(':checked');
     switch (state) {
-        case 0:
+        case false:
             var interval = $('#status_stream_interval').val();
             clearInterval(interval);
             break;
-        case 1:
+        case true:
             var delay=$("#status_stream_delay").val();
             var interval = setInterval(function(){redraw_svg_layer()},delay);    // enables SVG draw with JS
             $('#status_stream_interval').val(interval);
