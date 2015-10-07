@@ -53,11 +53,11 @@ cp -rf css/* /srv/http/css/
 
 # includes
 echo 'CU> ...includes...'
-cp -rf css/* /srv/http/includes/
+cp -rf includes/* /srv/http/includes/
 
 # resources
 echo 'CU> ...resources (eg SVG)...'
-cp -rf css/* /srv/http/res/
+cp -rf res/* /srv/http/res/
 
 # installation files and stuff
 echo 'CU> ...installation routines and stuff...'
