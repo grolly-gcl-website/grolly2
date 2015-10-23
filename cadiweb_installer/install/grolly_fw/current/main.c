@@ -114,6 +114,9 @@ volatile static uint8_t dht1_rh_str[4], dht1_t_str[4];
 volatile static uint8_t dht2_rh_str[4], dht2_t_str[4];
 volatile static uint8_t dht_last_read_id = 255;
 
+volatile static uint8_t iwdg_flag = 0;	// if 0 - tasks are refreshing IWDG counter, 1 - not
+
+
 void dht_get_data_x(uint8_t dht_id);
 void dht_req_x(uint8_t dht_id);
 void dht_1(uint8_t dht_id);
@@ -1355,7 +1358,7 @@ static void lstasks(void *pvParameters) {
 			power_ctrl(PWR_DHT, 1);
 			pwr_restart = RTC_GetCounter() + DHT_PWR_RESTART_INTERVAL;
 		}
-
+/*
 		// read pH
 		i2c_ping = 1;
 		vTaskDelay(100);
@@ -1373,6 +1376,7 @@ static void lstasks(void *pvParameters) {
 			 I2C_LowLevel_Init(I2C2);
 			 vTaskDelay(200);
 		 }
+		 */
 
 		vTaskDelay(100);
 //		psiStab();
@@ -1383,6 +1387,9 @@ static void lstasks(void *pvParameters) {
 		vTaskDelay(50);
 		dht_get_data_x(1);
 		vTaskDelay(400);
+		if (iwdg_flag==0){
+			IWDG_ReloadCounter();
+		}
 	}
 }
 
@@ -1452,7 +1459,7 @@ void send_resp_x(uint8_t cmd_uid, uint8_t x){
 	uint8_t i = 0;
 	for (i=0;i<x;i++) {
 		send_resp(cmd_uid);
-		vTaskDelay(50);
+		vTaskDelay(100);
 		IWDG_ReloadCounter();
 	}
 }
@@ -1569,8 +1576,10 @@ void run_uart_cmd(void) {
 						+ RxBuffer[5]);
 		break;
 	case 13:
+		iwdg_flag=1;
 		send_resp_x(RxBuffer[RxBuffer[0]],5);
 		vTaskDelay(10000); // wait a lot for watchdog to trigger reset
+
 		break;
 	case 14:
 		// force triple command execution confirmation send before command execution
@@ -4049,7 +4058,9 @@ void wt_mixing(uint16_t duration){
 		now = RTC_GetCounter();
 		vTaskDelay(200);
 		psiOn();
-		IWDG_ReloadCounter();
+		if (iwdg_flag==0){
+			IWDG_ReloadCounter();
+		}
 	}
 	psiOff();
 	vTaskDelay(500);
@@ -4082,6 +4093,7 @@ void wt_mix_in(uint16_t duration, uint16_t vol, uint8_t doserid, uint8_t spd){
 	psiOn();
 	run_doser_for(doserid,vol,spd);
 	while (now<timeout) {
+
 /*		if (now < finishDosing) {
 			enable_dosing_pump(doserid, spd);
 		}
@@ -4089,11 +4101,15 @@ void wt_mix_in(uint16_t duration, uint16_t vol, uint8_t doserid, uint8_t spd){
 			enable_dosing_pump(doserid, 0);
 		} */
 		now = RTC_GetCounter();
-		IWDG_ReloadCounter();
+		if (iwdg_flag==0){
+			IWDG_ReloadCounter();
+		}
 		vTaskDelay(200);
 		wpProgress = vol%256;
 		psiOn();
-		IWDG_ReloadCounter();
+		if (iwdg_flag==0){
+			IWDG_ReloadCounter();
+		}
 	}
 
 	psiOff();
@@ -4117,7 +4133,9 @@ void wt_watering(uint16_t duration, uint8_t line_id){
 		now = RTC_GetCounter();
 		vTaskDelay(200);
 		psiOn();
-		IWDG_ReloadCounter();
+		if (iwdg_flag==0){
+			IWDG_ReloadCounter();
+		}
 	}
 	psiOff();
 	timeout += 5;			// HARDCODE
@@ -4144,14 +4162,18 @@ void wt_watering_x(uint16_t duration, uint16_t valveFlags){
 		now = RTC_GetCounter();
 		vTaskDelay(200);
 		psiOn();
-		IWDG_ReloadCounter();
+		if (iwdg_flag==0){
+			IWDG_ReloadCounter();
+		}
 	}
 	psiOff();
 	timeout += 5;			// HARDCODE
 	while (now<timeout) {
 		now = RTC_GetCounter();
 		vTaskDelay(200);
-		IWDG_ReloadCounter();
+		if (iwdg_flag==0){
+			IWDG_ReloadCounter();
+		}
 	}
 	close_valves();
 }
@@ -4170,7 +4192,9 @@ void wt_mt_reach_level(uint16_t new_level, uint8_t source){
 		open_valve(FWI_VALVE);
 		psiOn();
 		vTaskDelay(400);
-		IWDG_ReloadCounter();
+		if (iwdg_flag==0){
+			IWDG_ReloadCounter();
+		}
 	}
 	psiOff();
 	close_valves();
@@ -4188,7 +4212,9 @@ void wt_mt_add_water(uint16_t amount, uint8_t source){
 		open_valve(FWI_VALVE);
 		psiOn();
 		vTaskDelay(400);
-		IWDG_ReloadCounter();
+		if (iwdg_flag==0){
+			IWDG_ReloadCounter();
+		}
 	}
 	psiOff();
 	close_valve(FWI_VALVE);
@@ -4205,7 +4231,9 @@ void wt_mt_drain2level(uint16_t new_level, uint8_t drain_valve){
 		open_valve(drain_valve);
 		psiOn();
 		vTaskDelay(400);
-		IWDG_ReloadCounter();
+		if (iwdg_flag==0){
+			IWDG_ReloadCounter();
+		}
 	}
 	psiOff();
 	vTaskDelay(1000);
@@ -6919,7 +6947,7 @@ uint8_t main(void) {
 	loadSettings();
 	flush_lcd_buffer(); // fills the LCD frame buffer with spaces
 
-	I2C_init2();	// master-slave test send	(pH sensor)
+//	I2C_init2();	// master-slave test send	(pH sensor)
 
 	tmpdata[0] = 0;
 
