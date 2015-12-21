@@ -2,11 +2,15 @@
  *  Use this code free of charge, but leave this text box here,
  *  This code is distributed "as is" with no warranties.
  *  https://github.com/grolly-gcl-website/grolly2 is main repository hub for Cadi project.
- *
- *	27.08.2013 changed the virtaddvartab usage to copying the whole row or variables 0x05C0-0x0679
+ *	COMPILATION FLAGS:
+ *	-DUSE_PH	// enables use of I2C2 and digital pH measurement module
+ *	-DUSE_EC	// enables use of EVAL-0349 conductivity and temperature measurement module
+ *	-DUSE_LCD	// I2C backpacked HD44780/1602 compliant module support
+ *	-DGROLLYSN001	// defines the valve ids for use with Grolly2 SN001. Default: 002 and up
  *
  *
  */
+
 
 
 
@@ -33,7 +37,8 @@
 #include "driver_sonar.h"
 #include "LiquidCrystal_I2C.h"
 // #include "dht22.h"
-
+#include "delays.h"
+#include "ad5934.h"
 
 #define PROTOBUZZZ3			// use Protobuzzz v3 communications
 #define GROLLY_VER		2	// Grolly version (different piping)
@@ -907,8 +912,8 @@ void getco2(void);
 void co2_sens_supply(void);
 uint8_t skip_button_cal(void);
 void psiOff(void);
-void I2C_init2(void);
-void Delay_us_(uint32_t delay);
+void I2C_init(I2C_TypeDef* I2Cx);
+// void Delay_us_(uint32_t delay);
 void get_settings_dump(void);
 void get_settings_dump_(uint16_t amount, uint16_t startaddr);
 void settings2tx_buff(uint16_t addr, uint8_t amount);
@@ -997,6 +1002,14 @@ char *itoa(int n, char *s, int b) {
 }
 
 
+// should be moved to delays.c
+void Delay_us(uint32_t delay) {
+	volatile uint32_t del = 0;
+	del = delay * 250;
+	while (del--) {
+
+	}
+}
 
 void autoSafe(void) {
 	if (((auto_flags & 4) >> 2) == 1) {
@@ -1343,7 +1356,7 @@ uint16_t ec1_adc_val = 0;
 
 static void lstasks(void *pvParameters) {
 	vTaskDelay(4000);
-
+	uint32_t temp_ec_reading = 0;
 	uint32_t pwr_restart = 0; // next power restart for DHT sensors
 	power_ctrl(PWR_DHT, 1); // enable power for DHT sensors
 	uint8_t i2c_ping = 0;
@@ -1358,7 +1371,8 @@ static void lstasks(void *pvParameters) {
 			power_ctrl(PWR_DHT, 1);
 			pwr_restart = RTC_GetCounter() + DHT_PWR_RESTART_INTERVAL;
 		}
-/*
+
+#ifdef USE_PH
 		// read pH
 		i2c_ping = 1;
 		vTaskDelay(100);
@@ -1376,7 +1390,17 @@ static void lstasks(void *pvParameters) {
 			 I2C_LowLevel_Init(I2C2);
 			 vTaskDelay(200);
 		 }
-		 */
+#endif
+
+#ifdef USE_EC
+		// AD5934 Main Task
+		vTaskDelay(100);
+
+		temp_ec_reading = runSweep();
+		if (temp_ec_reading<(~((uint32_t)0))) {
+			ec1_adc_val = temp_ec_reading;
+		}
+#endif
 
 		vTaskDelay(100);
 //		psiStab();
@@ -1395,6 +1419,7 @@ static void lstasks(void *pvParameters) {
 
 uint8_t last_cmd = 0;
 
+// parse and execute received Cadiweb command
 static void uart_task(void *pvParameters) {
 	uint8_t i = 0;
 	while (1) {
@@ -1420,6 +1445,7 @@ static void uart_task(void *pvParameters) {
 	}
 }
 
+// flush UART RX buffer
 void rx_flush(void) {
 	uint8_t i = 0;
 	for (i = 0; i < 42; i++) { /// HARDCODE
@@ -1427,6 +1453,7 @@ void rx_flush(void) {
 	}
 }
 
+// flush UART TX buffer
 void tx_flush(void) {
 	uint8_t i = 0;
 	NbrOfDataToTransfer = 0;
@@ -1436,7 +1463,7 @@ void tx_flush(void) {
 	}
 }
 
-
+// start UART TX buffer transfer
 void push_tx(void) {
 	txbuff_ne = 0; // stop Tx transfers
 	NbrOfDataToTransfer = TxBuffer[3] + 1; // packet size with code 13
@@ -1455,6 +1482,7 @@ void push_tx(void) {
 	txbuff_ne = 0; // packet sent, reset tx not empty flag
 }
 
+// send to Cadiweb MULTIPLE (x) responses of successfull command execution
 void send_resp_x(uint8_t cmd_uid, uint8_t x){
 	uint8_t i = 0;
 	for (i=0;i<x;i++) {
@@ -1464,6 +1492,7 @@ void send_resp_x(uint8_t cmd_uid, uint8_t x){
 	}
 }
 
+// send to Cadiweb SINGLE response of successfull command execution
 void send_resp(uint8_t cmd_uid) { // Protobuzzz v3
 	tx_flush();
 	TxBuffer[0] = 90; // "Z"
@@ -1479,17 +1508,6 @@ void send_resp(uint8_t cmd_uid) { // Protobuzzz v3
 	resp_id = cmd_uid;
 }
 
-void send_resp_bak(uint8_t cmd_uid) { // Protobuzz v2
-	tx_flush();
-	TxBuffer[0] = 90; // "Z"
-	TxBuffer[1] = 88; // "X"
-	TxBuffer[2] = 55; // "7" command execution success response packet
-	TxBuffer[3] = 6; // packet size
-	TxBuffer[4] = cmd_uid;
-	TxBuffer[(TxBuffer[3] - 1)] = crc_block(0, &TxBuffer[0], (TxBuffer[3 - 1])); // with crc
-	vTaskDelay(1);
-	push_tx();
-}
 
 #define EE_DUMPSIZE	200		// eeprom dump size
 #define EE_DUMPSTART	0x05C0	// eeprom dump start address
@@ -1511,6 +1529,17 @@ void send_ee_dump(void) {
 	}
 }
 
+/* EXECUTE CADIWEB COMMAND OR START THE TASK
+ * COMMANDS are functions, that are running relatively fast and block other commands execution, during run
+ * TASKS are long-term functions, started with corresponding COMMANDS
+ * Only ONE watering task could run at once, but commands are executable during the task
+ * eg. watering task, while running, could be manually interrupted by reset command
+ *
+ * there are 3 main types of commands, and they need differend behavior of cexecution confirmation
+ * type 1: does not need a confirmation
+ * type 2: uC have to send response, with id of successfully executed command
+ * type 3: uC sends response with id of TASK started
+ */
 void run_uart_cmd(void) {
 	uint16_t addr = 0;
 	uint16_t val16 = 0;
@@ -1735,17 +1764,6 @@ void run_watering_pump(uint32_t seconds) {
 	psiOff();
 }
 
-void run_watering_pump_task(uint16_t secs){
-
-}
-
-void mix_tank(uint16_t secs){
-	close_valves();
-	open_valve(MTI_VALVE);
-	open_valve(BACK_VALVE);
-	run_watering_pump_task(secs);
-
-}
 
 void settings2tx_buff(uint16_t addr, uint8_t amount) {
 	uint16_t tmpaddr = 0;
@@ -2102,10 +2120,21 @@ void get_status_block(uint8_t blockId) { // sends block with Cadi STATUS data
 			TxBuffer[19] = (uint8_t)((sonar_read[FWTANK_SONAR] >> 8) & (0xFF)); // first sonar higher byte
 			TxBuffer[20] = (uint8_t)(sonar_read[MIXTANK_SONAR] & (0xFF)); // second sonar
 			TxBuffer[21] = (uint8_t)((sonar_read[MIXTANK_SONAR] >> 8) & (0xFF));
-			TxBuffer[22] = (uint8_t)(ph1_adc_val & (0xFF)); // ADC1 average reading
+#ifdef USE_PH
+			TxBuffer[22] = (uint8_t)(ph1_adc_val & (0xFF)); // pH reading
 			TxBuffer[23] = (uint8_t)(((ph1_adc_val) >> 8) & (0xFF));
+#else
+			TxBuffer[22] = (uint8_t)(adcAverage[0] & (0xFF)); // ADC1 average reading
+			TxBuffer[23] = (uint8_t)(((adcAverage[0]) >> 8) & (0xFF));
+#endif
+
+#ifdef USE_EC
+			TxBuffer[24] = (uint8_t)(ec1_adc_val & (0xFF)); // ADC1 average reading
+			TxBuffer[25] = (uint8_t)(((ec1_adc_val) >> 8) & (0xFF));
+#else
 			TxBuffer[24] = (uint8_t)(adcAverage[1] & (0xFF)); // ADC2 average reading
 			TxBuffer[25] = (uint8_t)(((adcAverage[1]) >> 8) & (0xFF));
+#endif
 			TxBuffer[26] = (uint8_t)(adcAverage[2] & (0xFF)); // ADC3 average reading
 			TxBuffer[27] = (uint8_t)(((adcAverage[2]) >> 8) & (0xFF));
 			TxBuffer[28] = (uint8_t)(adcAverage[3] & (0xFF)); // ADC4 average reading
@@ -4809,21 +4838,8 @@ char* adc2str(uint_fast16_t d, volatile char* out) {
 	return out;
 }
 
-void Delay_us_(uint32_t delay) { // adjusted for 8mhz
-	volatile uint32_t del = 0;
-	del = delay * 3;
-	while (del--) {
 
-	}
-}
 
-void Delay_us(uint32_t delay) {
-	volatile uint32_t del = 0;
-	del = delay * 250;
-	while (del--) {
-
-	}
-}
 
 void buttonCalibration(void) { // buttons calibration function
 	volatile static uint16_t button_val[4];
@@ -5455,39 +5471,29 @@ void psiSetup(void) { // REMOVE !!!
 
 }
 
-void I2C_init2(void) {
-	// STMicroelectronics IORoutines example
+void I2C_init(I2C_TypeDef* I2Cx){
+	if (I2Cx==I2C1) {
+		NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4);
 
-	// NVIC_Configuration()
-	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4);
+		NVIC_SetPriority(I2C1_EV_IRQn, 0x01);
+		NVIC_EnableIRQ(I2C1_EV_IRQn);
 
-	NVIC_SetPriority(I2C1_EV_IRQn, 0x01);
-	NVIC_EnableIRQ(I2C1_EV_IRQn);
+		NVIC_SetPriority(I2C1_ER_IRQn, 0x02);
+		NVIC_EnableIRQ(I2C1_ER_IRQn);
 
-	NVIC_SetPriority(I2C1_ER_IRQn, 0x02);
-	NVIC_EnableIRQ(I2C1_ER_IRQn);
+		I2C_LowLevel_Init(I2C1); // make an init on low level
+	}
+	else if (I2Cx==I2C2) {
+		NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4);
 
-	I2C_LowLevel_Init(I2C1); // make an init on low level
+		NVIC_SetPriority(I2C2_EV_IRQn, 0x01);
+		NVIC_EnableIRQ(I2C2_EV_IRQn);
 
-	NVIC_SetPriority(I2C2_EV_IRQn, 0x01);
-	NVIC_EnableIRQ(I2C2_EV_IRQn);
+		NVIC_SetPriority(I2C2_ER_IRQn, 0x02);
+		NVIC_EnableIRQ(I2C2_ER_IRQn);
 
-	NVIC_SetPriority(I2C2_ER_IRQn, 0x02);
-	NVIC_EnableIRQ(I2C2_ER_IRQn);
-
-	I2C_LowLevel_Init(I2C2);
-
-
-}
-
-void I2C2_init(void) {
-	NVIC_SetPriority(I2C2_EV_IRQn, 0x01);
-	NVIC_EnableIRQ(I2C2_EV_IRQn);
-
-	NVIC_SetPriority(I2C2_ER_IRQn, 0x02);
-	NVIC_EnableIRQ(I2C2_ER_IRQn);
-
-	I2C_LowLevel_Init(I2C2);
+		I2C_LowLevel_Init(I2C2);
+	}
 }
 
 void I2C_single_write(uint8_t HW_address, uint8_t addr, uint8_t data) {
@@ -6947,7 +6953,15 @@ uint8_t main(void) {
 	loadSettings();
 	flush_lcd_buffer(); // fills the LCD frame buffer with spaces
 
-//	I2C_init2();	// master-slave test send	(pH sensor)
+// enable I2C2 for pH and EC measurements
+#if defined (USE_PH) || defined (USE_EC)
+	I2C_init(I2C2);
+#endif
+
+// enable I2C1 for LCD display
+#ifdef USE_LCD
+	I2C_init(I2C1);
+#endif
 
 	tmpdata[0] = 0;
 
@@ -6989,6 +7003,14 @@ uint8_t main(void) {
 	 NULL, tskIDLE_PRIORITY + 1, NULL);
 
 	Delay_us(100);
+
+#ifdef USE_EC
+	init_adg715(LOW_RANGE_CONDUCTIVITY);
+	init_adg715(LOW_RANGE_CONDUCTIVITY);	// first run on I2C2 neds double executions
+	init_ad5934();
+#endif
+
+	Delay_us_(1000*100);
 
 #ifndef DEBUG_ON
 	watchdog_init();	// start watchdog timer

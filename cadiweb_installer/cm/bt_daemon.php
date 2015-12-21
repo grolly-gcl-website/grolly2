@@ -612,6 +612,8 @@ function status_bin2csv($statbin){
 			$tofile[24] = $statarr['ph1_adc_val'];
 			$tofile[25] = $statarr['ph1_adc_val'];
 			
+
+			// feature request: json
 			$csv_string = implode(",", $tofile);
 
 			// echo 'CSVVVVV='.$csv_string;
@@ -648,6 +650,7 @@ function dump_settings_block($addr, $block_data){
 	fwrite($fp, $settings_dump);
 	fclose($fp); // close the file
 }
+
 
 function sm_get_string(){
 	global $shared_memory_id;

@@ -16,8 +16,8 @@
 <attrib name="registered" value="true"/>
 <attrib name="path" value="/Grolly 2/cadi_libs/src/ad5934.c"/>
 <attrib name="org.eclipse.cdt.debug.core.sourceHandle" value="D:\repos\grolly2\STM32F103C8\cadi_libs\src\ad5934.c"/>
-<attrib name="org.eclipse.cdt.debug.core.ignoreCount" value="0"/>
 <attrib name="org.eclipse.debug.core.enabled" value="true"/>
+<attrib name="org.eclipse.cdt.debug.core.ignoreCount" value="0"/>
 </marker>
 </breakpoint>
 </breakpoints>

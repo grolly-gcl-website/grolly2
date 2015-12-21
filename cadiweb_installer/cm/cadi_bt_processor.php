@@ -163,6 +163,7 @@ function get_packet(){
 				$packet .= chr($_POST['plug']);		 // Plug ID  (command arguments)
 				$packet .= chr($_POST['state']);	// new Plug State (Payload ends here)
 				break;
+/* TO BE DELETED */
 			case 2:		// Direct drive enable
 				$packet .= chr(2);	// packet payload size (including this size byte)
 				$packet .= chr(2);	// command
@@ -171,6 +172,7 @@ function get_packet(){
 				$packet .= chr(2);	// packet payload size (including this size byte)
 				$packet .= chr(3);	// command
 				break;
+/* EOF TBD */
 			case 4:		// open_valve()
 				$packet .= chr(3);	// packet payload size (including this size byte)
 				$packet .= chr(4);	// command

@@ -34,6 +34,7 @@
 <part id="21"/>
 <part id="22"/>
 <part id="23"/>
+<part id="24"/>
 </presentation>
 </folder>
 </info>
@@ -130,9 +131,14 @@
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Grolly 2/cadi_libs/inc/ad5934.h"/>
 <editorState selectionHorizontalPixel="0" selectionLength="20" selectionOffset="515" selectionTopPixel="0"/>
 </editor>
-<editor activePart="true" focus="true" id="org.eclipse.cdt.ui.editor.CEditor" name="I2CRoutines.c" partName="I2CRoutines.c" path="D:/repos/grolly2/STM32F103C8/stm_lib/src/I2CRoutines.c" title="I2CRoutines.c" tooltip="D:/repos/grolly2/STM32F103C8/stm_lib/src/I2CRoutines.c" workbook="DefaultEditorWorkbook">
+<editor id="org.eclipse.cdt.ui.editor.CEditor" name="I2CRoutines.c" partName="I2CRoutines.c" path="D:/repos/grolly2/STM32F103C8/stm_lib/src/I2CRoutines.c" title="I2CRoutines.c" tooltip="D:/repos/grolly2/STM32F103C8/stm_lib/src/I2CRoutines.c" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Grolly 2/stm_lib/src/I2CRoutines.c"/>
 <editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="19317" selectionTopPixel="10360"/>
+</editor>
+<editor activePart="true" focus="true" id="org.coocox.builder.ui.editors.ConfigEditor" name="" partName="Configuration" title="Configuration" tooltip="" workbook="DefaultEditorWorkbook">
+<input factoryID="org.coocox.builder.ui.persistent.PersistentElementFactory">
+<org.coocox.builder.ui.editors.ConfigEditor horizontalPosition="0" subTagIndex="0" verticalPosition="0"/>
+</input>
 </editor>
 </editors>
 <views>
@@ -174,7 +180,7 @@
 <viewState/>
 </view>
 </views>
-<perspectives activePart="org.eclipse.cdt.ui.editor.CEditor" activePerspective="org.coocox.builder.perspective.CoBuilder">
+<perspectives activePart="org.coocox.builder.ui.editors.ConfigEditor" activePerspective="org.coocox.builder.perspective.CoBuilder">
 <perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
 <descriptor class="org.coocox.builder.ui.PerspectiveCoBuilder" id="org.coocox.builder.perspective.CoBuilder" label="CooCox CoBuilder"/>
 <alwaysOnActionSet id="org.coocox.component.ui.actionSet"/>
@@ -365,10 +371,10 @@
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Grolly 2/cmsis_boot/startup/startup_stm32f10x_md_vl.c"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Grolly 2/main.c"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" path="/Grolly 2/stm_lib/src/I2CRoutines.c"/>
+<editor factoryID="org.coocox.builder.ui.persistent.PersistentElementFactory" id="org.coocox.builder.ui.editors.ConfigEditor">
+<org.coocox.builder.ui.editors.ConfigEditor horizontalPosition="0" subTagIndex="0" verticalPosition="0"/>
+</editor>
 </editors>
-<item historyLabel="ad5934.c" index="1">
-<position info="not_deleted" x="495" y="11"/>
-</item>
 <item historyLabel="main.c" index="0">
 <position info="not_deleted" x="185647" y="0"/>
 </item>
@@ -509,9 +515,10 @@
 <item historyLabel="main.c" index="8">
 <position info="not_deleted" x="192315" y="0"/>
 </item>
-<item active="true" historyLabel="I2CRoutines.c" index="9">
+<item historyLabel="I2CRoutines.c" index="9">
 <position info="not_deleted" x="19317" y="0"/>
 </item>
+<item active="true" historyLabel="Configuration" index="10"/>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
 </page>
@@ -519,20 +526,37 @@
 <actionBarAdvisor/>
 </window>
 <mruList>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="eeprom.h" tooltip="Grolly 2/stm_lib/inc/eeprom.h">
-<persistable path="/Grolly 2/stm_lib/inc/eeprom.h"/>
+<file factoryID="org.coocox.builder.ui.persistent.PersistentElementFactory" id="org.coocox.builder.ui.editors.ConfigEditor" name="" tooltip="">
+<persistable>
+<org.coocox.builder.ui.editors.ConfigEditor horizontalPosition="0" subTagIndex="0" verticalPosition="0"/>
+</persistable>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="delays.h" tooltip="Grolly 2/cadi_libs/inc/delays.h">
+<persistable path="/Grolly 2/cadi_libs/inc/delays.h"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="ad5934.h" tooltip="Grolly 2/cadi_libs/inc/ad5934.h">
 <persistable path="/Grolly 2/cadi_libs/inc/ad5934.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="portmacro.h" tooltip="Grolly 2/freertos/Source/portable/ARM_CM3/portmacro.h">
+<persistable path="/Grolly 2/freertos/Source/portable/ARM_CM3/portmacro.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="system_stm32f10x.c" tooltip="Grolly 2/cmsis_boot/system_stm32f10x.c">
+<persistable path="/Grolly 2/cmsis_boot/system_stm32f10x.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="startup_stm32f10x_md_vl.c" tooltip="Grolly 2/cmsis_boot/startup/startup_stm32f10x_md_vl.c">
+<persistable path="/Grolly 2/cmsis_boot/startup/startup_stm32f10x_md_vl.c"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="core_cm3.h" tooltip="Grolly 2/cmsis/core_cm3.h">
+<persistable path="/Grolly 2/cmsis/core_cm3.h"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="eeprom.h" tooltip="Grolly 2/stm_lib/inc/eeprom.h">
+<persistable path="/Grolly 2/stm_lib/inc/eeprom.h"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="stm32f10x_iwdg.c" tooltip="Grolly 2/stm_lib/src/stm32f10x_iwdg.c">
 <persistable path="/Grolly 2/stm_lib/src/stm32f10x_iwdg.c"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="main.c" tooltip="Grolly 2/main.c">
 <persistable path="/Grolly 2/main.c"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="startup_stm32f10x_md_vl.c" tooltip="Grolly 2/cmsis_boot/startup/startup_stm32f10x_md_vl.c">
-<persistable path="/Grolly 2/cmsis_boot/startup/startup_stm32f10x_md_vl.c"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="ad5934.c" tooltip="Grolly 2/cadi_libs/src/ad5934.c">
 <persistable path="/Grolly 2/cadi_libs/src/ad5934.c"/>
@@ -548,21 +572,6 @@
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="delay.c" tooltip="Grolly 2/LCD_I2C/delay.c">
 <persistable path="/Grolly 2/LCD_I2C/delay.c"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="delay.h" tooltip="Grolly 2/LCD_I2C/delay.h">
-<persistable path="/Grolly 2/LCD_I2C/delay.h"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="core_cm3.h" tooltip="Grolly 2/cmsis/core_cm3.h">
-<persistable path="/Grolly 2/cmsis/core_cm3.h"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="tasks.c" tooltip="Grolly 2/freertos/Source/tasks.c">
-<persistable path="/Grolly 2/freertos/Source/tasks.c"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="ad5934.h" tooltip="Grolly 2/cadi_libs/inc/ad5934.h">
-<persistable path="/Grolly 2/cadi_libs/inc/ad5934.h"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.cdt.ui.editor.CEditor" name="driver_sonar.h" tooltip="Grolly 2/cadi_libs/inc/driver_sonar.h">
-<persistable path="/Grolly 2/cadi_libs/inc/driver_sonar.h"/>
 </file>
 </mruList>
 </workbench>

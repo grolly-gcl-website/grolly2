@@ -932,8 +932,10 @@ void run_demo(void);
 void wt_get_water(uint8_t amount);
 
 void wt_mt_drain2level(uint16_t new_level, uint8_t drain_valve);
-
 void uart_dma_init(uint8_t size, uint8_t *txbuff);
+
+void init_shiftreg(void);
+void sr_write(uint16_t val);
 
 int strlen(const char *);
 char *strrev(char *);
@@ -7076,20 +7078,69 @@ uint8_t main(void) {
 //	ad5933_probe();
 //	ad5933_ring_preenable();
 
+#ifdef USE_EC
 	init_adg715(LOW_RANGE_CONDUCTIVITY);
 	init_adg715(LOW_RANGE_CONDUCTIVITY);	// first run on I2C2 neds double executions
 	init_ad5934();
+#endif
+
+#ifdef USE_SHIFTREG
+	init_shiftreg();	//
+#endif
+
 
 	Delay_us_(1000*100);
-
-//	watchdog_init();	// start watchdog timer
 
 	/* Start the scheduler. */
 	vTaskStartScheduler();
 
 	while (1){
 
+	}
+}
 
+#define STP16C596_GPIOx		GPIOB
+
+#define STP16C596_CLK_PIN	3
+#define STP16C596_SDI_PIN	4
+#define STP16C596_LE_PIN	5
+#define STP16C596_OE_PIN	6
+
+#define STP16C596_CLK_HIGH	(STP16C596_GPIOx->BSRR = (1<<STP16C596_CLK_PIN))
+#define STP16C596_CLK_LOW	(STP16C596_GPIOx->BRR = (1<<STP16C596_CLK_PIN))
+#define STP16C596_SDI_HIGH	(STP16C596_GPIOx->BSRR = (1<<STP16C596_SDI_PIN))
+#define STP16C596_SDI_LOW	(STP16C596_GPIOx->BRR = (1<<STP16C596_SDI_PIN))
+#define STP16C596_LE_HIGH	(STP16C596_GPIOx->BSRR = (1<<STP16C596_LE_PIN))
+#define STP16C596_LE_LOW	(STP16C596_GPIOx->BRR = (1<<STP16C596_LE_PIN))
+#define STP16C596_OE_HIGH	(STP16C596_GPIOx->BSRR = (1<<STP16C596_OE_PIN))
+#define STP16C596_OE_LOW	(STP16C596_GPIOx->BRR = (1<<STP16C596_OE_PIN))
+
+
+void init_shiftreg(void){	// shift register init
+	GPIO_InitTypeDef init_pin;
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB | RCC_APB2Periph_AFIO, ENABLE);
+	init_pin.GPIO_Pin = GPIO_Pin_6 | GPIO_Pin_5 | GPIO_Pin_4 | GPIO_Pin_3;
+	init_pin.GPIO_Mode = GPIO_Mode_Out_PP;
+	init_pin.GPIO_Speed = GPIO_Speed_50MHz;
+	GPIO_Init(STP16C596_GPIOx, &init_pin);
+}
+
+void sr_write(uint16_t val){	// write to shift register
+	uint8_t i = 0;
+	for(i=0;i<16;i++) {
+		if (((val>>i)&1)==1) {
+			STP16C596_SDI_HIGH;
+		}
+		else {
+			STP16C596_SDI_LOW;
+		}
+		vTaskDelay(25);
+		STP16C596_CLK_HIGH;
+		vTaskDelay(25);
+		STP16C596_SDI_LOW;
+		vTaskDelay(25);
+		STP16C596_CLK_LOW;
+		vTaskDelay(25);
 	}
 }
 

@@ -4,6 +4,8 @@ $(function() {
 	$( ".radio_" ).buttonset();
 });
 
+
+// TO BE DELETED
 function bt_setdd(state) {
 	if (state==1) {
 		$.post('cm/cadi_bt_processor.php', {action: 'tx_packet', cmd: '2'}, function(data){
